@@ -1,55 +1,27 @@
-# {project_name}
+# TfeApplication
 
-{project_description}
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.0.6.
 
-![screenshot](../master/res/{image})
+## Development server
 
-## Getting Started
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+## Code scaffolding
 
-### Requirements
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-*{project_name}* require the following to run:
+## Build
 
-- []()
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
-### Building
+## Running unit tests
 
-#### {language} configuration
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-[Download {language}]()
+## Running end-to-end tests
 
-Execute the following line.
+Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
-```bash
+## Further help
 
-```
-
-#### Configuration for {project_name}
-
-
-
-### Run
-
-To run {project_name} using {language}, executes this command in the project folder:
-
-```bash
-
-```
-
-## Documentation
-
-- [](https://github.com/VictorHachard/{repository}/wiki/{wiki}---Documentation)
-
-## What I Learned
-
--
-
-## Authors & Contributors
-
-* **Hachard Victor** - *Initial work* - [VictorHachard](https://github.com/VictorHachard)
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](../master/LICENSE) file for details.
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
