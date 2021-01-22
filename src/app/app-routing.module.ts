@@ -7,6 +7,8 @@ import {AccueilComponent} from './components/home/accueil.component';
 import {SettingsComponent} from './components/settings/settings.component';
 import {TermsComponent} from './components/terms/terms.component';
 import {PrivacyComponent} from './components/privacy/privacy.component';
+import {PageComponent} from './components/page/page.component';
+import {PagesComponent} from './components/pages/pages.component';
 const routes: Routes = [
   { path: 'home', component: AccueilComponent },
   { path: 'login', component: LoginComponent },
@@ -14,7 +16,9 @@ const routes: Routes = [
   { path: 'forget', component: ForgetComponent },
   { path: 'terms', component: TermsComponent },
   { path: 'privacy', component: PrivacyComponent },
-  { path: 'settings', component: SettingsComponent }
+  { path: 'settings', component: SettingsComponent },
+  { path: 'page/:id', component: PageComponent },
+  { path: 'pages', component: PagesComponent }
 ];
 
 @NgModule({

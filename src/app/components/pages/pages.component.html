@@ -1,1 +1,18 @@
-<p>pages works!</p>
+<section class="container">
+  <h2 class="font-weight-normal mb-4">Monitored playlists</h2>
+  <hr class="style1 mb-4">
+
+  <div class="row">
+    <div *ngFor="let page of pages" class="col-md-4 mb-4">
+      <a class="card" [routerLink]="['/page', page.id]">
+        <div class="card-header">
+          <h5 title="{{ page.title }}" class="font-weight-normal">{{ page.title }}</h5>
+        </div>
+        <div class="card-body">
+
+        </div>
+      </a>
+    </div>
+  </div>
+
+</section>

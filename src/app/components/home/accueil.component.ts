@@ -9,23 +9,8 @@ import {CategoryService} from '../../service/category.service';
 })
 export class AccueilComponent implements OnInit {
 
-  pages: any[];
-
-  categories: any[];
-
-  constructor(private pageService: PageService, private categoryService: CategoryService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.pageService.getAllPage().subscribe(data => {
-      this.pages = data;
-      console.log(this.pages);
-    });
-    this.categoryService.getAllCategory().subscribe(data => {
-      this.categories = data;
-      console.log(this.categories);
-    });
   }
-
-
-
 }

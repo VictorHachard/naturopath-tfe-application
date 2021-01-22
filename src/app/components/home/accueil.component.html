@@ -1,46 +1,5 @@
-<div class="container" style="white-space: pre-wrap;">
-  <div *ngFor="let page of pages" class="">
 
-    <h1 class="display-1">{{ page.title }}</h1>
-    <p>by <cite title="Source Title">{{ page.user.username }}</cite> created at {{ page.createdAt }}</p>
-
-    <nav aria-label="breadcrumb">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#">{{ page.category.name }}</a></li>
-      </ol>
-    </nav>
-
-    <div *ngFor="let tag of page.tagList">
-      <p>{{ tag.tagType.name }} : <a href="">{{ tag.name }}</a></p>
-      <p>{{ tag.description }}</p>
-    </div>
-
-    <div *ngFor="let paragraph of page.paragraphList">
-      <p class="h4">{{ paragraph.paragraphType.name }} - {{ paragraph.title }}</p>
-      <p class="ml-4 text-justify">{{ paragraph.content }}</p>
-    </div>
-
-    <div *ngFor="let paratag of page.paratagList">
-      <p class="h4">{{ paratag.paratagType.name }} - {{ paratag.title }}</p>
-      <p>{{ paratag.content }}</p>
-      <div class="ml-4">
-        <div class="d-inline" *ngFor="let tag of paratag.tagList">
-          <span class="badge rounded-pill bg-primary mr-2">{{ tag.name }}</span><span *ngIf="tag.content.length != 0">- {{ tag.content }}</span>
-        </div>
-      </div>
-
-    </div>
-
-    <div *ngFor="let parapage of page.parapageList">
-      <p class="h4">{{ parapage.title }}</p>
-    </div>
-
-  </div>
-</div>
-
-<br>
-
-  <div *ngFor="let category of categories">
+  <!-- <div *ngFor="let category of categories">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="#">{{ category.name }}</a></li>
@@ -49,4 +8,4 @@
         </a></li>
       </ol>
     </nav>
-  </div>
+  </div> -->

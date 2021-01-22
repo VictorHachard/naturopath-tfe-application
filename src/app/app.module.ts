@@ -12,6 +12,7 @@ import { ForgetComponent } from './components/forget/forget.component';
 import { TermsComponent } from './components/terms/terms.component';
 import { PrivacyComponent } from './components/privacy/privacy.component';
 import { SettingsComponent } from './components/settings/settings.component';
+import { PageComponent } from './components/page/page.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { SettingsComponent } from './components/settings/settings.component';
     TermsComponent,
     PrivacyComponent,
     SettingsComponent,
+    PageComponent,
   ],
   imports: [
     BrowserModule,
