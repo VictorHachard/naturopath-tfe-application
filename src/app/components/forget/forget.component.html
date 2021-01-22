@@ -5,12 +5,12 @@
   <div class="vertical-center">
     <div class="w-100">
       <h2 class="h3 mb-3 text-center">Reset your password</h2>
-      <form id="forgetForm" action="/forget" class="form-center form-setting border rounded-lg">
+      <form [formGroup]="FormResetPassword" (ngSubmit)="SendEmail()" id="forgetForm"  class="form-center form-setting border rounded-lg">
         <div class="form-group">
           <label for="inputEmail" class="my-0">Email address</label>
-          <input type="email" name="email" id="inputEmail" class="form-control mt-2 mb-3" required="" autocapitalize="off" autocorrect="off" autofocus="autofocus">
+          <input type="email" name="email" id="inputEmail" formControlName="email" class="form-control mt-2 mb-3"  autocapitalize="off" autofocus="autofocus">
         </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Reset your password</button>
+        <button [disabled]="FormResetPassword.invalid" class="btn btn-lg btn-primary btn-block" type="submit">Reset your password</button>
       </form>
     </div>
   </div>
