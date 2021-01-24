@@ -5,6 +5,7 @@ import {Paratag} from './Paratag';
 import {Parapage} from './Parapage';
 
 export class Page {
+  id: number;
   createdAt: Date;
   title: string;
   description: string;

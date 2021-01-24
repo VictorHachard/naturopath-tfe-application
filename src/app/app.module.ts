@@ -14,6 +14,8 @@ import { PrivacyComponent } from './components/privacy/privacy.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { PageComponent } from './components/page/page.component';
 import {ReactiveFormsModule} from '@angular/forms';
+import { AddpageComponent } from './components/addpage/addpage.component';
+import { AddpageselectcategoryComponent } from './components/addpageselectcategory/addpageselectcategory.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,8 @@ import {ReactiveFormsModule} from '@angular/forms';
     PrivacyComponent,
     SettingsComponent,
     PageComponent,
+    AddpageComponent,
+    AddpageselectcategoryComponent,
   ],
   imports: [
     BrowserModule,

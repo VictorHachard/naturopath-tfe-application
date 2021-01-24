@@ -10,7 +10,7 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class PageComponent implements OnInit {
 
-  public id: string;
+  private id: string;
 
   page: any;
 
