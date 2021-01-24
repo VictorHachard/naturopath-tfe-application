@@ -10,8 +10,7 @@ export class PageService {
 
   private baseUrl = 'http://localhost:8080/api/v1/';
 
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) { }
 
   public getAllPage(): Observable<Page[]> {
     return this.http.get<Page[]>(this.baseUrl + 'dto/page');
@@ -25,6 +24,7 @@ export class PageService {
     return this.http.post<Page[]>(this.baseUrl + 'dto/pageByCategory', { categoryId: id });
   }
 
-  public createPage(): void{
+  public createPage(body: any): void {
+    this.http.post<any>(this.baseUrl + 'page', body).subscribe();
   }
 }

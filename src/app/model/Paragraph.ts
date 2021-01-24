@@ -1,8 +1,9 @@
 import {ParagraphType} from './ParagraphType';
 
 export class Paragraph {
-  id: number;
-  paragraphType: ParagraphType;
-  title: string;
-  content: string;
+ constructor( public id: number,
+              public paragraphType: ParagraphType,
+              public title: string,
+              public content: string) {
+ }
 }

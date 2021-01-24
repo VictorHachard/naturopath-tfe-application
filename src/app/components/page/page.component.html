@@ -1,24 +1,19 @@
 <div class="container" style="white-space: pre-wrap;">
-    <h1 class="display-1">{{ page.title }}</h1>
-    <p>by <cite title="Source Title">{{ page.user.username }}</cite> created at {{ page.createdAt }}</p>
+    <h1 class="display-1">{{ page?.title }}</h1>
+    <p>by <cite title="Source Title">{{ page?.user.username }}</cite> created at {{ page?.createdAt }}</p>
 
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#">{{ page.category.name }}</a></li>
+        <li class="breadcrumb-item"><a href="#">{{ page?.category.name }}</a></li>
       </ol>
     </nav>
 
-    <div *ngFor="let tag of page.tagList">
-      <p>{{ tag.tagType.name }} : <a href="">{{ tag.name }}</a></p>
-      <p>{{ tag.description }}</p>
-    </div>
-
-    <div *ngFor="let paragraph of page.paragraphList">
+    <div *ngFor="let paragraph of page?.paragraphList">
       <p class="h4">{{ paragraph.paragraphType.name }} - {{ paragraph.title }}</p>
       <p class="ml-4 text-justify">{{ paragraph.content }}</p>
     </div>
 
-    <div *ngFor="let paratag of page.paratagList">
+    <div *ngFor="let paratag of page?.paratagList">
       <p class="h4">{{ paratag.paratagType.name }} - {{ paratag.title }}</p>
       <p>{{ paratag.content }}</p>
       <div class="ml-4">

@@ -7,19 +7,19 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
   styleUrls: ['./forget.component.css']
 })
 export class ForgetComponent implements OnInit {
-  FormResetPassword: FormGroup;
+  formResetPassword: FormGroup;
   constructor() { }
 
   ngOnInit(): void {
     this.init();
   }
   init(): void{
-    this.FormResetPassword = new FormGroup({
+    this.formResetPassword = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email])
     });
   }
   SendEmail(): void{
-    const EmailValue = this.FormResetPassword.value;
+    const EmailValue = this.formResetPassword.value;
     console.log(EmailValue.email);
   }
 }

@@ -3,15 +3,18 @@ import {Category} from './Category';
 import {Tag} from './Tag';
 import {Paratag} from './Paratag';
 import {Parapage} from './Parapage';
+import {User} from './User';
 
 export class Page {
-  id: number;
-  createdAt: Date;
-  title: string;
-  description: string;
-  paragraphList: Paragraph[];
-  paratagList: Paratag[];
-  parapareList: Parapage[];
-  tagList: Tag[];
-  category: Category;
+ constructor(public id: number,
+             public user: User,
+             public createdAt: Date,
+             public title: string,
+             public  description: string,
+             public paragraphList: Paragraph[],
+             public paratagList: Paratag[],
+             public parapageList: Parapage[],
+             public tagList: Tag[],
+             public category: Category) {
+ }
 }

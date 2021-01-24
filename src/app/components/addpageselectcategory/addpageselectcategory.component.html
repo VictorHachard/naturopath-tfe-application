@@ -1,1 +1,29 @@
-<p>addpageselectcategory works!</p>
+<section class="my-4 container">
+  <form [formGroup]="addPageSelectCategoryForm" (ngSubmit)="addPageSelectCategory()" >
+    <div class="form-group">
+      <label for="category">Select catégories</label>
+      <select class="form-control" id="category" multiple formControlName="categories">
+        <option *ngFor="let category of categories" aria-label="breadcrumb">
+          {{ category.name }}
+          <!-- <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">{{ category.name }}</a></li>
+            <li *ngFor="let ca of category.childCategory" class="breadcrumb-item active" aria-current="page"><a href="#">
+              {{ ca.name }}
+            </a></li>
+          </ol> -->
+        </option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input type="text" class="form-control" id="title" formControlName="title">
+    </div>
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea class="form-control" id="description" rows="3" formControlName="description"></textarea>
+    </div>
+    <button class="btn btn-lg btn-primary btn-block mt-3" [disabled]="addPageSelectCategoryForm.invalid" type="submit">Create an account</button>
+  </form>
+</section>
+
+

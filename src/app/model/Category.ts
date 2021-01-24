@@ -3,11 +3,12 @@ import {ParapageType} from './ParapageType';
 import {ParatagType} from './ParatagType';
 
 export class Category {
-  id: number;
-  name: string;
-  description: string;
-  childCategory: Category[];
-  paragraphType: ParagraphType[];
-  parapageType: ParapageType[];
-  paratagType: ParatagType[];
+  constructor( public id: number,
+               public name: string,
+               public description: string,
+               public childCategory: Category[],
+               public paragraphType: ParagraphType[],
+               public parapageType: ParapageType[],
+               public paratagType: ParatagType[]) {
+  }
 }

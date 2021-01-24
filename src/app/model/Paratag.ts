@@ -2,9 +2,9 @@ import {Tag} from './Tag';
 import {ParatagType} from './ParatagType';
 
 export class Paratag {
-  id: number;
-  paratagType: ParatagType;
-  title: string;
-  content: string;
-  tagList: Tag[];
+  constructor( public paratagType: ParatagType,
+               public title: string,
+               public content: string,
+               public tagList: Tag[]) {
+  }
 }

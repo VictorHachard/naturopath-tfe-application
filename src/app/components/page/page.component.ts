@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {PageService} from '../../service/page.service';
 import {CategoryService} from '../../service/category.service';
 import {ActivatedRoute} from '@angular/router';
+import {Page} from '../../model/Page';
 
 @Component({
   selector: 'app-page',
@@ -12,7 +13,7 @@ export class PageComponent implements OnInit {
 
   private id: string;
 
-  page: any;
+  page: Page;
 
   constructor(private route: ActivatedRoute, private pageService: PageService, private categoryService: CategoryService) { }
 

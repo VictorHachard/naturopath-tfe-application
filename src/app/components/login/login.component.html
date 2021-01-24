@@ -5,7 +5,7 @@
   <div class="vertical-center">
     <div class="w-100">
       <h2 class="h3 mb-3 text-center">Sign in to YPC</h2>
-      <form [formGroup]="FormLogin" (ngSubmit)="Login()" id="loginForm" class="form-center form-setting border rounded-lg">
+      <form [formGroup]="formLogin" (ngSubmit)="Login()" id="loginForm" class="form-center form-setting border rounded-lg">
         <div class="form-group">
           <label for="inputEmail" class="my-0">Username or email address</label>
           <input type="text" name="login" id="inputEmail" formControlName="username" class="form-control mt-2 mb-3" autocapitalize="off" autofocus="autofocus">
@@ -22,7 +22,7 @@
             <span class="checkmark"></span>
           </label>
         </div>
-        <button [disabled]="FormLogin.invalid" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <button [disabled]="formLogin.invalid" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
       </form>
       <p class="form-center text-center my-4 border rounded-lg">
         New here?

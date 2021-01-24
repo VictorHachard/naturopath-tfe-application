@@ -10,6 +10,7 @@ import {PrivacyComponent} from './components/privacy/privacy.component';
 import {PageComponent} from './components/page/page.component';
 import {PagesComponent} from './components/pages/pages.component';
 import {AddpageComponent} from './components/addpage/addpage.component';
+import {AddpageselectcategoryComponent} from './components/addpageselectcategory/addpageselectcategory.component';
 const routes: Routes = [
   { path: 'home', component: AccueilComponent },
   { path: 'login', component: LoginComponent },
@@ -20,7 +21,8 @@ const routes: Routes = [
   { path: 'settings', component: SettingsComponent },
   { path: 'page/:id', component: PageComponent },
   { path: 'pages', component: PagesComponent },
-  { path: 'addpage/:id', component: AddpageComponent }
+  { path: 'addpage/:id', component: AddpageComponent },
+  { path: 'apage', component: AddpageselectcategoryComponent }
 ];
 
 @NgModule({
