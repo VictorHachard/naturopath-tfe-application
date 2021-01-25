@@ -39,8 +39,9 @@ export class AddpageselectcategoryComponent implements OnInit {
     let categoryId: number;
 
     this.categories.forEach(function(value: Category): void {
-      if (addPageSelectCategoryValue.categories[0] === value.name) {
+      if (addPageSelectCategoryValue.categories === value.name) {
         categoryId = value.id;
+
       }
     });
 

@@ -20,7 +20,7 @@ export class PageService {
     return this.http.get<Page>(this.baseUrl + 'dto/page/' + id);
   }
 
-  public getAllPageByCategory(id: number): Observable<Page[]> {
+  public getAllPageByCategory(id: string): Observable<Page[]> {
     return this.http.post<Page[]>(this.baseUrl + 'dto/pageByCategory', { categoryId: id });
   }
 

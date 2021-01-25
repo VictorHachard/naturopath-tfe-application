@@ -21,6 +21,7 @@ const routes: Routes = [
   { path: 'settings', component: SettingsComponent },
   { path: 'page/:id', component: PageComponent },
   { path: 'pages', component: PagesComponent },
+  { path: 'pages/:id', component: PagesComponent },
   { path: 'addpage/:id', component: AddpageComponent },
   { path: 'apage', component: AddpageselectcategoryComponent }
 ];

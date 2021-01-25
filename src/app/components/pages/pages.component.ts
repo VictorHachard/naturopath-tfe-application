@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {PageService} from '../../service/page.service';
 import {CategoryService} from '../../service/category.service';
+import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
+import {Page} from '../../model/Page';
+import * as url from 'url';
 
 @Component({
   selector: 'app-pages',
@@ -9,21 +12,27 @@ import {CategoryService} from '../../service/category.service';
 })
 export class PagesComponent implements OnInit {
 
+  private id: string;
+
   categories: any[];
 
   pages: any[];
 
-  constructor(private pageService: PageService, private categoryService: CategoryService) { }
+  constructor(private route: ActivatedRoute, private pageService: PageService, private categoryService: CategoryService) {
+  }
 
   ngOnInit(): void {
-    this.pageService.getAllPageByCategory(17).subscribe(data => {
-      this.pages = data;
-      console.log(this.pages);
-    });
+    console.log('COPUCOUCOUCOQCUQOUQOCUO');
+    this.id = this.route.snapshot.paramMap.get('id') === undefined ? null : this.route.snapshot.paramMap.get('id');
+    if (this.id !== null) {
+      this.pageService.getAllPageByCategory(this.id).subscribe(data => {
+        this.pages = data;
+        console.log(this.pages);
+      });
+    }
     this.categoryService.getAllCategory().subscribe(data => {
       this.categories = data;
       console.log(this.categories);
     });
   }
-
 }
