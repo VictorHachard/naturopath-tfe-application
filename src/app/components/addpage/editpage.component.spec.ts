@@ -1,20 +1,20 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { AddpageComponent } from './addpage.component';
+import {EditpageComponent} from './editpage.component';
 
 describe('AddpageComponent', () => {
-  let component: AddpageComponent;
-  let fixture: ComponentFixture<AddpageComponent>;
+  let component: EditpageComponent;
+  let fixture: ComponentFixture<EditpageComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddpageComponent ]
+      declarations: [ EditpageComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AddpageComponent);
+    fixture = TestBed.createComponent(EditpageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

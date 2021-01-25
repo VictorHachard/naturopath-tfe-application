@@ -1,4 +1,4 @@
-import { TagType } from './TagType';
+import {TagType} from './TagType';
 
 export class Tag {
   constructor( public id: number,

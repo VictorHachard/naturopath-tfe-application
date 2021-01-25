@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CategoryService} from '../../service/category.service';
-import {Category} from '../../model/Category';
+import {Category} from '../../model/view/Category';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {PageService} from '../../service/page.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-addpageselectcategory',
@@ -13,7 +14,7 @@ export class AddpageselectcategoryComponent implements OnInit {
   addPageSelectCategoryForm: FormGroup;
   categories: Category[];
 
-  constructor(private categoryService: CategoryService, private pageService: PageService) { }
+  constructor(private router: Router, private categoryService: CategoryService, private pageService: PageService) { }
 
   ngOnInit(): void {
     this.init();
@@ -48,6 +49,8 @@ export class AddpageselectcategoryComponent implements OnInit {
     this.pageService.createPage({categoryId: categoryId.toString(),
       description: addPageSelectCategoryValue.description,
       title: addPageSelectCategoryValue.title,
-      userId: '1'});
+      userId: '1'}).subscribe(data => {
+        this.router.navigate(['/editpage/' + data.toString()]);
+    });
   }
 }

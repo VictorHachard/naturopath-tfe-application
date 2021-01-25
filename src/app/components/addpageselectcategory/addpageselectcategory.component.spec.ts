@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { AddpageselectcategoryComponent } from './addpageselectcategory.component';
+import {AddpageselectcategoryComponent} from './addpageselectcategory.component';
 
 describe('AddpageselectcategoryComponent', () => {
   let component: AddpageselectcategoryComponent;

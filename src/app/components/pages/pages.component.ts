@@ -1,9 +1,7 @@
-import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {PageService} from '../../service/page.service';
 import {CategoryService} from '../../service/category.service';
-import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
-import {Page} from '../../model/Page';
-import * as url from 'url';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-pages',
