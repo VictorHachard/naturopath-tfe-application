@@ -10,7 +10,9 @@ import {PrivacyComponent} from './components/privacy/privacy.component';
 import {PageComponent} from './components/page/page.component';
 import {PagesComponent} from './components/pages/pages.component';
 import {EditpageComponent} from './components/addpage/editpage.component';
-import {AddpageselectcategoryComponent} from './components/addpageselectcategory/addpageselectcategory.component';
+import {AddpageComponent} from './components/addpageselectcategory/addpage.component';
+import {AddtagComponent} from './components/addtag/addtag.component';
+import {EdittagComponent} from './components/edittag/edittag.component';
 
 const routes: Routes = [
   { path: 'home', component: AccueilComponent },
@@ -24,7 +26,9 @@ const routes: Routes = [
   { path: 'pages', component: PagesComponent },
   { path: 'pages/:id', component: PagesComponent },
   { path: 'editpage/:id', component: EditpageComponent },
-  { path: 'apage', component: AddpageselectcategoryComponent }
+  { path: 'addpage', component: AddpageComponent },
+  { path: 'edittag/:id', component: EdittagComponent },
+  { path: 'addtag', component: AddtagComponent }
 ];
 
 @NgModule({

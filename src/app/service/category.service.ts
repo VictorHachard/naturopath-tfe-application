@@ -10,17 +10,12 @@ export class CategoryService {
 
   private baseUrl = 'http://localhost:8080/api/v1/';
 
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) { }
 
   public getAllCategory(): Observable<Category[]> {
     return this.http.get<Category[]>(this.baseUrl + 'dto/category');
   }
 
-  public getEditCategoryDto(id: string): Observable<Category> {
-    return this.http.get<Category>(this.baseUrl + 'dto/edit/category/' + id);
-  }
-
-  public createCategory(): void{
+  public addCategory(): void{
   }
 }

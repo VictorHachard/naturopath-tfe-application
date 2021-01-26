@@ -15,7 +15,9 @@ import {SettingsComponent} from './components/settings/settings.component';
 import {PageComponent} from './components/page/page.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {EditpageComponent} from './components/addpage/editpage.component';
-import {AddpageselectcategoryComponent} from './components/addpageselectcategory/addpageselectcategory.component';
+import {AddpageComponent} from './components/addpageselectcategory/addpage.component';
+import { AddtagComponent } from './components/addtag/addtag.component';
+import { EdittagComponent } from './components/edittag/edittag.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import {AddpageselectcategoryComponent} from './components/addpageselectcategory
     SettingsComponent,
     PageComponent,
     EditpageComponent,
-    AddpageselectcategoryComponent,
+    AddpageComponent,
+    AddtagComponent,
+    EdittagComponent,
   ],
   imports: [
     BrowserModule,

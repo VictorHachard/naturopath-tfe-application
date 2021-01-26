@@ -48,12 +48,8 @@ export class PageService {
     this.http.post<any>(this.baseUrl + 'innerParagraph/validation/' + id, {}).subscribe();
   }
 
-  public createPage(body: any): Observable<any> {
+  public addPage(body: any): Observable<any> {
     return this.http.post<any>(this.baseUrl + 'page', body);
-  }
-
-  public addVote(body: any): void {
-    this.http.post<any>(this.baseUrl + 'vote', body).subscribe();
   }
 
   public addInnerParagraph(body: any): void {
