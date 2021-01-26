@@ -28,7 +28,35 @@ export class PageService {
     return this.http.get<any>(this.baseUrl + 'dto/edit/page/' + id);
   }
 
+  public addInnerPage(body: any): void  {
+    this.http.post<any>(this.baseUrl + 'innerPage', body).subscribe();
+  }
+
+  public updateInnerPage(id: string, body: any): void {
+    this.http.post<any>(this.baseUrl + 'innerPage/update/' + id, body).subscribe();
+  }
+
+  public updateInnerParagraph(id: string, body: any): void {
+    this.http.post<any>(this.baseUrl + 'innerParagraph/update/' + id, body).subscribe();
+  }
+
+  public validationInnerPage(id: string): void {
+    this.http.post<any>(this.baseUrl + 'innerPage/validation/' + id, {}).subscribe();
+  }
+
+  public validationInnerParagraph(id: string): void {
+    this.http.post<any>(this.baseUrl + 'innerParagraph/validation/' + id, {}).subscribe();
+  }
+
   public createPage(body: any): Observable<any> {
     return this.http.post<any>(this.baseUrl + 'page', body);
+  }
+
+  public addVote(body: any): void {
+    this.http.post<any>(this.baseUrl + 'vote', body).subscribe();
+  }
+
+  public addInnerParagraph(body: any): void {
+    this.http.post<any>(this.baseUrl + 'innerParagraph', body).subscribe();
   }
 }

@@ -26,9 +26,9 @@ export class AddpageselectcategoryComponent implements OnInit {
 
   init(): void {
     this.addPageSelectCategoryForm = new FormGroup({
-      categories: new FormControl('', Validators.required),
-      title: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(128)]),
-      description: new FormControl('', [Validators.required, Validators.minLength(64), Validators.maxLength(1024)]),
+      categories: new FormControl('Tisanes', Validators.required),
+      title: new FormControl('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', [Validators.required, Validators.minLength(8), Validators.maxLength(128)]),
+      description: new FormControl('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', [Validators.required, Validators.minLength(64), Validators.maxLength(1024)]),
     });
   }
 
