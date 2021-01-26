@@ -29,14 +29,14 @@
       </div>
     </div>
     <div class="form-group">
-      <label for="description">Description</label>
-      <textarea class="form-control" id="description" rows="3" formControlName="description"></textarea>
+      <label for="content">Description</label>
+      <textarea class="form-control" id="content" rows="3" formControlName="content"></textarea>
       <p class="note" style="margin-bottom: 0">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</p>
-      <div *ngIf="addTagForm.get('description').invalid &&
-        (addTagForm.get('description').dirty || addTagForm.get('description').touched)" >
-        <p *ngIf="addTagForm.get('description').errors.required"
+      <div *ngIf="addTagForm.get('content').invalid &&
+        (addTagForm.get('content').dirty || addTagForm.get('content').touched)" >
+        <p *ngIf="addTagForm.get('content').errors.required"
            class="note text-danger">Please type a description.</p>
-        <p *ngIf="addTagForm.get('description').errors.minlength || addTagForm.get('description').errors.minlength"
+        <p *ngIf="addTagForm.get('content').errors.minlength || addTagForm.get('content').errors.minlength"
            class="note text-danger">Please insert minimum of 64 characters and a maximum of 1024 characters.</p>
       </div>
     </div>

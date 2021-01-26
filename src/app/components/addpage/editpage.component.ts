@@ -59,7 +59,7 @@ export class EditpageComponent implements OnInit {
     const editInnerPageValue = this.editInnerPageForm.value;
     const innerPageId: string = this.page.innerPageList[this.page.innerPageList.length - 1].id;
     this.pageService.updateInnerPage(innerPageId.toString(),
-      {description: editInnerPageValue.descriptionPage,
+      {content: editInnerPageValue.descriptionPage,
         title: editInnerPageValue.titlePage});
   }
 
@@ -77,7 +77,7 @@ export class EditpageComponent implements OnInit {
 
   addInnerPage(id: number, pageId: number): void {
     const editInnerPageValue = this.editInnerPageForm.value;
-    this.pageService.addInnerPage({description: editInnerPageValue.descriptionPage,
+    this.pageService.addInnerPage({content: editInnerPageValue.descriptionPage,
       paragraphId: pageId.toString(),
       title: editInnerPageValue.titlePage,
       userId: 1});
