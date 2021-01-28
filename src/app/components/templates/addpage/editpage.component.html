@@ -74,33 +74,60 @@
     </div>
   </div>
 
-  <!--
+  <div  *ngIf="page && allParaTagForm">
 
-  <form *ngFor="let paratag of page?.paratagList ">
-    <h4 class="mb-4">Title: {{ paratag.paratagType.name }}</h4>
-    <div class="form-group">
-      <label for="titleParatag">Title:</label>
-      <input type="text" class="form-control" id="titleParatag" value="{{ paratag.innerParatagList[paratag.innerParatagList.length - 1].title }}">
-    </div>
 
-    <div class="mb-3">
-      <div *ngIf="paratag.innerParatagList[paratag.innerParatagList.length - 1].state === 'DRAFT'; else elseIfBlock">
-        <button type="button" class="btn btn-primary mr-2">Save Draft</button>
-        <button type="button" class="btn btn-primary">Validation</button>
-      </div>
-      <ng-template #elseIfBlock>
-        <div class="progress" *ngIf="paratag.innerParatagList[paratag.innerParatagList.length - 1].state === 'VALIDATING'; else elseBlock">
-          <div class="progress-bar bg-success" role="progressbar" style="{{ 'width:' + (paratag.innerParatagList[paratag.innerParatagList.length - 1].favour * 20).toString() + '%' }}" aria-valuenow="{{ paratag.innerParatagList[paratag.innerParatagList.length - 1].favour * 20 }}" aria-valuemin="0" aria-valuemax="100">{{ paratag.innerParatagList[paratag.innerParatagList.length - 1].favour }}/5</div>
-          <div class="progress-bar bg-danger" role="progressbar" style="{{ 'width:' + (paratag.innerParatagList[paratag.innerParatagList.length - 1].against * 20).toString() + '%' }}" aria-valuenow="{{ paratag.innerParatagList[paratag.innerParatagList.length - 1].against * 20 }}" aria-valuemin="0" aria-valuemax="100">{{ paratag.innerParatagList[paratag.innerParatagList.length - 1].against }}/5</div>
+    <div *ngFor="let formGroup of allParaTagForm; let index = index">
+      <form [formGroup]="formGroup">
+        <h4 class="mb-4">Title: {{ page.paratagList[index].paratagType.name }}</h4>
+        <div class="form-group">
+          <label for="titleParatag">Title:</label>
+          <input type="text" class="form-control" id="titleParaTag" formControlName="titleParaTag" value="{{ page.paratagList[index].innerParatagList[page.paratagList[index].innerParatagList.length - 1].title }}">
         </div>
-      </ng-template>
-      <ng-template #elseBlock>
-        <button type="button" class="btn btn-primary">New title/description</button>
-      </ng-template>
-    </div>
-  </form>-->
+        <!---  <div cdkDropListGroup>
+         <div class="example-container">
+           <h2>To do</h2>
+           <div
+             cdkDropList
+             [cdkDropListData]="allParaTagForm"
+             class="example-list"
+             (cdkDropListDropped)="dropItem($event)">
+             <div class="example-box" *ngFor="let item of allParaTagForm" cdkDrag>{{item}}</div>
+           </div>
+         </div>
+         <div class="example-container">
+           <h2>Done</h2>
+           <div
+             cdkDropList
+             [cdkDropListData]="paraTagListSend"
+             class="example-list"
+             (cdkDropListDropped)="dropItem($event)">
+             <div class="example-box" *ngFor="let item of paraTagListSend" cdkDrag>{{item}}</div>
+           </div>
+         </div>
+       </div>
+      <div class="mb-3">
+          <div *ngIf="paratag.innerParatagList[paratag.innerParatagList.length - 1].state === 'DRAFT'; else elseIfBlock">
+            <button type="button" class="btn btn-primary mr-2">Save Draft</button>
+            <button type="button" class="btn btn-primary">Validation</button>
+          </div>
+          <ng-template #elseIfBlock>
+            <div class="progress" *ngIf="paratag.innerParatagList[paratag.innerParatagList.length - 1].state === 'VALIDATING'; else elseBlock">
+              <div class="progress-bar bg-success" role="progressbar" style="{{ 'width:' + (paratag.innerParatagList[paratag.innerParatagList.length - 1].favour * 20).toString() + '%' }}" aria-valuenow="{{ paratag.innerParatagList[paratag.innerParatagList.length - 1].favour * 20 }}" aria-valuemin="0" aria-valuemax="100">{{ paratag.innerParatagList[paratag.innerParatagList.length - 1].favour }}/5</div>
+              <div class="progress-bar bg-danger" role="progressbar" style="{{ 'width:' + (paratag.innerParatagList[paratag.innerParatagList.length - 1].against * 20).toString() + '%' }}" aria-valuenow="{{ paratag.innerParatagList[paratag.innerParatagList.length - 1].against * 20 }}" aria-valuemin="0" aria-valuemax="100">{{ paratag.innerParatagList[paratag.innerParatagList.length - 1].against }}/5</div>
+            </div>
+          </ng-template>
+          <ng-template #elseBlock>
+            <button type="button" class="btn btn-primary">New title/description</button>
+          </ng-template>
+        </div>--->
+       </form>
+     </div>
+   </div>
 
 
-</section>
+
+
+ </section>
 
 

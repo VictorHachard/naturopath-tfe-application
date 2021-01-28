@@ -1,1 +1,31 @@
-<p>editcategory works!</p>
+<section class="my-4 container">
+
+  <h2 class="mb-4">Edit tag</h2>
+
+  <form *ngIf="category" [formGroup]="editCategoryForm">
+    <div class="form-group">
+      <label for="title">Title:</label>
+      <input type="text" class="form-control" formControlName="title" id="title" >
+      <p class="note" style="margin-bottom: 0">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</p>
+      <div *ngIf="editCategoryForm.get('title').invalid &&
+        (editCategoryForm.get('title').dirty || editCategoryForm.get('title').touched)" >
+        <p *ngIf="editCategoryForm.get('title').errors.required"
+           class="note text-danger">Please type a description.</p>
+        <p *ngIf="editCategoryForm.get('title').errors.minlength || editCategoryForm.get('title').errors.minlength"
+           class="note text-danger">Please insert minimum of 8 characters and a maximum of 128 characters.</p>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="contentTag">Description:</label>
+      <textarea id="contentTag" formControlName="contentTag" class="form-control"></textarea>
+      <p class="note" style="margin-bottom: 0">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</p>
+      <div *ngIf="editCategoryForm.get('description').invalid &&
+        (editCategoryForm.get('description').dirty || editCategoryForm.get('description').touched)" >
+        <p *ngIf="editCategoryForm.get('description').errors.required"
+           class="note text-danger">Please type a description.</p>
+        <p *ngIf="editCategoryForm.get('description').errors.minlength || editCategoryForm.get('description').errors.minlength"
+           class="note text-danger">Please insert minimum of 64 characters and a maximum of 1024 characters.</p>
+      </div>
+    </div>
+  </form>
+</section>

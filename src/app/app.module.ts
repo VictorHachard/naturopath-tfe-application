@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -26,6 +26,8 @@ import {FooterComponent} from './components/layouts/footer/footer.component';
 import {HeaderComponent} from './components/layouts/header/header.component';
 import {AdmindashboardComponent} from './components/templates/admindashboard/admindashboard.component';
 import {ContactComponent} from './components/templates/contact/contact.component';
+import {DragDropModule} from '@angular/cdk/drag-drop';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -56,12 +58,15 @@ import {ContactComponent} from './components/templates/contact/contact.component
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DragDropModule,
+    BrowserAnimationsModule
   ],
   exports: [
     HttpClientModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

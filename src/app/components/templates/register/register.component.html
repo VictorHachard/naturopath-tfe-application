@@ -8,20 +8,47 @@
       <label for="inputUsername" class="my-0">Username</label>
       <input type="text" name="username" id="inputUsername" formControlName="username" class="form-control mt-2" autocapitalize="off"  autofocus="autofocus">
       <p class="note">This will be your username. You can update your username later.</p>
+      <div *ngIf="registerForm.get('username').invalid &&
+        (registerForm.get('username').dirty || registerForm.get('username').touched)" >
+        <p *ngIf="registerForm.get('username').errors.required"
+           class="note text-danger">Please type a username.</p>
+      </div>
     </div>
     <div class="form-group">
       <label for="inputEmail" class="my-0">Email address</label>
       <input type="email" name="email" id="inputEmail" formControlName="email" class="form-control mt-2" autocapitalize="off"  autofocus="autofocus">
       <p class="note">We’ll never share your email address with anyone. The tested email service provider are hotmail, outlook and gmail.</p>
     </div>
+    <div *ngIf="registerForm.get('email').invalid &&
+        (registerForm.get('email').dirty || registerForm.get('email').touched)" >
+      <p *ngIf="registerForm.get('email').errors.required"
+         class="note text-danger">Please type a email.</p>
+      <p *ngIf="registerForm.get('email').errors.email" class="note text-danger">Please insert a valid email address.</p>
+    </div>
     <div class="form-group">
       <label for="inputPassword" class="my-0">Password</label>
       <input type="password" name="password" id="inputPassword" formControlName="password" class="form-control mt-2" autocapitalize="off" autofocus="autofocus">
       <p class="note">Make sure it's at least 8 characters.</p>
     </div>
+    <div *ngIf="registerForm.get('password').invalid &&
+        (registerForm.get('password').dirty || registerForm.get('password').touched)" >
+      <p *ngIf="registerForm.get('password').errors.required"
+         class="note text-danger">Please type a password.</p>
+      <p *ngIf="registerForm.get('password').errors.pattern"
+         class="note text-danger">Password must contain at least one lowercase, uppercase, numeric, special character and between six and sixteen characters.</p>
+      <p *ngIf="registerForm.get('password').errors?.noMatch"  class="note text-danger">The password Dont match</p>
+    </div>
     <div class="form-group">
       <label for="inputPasswordConfirm" class="my-0">Confirm password</label>
       <input type="password" name="password_confirm" id="inputPasswordConfirm" formControlName="password_confirm" class="form-control mt-2" autocapitalize="off"  autofocus="autofocus">
+    </div>
+    <div *ngIf="registerForm.get('password_confirm').invalid &&
+        (registerForm.get('password_confirm').dirty || registerForm.get('password_confirm').touched)" >
+      <p *ngIf="registerForm.get('password_confirm').errors.required"
+         class="note text-danger">Please type password confirmation.</p>
+      <p *ngIf="registerForm.get('password_confirm').errors.pattern"
+         class="note text-danger">Password must contain at least one lowercase, uppercase, numeric, special character and between six and sixteen characters.</p>
+      <p *ngIf="registerForm.get('password_confirm').errors?.noMatch" class="note text-danger">The password Dont match</p>
     </div>
     <h4 class="mb-3">Verify your account</h4>
     <div class="g-recaptcha center" data-sitekey=""></div>

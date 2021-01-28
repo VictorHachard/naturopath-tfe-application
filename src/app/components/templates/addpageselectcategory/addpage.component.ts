@@ -43,7 +43,7 @@ export class AddpageComponent implements OnInit {
     });
 
     this.pageService.addPage({categoryId: categoryId.toString(),
-      content: addPageValue.description,
+      description: addPageValue.description,
       title: addPageValue.title,
       userId: '1'}).subscribe(data => {
         this.router.navigate(['/editpage/' + data.toString()]);

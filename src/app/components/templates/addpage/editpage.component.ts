@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {PageService} from '../../../service/page.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {VoteService} from '../../../service/vote.service';
+import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-addpage',
@@ -11,6 +12,9 @@ import {VoteService} from '../../../service/vote.service';
 })
 export class EditpageComponent implements OnInit {
 
+  allParaTagForm: FormGroup[] = [];
+
+  paraTagListSend = [];
   editInnerPageForm: FormGroup;
   editInnerParagraphForm: FormGroup[] = [];
 
@@ -44,6 +48,12 @@ export class EditpageComponent implements OnInit {
           [Validators.required, Validators.minLength(1), Validators.maxLength(1024)]),
         contentParagraph : new FormControl(p.innerParagraphList[p.innerParagraphList.length - 1].content,
           [Validators.required, Validators.minLength(64), Validators.maxLength(1024)]),
+      }));
+    });
+    this.page.paratagList.forEach(p => {
+      this.allParaTagForm.push(new FormGroup({
+        titleParaTag: new FormControl(p.paratagList.innerParatagList[p.paratagList.innerParatagList.length - 1].title,
+          [Validators.required, Validators.minLength(8), Validators.maxLength(128)])
       }));
     });
   }
@@ -100,5 +110,16 @@ export class EditpageComponent implements OnInit {
       paragraphId: paragraphId.toString(),
       title: editInnerParagraphValue.titleParagraph,
       userId: 1});
+  }
+
+  dropItem(event: CdkDragDrop<any[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex);
+    }
   }
 }

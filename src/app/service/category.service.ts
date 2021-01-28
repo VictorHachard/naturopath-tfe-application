@@ -16,6 +16,11 @@ export class CategoryService {
     return this.http.get<Category[]>(this.baseUrl + 'dto/category');
   }
 
-  public addCategory(): void{
+  public getEditCategoryDto(id: string): Observable<any> {
+    return this.http.get<any>(this.baseUrl + 'dto/edit/category/' + id);
+  }
+
+  public addCategory(body: any): Observable<any> {
+    return this.http.post<any>(this.baseUrl + 'category', body);
   }
 }
