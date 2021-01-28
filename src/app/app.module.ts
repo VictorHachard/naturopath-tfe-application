@@ -14,8 +14,8 @@ import {PrivacyComponent} from './components/templates/privacy/privacy.component
 import {SettingsComponent} from './components/templates/settings/settings.component';
 import {PageComponent} from './components/templates/page/page.component';
 import {ReactiveFormsModule} from '@angular/forms';
-import {EditpageComponent} from './components/templates/addpage/editpage.component';
-import {AddpageComponent} from './components/templates/addpageselectcategory/addpage.component';
+import {EditpageComponent} from './components/templates/editpage/editpage.component';
+import {AddpageComponent} from './components/templates/addpage/addpage.component';
 import {AddtagComponent} from './components/templates/addtag/addtag.component';
 import {EdittagComponent} from './components/templates/edittag/edittag.component';
 import {AddcategoryComponent} from './components/templates/addcategory/addcategory.component';

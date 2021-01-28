@@ -17,16 +17,16 @@ export class AddpageComponent implements OnInit {
   constructor(private router: Router, private categoryService: CategoryService, private pageService: PageService) { }
 
   ngOnInit(): void {
-    this.init();
     this.categoryService.getAllCategory().subscribe(data => {
       this.categories = data;
       console.log(this.categories);
+      this.init();
     });
   }
 
   init(): void {
     this.addPageForm = new FormGroup({
-      category: new FormControl('Tisanes', Validators.required),
+      category: new FormControl(this.categories[0].name, Validators.required),
       title: new FormControl('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', [Validators.required, Validators.minLength(8), Validators.maxLength(128)]),
       description: new FormControl('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', [Validators.required, Validators.minLength(64), Validators.maxLength(1024)]),
     });

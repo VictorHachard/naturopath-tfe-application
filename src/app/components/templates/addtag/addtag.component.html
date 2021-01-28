@@ -2,7 +2,7 @@
 
   <h2 class="mb-4">Add a new tag</h2>
 
-  <form [formGroup]="addTagForm" (ngSubmit)="addTag()">
+  <form *ngIf="tagTypeList" [formGroup]="addTagForm" (ngSubmit)="addTag()">
     <div class="form-group">
       <div class="input-group mb-0">
         <div class="input-group-prepend">

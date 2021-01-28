@@ -9,8 +9,8 @@ import {TermsComponent} from './components/templates/terms/terms.component';
 import {PrivacyComponent} from './components/templates/privacy/privacy.component';
 import {PageComponent} from './components/templates/page/page.component';
 import {PagesComponent} from './components/templates/pages/pages.component';
-import {EditpageComponent} from './components/templates/addpage/editpage.component';
-import {AddpageComponent} from './components/templates/addpageselectcategory/addpage.component';
+import {EditpageComponent} from './components/templates/editpage/editpage.component';
+import {AddpageComponent} from './components/templates/addpage/addpage.component';
 import {AddtagComponent} from './components/templates/addtag/addtag.component';
 import {EdittagComponent} from './components/templates/edittag/edittag.component';
 import {ContactComponent} from './components/templates/contact/contact.component';
@@ -30,7 +30,7 @@ const routes: Routes = [
   { path: 'pages', component: PagesComponent },
   { path: 'pages/:id', component: PagesComponent },
   { path: 'editpage/:id', component: EditpageComponent },
-  { path: 'addpage', component: AddpageComponent },
+  { path: 'editpage', component: AddpageComponent },
   { path: 'edittag/:id', component: EdittagComponent },
   { path: 'addtag', component: AddtagComponent },
   { path: 'editcategory/:id', component: EditcategoryComponent },
