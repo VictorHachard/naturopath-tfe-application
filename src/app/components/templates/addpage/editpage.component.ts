@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {PageService} from '../../service/page.service';
+import {PageService} from '../../../service/page.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {VoteService} from '../../service/vote.service';
+import {VoteService} from '../../../service/vote.service';
 
 @Component({
   selector: 'app-addpage',

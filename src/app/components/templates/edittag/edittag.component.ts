@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {VoteService} from '../../service/vote.service';
-import {TagService} from '../../service/tag.service';
+import {VoteService} from '../../../service/vote.service';
+import {TagService} from '../../../service/tag.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({

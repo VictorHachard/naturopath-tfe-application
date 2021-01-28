@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { TagtypeService } from './tagtype.service';
+import {TagtypeService} from './tagtype.service';
 
 describe('TagtypeService', () => {
   let service: TagtypeService;

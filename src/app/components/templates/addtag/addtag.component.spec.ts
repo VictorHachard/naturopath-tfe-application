@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { AddtagComponent } from './addtag.component';
+import {AddtagComponent} from './addtag.component';
 
 describe('AddtagComponent', () => {
   let component: AddtagComponent;
