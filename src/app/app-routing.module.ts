@@ -30,7 +30,7 @@ const routes: Routes = [
   { path: 'pages', component: PagesComponent },
   { path: 'pages/:id', component: PagesComponent },
   { path: 'editpage/:id', component: EditpageComponent },
-  { path: 'editpage', component: AddpageComponent },
+  { path: 'addpage', component: AddpageComponent },
   { path: 'edittag/:id', component: EdittagComponent },
   { path: 'addtag', component: AddtagComponent },
   { path: 'editcategory/:id', component: EditcategoryComponent },
