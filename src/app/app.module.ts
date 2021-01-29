@@ -29,6 +29,18 @@ import {ContactComponent} from './components/templates/contact/contact.component
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { AdmincategoriesComponent } from './components/templates/admin/admincategories/admincategories.component';
+import { AddparagraphtypeComponent } from './components/templates/add/addparagraphtype/addparagraphtype.component';
+import { EditparagraphtypeComponent } from './components/templates/edit/editparagraphtype/editparagraphtype.component';
+import { EditparapagetypeComponent } from './components/templates/edit/editparapagetype/editparapagetype.component';
+import { AddparapagetypeComponent } from './components/templates/add/addparapagetype/addparapagetype.component';
+import { AddparatagtypeComponent } from './components/templates/add/addparatagtype/addparatagtype.component';
+import { EditparatagtypeComponent } from './components/templates/edit/editparatagtype/editparatagtype.component';
+import { EdittagtypeComponent } from './components/templates/edit/edittagtype/edittagtype.component';
+import { AddtagtypeComponent } from './components/templates/add/addtagtype/addtagtype.component';
+import { AdmintagtypesComponent } from './components/templates/admin/admintagtypes/admintagtypes.component';
+import { AdminparagraphtypesComponent } from './components/templates/admin/adminparagraphtypes/adminparagraphtypes.component';
+import { AdminparatagtypesComponent } from './components/templates/admin/adminparatagtypes/adminparatagtypes.component';
+import { AdminparapagetypesComponent } from './components/templates/admin/adminparapagetypes/adminparapagetypes.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +67,18 @@ import { AdmincategoriesComponent } from './components/templates/admin/admincate
     AdmindashboardComponent,
     ContactComponent,
     AdmincategoriesComponent,
+    AddparagraphtypeComponent,
+    EditparagraphtypeComponent,
+    EditparapagetypeComponent,
+    AddparapagetypeComponent,
+    AddparatagtypeComponent,
+    EditparatagtypeComponent,
+    EdittagtypeComponent,
+    AddtagtypeComponent,
+    AdmintagtypesComponent,
+    AdminparagraphtypesComponent,
+    AdminparatagtypesComponent,
+    AdminparapagetypesComponent,
   ],
   imports: [
     BrowserModule,

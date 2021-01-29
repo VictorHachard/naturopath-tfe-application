@@ -4,3 +4,25 @@
 .form-control.ng-touched.ng-valid{
   border: 1px solid green;
 }
+/* Form */
+.forget-center {
+  width: 100%;
+  max-width: 330px;
+  margin: auto;
+}
+.forget-center form {
+  padding: 15px;
+}
+.forget-center .checkbox {
+  font-weight: 400;
+}
+.forget-center .form-control {
+  position: relative;
+  box-sizing: border-box;
+  height: auto;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-center .form-control:focus {
+  z-index: 2;
+}

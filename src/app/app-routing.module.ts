@@ -17,6 +17,17 @@ import {ContactComponent} from './components/templates/contact/contact.component
 import {EditcategoryComponent} from './components/templates/edit/editcategory/editcategory.component';
 import {AddcategoryComponent} from './components/templates/add/addcategory/addcategory.component';
 import {AdmincategoriesComponent} from './components/templates/admin/admincategories/admincategories.component';
+import {EdittagtypeComponent} from './components/templates/edit/edittagtype/edittagtype.component';
+import {AddtagtypeComponent} from './components/templates/add/addtagtype/addtagtype.component';
+import {AdmintagtypesComponent} from './components/templates/admin/admintagtypes/admintagtypes.component';
+import {EditparagraphtypeComponent} from './components/templates/edit/editparagraphtype/editparagraphtype.component';
+import {AddparagraphtypeComponent} from './components/templates/add/addparagraphtype/addparagraphtype.component';
+import {AdminparagraphtypesComponent} from './components/templates/admin/adminparagraphtypes/adminparagraphtypes.component';
+import {AdminparatagtypesComponent} from './components/templates/admin/adminparatagtypes/adminparatagtypes.component';
+import {AddparatagtypeComponent} from './components/templates/add/addparatagtype/addparatagtype.component';
+import {AdminparapagetypesComponent} from './components/templates/admin/adminparapagetypes/adminparapagetypes.component';
+import {AddparapagetypeComponent} from './components/templates/add/addparapagetype/addparapagetype.component';
+import {EditparapagetypeComponent} from './components/templates/edit/editparapagetype/editparapagetype.component';
 
 const routes: Routes = [
   { path: 'home', component: AccueilComponent },
@@ -37,6 +48,22 @@ const routes: Routes = [
   { path: 'editcategory/:id', component: EditcategoryComponent },
   { path: 'addcategory', component: AddcategoryComponent },
   { path: 'admincategories', component: AdmincategoriesComponent },
+
+  { path: 'edittagtype/:id', component: EdittagtypeComponent },
+  { path: 'addtagtype', component: AddtagtypeComponent },
+  { path: 'admintagtypes', component: AdmintagtypesComponent },
+
+  { path: 'editparagraphtype/:id', component: EditparagraphtypeComponent },
+  { path: 'addparagraphtype', component: AddparagraphtypeComponent },
+  { path: 'adminparagraphtypes', component: AdminparagraphtypesComponent },
+
+  { path: 'editparatagtype/:id', component: EdittagtypeComponent },
+  { path: 'addparatagtype', component: AddparatagtypeComponent },
+  { path: 'adminparatagtypes', component: AdminparatagtypesComponent },
+
+  { path: 'editparapagetype/:id', component: EditparapagetypeComponent },
+  { path: 'addparapagetype', component: AddparapagetypeComponent },
+  { path: 'adminparapagetypes', component: AdminparapagetypesComponent },
 ];
 
 @NgModule({
