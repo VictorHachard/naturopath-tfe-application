@@ -7,14 +7,26 @@
       <h2 class="h3 mb-3 text-center">Sign in to YPC</h2>
       <form [formGroup]="formLogin" (ngSubmit)="Login()" id="loginForm" class="form-center form-setting border rounded-lg">
         <div class="form-group">
-          <label for="inputEmail" class="my-0">Username or email address</label>
-          <input type="text" name="login" id="inputEmail" formControlName="username" class="form-control mt-2 mb-3" autocapitalize="off" autofocus="autofocus">
+          <label for="emailOrUsername" class="my-0">Username or email address</label>
+          <input type="text" name="login" id="emailOrUsername" formControlName="emailOrUsername" class="form-control mt-2 mb-3" autocapitalize="off" autofocus="autofocus">
+          <div *ngIf="formLogin.get('emailOrUsername').invalid &&
+                 (formLogin.get('emailOrUsername').dirty || formLogin.get('emailOrUsername').touched)" >
+            <p *ngIf="formLogin.get('emailOrUsername').errors.required"
+               class="note text-danger">Please type a email.</p>
+          </div>
         </div>
         <div class="form-group">
           <label for="inputPassword" class="my-0">Password
             <a class="label-link" routerLink="/forget">Forgot password?</a>
           </label>
           <input type="password" name="password" id="inputPassword" formControlName="password" class="form-control mt-2 mb-3" autocapitalize="off" autofocus="autofocus">
+          <div *ngIf="formLogin.get('password').invalid &&
+                 (formLogin.get('password').dirty || formLogin.get('password').touched)" >
+            <p *ngIf="formLogin.get('password').errors.required"
+               class="note text-danger">Please type a password.</p>
+            <p *ngIf="formLogin.get('password').errors.pattern"
+               class="note text-danger">Password must contain at least one lowercase, uppercase, numeric, special character and between six and sixteen characters.</p>
+          </div>
         </div>
         <div class="form-group mb-3">
           <label class="containerCheckbox">Remember me

@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {VoteService} from '../../../service/vote.service';
 import {TagService} from '../../../service/tag.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {InnertagService} from '../../../service/innertag.service';
 
 @Component({
   selector: 'app-edittag',
@@ -17,7 +18,8 @@ export class EdittagComponent implements OnInit {
 
   tag: any;
 
-  constructor(private route: ActivatedRoute, private tagService: TagService, private voteService: VoteService, private router: Router) {
+  constructor(private route: ActivatedRoute, private tagService: TagService, private voteService: VoteService, private router: Router,
+              private innerTag: InnertagService) {
   }
 
   ngOnInit(): void {
@@ -41,14 +43,14 @@ export class EdittagComponent implements OnInit {
   updateInnerTag(): void {
     const editInnerTagValue = this.editInnerTagForm.value;
     const innerTagId: string = this.tag.innerTagList[this.tag.innerTagList.length - 1].id;
-    this.tagService.updateInnerTag(innerTagId.toString(),
+    this.innerTag.updateInnerTag(innerTagId.toString(),
       {content: editInnerTagValue.contentTag,
         name: editInnerTagValue.nameTag});
   }
 
   validationInnerTag(): void {
     const innerTagId: string = this.tag.innerTagList[this.tag.innerTagList.length - 1].id;
-    this.tagService.validationInnerTag(innerTagId);
+    this.innerTag.validationInnerTag(innerTagId);
   }
 
   voteInnerTag(id: number, choice: number): void {
@@ -60,9 +62,9 @@ export class EdittagComponent implements OnInit {
 
   addInnerTag(id: number,  tagId: number): void {
     const editInnerTagValue = this.editInnerTagForm.value;
-    this.tagService.addInnerPage({content: editInnerTagValue.contentTag,
-      tagId: tagId.toString(),
+    this.innerTag.addInnerTag({content: editInnerTagValue.contentTag,
       name: editInnerTagValue.nameTag,
+      tagId: tagId.toString(),
       userId: 1});
   }
 }

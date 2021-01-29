@@ -7,8 +7,24 @@
       <h2 class="h3 mb-3 text-center">Reset your password</h2>
       <form [formGroup]="formResetPassword" (ngSubmit)="SendEmail()" id="forgetForm"  class="form-center form-setting border rounded-lg">
         <div class="form-group">
-          <label for="inputEmail" class="my-0">Email address</label>
-          <input type="email" name="email" id="inputEmail" formControlName="email" class="form-control mt-2 mb-3"  autocapitalize="off" autofocus="autofocus">
+          <label for="emailOrUsername" class="my-0">Email address or username</label>
+          <input type="email" name="email" id="emailOrUsername" formControlName="emailOrUsername" class="form-control mt-2 mb-3"  autocapitalize="off" autofocus="autofocus">
+            <div *ngIf="formResetPassword.get('emailOrUsername').invalid &&
+                 (formResetPassword.get('emailOrUsername').dirty || formResetPassword.get('emailOrUsername').touched)" >
+              <p *ngIf="formResetPassword.get('emailOrUsername').errors.required"
+                 class="note text-danger">Please type a email.</p>
+            </div>
+        </div>
+        <div class="form-group">
+          <label for="forgetPassword" class="my-0">Old password</label>
+          <input type="password" name="forgetPassword" id="forgetPassword" formControlName="forgetPassword" class="form-control mt-2 mb-3"  autocapitalize="off">
+          <div *ngIf="formResetPassword.get('forgetPassword').invalid &&
+                 (formResetPassword.get('forgetPassword').dirty || formResetPassword.get('forgetPassword').touched)" >
+            <p *ngIf="formResetPassword.get('forgetPassword').errors.required"
+               class="note text-danger">Please type a password.</p>
+            <p *ngIf="formResetPassword.get('forgetPassword').errors.pattern"
+               class="note text-danger">Password must contain at least one lowercase, uppercase, numeric, special character and between six and sixteen characters.</p>
+          </div>
         </div>
         <button [disabled]="formResetPassword.invalid" class="btn btn-lg btn-primary btn-block" type="submit">Reset your password</button>
       </form>

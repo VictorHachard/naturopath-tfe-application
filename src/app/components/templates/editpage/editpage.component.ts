@@ -4,6 +4,10 @@ import {PageService} from '../../../service/page.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {VoteService} from '../../../service/vote.service';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import {InnerparagraphService} from '../../../service/innerparagraph.service';
+import {InnerpageService} from '../../../service/innerpage.service';
+import {TagtypeService} from '../../../service/tagtype.service';
+import {Paratag} from '../../../model/view/Paratag';
 
 @Component({
   selector: 'app-addpage',
@@ -14,7 +18,8 @@ export class EditpageComponent implements OnInit {
 
   allParaTagForm: FormGroup[] = [];
 
-  paraTagListSend = [];
+  allTagTypeList =  [];
+  tagTypeListSend = [];
   editInnerPageForm: FormGroup;
   editInnerParagraphForm: FormGroup[] = [];
 
@@ -22,9 +27,10 @@ export class EditpageComponent implements OnInit {
 
   page: any;
 
-  test: string;
+  paraTag: any;
 
-  constructor(private route: ActivatedRoute, private pageService: PageService, private voteService: VoteService, private router: Router) { }
+  constructor(private route: ActivatedRoute, private pageService: PageService, private voteService: VoteService, private router: Router, private tagType: TagtypeService,
+              private innerParagraph: InnerparagraphService, private innerPage: InnerpageService) { }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
@@ -32,6 +38,11 @@ export class EditpageComponent implements OnInit {
       console.log(data);
       this.page = data;
       this.init();
+    });
+    this.tagType.getAllTagType().subscribe(data => {
+      this.paraTag = data;
+      this.paraTag.forEach( p => { this.allTagTypeList.push(p.name); });
+      console.log(this.paraTag);
     });
   }
 
@@ -52,15 +63,17 @@ export class EditpageComponent implements OnInit {
     });
     this.page.paratagList.forEach(p => {
       this.allParaTagForm.push(new FormGroup({
-        titleParaTag: new FormControl(p.paratagList.innerParatagList[p.paratagList.innerParatagList.length - 1].title,
-          [Validators.required, Validators.minLength(8), Validators.maxLength(128)])
+        titleParaTag: new FormControl(p.paratagType.name,
+          [Validators.required, Validators.minLength(8), Validators.maxLength(128)]),
+        descriptionParaTag: new FormControl(p.paratagType.description,
+          [Validators.required, Validators.minLength(64), Validators.maxLength(1024)]),
       }));
     });
   }
 
   updateInnerParagraph(index: number, id: number): void {
     const editInnerParagraphValue = this.editInnerParagraphForm[index].value;
-    this.pageService.updateInnerParagraph(id.toString(),
+    this.innerParagraph.updateInnerParagraph(id.toString(),
       {content: editInnerParagraphValue.contentParagraph,
         title: editInnerParagraphValue.titleParagraph});
   }
@@ -68,14 +81,14 @@ export class EditpageComponent implements OnInit {
   updateInnerPage(): void {
     const editInnerPageValue = this.editInnerPageForm.value;
     const innerPageId: string = this.page.innerPageList[this.page.innerPageList.length - 1].id;
-    this.pageService.updateInnerPage(innerPageId.toString(),
+    this.innerPage.updateInnerPage(innerPageId.toString(),
       {content: editInnerPageValue.descriptionPage,
         title: editInnerPageValue.titlePage});
   }
 
   validationInnerPage(): void {
     const innerPageId: string = this.page.innerPageList[this.page.innerPageList.length - 1].id;
-    this.pageService.validationInnerPage(innerPageId);
+    this.innerPage.validationInnerPage(innerPageId);
   }
 
   voteInnerPage(id: number, choice: number): void {
@@ -87,14 +100,14 @@ export class EditpageComponent implements OnInit {
 
   addInnerPage(id: number, pageId: number): void {
     const editInnerPageValue = this.editInnerPageForm.value;
-    this.pageService.addInnerPage({content: editInnerPageValue.descriptionPage,
+    this.innerPage.addInnerPage({content: editInnerPageValue.descriptionPage,
       paragraphId: pageId.toString(),
       title: editInnerPageValue.titlePage,
       userId: 1});
   }
 
   validationInnerParagraph(index: number, id: number): void {
-    this.pageService.validationInnerParagraph(id.toString());
+    this.innerParagraph.validationInnerParagraph(id.toString());
   }
 
   voteInnerParagraph(index: number, id: number, choice: number): void {
@@ -106,13 +119,13 @@ export class EditpageComponent implements OnInit {
 
   addInnerParagraph(index: number, id: number, paragraphId: number): void {
     const editInnerParagraphValue = this.editInnerParagraphForm[index].value;
-    this.pageService.addInnerParagraph({content: editInnerParagraphValue.contentParagraph,
+    this.innerParagraph.addInnerParagraph({content: editInnerParagraphValue.contentParagraph,
       paragraphId: paragraphId.toString(),
       title: editInnerParagraphValue.titleParagraph,
       userId: 1});
   }
 
-  dropItem(event: CdkDragDrop<any[]>) {
+  dropItem(event: CdkDragDrop<any[]>): void {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {

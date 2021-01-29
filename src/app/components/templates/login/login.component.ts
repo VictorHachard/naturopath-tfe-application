@@ -1,5 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {UsersecurityService} from '../../../service/usersecurity.service';
+import {Router} from '@angular/router';
+import {Globalconstants} from '../../../helpers/globalconstants';
 
 @Component({
   selector: 'app-login',
@@ -8,19 +11,27 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
   formLogin: FormGroup;
-  constructor() { }
+  user: any;
+
+  constructor(private router: Router, private userSecurity: UsersecurityService) { }
 
   ngOnInit(): void {
     this.init();
   }
   init(): void {
     this.formLogin = new FormGroup({
-      username: new FormControl('', Validators.required),
-      password: new FormControl('',  Validators.required)
+      emailOrUsername: new FormControl('', Validators.required),
+      password: new FormControl('',  [Validators.required, Validators.pattern('(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=*])(?=\\S+$).{6,}')])
     });
   }
   Login(): void {
     const LoginValue = this.formLogin.value;
-    console.log(LoginValue.username, LoginValue.password);
+
+    this.userSecurity.loginUser({emailOrUsername: LoginValue.emailOrUsername,
+      password: LoginValue.password}).subscribe(data => {
+        this.user = data;
+        Globalconstants.addUserInformation(this.user.id, this.user.username);
+        this.router.navigate(['/home']);
+    });
   }
 }

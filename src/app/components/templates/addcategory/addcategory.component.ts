@@ -17,7 +17,7 @@ export class AddcategoryComponent implements OnInit {
 
   ngOnInit(): void {
     this.init();
-    this.categoryService.getAllCategory().subscribe(data => {
+    this.categoryService.getAllParentCategoryDto().subscribe(data => {
       this.categories = data;
       console.log(this.categories);
     });
@@ -25,8 +25,9 @@ export class AddcategoryComponent implements OnInit {
 
   init(): void{
     this.addCategoryForm = new FormGroup({
+      isParent: new FormControl(false),
       category: new FormControl('Tisanes', Validators.required),
-      name: new FormControl('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', [Validators.required, Validators.minLength(6), Validators.maxLength(32)]),
+      name: new FormControl('Lorem ipsum dolor.', [Validators.required, Validators.minLength(6), Validators.maxLength(32)]),
       description: new FormControl('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', [Validators.required, Validators.minLength(16), Validators.maxLength(1024)]),
     });
   }
@@ -40,17 +41,19 @@ export class AddcategoryComponent implements OnInit {
         categoryId = value.id;
       }
     });
-    if (categoryId === null) {
-      this.categoryService.addCategory({categoryId: null,
-        description: addCategoryValue.description,
+    if (categoryId === undefined) {
+      this.categoryService.addCategory({description: addCategoryValue.description,
+        isParent: addCategoryValue.isParent,
         name: addCategoryValue.name,
+        parentCategoryId: null,
         userId: '1'}).subscribe(data => {
         this.router.navigate(['/editcategory/' + data.toString()]);
       });
     } else {
-      this.categoryService.addCategory({categoryId: categoryId.toString(),
-        description: addCategoryValue.description,
+      this.categoryService.addCategory({description: addCategoryValue.description,
+        isParent: addCategoryValue.isParent,
         name: addCategoryValue.name,
+        parentCategoryId: categoryId.toString(),
         userId: '1'}).subscribe(data => {
         this.router.navigate(['/editcategory/' + data.toString()]);
       });

@@ -84,29 +84,33 @@
           <label for="titleParatag">Title:</label>
           <input type="text" class="form-control" id="titleParaTag" formControlName="titleParaTag" value="{{ page.paratagList[index].innerParatagList[page.paratagList[index].innerParatagList.length - 1].title }}">
         </div>
-        <!---  <div cdkDropListGroup>
+        <div class="form-group">
+          <label for="content">Content:</label>
+          <textarea id="descriptionParaTag" class="form-control" formControlName="descriptionParaTag" [value]="page.paragraphList[index].innerParagraphList[page.paragraphList[index].innerParagraphList.length - 1].content"></textarea>
+        </div>
+           <div cdkDropListGroup>
          <div class="example-container">
            <h2>To do</h2>
            <div
              cdkDropList
-             [cdkDropListData]="allParaTagForm"
+             [cdkDropListData]="allTagTypeList"
              class="example-list"
              (cdkDropListDropped)="dropItem($event)">
-             <div class="example-box" *ngFor="let item of allParaTagForm" cdkDrag>{{item}}</div>
+             <div class="example-box" *ngFor="let item of allTagTypeList" cdkDrag>{{item}}</div>
            </div>
          </div>
          <div class="example-container">
            <h2>Done</h2>
            <div
              cdkDropList
-             [cdkDropListData]="paraTagListSend"
+             [cdkDropListData]="tagTypeListSend"
              class="example-list"
              (cdkDropListDropped)="dropItem($event)">
-             <div class="example-box" *ngFor="let item of paraTagListSend" cdkDrag>{{item}}</div>
+             <div class="example-box" *ngFor="let item of tagTypeListSend" cdkDrag>{{item}}</div>
            </div>
          </div>
        </div>
-      <div class="mb-3">
+     <!-- <div class="mb-3">
           <div *ngIf="paratag.innerParatagList[paratag.innerParatagList.length - 1].state === 'DRAFT'; else elseIfBlock">
             <button type="button" class="btn btn-primary mr-2">Save Draft</button>
             <button type="button" class="btn btn-primary">Validation</button>

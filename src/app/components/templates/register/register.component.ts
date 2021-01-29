@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, ValidatorFn, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+import {UsersecurityService} from '../../../service/usersecurity.service';
 
 @Component({
   selector: 'app-register',
@@ -9,7 +11,7 @@ import {FormControl, FormGroup, ValidatorFn, Validators} from '@angular/forms';
 export class RegisterComponent implements OnInit {
 
   registerForm: FormGroup;
-  constructor() { }
+  constructor(private router: Router, private userSecurity: UsersecurityService) { }
 
   ngOnInit(): void {
     this.init();
@@ -24,8 +26,12 @@ export class RegisterComponent implements OnInit {
   }
   Register(): void{
     const RegisterValue = this.registerForm.value;
-    console.log(RegisterValue.username, RegisterValue.email, RegisterValue.password);
-  }
+
+    this.userSecurity.addUser({email: RegisterValue.email,
+      password: RegisterValue.password,
+      username: RegisterValue.username});
+    this.router.navigate(['/home']);
+    }
 
     matchPassword(firstControl, secondControl): ValidatorFn {
     return (control: FormGroup): { [key: string]: boolean } | null => {
@@ -40,8 +46,8 @@ export class RegisterComponent implements OnInit {
       }else {
         const noMatchError = control.get(firstControl).hasError('noMatch');
         if (noMatchError){
-          delete control.get(firstControl).errors.noMatch;
-          control.get(firstControl).updateValueAndValidity();
+            delete control.get(firstControl).errors.noMatch;
+            control.get(firstControl).updateValueAndValidity();
         }
       }
     };
