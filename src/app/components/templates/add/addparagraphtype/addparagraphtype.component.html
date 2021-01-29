@@ -1,1 +1,32 @@
-<p>addparagraphtype works!</p>
+<section class="my-4 container">
+
+  <h2 class="mb-4">Add a new paragraphtype</h2>
+
+  <form [formGroup]="addParagraphTypeForm" (ngSubmit)="addParagraphType()">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" id="name" formControlName="name">
+      <p class="note">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</p>
+      <div *ngIf="addParagraphTypeForm.get('name').invalid &&
+        (addParagraphTypeForm.get('name').dirty || addParagraphTypeForm.get('name').touched)" >
+        <p *ngIf="addParagraphTypeForm.get('name').errors.required"
+           class="note text-danger">Please type a name.</p>
+        <p *ngIf="addParagraphTypeForm.get('name').errors.maxlength || addParagraphTypeForm.get('name').errors.minlength"
+           class="note text-danger">Please insert minimum of 6 characters and a maximum of 32 characters.</p>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea class="form-control" id="description" rows="3" formControlName="description"></textarea>
+      <p class="note">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</p>
+      <div *ngIf="addParagraphTypeForm.get('description').invalid &&
+        (addParagraphTypeForm.get('description').dirty || addParagraphTypeForm.get('description').touched)" >
+        <p *ngIf="addParagraphTypeForm.get('description').errors.required"
+           class="note text-danger">Please type a description.</p>
+        <p *ngIf="addParagraphTypeForm.get('description').errors.minlength || addParagraphTypeForm.get('description').errors.minlength"
+           class="note text-danger">Please insert minimum of 16 characters and a maximum of 1024 characters.</p>
+      </div>
+    </div>
+    <button class="btn btn-lg btn-primary btn-block mt-3" [disabled]="addParagraphTypeForm.invalid" type="submit">Add a paragraphtype</button>
+  </form>
+</section>

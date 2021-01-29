@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {CategoryService} from '../../../../service/category.service';
+import {TagtypeService} from '../../../../service/tagtype.service';
 
 @Component({
   selector: 'app-admintagtypes',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdmintagtypesComponent implements OnInit {
 
-  constructor() { }
+  tagType: any[];
+
+  constructor(private tagTypeService: TagtypeService) { }
 
   ngOnInit(): void {
+    this.tagTypeService.getAllTagType().subscribe(data => {
+      this.tagType = data;
+      console.log(this.tagType);
+    });
   }
+
 
 }

@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {CategoryService} from '../../../../service/category.service';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {TagtypeService} from '../../../../service/tagtype.service';
 
 @Component({
   selector: 'app-edittagtype',
@@ -7,9 +11,37 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EdittagtypeComponent implements OnInit {
 
-  constructor() { }
+  editTagTypeForm: FormGroup;
 
-  ngOnInit(): void {
+  private id: string;
+
+  tagType: any;
+
+  constructor(private route: ActivatedRoute, private tagTypeService: TagtypeService, private router: Router) {
   }
 
+  ngOnInit(): void {
+    this.id = this.route.snapshot.paramMap.get('id');
+    this.tagTypeService.getTagTypeDto(this.id).subscribe(data => {
+      console.log(data);
+      this.tagType = data;
+      this.init();
+    });
+  }
+
+  init(): void {
+    this.editTagTypeForm = new FormGroup({
+      name: new FormControl(this.tagType.name,
+        [Validators.required, Validators.minLength(6), Validators.maxLength(32)]),
+      description: new FormControl(this.tagType.description,
+        [Validators.required, Validators.minLength(16), Validators.maxLength(1024)]),
+    });
+  }
+
+  update(): void {
+    const editTagTypeValue = this.editTagTypeForm.value;
+    this.tagTypeService.updateTagType(this.tagType.id.toString(),
+      {description: editTagTypeValue.description,
+        name: editTagTypeValue.name});
+  }
 }

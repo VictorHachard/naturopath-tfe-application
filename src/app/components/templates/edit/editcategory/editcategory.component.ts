@@ -39,8 +39,6 @@ export class EditcategoryComponent implements OnInit {
     });
   }
 
-  addCategory(): void {}
-
   update(): void {
     const editCategoryValue = this.editCategoryForm.value;
     this.categoryService.updateCategory(this.category.id.toString(),

@@ -1,1 +1,31 @@
-<p>edittagtype works!</p>
+<section class="my-4 container">
+
+  <h2 class="mb-4">Edit tagtype</h2>
+    <form *ngIf="tagType" [formGroup]="editTagTypeForm">
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" class="form-control" formControlName="name" id="name" >
+        <p class="note">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</p>
+        <div *ngIf="editTagTypeForm.get('name').invalid &&
+            (editTagTypeForm.get('name').dirty || editTagTypeForm.get('name').touched)" >
+          <p *ngIf="editTagTypeForm.get('name').errors.required"
+             class="note text-danger">Please type a description.</p>
+          <p *ngIf="editTagTypeForm.get('name').errors.minlength || editTagTypeForm.get('name').errors.minlength"
+             class="note text-danger">Please insert minimum of 8 characters and a maximum of 128 characters.</p>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="description">Description:</label>
+        <textarea id="description" formControlName="description" class="form-control"></textarea>
+        <p class="note">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</p>
+        <div *ngIf="editTagTypeForm.get('description').invalid &&
+            (editTagTypeForm.get('description').dirty || editTagTypeForm.get('description').touched)" >
+          <p *ngIf="editTagTypeForm.get('description').errors.required"
+             class="note text-danger">Please type a description.</p>
+          <p *ngIf="editTagTypeForm.get('description').errors.minlength || editTagTypeForm.get('description').errors.minlength"
+             class="note text-danger">Please insert minimum of 64 characters and a maximum of 1024 characters.</p>
+        </div>
+      </div>
+      <button type="button" class="btn btn-primary" [disabled]="editTagTypeForm.invalid" (click)="update()">Update</button>
+    </form>
+</section>
