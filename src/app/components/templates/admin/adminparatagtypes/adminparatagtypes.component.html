@@ -1,1 +1,20 @@
-<p>adminparatagtypes works!</p>
+<section class="my-4 container">
+
+  <table class="table table-bordered">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let paratag of paratagTypes; let index = index">
+      <th scope="row">{{ index }}</th>
+      <td>{{ paratag.name }}</td>
+      <td><button type="button" class="btn btn-primary" [routerLink]="['/editparatagtype', paratag.id]">Edit</button></td>
+    </tr>
+    </tbody>
+  </table>
+
+</section>

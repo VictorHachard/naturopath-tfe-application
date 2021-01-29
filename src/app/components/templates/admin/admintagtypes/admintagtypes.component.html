@@ -9,7 +9,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let tagType of tagType; let index = index">
+    <tr *ngFor="let tagType of tagTypes; let index = index">
       <th scope="row">{{ index }}</th>
       <td>{{ tagType.name }}</td>
       <td><button type="button" class="btn btn-primary" [routerLink]="['/edittagtype', tagType.id]">Edit</button></td>

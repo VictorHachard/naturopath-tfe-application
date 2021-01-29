@@ -11,7 +11,7 @@ export class TagtypeService {
 
   constructor(private http: HttpClient) { }
 
-  public getTagTypeDto(id: string): Observable<any> {
+  public getTagType(id: string): Observable<any> {
     return this.http.get<any>(this.baseUrl + 'dto/tagType/' + id);
   }
 

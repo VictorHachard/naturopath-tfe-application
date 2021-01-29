@@ -1,1 +1,57 @@
-<p>editparatagtype works!</p>
+<section class="my-4 container">
+
+  <h2 class="mb-4">Edit paratagType</h2>
+
+  <form *ngIf="tagTypes" [formGroup]="editParatagTypeForm">
+    <div class="form-group">
+      <div class="input-group mb-0">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="tagType">Select tagType</label>
+        </div>
+        <select class="custom-select" id="tagType" formControlName="tagType">
+          <option *ngFor="let tagType of tagTypes" aria-label="breadcrumb">
+            {{ tagType.name }}
+          </option>
+        </select>
+      </div>
+      <p class="note">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</p>
+    </div>
+    <div class="form-group">
+      <div class="input-group mb-0">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="size">Select size</label>
+        </div>
+        <select class="custom-select" id="size" formControlName="size">
+          <option>SMALL</option>
+          <option>LARGE</option>
+        </select>
+      </div>
+      <p class="note">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</p>
+    </div>
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input type="text" class="form-control" formControlName="name" id="name" >
+      <p class="note">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</p>
+      <div *ngIf="editParatagTypeForm.get('name').invalid &&
+            (editParatagTypeForm.get('name').dirty || editParatagTypeForm.get('name').touched)" >
+        <p *ngIf="editParatagTypeForm.get('name').errors.required"
+           class="note text-danger">Please type a description.</p>
+        <p *ngIf="editParatagTypeForm.get('name').errors.minlength || editParatagTypeForm.get('name').errors.minlength"
+           class="note text-danger">Please insert minimum of 8 characters and a maximum of 128 characters.</p>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="description">Description:</label>
+      <textarea id="description" formControlName="description" class="form-control"></textarea>
+      <p class="note">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</p>
+      <div *ngIf="editParatagTypeForm.get('description').invalid &&
+            (editParatagTypeForm.get('description').dirty || editParatagTypeForm.get('description').touched)" >
+        <p *ngIf="editParatagTypeForm.get('description').errors.required"
+           class="note text-danger">Please type a description.</p>
+        <p *ngIf="editParatagTypeForm.get('description').errors.minlength || editParatagTypeForm.get('description').errors.minlength"
+           class="note text-danger">Please insert minimum of 64 characters and a maximum of 1024 characters.</p>
+      </div>
+    </div>
+    <button type="button" class="btn btn-primary" [disabled]="editParatagTypeForm.invalid" (click)="update()">Update</button>
+  </form>
+</section>

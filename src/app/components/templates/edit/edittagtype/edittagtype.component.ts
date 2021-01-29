@@ -22,7 +22,7 @@ export class EdittagtypeComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
-    this.tagTypeService.getTagTypeDto(this.id).subscribe(data => {
+    this.tagTypeService.getTagType(this.id).subscribe(data => {
       console.log(data);
       this.tagType = data;
       this.init();

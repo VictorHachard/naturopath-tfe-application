@@ -9,14 +9,14 @@ import {ParagraphtypeService} from '../../../../service/paragraphtype.service';
 })
 export class AdminparagraphtypesComponent implements OnInit {
 
-  parapgraphType: any[];
+  parapgraphTypes: any[];
 
   constructor(private paragraphTypeService: ParagraphtypeService) { }
 
   ngOnInit(): void {
     this.paragraphTypeService.getAllParagraphType().subscribe(data => {
-      this.parapgraphType = data;
-      console.log(this.parapgraphType);
+      this.parapgraphTypes = data;
+      console.log(this.parapgraphTypes);
     });
   }
 

@@ -1,1 +1,61 @@
-<p>addparatagtype works!</p>
+<section class="my-4 container">
+
+  <div *ngIf="!tagTypes;" class="alert alert-danger" role="alert">
+    There is a connection issue with the api please retry later.
+  </div>
+
+  <h2 class="mb-4">Add a new paratagType</h2>
+
+  <form *ngIf="tagTypes;" [formGroup]="addTagTypeForm" (ngSubmit)="addParatagType()">
+    <div class="form-group">
+      <div class="input-group mb-0">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="tagType">Select tagType</label>
+        </div>
+        <select class="custom-select" id="tagType" formControlName="tagType">
+          <option *ngFor="let tagType of tagTypes" aria-label="breadcrumb">
+            {{ tagType.name }}
+          </option>
+        </select>
+      </div>
+      <p class="note">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</p>
+    </div>
+    <div class="form-group">
+      <div class="input-group mb-0">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="size">Select size</label>
+        </div>
+        <select class="custom-select" id="size" formControlName="size">
+          <option>SMALL</option>
+          <option>LARGE</option>
+        </select>
+      </div>
+      <p class="note">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</p>
+    </div>
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" id="name" formControlName="name">
+      <p class="note">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</p>
+      <div *ngIf="addTagTypeForm.get('name').invalid &&
+        (addTagTypeForm.get('name').dirty || addTagTypeForm.get('name').touched)" >
+        <p *ngIf="addTagTypeForm.get('name').errors.required"
+           class="note text-danger">Please type a name.</p>
+        <p *ngIf="addTagTypeForm.get('name').errors.maxlength || addTagTypeForm.get('name').errors.minlength"
+           class="note text-danger">Please insert minimum of 6 characters and a maximum of 32 characters.</p>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea class="form-control" id="description" rows="3" formControlName="description"></textarea>
+      <p class="note">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</p>
+      <div *ngIf="addTagTypeForm.get('description').invalid &&
+        (addTagTypeForm.get('description').dirty || addTagTypeForm.get('description').touched)" >
+        <p *ngIf="addTagTypeForm.get('description').errors.required"
+           class="note text-danger">Please type a description.</p>
+        <p *ngIf="addTagTypeForm.get('description').errors.minlength || addTagTypeForm.get('description').errors.minlength"
+           class="note text-danger">Please insert minimum of 16 characters and a maximum of 1024 characters.</p>
+      </div>
+    </div>
+    <button class="btn btn-lg btn-primary btn-block mt-3" [disabled]="addTagTypeForm.invalid" type="submit">Add a paratagType</button>
+  </form>
+</section>

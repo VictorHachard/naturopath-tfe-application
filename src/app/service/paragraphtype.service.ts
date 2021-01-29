@@ -11,7 +11,7 @@ export class ParagraphtypeService {
 
   constructor(private http: HttpClient) { }
 
-  public getParagraphDto(id: string): Observable<any> {
+  public getParagraphType(id: string): Observable<any> {
     return this.http.get<any>(this.baseUrl + 'dto/paragraphType/' + id);
   }
 
@@ -19,7 +19,7 @@ export class ParagraphtypeService {
     return this.http.get<any[]>(this.baseUrl + 'dto/paragraphType');
   }
 
-  addTagType(body: any): Observable<any> {
+  addParagraphType(body: any): Observable<any> {
     return this.http.post<any>(this.baseUrl + 'paragraphType', body);
   }
 

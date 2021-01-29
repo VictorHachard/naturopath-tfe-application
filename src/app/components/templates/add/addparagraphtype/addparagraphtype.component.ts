@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {TagtypeService} from '../../../../service/tagtype.service';
 import {Router} from '@angular/router';
+import {ParagraphtypeService} from '../../../../service/paragraphtype.service';
 
 @Component({
   selector: 'app-addparagraphtype',
@@ -12,7 +13,7 @@ export class AddparagraphtypeComponent implements OnInit {
 
   addParagraphTypeForm: FormGroup;
 
-  constructor(private tagTypeService: TagtypeService, private router: Router) { }
+  constructor(private paragraphtypeService: ParagraphtypeService, private router: Router) { }
 
   ngOnInit(): void {
     this.init();
@@ -26,10 +27,10 @@ export class AddparagraphtypeComponent implements OnInit {
   }
 
   addParagraphType(): void {
-    const addTagTypeValue = this.addParagraphTypeForm.value;
+    const addPragraphTypeValue = this.addParagraphTypeForm.value;
 
-    this.tagTypeService.addTagType({description: addTagTypeValue.description,
-      name: addTagTypeValue.name}).subscribe(data => {
+    this.paragraphtypeService.addParagraphType({description: addPragraphTypeValue.description,
+      name: addPragraphTypeValue.name}).subscribe(data => {
       this.router.navigate(['/editparagraphtype/' + data.toString()]);
     });
   }

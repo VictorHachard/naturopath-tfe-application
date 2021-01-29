@@ -28,6 +28,7 @@ import {AddparatagtypeComponent} from './components/templates/add/addparatagtype
 import {AdminparapagetypesComponent} from './components/templates/admin/adminparapagetypes/adminparapagetypes.component';
 import {AddparapagetypeComponent} from './components/templates/add/addparapagetype/addparapagetype.component';
 import {EditparapagetypeComponent} from './components/templates/edit/editparapagetype/editparapagetype.component';
+import {EditparatagtypeComponent} from './components/templates/edit/editparatagtype/editparatagtype.component';
 
 const routes: Routes = [
   { path: 'home', component: AccueilComponent },
@@ -57,7 +58,7 @@ const routes: Routes = [
   { path: 'addparagraphtype', component: AddparagraphtypeComponent },
   { path: 'adminparagraphtypes', component: AdminparagraphtypesComponent },
 
-  { path: 'editparatagtype/:id', component: EdittagtypeComponent },
+  { path: 'editparatagtype/:id', component: EditparatagtypeComponent },
   { path: 'addparatagtype', component: AddparatagtypeComponent },
   { path: 'adminparatagtypes', component: AdminparatagtypesComponent },
 

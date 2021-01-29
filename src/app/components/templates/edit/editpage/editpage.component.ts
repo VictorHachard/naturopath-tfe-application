@@ -29,7 +29,8 @@ export class EditpageComponent implements OnInit {
 
   paraTag: any;
 
-  constructor(private route: ActivatedRoute, private pageService: PageService, private voteService: VoteService, private router: Router, private tagType: TagtypeService,
+  constructor(private route: ActivatedRoute, private pageService: PageService, private voteService: VoteService, private router: Router,
+              private tagType: TagtypeService,
               private innerParagraph: InnerparagraphService, private innerPage: InnerpageService) { }
 
   ngOnInit(): void {
@@ -82,7 +83,7 @@ export class EditpageComponent implements OnInit {
     const editInnerPageValue = this.editInnerPageForm.value;
     const innerPageId: string = this.page.innerPageList[this.page.innerPageList.length - 1].id;
     this.innerPage.updateInnerPage(innerPageId.toString(),
-      {content: editInnerPageValue.descriptionPage,
+      {description: editInnerPageValue.descriptionPage,
         title: editInnerPageValue.titlePage});
   }
 

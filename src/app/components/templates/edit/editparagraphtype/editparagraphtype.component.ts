@@ -10,8 +10,6 @@ import {ParagraphtypeService} from '../../../../service/paragraphtype.service';
   styleUrls: ['./editparagraphtype.component.css']
 })
 export class EditparagraphtypeComponent implements OnInit {
-
-
   editParagraphTypeForm: FormGroup;
 
   private id: string;
@@ -23,7 +21,7 @@ export class EditparagraphtypeComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
-    this.paragraphTypeService.getParagraphDto(this.id).subscribe(data => {
+    this.paragraphTypeService.getParagraphType(this.id).subscribe(data => {
       console.log(data);
       this.paragraphType = data;
       this.init();
