@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {VoteService} from '../../../service/vote.service';
-import {TagService} from '../../../service/tag.service';
+import {VoteService} from '../../../../service/vote.service';
+import {TagService} from '../../../../service/tag.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {InnertagService} from '../../../service/innertag.service';
+import {InnertagService} from '../../../../service/innertag.service';
 
 @Component({
   selector: 'app-edittag',

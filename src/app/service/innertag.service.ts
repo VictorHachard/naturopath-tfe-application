@@ -15,7 +15,7 @@ export class InnertagService {
   }
 
   public updateInnerTag(innerTagId: string, body: any): void {
-    this.http.post<any>(this.baseUrl + 'innerTag/update/' + innerTagId, body).subscribe();
+    this.http.put<any>(this.baseUrl + 'innerTag/update/' + innerTagId, body).subscribe();
   }
 
   addInnerTag(body: any): void {

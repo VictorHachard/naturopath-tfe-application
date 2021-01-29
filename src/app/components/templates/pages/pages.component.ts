@@ -20,7 +20,6 @@ export class PagesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('COPUCOUCOUCOQCUQOUQOCUO');
     this.id = this.route.snapshot.paramMap.get('id') === undefined ? null : this.route.snapshot.paramMap.get('id');
     if (this.id !== null) {
       this.pageService.getAllPageByCategory(this.id).subscribe(data => {

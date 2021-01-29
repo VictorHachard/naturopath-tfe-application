@@ -1,8 +1,12 @@
 <section class="my-4 container">
 
+  <div *ngIf="!categories;" class="alert alert-danger" role="alert">
+    There is a connection issue with the api please retry later.
+  </div>
+
   <h2 class="mb-4">Add a new category</h2>
 
-  <form [formGroup]="addCategoryForm" (ngSubmit)="addCategory()">
+  <form *ngIf="categories;" [formGroup]="addCategoryForm" (ngSubmit)="addCategory()">
     <div class="form-group">
       <div class="input-group mb-0">
         <div class="input-group-prepend">
@@ -21,18 +25,17 @@
           </option>
         </select>
       </div>
-      <p class="note" style="margin-bottom: 0">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</p>
+      <p class="note">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</p>
     </div>
-    <div class="col-auto my-1">
-      <div class="custom-control custom-checkbox mr-sm-2">
-        <input type="checkbox" class="custom-control-input" id="isParent" formControlName="isParent">
-        <label class="custom-control-label" for="isParent">Parent choice</label>
-      </div>
+    <div class="ml-1 form-check">
+      <input type="checkbox" class="custom-control-input" id="isParent" formControlName="isParent">
+      <label class="custom-control-label" for="isParent">Parent choice</label>
     </div>
+    <p class="note mb-3">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</p>
     <div class="form-group">
       <label for="name">Name</label>
       <input type="text" class="form-control" id="name" formControlName="name">
-      <p class="note" style="margin-bottom: 0">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</p>
+      <p class="note">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</p>
       <div *ngIf="addCategoryForm.get('name').invalid &&
         (addCategoryForm.get('name').dirty || addCategoryForm.get('name').touched)" >
         <p *ngIf="addCategoryForm.get('name').errors.required"
@@ -44,7 +47,7 @@
     <div class="form-group">
       <label for="description">Description</label>
       <textarea class="form-control" id="description" rows="3" formControlName="description"></textarea>
-      <p class="note" style="margin-bottom: 0">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</p>
+      <p class="note">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</p>
       <div *ngIf="addCategoryForm.get('description').invalid &&
         (addCategoryForm.get('description').dirty || addCategoryForm.get('description').touched)" >
         <p *ngIf="addCategoryForm.get('description').errors.required"

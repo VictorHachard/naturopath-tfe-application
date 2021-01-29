@@ -15,7 +15,7 @@ export class InnerpageService {
   }
 
   public updateInnerPage(id: string, body: any): void {
-    this.http.post<any>(this.baseUrl + 'innerPage/update/' + id, body).subscribe();
+    this.http.put<any>(this.baseUrl + 'innerPage/update/' + id, body).subscribe();
   }
 
   public validationInnerPage(id: string): void {

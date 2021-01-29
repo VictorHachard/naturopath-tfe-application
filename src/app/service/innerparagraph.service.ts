@@ -11,7 +11,7 @@ export class InnerparagraphService {
   constructor(private http: HttpClient) { }
 
   public updateInnerParagraph(id: string, body: any): void {
-    this.http.post<any>(this.baseUrl + 'innerParagraph/update/' + id, body).subscribe();
+    this.http.put<any>(this.baseUrl + 'innerParagraph/update/' + id, body).subscribe();
   }
 
   public validationInnerParagraph(id: string): void {

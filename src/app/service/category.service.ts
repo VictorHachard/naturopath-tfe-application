@@ -27,4 +27,8 @@ export class CategoryService {
   public addCategory(body: any): Observable<any> {
     return this.http.post<any>(this.baseUrl + 'category', body);
   }
+
+  public updateCategory(id: string, body: any): void {
+    this.http.put<any>(this.baseUrl + 'category/update/' + id, body).subscribe();
+  }
 }

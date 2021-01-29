@@ -1,5 +1,9 @@
 <section class="my-4 container">
 
+  <div *ngIf="!tagTypeList;" class="alert alert-danger" role="alert">
+    There is a connection issue with the api please retry later.
+  </div>
+
   <h2 class="mb-4">Add a new tag</h2>
 
   <form *ngIf="tagTypeList" [formGroup]="addTagForm" (ngSubmit)="addTag()">
@@ -14,12 +18,12 @@
           </option>
         </select>
       </div>
-      <p class="note" style="margin-bottom: 0">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</p>
+      <p class="note">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</p>
     </div>
     <div class="form-group">
       <label for="name">Name</label>
       <input type="text" class="form-control" id="name" formControlName="name">
-      <p class="note" style="margin-bottom: 0">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</p>
+      <p class="note">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</p>
       <div *ngIf="addTagForm.get('name').invalid &&
         (addTagForm.get('name').dirty || addTagForm.get('name').touched)" >
         <p *ngIf="addTagForm.get('name').errors.required"
@@ -31,7 +35,7 @@
     <div class="form-group">
       <label for="content">Description</label>
       <textarea class="form-control" id="content" rows="3" formControlName="content"></textarea>
-      <p class="note" style="margin-bottom: 0">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</p>
+      <p class="note">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</p>
       <div *ngIf="addTagForm.get('content').invalid &&
         (addTagForm.get('content').dirty || addTagForm.get('content').touched)" >
         <p *ngIf="addTagForm.get('content').errors.required"

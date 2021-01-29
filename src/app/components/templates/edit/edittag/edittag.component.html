@@ -6,7 +6,7 @@
     <div class="form-group">
       <label for="nameTag">Title:</label>
       <input type="text" class="form-control" formControlName="nameTag" id="nameTag" >
-      <p class="note" style="margin-bottom: 0">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</p>
+      <p class="note">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</p>
       <div *ngIf="editInnerTagForm.get('nameTag').invalid &&
         (editInnerTagForm.get('nameTag').dirty || editInnerTagForm.get('nameTag').touched)" >
         <p *ngIf="editInnerTagForm.get('nameTag').errors.required"
@@ -18,7 +18,7 @@
     <div class="form-group">
       <label for="contentTag">Description:</label>
       <textarea id="contentTag" formControlName="contentTag" class="form-control"></textarea>
-      <p class="note" style="margin-bottom: 0">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</p>
+      <p class="note">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</p>
       <div *ngIf="editInnerTagForm.get('contentTag').invalid &&
         (editInnerTagForm.get('contentTag').dirty || editInnerTagForm.get('contentTag').touched)" >
         <p *ngIf="editInnerTagForm.get('contentTag').errors.required"

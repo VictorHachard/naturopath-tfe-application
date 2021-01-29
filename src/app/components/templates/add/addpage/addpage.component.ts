@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {CategoryService} from '../../../service/category.service';
-import {Category} from '../../../model/view/Category';
+import {CategoryService} from '../../../../service/category.service';
+import {Category} from '../../../../model/view/Category';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {PageService} from '../../../service/page.service';
+import {PageService} from '../../../../service/page.service';
 import {Router} from '@angular/router';
 
 @Component({

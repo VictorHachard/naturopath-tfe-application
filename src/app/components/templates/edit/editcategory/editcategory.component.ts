@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
-import {TagService} from '../../../service/tag.service';
-import {VoteService} from '../../../service/vote.service';
-import {CategoryService} from '../../../service/category.service';
+import {TagService} from '../../../../service/tag.service';
+import {VoteService} from '../../../../service/vote.service';
+import {CategoryService} from '../../../../service/category.service';
 
 @Component({
   selector: 'app-editcategory',
@@ -32,12 +32,19 @@ export class EditcategoryComponent implements OnInit {
 
   init(): void {
     this.editCategoryForm = new FormGroup({
-      title: new FormControl(this.category.title,
-        [Validators.required, Validators.minLength(8), Validators.maxLength(128)]),
+      name: new FormControl(this.category.name,
+        [Validators.required, Validators.minLength(6), Validators.maxLength(32)]),
       description: new FormControl(this.category.description,
-        [Validators.required, Validators.minLength(64), Validators.maxLength(1024)]),
+        [Validators.required, Validators.minLength(16), Validators.maxLength(1024)]),
     });
   }
 
   addCategory(): void {}
+
+  update(): void {
+    const editCategoryValue = this.editCategoryForm.value;
+    this.categoryService.updateCategory(this.category.id.toString(),
+      {description: editCategoryValue.description,
+        name: editCategoryValue.name});
+  }
 }

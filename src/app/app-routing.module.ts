@@ -9,13 +9,14 @@ import {TermsComponent} from './components/templates/terms/terms.component';
 import {PrivacyComponent} from './components/templates/privacy/privacy.component';
 import {PageComponent} from './components/templates/page/page.component';
 import {PagesComponent} from './components/templates/pages/pages.component';
-import {EditpageComponent} from './components/templates/editpage/editpage.component';
-import {AddpageComponent} from './components/templates/addpage/addpage.component';
-import {AddtagComponent} from './components/templates/addtag/addtag.component';
-import {EdittagComponent} from './components/templates/edittag/edittag.component';
+import {EditpageComponent} from './components/templates/edit/editpage/editpage.component';
+import {AddpageComponent} from './components/templates/add/addpage/addpage.component';
+import {AddtagComponent} from './components/templates/add/addtag/addtag.component';
+import {EdittagComponent} from './components/templates/edit/edittag/edittag.component';
 import {ContactComponent} from './components/templates/contact/contact.component';
-import {EditcategoryComponent} from './components/templates/editcategory/editcategory.component';
-import {AddcategoryComponent} from './components/templates/addcategory/addcategory.component';
+import {EditcategoryComponent} from './components/templates/edit/editcategory/editcategory.component';
+import {AddcategoryComponent} from './components/templates/add/addcategory/addcategory.component';
+import {AdmincategoriesComponent} from './components/templates/admin/admincategories/admincategories.component';
 
 const routes: Routes = [
   { path: 'home', component: AccueilComponent },
@@ -34,7 +35,8 @@ const routes: Routes = [
   { path: 'edittag/:id', component: EdittagComponent },
   { path: 'addtag', component: AddtagComponent },
   { path: 'editcategory/:id', component: EditcategoryComponent },
-  { path: 'addcategory', component: AddcategoryComponent }
+  { path: 'addcategory', component: AddcategoryComponent },
+  { path: 'admincategories', component: AdmincategoriesComponent },
 ];
 
 @NgModule({

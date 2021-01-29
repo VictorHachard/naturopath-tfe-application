@@ -1,5 +1,9 @@
 <section class="my-4 container">
 
+  <div *ngIf="!categories;" class="alert alert-danger" role="alert">
+    There is a connection issue with the api please retry later.
+  </div>
+
   <h2 class="mb-4">Add a new page</h2>
 
   <form *ngIf="categories" [formGroup]="addPageForm" (ngSubmit)="addPage()">
@@ -20,12 +24,12 @@
           </option>
         </select>
       </div>
-      <p class="note" style="margin-bottom: 0">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</p>
+      <p class="note">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</p>
     </div>
     <div class="form-group">
       <label for="title">Title</label>
       <input type="text" class="form-control" id="title" formControlName="title">
-      <p class="note" style="margin-bottom: 0">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</p>
+      <p class="note">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</p>
       <div *ngIf="addPageForm.get('title').invalid &&
         (addPageForm.get('title').dirty || addPageForm.get('title').touched)" >
         <p *ngIf="addPageForm.get('title').errors.required"
@@ -37,7 +41,7 @@
     <div class="form-group">
       <label for="description">Description</label>
       <textarea class="form-control" id="description" rows="3" formControlName="description"></textarea>
-      <p class="note" style="margin-bottom: 0">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</p>
+      <p class="note">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</p>
       <div *ngIf="addPageForm.get('description').invalid &&
         (addPageForm.get('description').dirty || addPageForm.get('description').touched)" >
         <p *ngIf="addPageForm.get('description').errors.required"
@@ -48,6 +52,7 @@
     </div>
     <button class="btn btn-lg btn-primary btn-block mt-3" [disabled]="addPageForm.invalid" type="submit">Add a page</button>
   </form>
+
 </section>
 
 

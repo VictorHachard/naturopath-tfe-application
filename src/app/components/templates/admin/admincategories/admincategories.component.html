@@ -1,0 +1,20 @@
+<section class="my-4 container">
+
+  <table class="table table-bordered">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let category of categories; let index = index">
+      <th scope="row">{{ index }}</th>
+      <td>{{ category.name }}</td>
+      <td><button type="button" class="btn btn-primary" [routerLink]="['/editcategory', category.id]">Edit</button></td>
+    </tr>
+    </tbody>
+  </table>
+
+</section>

@@ -1,13 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {PageService} from '../../../service/page.service';
+import {PageService} from '../../../../service/page.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {VoteService} from '../../../service/vote.service';
+import {VoteService} from '../../../../service/vote.service';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
-import {InnerparagraphService} from '../../../service/innerparagraph.service';
-import {InnerpageService} from '../../../service/innerpage.service';
-import {TagtypeService} from '../../../service/tagtype.service';
-import {Paratag} from '../../../model/view/Paratag';
+import {InnerparagraphService} from '../../../../service/innerparagraph.service';
+import {InnerpageService} from '../../../../service/innerpage.service';
+import {TagtypeService} from '../../../../service/tagtype.service';
+import {Paratag} from '../../../../model/view/Paratag';
 
 @Component({
   selector: 'app-addpage',

@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {CategoryService} from '../../../service/category.service';
+import {CategoryService} from '../../../../service/category.service';
 import {Router} from '@angular/router';
-import {Category} from '../../../model/view/Category';
+import {Category} from '../../../../model/view/Category';
 
 @Component({
   selector: 'app-addcategory',
@@ -16,10 +16,10 @@ export class AddcategoryComponent implements OnInit {
   constructor(private categoryService: CategoryService, private router: Router) { }
 
   ngOnInit(): void {
-    this.init();
     this.categoryService.getAllParentCategoryDto().subscribe(data => {
       this.categories = data;
       console.log(this.categories);
+      this.init();
     });
   }
 
@@ -44,18 +44,15 @@ export class AddcategoryComponent implements OnInit {
     if (categoryId === undefined) {
       this.categoryService.addCategory({description: addCategoryValue.description,
         isParent: addCategoryValue.isParent,
-        name: addCategoryValue.name,
-        parentCategoryId: null,
-        userId: '1'}).subscribe(data => {
-        this.router.navigate(['/editcategory/' + data.toString()]);
+        name: addCategoryValue.name}).subscribe(data => {
+          this.router.navigate(['/editcategory/' + data.toString()]);
       });
     } else {
       this.categoryService.addCategory({description: addCategoryValue.description,
         isParent: addCategoryValue.isParent,
         name: addCategoryValue.name,
-        parentCategoryId: categoryId.toString(),
-        userId: '1'}).subscribe(data => {
-        this.router.navigate(['/editcategory/' + data.toString()]);
+        parentCategoryId: categoryId.toString()}).subscribe(data => {
+          this.router.navigate(['/editcategory/' + data.toString()]);
       });
     }
   }

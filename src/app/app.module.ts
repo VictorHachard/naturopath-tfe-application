@@ -14,20 +14,21 @@ import {PrivacyComponent} from './components/templates/privacy/privacy.component
 import {SettingsComponent} from './components/templates/settings/settings.component';
 import {PageComponent} from './components/templates/page/page.component';
 import {ReactiveFormsModule} from '@angular/forms';
-import {EditpageComponent} from './components/templates/editpage/editpage.component';
-import {AddpageComponent} from './components/templates/addpage/addpage.component';
-import {AddtagComponent} from './components/templates/addtag/addtag.component';
-import {EdittagComponent} from './components/templates/edittag/edittag.component';
-import {AddcategoryComponent} from './components/templates/addcategory/addcategory.component';
-import {EditcategoryComponent} from './components/templates/editcategory/editcategory.component';
+import {EditpageComponent} from './components/templates/edit/editpage/editpage.component';
+import {AddpageComponent} from './components/templates/add/addpage/addpage.component';
+import {AddtagComponent} from './components/templates/add/addtag/addtag.component';
+import {EdittagComponent} from './components/templates/edit/edittag/edittag.component';
+import {AddcategoryComponent} from './components/templates/add/addcategory/addcategory.component';
+import {EditcategoryComponent} from './components/templates/edit/editcategory/editcategory.component';
 import {ValidatingComponent} from './components/templates/validating/validating.component';
 import {DashboardComponent} from './components/templates/dashboard/dashboard.component';
 import {FooterComponent} from './components/layouts/footer/footer.component';
 import {HeaderComponent} from './components/layouts/header/header.component';
-import {AdmindashboardComponent} from './components/templates/admindashboard/admindashboard.component';
+import {AdmindashboardComponent} from './components/templates/admin/admindashboard/admindashboard.component';
 import {ContactComponent} from './components/templates/contact/contact.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { AdmincategoriesComponent } from './components/templates/admin/admincategories/admincategories.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     HeaderComponent,
     AdmindashboardComponent,
     ContactComponent,
+    AdmincategoriesComponent,
   ],
   imports: [
     BrowserModule,
