@@ -8,24 +8,36 @@
       </ol>
     </nav>
 
-    <div *ngFor="let paragraph of page?.paragraphList">
-      <p class="h4">{{ paragraph.paragraphType.name }} - {{ paragraph.title }}</p>
-      <p class="ml-4 text-justify">{{ paragraph.content }}</p>
-    </div>
-
-    <div *ngFor="let paratag of page?.paratagList">
-      <p class="h4">{{ paratag.paratagType.name }} - {{ paratag.title }}</p>
-      <p>{{ paratag.content }}</p>
-      <div class="ml-4">
-        <div class="d-inline" *ngFor="let tag of paratag.tagList">
-          <span class="badge rounded-pill bg-primary mr-2">{{ tag.name }}</span><span *ngIf="tag.content.length != 0">- {{ tag.content }}</span>
+  <div *ngIf="page">
+    <div *ngFor="let sortedType of page.sortedTypeList">
+      <div *ngIf="sortedType.type === 'ParagraphType'">
+        <div *ngFor="let paragraph of page.paragraphList">
+          <div *ngIf="paragraph.paragraphType.id === sortedType.typeId">
+            <p class="h4">{{ paragraph.paragraphType.name }} - {{ paragraph.title }}</p>
+            <p class="ml-4 text-justify">{{ paragraph.content }}</p>
+          </div>
         </div>
       </div>
+      <div *ngIf="sortedType.type === 'ParatagType'">
+        <div *ngFor="let paratag of page.paratagList">
+          <div *ngIf="paratag.paratagType.id === sortedType.typeId">
+            <p class="h4">{{ paratag.paratagType.name }} - {{ paratag.title }}</p>
+            <p>{{ paratag.content }}</p>
+            <div class="ml-4">
+              <div class="d-inline" *ngFor="let tag of paratag.tagList">
+                <span class="badge rounded-pill bg-primary mr-2">{{ tag.name }}</span><span *ngIf="tag.content.length != 0">- {{ tag.content }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="sortedType.type === 'ParapageType'">
 
+      </div>
     </div>
+  </div>
 
-    <div *ngFor="let parapage of page.parapageList">
-      <p class="h4">{{ parapage.title }}</p>
-    </div>
+
+
 
 </div>

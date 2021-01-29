@@ -13,12 +13,13 @@ export class PageComponent implements OnInit {
 
   private id: string;
 
-  page: Page;
+  page: any;
 
-  constructor(private route: ActivatedRoute, private pageService: PageService, private categoryService: CategoryService) { }
+  constructor(private route: ActivatedRoute, private pageService: PageService) { }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
+
     this.pageService.getPage(this.id).subscribe(data => {
       this.page = data;
       console.log(this.page);
