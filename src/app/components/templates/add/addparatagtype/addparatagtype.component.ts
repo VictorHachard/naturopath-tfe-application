@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {CategoryService} from '../../../../service/category.service';
-import {TagtypeService} from '../../../../service/tagtype.service';
+import {CategoryService} from '../../../../service/Category.service';
+import {TagTypeService} from '../../../../service/TagType.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Category} from '../../../../model/view/Category';
-import {ParatagtypeService} from '../../../../service/paratagtype.service';
+import {ParatagTypeService} from '../../../../service/ParatagType.service';
 import {Router} from '@angular/router';
 
 @Component({
@@ -15,7 +15,7 @@ export class AddparatagtypeComponent implements OnInit {
   addTagTypeForm: FormGroup;
   tagTypes: any[];
 
-  constructor(private tagTypeService: TagtypeService, private paratagTypeService: ParatagtypeService, private router: Router) { }
+  constructor(private tagTypeService: TagTypeService, private paratagTypeService: ParatagTypeService, private router: Router) { }
 
   ngOnInit(): void {
     this.tagTypeService.getAllTagType().subscribe(data => {

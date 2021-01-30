@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { InnertagService } from './innertag.service';
+import { InnerPageService } from './InnerPage.service';
 
-describe('InnertagService', () => {
-  let service: InnertagService;
+describe('InnerpageService', () => {
+  let service: InnerPageService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(InnertagService);
+    service = TestBed.inject(InnerPageService);
   });
 
   it('should be created', () => {

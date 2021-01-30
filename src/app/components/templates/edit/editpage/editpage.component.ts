@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {PageService} from '../../../../service/page.service';
+import {PageService} from '../../../../service/Page.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {VoteService} from '../../../../service/vote.service';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
-import {InnerparagraphService} from '../../../../service/innerparagraph.service';
-import {InnerpageService} from '../../../../service/innerpage.service';
-import {TagtypeService} from '../../../../service/tagtype.service';
+import {InnerParagraphService} from '../../../../service/InnerParagraph.service';
+import {InnerPageService} from '../../../../service/InnerPage.service';
+import {TagTypeService} from '../../../../service/TagType.service';
 import {Paratag} from '../../../../model/view/Paratag';
 
 @Component({
@@ -30,8 +30,8 @@ export class EditpageComponent implements OnInit {
   paraTag: any;
 
   constructor(private route: ActivatedRoute, private pageService: PageService, private voteService: VoteService, private router: Router,
-              private tagType: TagtypeService,
-              private innerParagraph: InnerparagraphService, private innerPage: InnerpageService) { }
+              private tagType: TagTypeService,
+              private innerParagraph: InnerParagraphService, private innerPage: InnerPageService) { }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');

@@ -5,7 +5,7 @@ import {Observable} from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class ParagraphtypeService {
+export class ParagraphTypeService {
 
   private baseUrl = 'http://localhost:8080/api/v1/';
 

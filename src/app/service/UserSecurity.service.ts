@@ -2,15 +2,16 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Page} from '../model/view/Page';
+import {AbstractService} from './commons/AbstractService';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UsersecurityService {
+export class UserSecurityService extends AbstractService {
 
-  private baseUrl = 'http://localhost:8080/api/v1/';
-
-  constructor(private http: HttpClient) { }
+  constructor(http: HttpClient) {
+    super(http);
+  }
 
 
   public addUser(body: any): Observable<any> {

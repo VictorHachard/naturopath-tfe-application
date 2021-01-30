@@ -1,15 +1,15 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {AbstractService} from './commons/AbstractService';
 
 @Injectable({
   providedIn: 'root'
 })
-export class TagService {
+export class TagService extends AbstractService {
 
-  private baseUrl = 'http://localhost:8080/api/v1/';
-
-  constructor(private http: HttpClient) {
+  constructor(http: HttpClient) {
+    super(http);
   }
 
   public addTag(body: any): Observable<any> {

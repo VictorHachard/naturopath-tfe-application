@@ -2,15 +2,16 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Page} from '../model/view/Page';
+import {AbstractService} from './commons/AbstractService';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PageService {
+export class PageService extends AbstractService {
 
-  private baseUrl = 'http://localhost:8080/api/v1/';
-
-  constructor(private http: HttpClient) { }
+  constructor(http: HttpClient) {
+    super(http);
+  }
 
   public getAllPage(): Observable<Page[]> {
     return this.http.get<Page[]>(this.baseUrl + 'dto/page');

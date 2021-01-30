@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
-import {ParagraphtypeService} from '../../../../service/paragraphtype.service';
-import {ParatagtypeService} from '../../../../service/paratagtype.service';
-import {TagtypeService} from '../../../../service/tagtype.service';
+import {ParagraphTypeService} from '../../../../service/ParagraphType.service';
+import {ParatagTypeService} from '../../../../service/ParatagType.service';
+import {TagTypeService} from '../../../../service/TagType.service';
 
 @Component({
   selector: 'app-editparatagtype',
@@ -18,7 +18,7 @@ export class EditparatagtypeComponent implements OnInit {
   paratagType: any;
   tagTypes: any[];
 
-  constructor(private tagTypeService: TagtypeService, private route: ActivatedRoute, private paratagtypeService: ParatagtypeService) {
+  constructor(private tagTypeService: TagTypeService, private route: ActivatedRoute, private paratagtypeService: ParatagTypeService) {
   }
 
   ngOnInit(): void {

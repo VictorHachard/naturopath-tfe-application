@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {CategoryService} from '../../../../service/category.service';
-import {ParagraphtypeService} from '../../../../service/paragraphtype.service';
+import {CategoryService} from '../../../../service/Category.service';
+import {ParagraphTypeService} from '../../../../service/ParagraphType.service';
 
 @Component({
   selector: 'app-adminparagraphtypes',
@@ -11,7 +11,7 @@ export class AdminparagraphtypesComponent implements OnInit {
 
   parapgraphTypes: any[];
 
-  constructor(private paragraphTypeService: ParagraphtypeService) { }
+  constructor(private paragraphTypeService: ParagraphTypeService) { }
 
   ngOnInit(): void {
     this.paragraphTypeService.getAllParagraphType().subscribe(data => {

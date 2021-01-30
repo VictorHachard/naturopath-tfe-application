@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
-import {TagtypeService} from '../../../../service/tagtype.service';
-import {ParagraphtypeService} from '../../../../service/paragraphtype.service';
+import {TagTypeService} from '../../../../service/TagType.service';
+import {ParagraphTypeService} from '../../../../service/ParagraphType.service';
 
 @Component({
   selector: 'app-editparagraphtype',
@@ -16,7 +16,7 @@ export class EditparagraphtypeComponent implements OnInit {
 
   paragraphType: any;
 
-  constructor(private route: ActivatedRoute, private paragraphTypeService: ParagraphtypeService, private router: Router) {
+  constructor(private route: ActivatedRoute, private paragraphTypeService: ParagraphTypeService, private router: Router) {
   }
 
   ngOnInit(): void {

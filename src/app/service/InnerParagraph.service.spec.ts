@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { InnerparagraphService } from './innerparagraph.service';
+import { InnerParagraphService } from './InnerParagraph.service';
 
 describe('InnerparagraphService', () => {
-  let service: InnerparagraphService;
+  let service: InnerParagraphService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(InnerparagraphService);
+    service = TestBed.inject(InnerParagraphService);
   });
 
   it('should be created', () => {

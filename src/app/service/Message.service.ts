@@ -5,13 +5,10 @@ import {AbstractService} from './commons/AbstractService';
 @Injectable({
   providedIn: 'root'
 })
-export class VoteService extends AbstractService {
+export class MessageService extends AbstractService {
 
   constructor(http: HttpClient) {
     super(http);
   }
 
-  public addVote(body: any): void {
-    this.http.post<any>(this.baseUrl + 'vote', body).subscribe();
-  }
 }

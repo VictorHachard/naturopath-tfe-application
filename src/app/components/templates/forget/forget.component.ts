@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
-import {UsersecurityService} from '../../../service/usersecurity.service';
+import {UserSecurityService} from '../../../service/UserSecurity.service';
 
 @Component({
   selector: 'app-forget',
@@ -12,7 +12,7 @@ export class ForgetComponent implements OnInit {
 
   formResetPassword: FormGroup;
 
-  constructor(private router: Router, private userSecurity: UsersecurityService) { }
+  constructor(private router: Router, private userSecurity: UserSecurityService) { }
 
   ngOnInit(): void {
     this.init();

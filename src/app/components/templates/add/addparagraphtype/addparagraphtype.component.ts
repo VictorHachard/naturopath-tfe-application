@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {TagtypeService} from '../../../../service/tagtype.service';
+import {TagTypeService} from '../../../../service/TagType.service';
 import {Router} from '@angular/router';
-import {ParagraphtypeService} from '../../../../service/paragraphtype.service';
+import {ParagraphTypeService} from '../../../../service/ParagraphType.service';
 
 @Component({
   selector: 'app-addparagraphtype',
@@ -13,7 +13,7 @@ export class AddparagraphtypeComponent implements OnInit {
 
   addParagraphTypeForm: FormGroup;
 
-  constructor(private paragraphtypeService: ParagraphtypeService, private router: Router) { }
+  constructor(private paragraphtypeService: ParagraphTypeService, private router: Router) { }
 
   ngOnInit(): void {
     this.init();

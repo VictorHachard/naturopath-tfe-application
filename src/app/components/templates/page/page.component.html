@@ -1,6 +1,6 @@
-<div class="container" style="white-space: pre-wrap;">
+<section class="container my-4" style="white-space: pre-wrap;">
     <h1 class="display-1">{{ page?.title }}</h1>
-    <p>by <cite title="Source Title">{{ page?.user.username }}</cite> created at {{ page?.createdAt }}</p>
+  <p>by <a href="">{{ page?.user.username }}</a> the {{ page?.createdAt| date:'dd MMMM yyyy' }}</p>
 
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
@@ -21,11 +21,16 @@
       <div *ngIf="sortedType.type === 'ParatagType'">
         <div *ngFor="let paratag of page.paratagList">
           <div *ngIf="paratag.paratagType.id === sortedType.typeId">
-            <p class="h4">{{ paratag.paratagType.name }} - {{ paratag.title }}</p>
-            <p>{{ paratag.content }}</p>
-            <div class="ml-4">
+            <p class="h4 d-inline">{{ paratag.paratagType.name }} - {{ paratag.title }}</p>
+            <div *ngIf="paratag.paratagType.size === 'SMALL'" class="d-inline ml-2">
               <div class="d-inline" *ngFor="let tag of paratag.tagList">
                 <span class="badge rounded-pill bg-primary mr-2">{{ tag.name }}</span><span *ngIf="tag.content.length != 0">- {{ tag.content }}</span>
+              </div>
+            </div>
+            <p>{{ paratag.content }}</p>
+            <div *ngIf="paratag.paratagType.size === 'LARGE'" class="d-inline m">
+              <div class="ml-4" *ngFor="let tag of paratag.tagList">
+                <span class="badge rounded-pill bg-primary mr-1">{{ tag.name }}</span><span *ngIf="tag.content.length != 0">- {{ tag.content }}</span>
               </div>
             </div>
           </div>
@@ -37,7 +42,4 @@
     </div>
   </div>
 
-
-
-
-</div>
+</section>

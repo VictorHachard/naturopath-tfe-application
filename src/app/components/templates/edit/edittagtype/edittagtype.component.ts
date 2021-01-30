@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {CategoryService} from '../../../../service/category.service';
+import {CategoryService} from '../../../../service/Category.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {TagtypeService} from '../../../../service/tagtype.service';
+import {TagTypeService} from '../../../../service/TagType.service';
 
 @Component({
   selector: 'app-edittagtype',
@@ -17,7 +17,7 @@ export class EdittagtypeComponent implements OnInit {
 
   tagType: any;
 
-  constructor(private route: ActivatedRoute, private tagTypeService: TagtypeService, private router: Router) {
+  constructor(private route: ActivatedRoute, private tagTypeService: TagTypeService, private router: Router) {
   }
 
   ngOnInit(): void {

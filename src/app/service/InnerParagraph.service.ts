@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {AbstractService} from './commons/AbstractService';
 
 @Injectable({
   providedIn: 'root'
 })
-export class InnerparagraphService {
+export class InnerParagraphService extends AbstractService {
 
-  private baseUrl = 'http://localhost:8080/api/v1/';
-
-  constructor(private http: HttpClient) { }
+  constructor(http: HttpClient) {
+    super(http);
+  }
 
   public updateInnerParagraph(id: string, body: any): void {
     this.http.put<any>(this.baseUrl + 'innerParagraph/update/' + id, body).subscribe();

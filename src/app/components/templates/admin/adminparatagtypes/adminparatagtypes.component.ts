@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {TagtypeService} from '../../../../service/tagtype.service';
-import {ParatagtypeService} from '../../../../service/paratagtype.service';
+import {TagTypeService} from '../../../../service/TagType.service';
+import {ParatagTypeService} from '../../../../service/ParatagType.service';
 
 @Component({
   selector: 'app-adminparatagtypes',
@@ -11,7 +11,7 @@ export class AdminparatagtypesComponent implements OnInit {
 
   paratagTypes: any[];
 
-  constructor(private paratagtypeService: ParatagtypeService) { }
+  constructor(private paratagtypeService: ParatagTypeService) { }
 
   ngOnInit(): void {
     this.paratagtypeService.getAllParatagType().subscribe(data => {

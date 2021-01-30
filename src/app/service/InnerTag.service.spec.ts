@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ParagraphService } from './paragraph.service';
+import { InnertagService } from './Innertag.service';
 
-describe('ParagraphService', () => {
-  let service: ParagraphService;
+describe('InnertagService', () => {
+  let service: InnertagService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(ParagraphService);
+    service = TestBed.inject(InnertagService);
   });
 
   it('should be created', () => {

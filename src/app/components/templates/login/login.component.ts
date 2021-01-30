@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {UsersecurityService} from '../../../service/usersecurity.service';
+import {UserSecurityService} from '../../../service/UserSecurity.service';
 import {Router} from '@angular/router';
 import {Globalconstants} from '../../../helpers/globalconstants';
 
@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
   formLogin: FormGroup;
   user: any;
 
-  constructor(private router: Router, private userSecurity: UsersecurityService) { }
+  constructor(private router: Router, private userSecurity: UserSecurityService) { }
 
   ngOnInit(): void {
     this.init();

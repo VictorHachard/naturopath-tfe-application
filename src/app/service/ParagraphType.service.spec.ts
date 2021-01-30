@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ParatagtypeService } from './paratagtype.service';
+import { ParagraphTypeService } from './ParagraphType.service';
 
-describe('ParatagtypeService', () => {
-  let service: ParatagtypeService;
+describe('ParagraphtypeService', () => {
+  let service: ParagraphTypeService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(ParatagtypeService);
+    service = TestBed.inject(ParagraphTypeService);
   });
 
   it('should be created', () => {

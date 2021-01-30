@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {TagService} from '../../../../service/tag.service';
-import {TagtypeService} from '../../../../service/tagtype.service';
+import {TagService} from '../../../../service/Tag.service';
+import {TagTypeService} from '../../../../service/TagType.service';
 import {Router} from '@angular/router';
 
 @Component({
@@ -14,7 +14,7 @@ export class AddtagComponent implements OnInit {
 
   tagTypeList: any;
 
-  constructor(private router: Router, private tagService: TagService, private tagTypeService: TagtypeService) { }
+  constructor(private router: Router, private tagService: TagService, private tagTypeService: TagTypeService) { }
 
   ngOnInit(): void {
     this.tagTypeService.getAllTagType().subscribe(data => {

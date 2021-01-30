@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { InnerpageService } from './innerpage.service';
+import { ParatagTypeService } from './ParatagType.service';
 
-describe('InnerpageService', () => {
-  let service: InnerpageService;
+describe('ParatagtypeService', () => {
+  let service: ParatagTypeService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(InnerpageService);
+    service = TestBed.inject(ParatagTypeService);
   });
 
   it('should be created', () => {

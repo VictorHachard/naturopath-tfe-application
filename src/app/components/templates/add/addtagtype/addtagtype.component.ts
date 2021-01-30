@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {CategoryService} from '../../../../service/category.service';
+import {CategoryService} from '../../../../service/Category.service';
 import {Router} from '@angular/router';
-import {TagtypeService} from '../../../../service/tagtype.service';
+import {TagTypeService} from '../../../../service/TagType.service';
 
 @Component({
   selector: 'app-addtagtype',
@@ -13,7 +13,7 @@ export class AddtagtypeComponent implements OnInit {
 
   addTagTypeForm: FormGroup;
 
-  constructor(private tagTypeService: TagtypeService, private router: Router) { }
+  constructor(private tagTypeService: TagTypeService, private router: Router) { }
 
   ngOnInit(): void {
     this.init();
