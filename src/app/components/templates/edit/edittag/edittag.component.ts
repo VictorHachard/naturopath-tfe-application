@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {VoteService} from '../../../../service/vote.service';
+import {VoteService} from '../../../../service/Vote.service';
 import {TagService} from '../../../../service/Tag.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {InnertagService} from '../../../../service/Innertag.service';
+import {InnerTagService} from '../../../../service/InnerTag.service';
 
 @Component({
   selector: 'app-edittag',
@@ -19,7 +19,7 @@ export class EdittagComponent implements OnInit {
   tag: any;
 
   constructor(private route: ActivatedRoute, private tagService: TagService, private voteService: VoteService, private router: Router,
-              private innerTag: InnertagService) {
+              private innerTag: InnerTagService) {
   }
 
   ngOnInit(): void {

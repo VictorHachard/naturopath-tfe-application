@@ -1,29 +1,32 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {AbstractService} from './commons/AbstractService';
+import {UserSecurityService} from './security/UserSecurity.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ParagraphTypeService {
+export class ParagraphTypeService extends AbstractService {
 
-  private baseUrl = 'http://localhost:8080/api/v1/';
-
-  constructor(private http: HttpClient) { }
+  constructor(http: HttpClient, userSecurityService: UserSecurityService) {
+    super(http, userSecurityService);
+    this.baseUrl = this.baseUrl + 'paragraphType/';
+  }
 
   public getParagraphType(id: string): Observable<any> {
-    return this.http.get<any>(this.baseUrl + 'dto/paragraphType/' + id);
+    return this.http.get<any>(this.baseUrl + 'dto/' + id);
   }
 
   public getAllParagraphType(): Observable<any[]> {
-    return this.http.get<any[]>(this.baseUrl + 'dto/paragraphType');
+    return this.http.get<any[]>(this.baseUrl + 'dto');
   }
 
-  addParagraphType(body: any): Observable<any> {
-    return this.http.post<any>(this.baseUrl + 'paragraphType', body);
+  public addParagraphType(body: any): Observable<any> {
+    return this.http.post<any>(this.baseUrl, body);
   }
 
-  public updateParagraphType(id: string, body: any): void {
-    this.http.put<any>(this.baseUrl + 'paragraphType/update/' + id, body).subscribe();
+  public updateParagraphType(id: string, body: any): Observable<any> {
+    return this.http.put<any>(this.baseUrl + 'update/' + id, body);
   }
 }

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {User} from '../../../model/view/User';
-import {UserSecurityService} from '../../../service/UserSecurity.service';
+import {UserSecurityService} from '../../../service/security/UserSecurity.service';
 
 @Component({
   selector: 'app-header',

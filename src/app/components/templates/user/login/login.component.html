@@ -23,8 +23,6 @@
                    (formLogin.get('password').dirty || formLogin.get('password').touched)" >
               <p *ngIf="formLogin.get('password').errors.required"
                  class="note text-danger">Please type a password.</p>
-              <p *ngIf="formLogin.get('password').errors.pattern"
-                 class="note text-danger">Password must contain at least one lowercase, uppercase, numeric, special character and between six and sixteen characters.</p>
             </div>
           </div>
           <div class="form-group mb-3">

@@ -1,13 +1,13 @@
 import {TestBed} from '@angular/core/testing';
 
-import {InnertagService} from './Innertag.service';
+import {InnerTagService} from './InnerTag.service';
 
 describe('InnertagService', () => {
-  let service: InnertagService;
+  let service: InnerTagService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(InnertagService);
+    service = TestBed.inject(InnerTagService);
   });
 
   it('should be created', () => {

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
-import {UserSecurityService} from '../../../service/UserSecurity.service';
+import {UserSecurityService} from '../../../../service/security/UserSecurity.service';
 
 @Component({
   selector: 'app-forget',
@@ -20,13 +20,13 @@ export class ForgetComponent implements OnInit {
   init(): void{
     this.formResetPassword = new FormGroup({
       emailOrUsername: new FormControl('', Validators.required),
-      forgetPassword: new FormControl('', [Validators.required, Validators.pattern('(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=*])(?=\\S+$).{6,}')])
+      forgetPassword: new FormControl('', Validators.required)
     });
   }
   SendEmail(): void{
     const EmailValue = this.formResetPassword.value;
 
-    this.userSecurity.resetPassword({emailOrUsername: EmailValue.emailOrUsername,
+    this.userSecurity.setResetAccount({emailOrUsername: EmailValue.emailOrUsername,
       forgetPassword: EmailValue.forgetPassword});
   }
 }

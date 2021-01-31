@@ -6,12 +6,12 @@ import {AppComponent} from './app.component';
 import {AccueilComponent} from './components/templates/home/accueil.component';
 import {HttpClientModule} from '@angular/common/http';
 import {PagesComponent} from './components/templates/pages/pages.component';
-import {RegisterComponent} from './components/templates/register/register.component';
-import {LoginComponent} from './components/templates/login/login.component';
-import {ForgetComponent} from './components/templates/forget/forget.component';
+import {RegisterComponent} from './components/templates/user/register/register.component';
+import {LoginComponent} from './components/templates/user/login/login.component';
+import {ForgetComponent} from './components/templates/user/forget/forget.component';
 import {TermsComponent} from './components/templates/terms/terms.component';
 import {PrivacyComponent} from './components/templates/privacy/privacy.component';
-import {SettingsComponent} from './components/templates/settings/settings.component';
+import {SettingsComponent} from './components/templates/user/settings/settings.component';
 import {PageComponent} from './components/templates/page/page.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {EditpageComponent} from './components/templates/edit/editpage/editpage.component';
@@ -41,6 +41,9 @@ import {AdmintagtypesComponent} from './components/templates/admin/admintagtypes
 import {AdminparagraphtypesComponent} from './components/templates/admin/adminparagraphtypes/adminparagraphtypes.component';
 import {AdminparatagtypesComponent} from './components/templates/admin/adminparatagtypes/adminparatagtypes.component';
 import {AdminparapagetypesComponent} from './components/templates/admin/adminparapagetypes/adminparapagetypes.component';
+import {ResetComponent} from './components/actions/reset/reset.component';
+import {ConfirmComponent} from './components/actions/confirm/confirm.component';
+import {DeleteComponent} from './components/actions/delete/delete.component';
 
 @NgModule({
   declarations: [
@@ -79,6 +82,9 @@ import {AdminparapagetypesComponent} from './components/templates/admin/adminpar
     AdminparagraphtypesComponent,
     AdminparatagtypesComponent,
     AdminparapagetypesComponent,
+    ResetComponent,
+    ConfirmComponent,
+    DeleteComponent,
   ],
   imports: [
     BrowserModule,

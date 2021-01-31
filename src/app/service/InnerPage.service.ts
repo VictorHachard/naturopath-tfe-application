@@ -1,25 +1,28 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {AbstractService} from './commons/AbstractService';
+import {Observable} from 'rxjs';
+import {UserSecurityService} from './security/UserSecurity.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class InnerPageService extends AbstractService {
 
-  constructor(http: HttpClient) {
-    super(http);
+  constructor(http: HttpClient, userSecurityService: UserSecurityService) {
+    super(http, userSecurityService);
+    this.baseUrl = this.baseUrl + 'innerPage/';
   }
 
-  public addInnerPage(body: any): void  {
-    this.http.post<any>(this.baseUrl + 'innerPage', body).subscribe();
+  public addInnerPage(body: any): Observable<any>  {
+    return this.http.post<any>(this.baseUrl, body);
   }
 
-  public updateInnerPage(id: string, body: any): void {
-    this.http.put<any>(this.baseUrl + 'innerPage/update/' + id, body).subscribe();
+  public updateInnerPage(id: string, body: any): Observable<any> {
+    return this.http.put<any>(this.baseUrl + 'update/' + id, body);
   }
 
-  public validationInnerPage(id: string): void {
-    this.http.post<any>(this.baseUrl + 'innerPage/validation/' + id, {}).subscribe();
+  public validationInnerPage(id: string): Observable<any> {
+    return this.http.post<any>(this.baseUrl + 'validation/' + id, {});
   }
 }

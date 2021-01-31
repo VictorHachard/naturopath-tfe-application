@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, ValidatorFn, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
-import {UserSecurityService} from '../../../service/UserSecurity.service';
-import {TestService} from '../../../test.service';
+import {UserSecurityService} from '../../../../service/security/UserSecurity.service';
+import {TestService} from '../../../../test.service';
 
 @Component({
   selector: 'app-register',
@@ -30,10 +30,11 @@ export class RegisterComponent implements OnInit {
   register(): void {
     const RegisterValue = this.registerForm.value;
 
-    this.userSecurityService.registerUser({email: RegisterValue.email,
+    this.userSecurityService.register({email: RegisterValue.email,
       password: RegisterValue.password,
       username: RegisterValue.username}).subscribe(data => {
-      this.userSecurityService.userSecurity = data;
+      this.userSecurityService.setValue(data);
+      this.userSecurityService.user = data;
       this.router.navigate(['/home']);
     });
 
@@ -49,7 +50,7 @@ export class RegisterComponent implements OnInit {
         const err = {noMatch: true};
         control.get(firstControl).setErrors(err);
         return err;
-      }else {
+      } else {
         const noMatchError = control.get(firstControl).hasError('noMatch');
         if (noMatchError){
             delete control.get(firstControl).errors.noMatch;

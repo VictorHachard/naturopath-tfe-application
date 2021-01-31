@@ -1,6 +1,6 @@
-<section class="my-4 container">
+<section *ngIf="user" class="my-4 container">
 
-  <div class="alert alert-warning" role="alert">
+  <div *ngIf="!user.confirmed" class="alert alert-warning" role="alert">
     You still need to confirm your account!
   </div>
 
@@ -8,17 +8,17 @@
 
   <h2 class="font-weight-normal mb-4">Settings</h2>
   <nav>
-    <div class="nav nav-tabs mb-4" id="v-pills-tab" role="tablist">
-      <a class="nav-item nav-link" id="v-pills-account-tab" data-toggle="pill" routerLink="/settings#v-pills-account" role="tab" aria-controls="v-pills-account" aria-selected="true">Account</a>
-      <a class="nav-item nav-link" id="v-pills-security-tab" data-toggle="pill" routerLink="/settings#v-pills-security" role="tab" aria-controls="v-pills-security" aria-selected="true">Security</a>
-      <a class="nav-item nav-link" id="v-pills-profil-tab" data-toggle="pill" routerLink="/settings#v-pills-profil" role="tab" aria-controls="v-pills-profil" aria-selected="false">Profile</a>
-      <a class="nav-item nav-link" id="v-pills-appearance-tab" data-toggle="pill" routerLink="/settings#v-pills-appearance"role="tab" aria-controls="v-pills-appearance" aria-selected="false">Appearance</a>
+    <div class="nav nav-tabs mb-4" role="tablist">
+      <a class="nav-item nav-link" routerLink="/settings/account">Account</a>
+      <a class="nav-item nav-link" routerLink="/settings/security">Security</a>
+      <a class="nav-item nav-link" routerLink="/settings/profile">Profile</a>
+      <a class="nav-item nav-link" routerLink="/settings/appearance">Appearance</a>
     </div>
   </nav>
-  <div class="tab-content" id="v-pills-tabContent">
+  <div class="tab-content">
     <!-- Account -->
-    <div class="tab-pane fade show" id="v-pills-account" role="tabpanel" aria-labelledby="v-pills-account-tab">
-      <form id="accountUpdateForm" class="form-setting" action="/settings">
+    <div *ngIf="param === 'account' || !param" class="">
+      <form class="form-setting">
         <div class="form-group">
           <label class="my-0">New username</label>
           <input type="username" name="username" class="form-control mt-2" required="">
@@ -32,12 +32,11 @@
             <a class="label-link ml-2 mb-4" routerLink="/forget">Forgot password?</a>
           <input type="password" name="password" class="form-control mt-2" required="" autocapitalize="off" autocorrect="off">
         </div>
-        <input type="hidden" name="action" value="updateAccount">
         <button class="btn btn-primary mb-4" type="submit">Update</button>
       </form>
       <hr class="style1 my-4">
       <p>Send me a email</p>
-      <form id="emailUpdateForm" class="form-setting" action="/settings">
+      <form id="emailUpdateForm" class="form-setting">
         <div class="form-group">
           <label class="containerCheckbox">if there is a update of my playlists
             <input type="checkbox" name="checkbox_playlists" id="checkbox_playlists" value="1">
@@ -45,20 +44,18 @@
             <input type="hidden" name="checkbox_playlists" id="checkbox_playlists_hidden" value="0">
           </label>
         </div>
-        <input type="hidden" name="action" value="updateEmail">
         <button class="btn btn-primary mb-4" type="button">Update</button>
       </form>
       <hr class="style1 my-4">
       <p>Resend me a confirmation link</p>
-      <form id="resendConfirmationForm" class="form-setting" action="/settings">
-        <input type="hidden" name="action" value="confirmation">
+      <form id="resendConfirmationForm" class="form-setting">
         <button class="btn btn-primary mb-4 <?= User::getInstance()->getUser()->confirmed_at != null ? 'disabled' : '' ?>" type="submit"></button>
       </form>
     </div>
     <!-- End Account -->
     <!-- Security -->
-    <div class="tab-pane fade show" id="v-pills-security" role="tabpanel" aria-labelledby="v-pills-security-tab">
-      <form id="securityUpdateForm" class="form-setting" action="/settings">
+    <div *ngIf="param === 'security'">
+      <form class="form-setting">
         <div class="form-group">
           <label class="my-0">Password</label>
             <a class="label-link ml-2 mb-4" routerLink="/forget">Forgot password?</a>
@@ -69,15 +66,14 @@
       </form>
       <hr class="style1 my-4">
       <p>Request all my data</p>
-      <form id="requestDataForm" class="form-setting" action="/settings">
-        <input type="hidden" name="action" value="requestData">
+      <form id="requestDataForm" class="form-setting">
         <button class="btn btn-primary mb-4" type="submit">Request data</button>
       </form>
     </div>
     <!-- End Security -->
-    <!-- Profil -->
-    <div class="tab-pane fade show" id="v-pills-profil" role="tabpanel" aria-labelledby="v-pills-profil-tab">
-      <form id="profilUpdateForm" class="form-setting" action="/settings">
+    <!-- Profile -->
+    <div *ngIf="param === 'profile'">
+      <form class="form-setting">
         <div class="form-group">
           <label class="my-0">New first name</label>
           <input placeholder="John" type="username" name="first_name" class="form-control mt-2" value="<?= UserInformations::getInstance()->getUserInfo()->first_name ?>" required="">
@@ -86,14 +82,13 @@
           <label class="my-0">New last name</label>
           <input placeholder="Doe" type="username" name="last_name" class="form-control mt-2" value="<?= UserInformations::getInstance()->getUserInfo()->last_name ?>" required="">
         </div>
-        <input type="hidden" name="action" value="updateProfil">
         <button class="btn btn-primary mb-4" type="submit">Update</button>
       </form>
     </div>
-    <!-- End Profil -->
+    <!-- End Profile -->
     <!-- Appearance -->
-    <div class="tab-pane fade show" id="v-pills-appearance" role="tabpanel" aria-labelledby="v-pills-appearance-tab">
-      <form id="appearanceUpdateForm" class="form-setting" action="/settings">
+    <div *ngIf="param === 'appearance'">
+      <form class="form-setting" action="/settings">
         <div class="form-group">
           <label class="containerCheckbox">Dark theme
             <input type="checkbox" name="checkbox_dark" id="checkbox_dark" value="1">
@@ -101,7 +96,6 @@
             <input type="hidden" name="checkbox_dark" id="checkbox_dark_hidden" value="0">
           </label>
         </div>
-        <input type="hidden" name="action" value="updateAppearance">
         <button class="btn btn-primary mb-4" type="button">Update</button>
       </form>
     </div>

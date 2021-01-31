@@ -1,10 +1,10 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {LoginComponent} from './components/templates/login/login.component';
-import {RegisterComponent} from './components/templates/register/register.component';
-import {ForgetComponent} from './components/templates/forget/forget.component';
+import {LoginComponent} from './components/templates/user/login/login.component';
+import {RegisterComponent} from './components/templates/user/register/register.component';
+import {ForgetComponent} from './components/templates/user/forget/forget.component';
 import {AccueilComponent} from './components/templates/home/accueil.component';
-import {SettingsComponent} from './components/templates/settings/settings.component';
+import {SettingsComponent} from './components/templates/user/settings/settings.component';
 import {TermsComponent} from './components/templates/terms/terms.component';
 import {PrivacyComponent} from './components/templates/privacy/privacy.component';
 import {PageComponent} from './components/templates/page/page.component';
@@ -29,6 +29,9 @@ import {AdminparapagetypesComponent} from './components/templates/admin/adminpar
 import {AddparapagetypeComponent} from './components/templates/add/addparapagetype/addparapagetype.component';
 import {EditparapagetypeComponent} from './components/templates/edit/editparapagetype/editparapagetype.component';
 import {EditparatagtypeComponent} from './components/templates/edit/editparatagtype/editparatagtype.component';
+import {ResetComponent} from './components/actions/reset/reset.component';
+import {ConfirmComponent} from './components/actions/confirm/confirm.component';
+import {DeleteComponent} from './components/actions/delete/delete.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home'},
@@ -41,6 +44,7 @@ const routes: Routes = [
   { path: 'terms', component: TermsComponent },
   { path: 'privacy', component: PrivacyComponent },
   { path: 'settings', component: SettingsComponent },
+  { path: 'settings/:param', component: SettingsComponent },
   { path: 'page/:id', component: PageComponent },
   { path: 'pages', component: PagesComponent },
   { path: 'pages/:id', component: PagesComponent },
@@ -67,6 +71,10 @@ const routes: Routes = [
   { path: 'editparapagetype/:id', component: EditparapagetypeComponent },
   { path: 'addparapagetype', component: AddparapagetypeComponent },
   { path: 'adminparapagetypes', component: AdminparapagetypesComponent },
+
+  { path: 'reset/:token', component: ResetComponent },
+  { path: 'confirm/:token', component: ConfirmComponent },
+  { path: 'delete/:token', component: DeleteComponent },
 ];
 
 @NgModule({

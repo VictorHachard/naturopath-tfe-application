@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {PageService} from '../../../../service/Page.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {VoteService} from '../../../../service/vote.service';
+import {VoteService} from '../../../../service/Vote.service';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import {InnerParagraphService} from '../../../../service/InnerParagraph.service';
 import {InnerPageService} from '../../../../service/InnerPage.service';
