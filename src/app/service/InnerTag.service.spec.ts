@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { InnertagService } from './Innertag.service';
+import {InnertagService} from './Innertag.service';
 
 describe('InnertagService', () => {
   let service: InnertagService;

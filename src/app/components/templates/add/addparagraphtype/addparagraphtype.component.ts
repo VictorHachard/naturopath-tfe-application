@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {TagTypeService} from '../../../../service/TagType.service';
 import {Router} from '@angular/router';
 import {ParagraphTypeService} from '../../../../service/ParagraphType.service';
 

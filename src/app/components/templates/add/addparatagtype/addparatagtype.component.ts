@@ -1,8 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import {CategoryService} from '../../../../service/Category.service';
+import {Component, OnInit} from '@angular/core';
 import {TagTypeService} from '../../../../service/TagType.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {Category} from '../../../../model/view/Category';
 import {ParatagTypeService} from '../../../../service/ParatagType.service';
 import {Router} from '@angular/router';
 

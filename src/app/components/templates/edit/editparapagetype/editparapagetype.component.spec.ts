@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { EditparapagetypeComponent } from './editparapagetype.component';
+import {EditparapagetypeComponent} from './editparapagetype.component';
 
 describe('EditparapagetypeComponent', () => {
   let component: EditparapagetypeComponent;

@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { AdminparatagtypesComponent } from './adminparatagtypes.component';
+import {AdminparatagtypesComponent} from './adminparatagtypes.component';
 
 describe('AdminparatagtypesComponent', () => {
   let component: AdminparatagtypesComponent;

@@ -1,8 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {PageService} from '../../../service/Page.service';
-import {CategoryService} from '../../../service/Category.service';
 import {ActivatedRoute} from '@angular/router';
-import {Page} from '../../../model/view/Page';
 
 @Component({
   selector: 'app-page',

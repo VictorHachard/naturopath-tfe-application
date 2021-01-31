@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { EditparagraphtypeComponent } from './editparagraphtype.component';
+import {EditparagraphtypeComponent} from './editparagraphtype.component';
 
 describe('EditparagraphtypeComponent', () => {
   let component: EditparagraphtypeComponent;

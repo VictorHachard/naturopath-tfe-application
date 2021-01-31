@@ -32,6 +32,7 @@ import {EditparatagtypeComponent} from './components/templates/edit/editparatagt
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home'},
+  { path: 'home', pathMatch: 'full', redirectTo: 'pages'},
   { path: 'home', component: AccueilComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'login', component: LoginComponent },

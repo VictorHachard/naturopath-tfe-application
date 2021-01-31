@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import {CategoryService} from '../../../../service/Category.service';
+import {Component, OnInit} from '@angular/core';
 import {ParagraphTypeService} from '../../../../service/ParagraphType.service';
 
 @Component({

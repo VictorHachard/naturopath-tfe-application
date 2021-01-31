@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { AddparatagtypeComponent } from './addparatagtype.component';
+import {AddparatagtypeComponent} from './addparatagtype.component';
 
 describe('AddparatagtypeComponent', () => {
   let component: AddparatagtypeComponent;

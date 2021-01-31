@@ -11,14 +11,15 @@ export class PageService extends AbstractService {
 
   constructor(http: HttpClient) {
     super(http);
+    this.baseUrl = this.baseUrl + 'page/';
   }
 
   public getAllPage(): Observable<Page[]> {
-    return this.http.get<Page[]>(this.baseUrl + 'dto/page');
+    return this.http.get<Page[]>(this.baseUrl + 'dto');
   }
 
   public getPage(id: string): Observable<Page> {
-    return this.http.get<Page>(this.baseUrl + 'dto/page/' + id);
+    return this.http.get<Page>(this.baseUrl + 'dto/' + id);
   }
 
   public getAllPageByCategory(id: string): Observable<Page[]> {
@@ -26,10 +27,10 @@ export class PageService extends AbstractService {
   }
 
   public getEditPageDto(id: string): Observable<any> {
-    return this.http.get<any>(this.baseUrl + 'dto/edit/page/' + id);
+    return this.http.get<any>(this.baseUrl + 'dto/edit/' + id);
   }
 
   public addPage(body: any): Observable<any> {
-    return this.http.post<any>(this.baseUrl + 'page', body);
+    return this.http.post<any>(this.baseUrl + '', body);
   }
 }

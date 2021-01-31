@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { AddparagraphtypeComponent } from './addparagraphtype.component';
+import {AddparagraphtypeComponent} from './addparagraphtype.component';
 
 describe('AddparagraphtypeComponent', () => {
   let component: AddparagraphtypeComponent;

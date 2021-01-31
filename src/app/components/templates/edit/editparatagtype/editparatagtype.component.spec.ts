@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { EditparatagtypeComponent } from './editparatagtype.component';
+import {EditparatagtypeComponent} from './editparatagtype.component';
 
 describe('EditparatagtypeComponent', () => {
   let component: EditparatagtypeComponent;

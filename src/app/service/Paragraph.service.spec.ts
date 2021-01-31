@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { ParagraphService } from './Paragraph.service';
+import {ParagraphService} from './Paragraph.service';
 
 describe('ParagraphService', () => {
   let service: ParagraphService;

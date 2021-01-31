@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import {TagTypeService} from '../../../../service/TagType.service';
+import {Component, OnInit} from '@angular/core';
 import {ParatagTypeService} from '../../../../service/ParatagType.service';
 
 @Component({

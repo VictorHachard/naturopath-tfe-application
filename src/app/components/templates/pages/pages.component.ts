@@ -17,6 +17,9 @@ export class PagesComponent implements OnInit {
   pages: any[];
 
   constructor(private route: ActivatedRoute, private pageService: PageService, private categoryService: CategoryService) {
+    this.route.paramMap.subscribe(params => {
+      this.ngOnInit();
+    });
   }
 
   ngOnInit(): void {

@@ -1,8 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
-import {TagService} from '../../../../service/Tag.service';
-import {VoteService} from '../../../../service/vote.service';
 import {CategoryService} from '../../../../service/Category.service';
 
 @Component({

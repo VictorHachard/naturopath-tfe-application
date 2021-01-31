@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { AdmintagtypesComponent } from './admintagtypes.component';
+import {AdmintagtypesComponent} from './admintagtypes.component';
 
 describe('AdmintagtypesComponent', () => {
   let component: AdmintagtypesComponent;

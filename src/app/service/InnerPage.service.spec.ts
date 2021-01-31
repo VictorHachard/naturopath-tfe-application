@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { InnerPageService } from './InnerPage.service';
+import {InnerPageService} from './InnerPage.service';
 
 describe('InnerpageService', () => {
   let service: InnerPageService;

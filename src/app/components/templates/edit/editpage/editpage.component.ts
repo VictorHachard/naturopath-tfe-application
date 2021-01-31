@@ -7,7 +7,6 @@ import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag
 import {InnerParagraphService} from '../../../../service/InnerParagraph.service';
 import {InnerPageService} from '../../../../service/InnerPage.service';
 import {TagTypeService} from '../../../../service/TagType.service';
-import {Paratag} from '../../../../model/view/Paratag';
 
 @Component({
   selector: 'app-addpage',

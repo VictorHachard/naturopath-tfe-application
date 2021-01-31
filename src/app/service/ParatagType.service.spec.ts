@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { ParatagTypeService } from './ParatagType.service';
+import {ParatagTypeService} from './ParatagType.service';
 
 describe('ParatagtypeService', () => {
   let service: ParatagTypeService;

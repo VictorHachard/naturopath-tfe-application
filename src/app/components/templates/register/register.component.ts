@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, ValidatorFn, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {UserSecurityService} from '../../../service/UserSecurity.service';
+import {TestService} from '../../../test.service';
 
 @Component({
   selector: 'app-register',
@@ -9,13 +10,14 @@ import {UserSecurityService} from '../../../service/UserSecurity.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-
   registerForm: FormGroup;
-  constructor(private router: Router, private userSecurity: UserSecurityService) { }
+
+  constructor(private router: Router, private userSecurityService: UserSecurityService, private test: TestService) { }
 
   ngOnInit(): void {
     this.init();
   }
+
   init(): void {
     this.registerForm = new FormGroup({
       username: new FormControl('', Validators.required),
@@ -24,13 +26,17 @@ export class RegisterComponent implements OnInit {
       password_confirm: new FormControl('', [Validators.required, Validators.pattern('(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=*])(?=\\S+$).{6,}')])},
       { validators: this.matchPassword('password', 'password_confirm')});
   }
-  Register(): void{
+
+  register(): void {
     const RegisterValue = this.registerForm.value;
 
-    this.userSecurity.addUser({email: RegisterValue.email,
+    this.userSecurityService.registerUser({email: RegisterValue.email,
       password: RegisterValue.password,
-      username: RegisterValue.username});
-    this.router.navigate(['/home']);
+      username: RegisterValue.username}).subscribe(data => {
+      this.userSecurityService.userSecurity = data;
+      this.router.navigate(['/home']);
+    });
+
     }
 
     matchPassword(firstControl, secondControl): ValidatorFn {
