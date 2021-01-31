@@ -31,6 +31,7 @@ import {EditparapagetypeComponent} from './components/templates/edit/editparapag
 import {EditparatagtypeComponent} from './components/templates/edit/editparatagtype/editparatagtype.component';
 
 const routes: Routes = [
+  { path: '', pathMatch: 'full', redirectTo: 'home'},
   { path: 'home', component: AccueilComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'login', component: LoginComponent },
