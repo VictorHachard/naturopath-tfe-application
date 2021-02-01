@@ -28,11 +28,11 @@ export class RegisterComponent implements OnInit {
   }
 
   register(): void {
-    const RegisterValue = this.registerForm.value;
+    const registerValue = this.registerForm.value;
 
-    this.userSecurityService.register({email: RegisterValue.email,
-      password: RegisterValue.password,
-      username: RegisterValue.username}).subscribe(data => {
+    this.userSecurityService.register({email: registerValue.email,
+      password: registerValue.password,
+      username: registerValue.username}).subscribe(data => {
       this.userSecurityService.setValue(data);
       this.userSecurityService.user = data;
       this.router.navigate(['/home']);

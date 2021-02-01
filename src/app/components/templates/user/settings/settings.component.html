@@ -18,19 +18,19 @@
   <div class="tab-content">
     <!-- Account -->
     <div *ngIf="param === 'account' || !param" class="">
-      <form class="form-setting">
+      <form [formGroup]="updateUsernameEmailForm" (ngSubmit)="updateUsernameEmail()" class="form-setting">
         <div class="form-group">
           <label class="my-0">New username</label>
-          <input type="username" name="username" class="form-control mt-2" required="">
+          <input type="text" formControlName="username" name="username" class="form-control mt-2">
         </div>
         <div class="form-group">
           <label class="my-0">New email</label>
-          <input type="email" name="email" class="form-control mt-2" required="">
+          <input type="email" formControlName="email" name="email" class="form-control mt-2">
         </div>
         <div class="form-group">
           <label class="my-0">Password</label>
             <a class="label-link ml-2 mb-4" routerLink="/forget">Forgot password?</a>
-          <input type="password" name="password" class="form-control mt-2" required="" autocapitalize="off" autocorrect="off">
+          <input type="password" formControlName="password" name="password" class="form-control mt-2">
         </div>
         <button class="btn btn-primary mb-4" type="submit">Update</button>
       </form>
