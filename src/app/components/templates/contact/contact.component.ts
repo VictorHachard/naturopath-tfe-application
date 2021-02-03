@@ -1,4 +1,7 @@
 import {Component, OnInit} from '@angular/core';
+import {FormGroup} from '@angular/forms';
+import {Router} from '@angular/router';
+import {UserSecurityService} from '../../../service/security/UserSecurity.service';
 
 @Component({
   selector: 'app-contact',
@@ -7,9 +10,14 @@ import {Component, OnInit} from '@angular/core';
 })
 export class ContactComponent implements OnInit {
 
-  constructor() { }
+  contactForm: FormGroup;
+
+  constructor(private router: Router, private userSecurity: UserSecurityService) { }
 
   ngOnInit(): void {
   }
 
+  contact(): void {
+
+  }
 }

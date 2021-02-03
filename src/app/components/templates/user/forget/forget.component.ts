@@ -10,23 +10,29 @@ import {UserSecurityService} from '../../../../service/security/UserSecurity.ser
 })
 export class ForgetComponent implements OnInit {
 
-  formResetPassword: FormGroup;
+  setResetForm: FormGroup;
 
   constructor(private router: Router, private userSecurity: UserSecurityService) { }
 
   ngOnInit(): void {
     this.init();
   }
+
   init(): void{
-    this.formResetPassword = new FormGroup({
+    this.setResetForm = new FormGroup({
       emailOrUsername: new FormControl('', Validators.required),
       forgetPassword: new FormControl('', Validators.required)
     });
   }
-  SendEmail(): void{
-    const EmailValue = this.formResetPassword.value;
 
-    this.userSecurity.setResetAccount({emailOrUsername: EmailValue.emailOrUsername,
-      forgetPassword: EmailValue.forgetPassword});
+  setReset(): void{
+    const setResetValue = this.setResetForm.value;
+
+    this.userSecurity.setResetAccount({emailOrUsername: setResetValue.emailOrUsername,
+      forgetPassword: setResetValue.forgetPassword}).subscribe(data => {
+        console.log(data);
+      }, error => {
+        console.log(error);
+    });
   }
 }
