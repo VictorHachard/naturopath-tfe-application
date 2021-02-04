@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {AbstractService} from './commons/AbstractService';
 import {Observable} from 'rxjs';
 import {UserSecurityService} from './security/UserSecurity.service';
@@ -15,14 +15,17 @@ export class InnerPageService extends AbstractService {
   }
 
   public addInnerPage(body: any): Observable<any>  {
-    return this.http.post<any>(this.baseUrl, body);
+    return this.http.post<any>(this.baseUrl, body,
+      {headers : new HttpHeaders().set('Authorization', 'Bearer ' + this.userSecurityService.user.token)});
   }
 
   public updateInnerPage(id: string, body: any): Observable<any> {
-    return this.http.put<any>(this.baseUrl + 'update/' + id, body);
+    return this.http.put<any>(this.baseUrl + 'update/' + id, body,
+      {headers : new HttpHeaders().set('Authorization', 'Bearer ' + this.userSecurityService.user.token)});
   }
 
   public validationInnerPage(id: string): Observable<any> {
-    return this.http.post<any>(this.baseUrl + 'validation/' + id, {});
+    return this.http.post<any>(this.baseUrl + 'validation/' + id, {},
+      {headers : new HttpHeaders().set('Authorization', 'Bearer ' + this.userSecurityService.user.token)});
   }
 }

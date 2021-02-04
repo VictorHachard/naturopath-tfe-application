@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {AbstractService} from './commons/AbstractService';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {UserSecurityService} from './security/UserSecurity.service';
 
@@ -15,14 +15,17 @@ export class InnerTagService extends AbstractService {
   }
 
   public validationInnerTag(innerTagId: string): Observable<any> {
-    return this.http.post<any>(this.baseUrl + 'validation/' + innerTagId, {});
+    return this.http.post<any>(this.baseUrl + 'validation/' + innerTagId, {},
+      {headers : new HttpHeaders().set('Authorization', 'Bearer ' + this.userSecurityService.user.token)});
   }
 
   public updateInnerTag(innerTagId: string, body: any): Observable<any> {
-    return this.http.put<any>(this.baseUrl + 'update/' + innerTagId, body);
+    return this.http.put<any>(this.baseUrl + 'update/' + innerTagId, body,
+      {headers : new HttpHeaders().set('Authorization', 'Bearer ' + this.userSecurityService.user.token)});
   }
 
   public addInnerTag(body: any): Observable<any> {
-    return this.http.post<any>(this.baseUrl, body);
+    return this.http.post<any>(this.baseUrl, body,
+      {headers : new HttpHeaders().set('Authorization', 'Bearer ' + this.userSecurityService.user.token)});
   }
 }

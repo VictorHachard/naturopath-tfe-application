@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {AbstractService} from './commons/AbstractService';
 import {UserSecurityService} from './security/UserSecurity.service';
 import {Observable} from 'rxjs';
@@ -15,6 +15,7 @@ export class VoteService extends AbstractService {
   }
 
   public addVote(body: any): Observable<any> {
-    return this.http.post<any>(this.baseUrl, body);
+    return this.http.post<any>(this.baseUrl, body,
+      {headers : new HttpHeaders().set('Authorization', 'Bearer ' + this.userSecurityService.user.token)});
   }
 }

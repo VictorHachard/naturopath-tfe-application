@@ -1,16 +1,23 @@
 <section class="my-4 container">
   <div class="row">
     <div class="col-md-auto">
-      <div *ngFor="let category of categories">
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a [routerLink]="['/pages', category.id]">{{ category.name }}</a></li>
-            <li *ngFor="let ca of category.childCategory" class="breadcrumb-item active" aria-current="page"><a  [routerLink]="['/pages', category.id]" >
-              {{ ca.name }}
-            </a></li>
-          </ol>
-        </nav>
-      </div>
+      <nav class="nav flex-column">
+        <div *ngFor="let category of categories">
+          <li *ngIf="category.childCategory.length === 0; else notEmpty" class="nav-item">
+            <a class="nav-link" [routerLink]="['/pages', category.id]">{{ category.name }}</a>
+          </li>
+          <ng-template #notEmpty>
+            <li class="nav-item dropdown">
+              <p class="nav-link dropdown-toggle m-0" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{ category.name }}
+              </p>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <a *ngFor="let ca of category.childCategory" class="dropdown-item" style="font-size: 14px" [routerLink]="['/pages', ca.id]">{{ ca.name }}</a>
+              </div>
+            </li>
+          </ng-template>
+        </div>
+      </nav>
     </div>
     <div class="col">
       <h2 class="font-weight-normal mb-4">Monitored playlists</h2>
