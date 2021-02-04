@@ -4,7 +4,9 @@
     You still need to confirm your account!
   </div>
 
-  <div id="alertPlacement"></div>
+  <div *ngIf="response" class="alert {{ response.alert }}" role="alert">
+    {{ response.message }}
+  </div>
 
   <h2 class="font-weight-normal mb-4">Settings</h2>
   <nav>

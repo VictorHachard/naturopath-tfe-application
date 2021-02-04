@@ -46,8 +46,11 @@ const routes: Routes = [
   { path: 'settings', component: SettingsComponent },
   { path: 'settings/:param', component: SettingsComponent },
   { path: 'page/:id', component: PageComponent },
+
   { path: 'pages', component: PagesComponent },
   { path: 'pages/:id', component: PagesComponent },
+  { path: 'pages/:id/:index', component: PagesComponent },
+
   { path: 'editpage/:id', component: EditpageComponent },
   { path: 'addpage', component: AddpageComponent },
   { path: 'edittag/:id', component: EdittagComponent },

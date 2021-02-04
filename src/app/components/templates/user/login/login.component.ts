@@ -3,6 +3,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {UserSecurityService} from '../../../../service/security/UserSecurity.service';
 import {Router} from '@angular/router';
 import {TestService} from '../../../../test.service';
+import {Response} from '../../../../model/my/response';
 
 @Component({
   selector: 'app-login',
@@ -11,6 +12,9 @@ import {TestService} from '../../../../test.service';
 })
 export class LoginComponent implements OnInit {
   formLogin: FormGroup;
+
+  response: Response;
+  count = 1;
 
   constructor(private router: Router, private userSecurityService: UserSecurityService, private test: TestService) { }
 
@@ -34,6 +38,13 @@ export class LoginComponent implements OnInit {
         this.userSecurityService.setValue(data);
         this.userSecurityService.user = data;
         this.router.navigate(['/home']);
+    }, error => {
+        if (this.response !== undefined) {
+          this.count += 1;
+          this.response = new Response('The username/email or password is incorrect - ' + this.count, 'alert-danger');
+        } else {
+          this.response = new Response('The username/email or password is incorrect', 'alert-danger');
+        }
     });
   }
 }

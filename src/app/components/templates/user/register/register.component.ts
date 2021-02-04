@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, ValidatorFn, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {UserSecurityService} from '../../../../service/security/UserSecurity.service';
-import {TestService} from '../../../../test.service';
 
 @Component({
   selector: 'app-register',
@@ -12,7 +11,7 @@ import {TestService} from '../../../../test.service';
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
 
-  constructor(private router: Router, private userSecurityService: UserSecurityService, private test: TestService) { }
+  constructor(private router: Router, private userSecurityService: UserSecurityService) { }
 
   ngOnInit(): void {
     this.init();
@@ -43,10 +42,7 @@ export class RegisterComponent implements OnInit {
     matchPassword(firstControl, secondControl): ValidatorFn {
     return (control: FormGroup): { [key: string]: boolean } | null => {
 
-      const password = control.get(firstControl).value;
-      const confirm = control.get(secondControl).value;
-
-      if (password !== confirm) {
+      if (control.get(firstControl).value !== control.get(secondControl).value) {
         const err = {noMatch: true};
         control.get(firstControl).setErrors(err);
         return err;

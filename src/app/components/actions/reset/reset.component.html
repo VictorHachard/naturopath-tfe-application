@@ -1,3 +1,39 @@
-<div class="alert alert-danger" role="alert">
-  {{ error.error.message }}
-</div>
+<section class="my-4 container">
+
+  <div class="vertical-center">
+    <div class="w-100">
+      <h2 class="h3 mb-3 text-center">Reset your password</h2>
+      <div class="login-center">
+        <form [formGroup]="resetForm" (ngSubmit)="reset()" class="form-setting border rounded-lg">
+          <div class="form-group">
+            <label class="my-0">Password</label>
+            <input type="password" name="password" formControlName="password" class="form-control mt-2">
+            <p class="note">Make sure it's at least 8 characters.</p>
+          </div>
+          <div *ngIf="resetForm.get('password').invalid &&
+        (resetForm.get('password').dirty || resetForm.get('password').touched)" >
+            <p *ngIf="resetForm.get('password').errors.required"
+               class="note text-danger">Please type a password.</p>
+            <p *ngIf="resetForm.get('password').errors.pattern"
+               class="note text-danger">Password must contain at least one lowercase, uppercase, numeric, special character and between six and sixteen characters.</p>
+            <p *ngIf="resetForm.get('password').errors?.noMatch"  class="note text-danger">The password does not match</p>
+          </div>
+          <div class="form-group">
+            <label class="my-0">Confirm password</label>
+            <input type="password" name="password_confirm" formControlName="password_confirm" class="form-control mt-2">
+          </div>
+          <div *ngIf="resetForm.get('password_confirm').invalid &&
+        (resetForm.get('password_confirm').dirty || resetForm.get('password_confirm').touched)" >
+            <p *ngIf="resetForm.get('password_confirm').errors.required"
+               class="note text-danger">Please type password confirmation.</p>
+            <p *ngIf="resetForm.get('password_confirm').errors.pattern"
+               class="note text-danger">Password must contain at least one lowercase, uppercase, numeric, special character and between six and sixteen characters.</p>
+            <p *ngIf="resetForm.get('password_confirm').errors?.noMatch" class="note text-danger">The password does not match</p>
+          </div>
+          <button [disabled]="resetForm.invalid" class="btn btn-lg btn-primary btn-block" type="submit">Set new password</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</section>

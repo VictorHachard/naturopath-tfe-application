@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {UserSecurityService} from '../../../../service/security/UserSecurity.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Response} from '../../../../model/my/response';
 
 @Component({
   selector: 'app-settings',
@@ -11,8 +12,11 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 export class SettingsComponent implements OnInit {
 
   param: string;
-
   user: any;
+  response: Response;
+  count = 1;
+  responseDone = new Response('The modification has been done', 'alert-success');
+  responseEmail = new Response('An email with instructions has been sent to you', 'alert-success');
 
   updateUsernameEmailForm: FormGroup;
   updateNameForm: FormGroup;
@@ -43,7 +47,7 @@ export class SettingsComponent implements OnInit {
   init(): void {
     this.updateUsernameEmailForm = new FormGroup({
       username: new FormControl(this.user.username, Validators.required),
-      email: new FormControl(this.user.email, Validators.required),
+      email: new FormControl(this.user.email, [Validators.required, Validators.email]),
       password: new FormControl('',  Validators.required)
     });
 
@@ -71,12 +75,12 @@ export class SettingsComponent implements OnInit {
     this.userSecurityService.updateUsernameEmail({email: updateUsernameEmailValue.email,
       password: updateUsernameEmailValue.password,
       username: updateUsernameEmailValue.username}).subscribe(data => {
-      console.log(data);
+      this.response = this.responseDone;
       this.userSecurityService.setValue(data);
       this.userSecurityService.user = data;
       this.initData();
     }, error => {
-      console.log(error);
+      this.response = new Response(error.error.message, 'alert-danger'); //TODO check email
     });
   }
 
@@ -85,10 +89,10 @@ export class SettingsComponent implements OnInit {
 
     this.userSecurityService.updateName({firstName: updateNameValue.firstName,
       lastName: updateNameValue.lastName}).subscribe(data => {
-      console.log(data);
+      this.response = this.responseDone;
       this.initData();
     }, error => {
-      console.log(error);
+      this.response = new Response(error.error.message, 'alert-danger');
     });
 
   }
@@ -97,10 +101,10 @@ export class SettingsComponent implements OnInit {
     const updatePrivacyValue = this.updatePrivacyForm.value;
 
     this.userSecurityService.updatePrivacy({isPrivate: updatePrivacyValue.isPrivate}).subscribe(data => {
-      console.log(data);
+      this.response = this.responseDone;
       this.initData();
     }, error => {
-      console.log(error);
+      this.response = new Response(error.error.message, 'alert-danger');
     });
   }
 
@@ -108,19 +112,19 @@ export class SettingsComponent implements OnInit {
     const updateAppearanceValue = this.updateAppearanceForm.value;
 
     this.userSecurityService.updateAppearance({dark: updateAppearanceValue.dark}).subscribe(data => {
-      console.log(data);
+      this.response = this.responseDone;
       this.initData();
     }, error => {
-      console.log(error);
+      this.response = new Response(error.error.message, 'alert-danger');
     });
   }
 
   setConfirmation(): void {
     this.userSecurityService.setConfirmAccount().subscribe(data => {
-      console.log(data);
+      this.response = this.responseEmail;
       this.initData();
     }, error => {
-      console.log(error);
+      this.response = new Response(error.error.message, 'alert-danger');
     });
   }
 
@@ -128,10 +132,16 @@ export class SettingsComponent implements OnInit {
     const deleteValue = this.deleteForm.value;
 
     this.userSecurityService.setDeleteAccount({password: deleteValue.password}).subscribe(data => {
-      console.log(data);
+      this.response = this.responseEmail;
       this.initData();
     }, error => {
       console.log(error);
+      if (this.response !== undefined) {
+        this.count += 1;
+        this.response = new Response('Wrong password - ' + this.count, 'alert-danger');
+      } else {
+        this.response = new Response('Wrong password', 'alert-danger');
+      }
     });
   }
 }

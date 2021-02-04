@@ -23,8 +23,8 @@ export class PageService extends AbstractService {
     return this.http.get<any>(this.baseUrl + 'dto/' + id);
   }
 
-  public getAllPageByCategory(id: string): Observable<any[]> {
-    return this.http.post<any[]>(this.baseUrl + 'dto/pageByCategory', { categoryId: id });
+  public getAllPageByCategory(id: string): Observable<any> {
+    return this.http.post<any>(this.baseUrl + 'dto/pageByCategory', { categoryId: id });
   }
 
   public getEditPageDto(id: string): Observable<any> {
