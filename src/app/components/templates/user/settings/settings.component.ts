@@ -34,6 +34,7 @@ export class SettingsComponent implements OnInit {
 
   ngOnInit(): void {
     this.param = this.route.snapshot.paramMap.get('param');
+    this.response = undefined;
   }
 
   initData(): void {
