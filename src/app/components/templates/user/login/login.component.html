@@ -8,13 +8,13 @@
     <div class="w-100">
       <h2 class="h3 mb-3 text-center">Sign in to YPC</h2>
       <div class="login-center">
-        <form [formGroup]="formLogin" (ngSubmit)="login()" class="form-setting border rounded-lg">
+        <form [formGroup]="loginForm" (ngSubmit)="login()" class="form-setting border rounded-lg">
           <div class="form-group">
             <label class="my-0">Username or email address</label>
             <input type="text" formControlName="emailOrUsername" class="form-control mt-2 mb-3">
-            <div *ngIf="formLogin.get('emailOrUsername').invalid &&
-                   (formLogin.get('emailOrUsername').dirty || formLogin.get('emailOrUsername').touched)" >
-              <p *ngIf="formLogin.get('emailOrUsername').errors.required"
+            <div *ngIf="loginForm.get('emailOrUsername').invalid &&
+                   (loginForm.get('emailOrUsername').dirty || loginForm.get('emailOrUsername').touched)" >
+              <p *ngIf="loginForm.get('emailOrUsername').errors.required"
                  class="note text-danger">Please type your email or your username.</p>
             </div>
           </div>
@@ -23,9 +23,9 @@
               <a class="label-link" routerLink="/forget">Forgot password?</a>
             </label>
             <input type="password" formControlName="password" class="form-control mt-2 mb-3">
-            <div *ngIf="formLogin.get('password').invalid &&
-                   (formLogin.get('password').dirty || formLogin.get('password').touched)" >
-              <p *ngIf="formLogin.get('password').errors.required"
+            <div *ngIf="loginForm.get('password').invalid &&
+                   (loginForm.get('password').dirty || loginForm.get('password').touched)" >
+              <p *ngIf="loginForm.get('password').errors.required"
                  class="note text-danger">Please type a password.</p>
             </div>
           </div>
@@ -35,7 +35,7 @@
               Remember me
             </label>
           </div>
-          <button [disabled]="formLogin.invalid" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+          <button [disabled]="loginForm.invalid" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
         </form>
         <p class="login-center-p justify-content-center text-center my-4 border rounded-lg">
           New here?

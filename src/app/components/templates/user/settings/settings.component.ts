@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {UserSecurityService} from '../../../../service/security/UserSecurity.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {Response} from '../../../../model/my/response';
+import {Response} from '../../../../model/my/Response';
 
 @Component({
   selector: 'app-settings',

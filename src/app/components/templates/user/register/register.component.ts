@@ -36,10 +36,9 @@ export class RegisterComponent implements OnInit {
       this.userSecurityService.user = data;
       this.router.navigate(['/home']);
     });
+  }
 
-    }
-
-    matchPassword(firstControl, secondControl): ValidatorFn {
+  matchPassword(firstControl, secondControl): ValidatorFn {
     return (control: FormGroup): { [key: string]: boolean } | null => {
 
       if (control.get(firstControl).value !== control.get(secondControl).value) {
@@ -48,7 +47,7 @@ export class RegisterComponent implements OnInit {
         return err;
       } else {
         const noMatchError = control.get(firstControl).hasError('noMatch');
-        if (noMatchError){
+        if (noMatchError) {
             delete control.get(firstControl).errors.noMatch;
             control.get(firstControl).updateValueAndValidity();
         }

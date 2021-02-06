@@ -3,7 +3,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {UserSecurityService} from '../../../../service/security/UserSecurity.service';
 import {Router} from '@angular/router';
 import {TestService} from '../../../../test.service';
-import {Response} from '../../../../model/my/response';
+import {Response} from '../../../../model/my/Response';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +11,7 @@ import {Response} from '../../../../model/my/response';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  formLogin: FormGroup;
+  loginForm: FormGroup;
 
   response: Response;
   count = 1;
@@ -23,17 +23,17 @@ export class LoginComponent implements OnInit {
   }
 
   init(): void {
-    this.formLogin = new FormGroup({
+    this.loginForm = new FormGroup({
       emailOrUsername: new FormControl('Paulin', Validators.required),
       password: new FormControl('Test123*',  Validators.required)
     });
   }
 
   login(): void {
-    const LoginValue = this.formLogin.value;
+    const loginValue = this.loginForm.value;
 
-    this.userSecurityService.login({emailOrUsername: LoginValue.emailOrUsername,
-      password: LoginValue.password}).subscribe(data => {
+    this.userSecurityService.login({emailOrUsername: loginValue.emailOrUsername,
+      password: loginValue.password}).subscribe(data => {
         console.log(data);
         this.userSecurityService.setValue(data);
         this.userSecurityService.user = data;
