@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, ValidatorFn, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {UserSecurityService} from '../../../../service/security/UserSecurity.service';
+import {User} from '../../../../model/view/User';
 
 @Component({
   selector: 'app-register',
@@ -31,11 +32,12 @@ export class RegisterComponent implements OnInit {
 
     this.userSecurityService.register({email: registerValue.email,
       password: registerValue.password,
-      username: registerValue.username}).subscribe(data => {
-      this.userSecurityService.setValue(data);
-      this.userSecurityService.user = data;
+      username: registerValue.username}).subscribe(value => {
+      const user: User = value;
+      localStorage.setItem('currentUser', JSON.stringify(user));
+      this.userSecurityService.logger.next(true);
       this.router.navigate(['/home']);
-    });
+    }, error => { });
   }
 
   matchPassword(firstControl, secondControl): ValidatorFn {

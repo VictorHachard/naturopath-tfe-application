@@ -1,6 +1,7 @@
 export class User {
-  constructor( public id: number,
+  constructor( public token: string,
                public username: string,
-               public roleList: string[]) {
+               public roleList: string[],
+               public dark: boolean) {
   }
 }

@@ -15,6 +15,13 @@ export class ContactComponent implements OnInit {
   constructor(private router: Router, private userSecurity: UserSecurityService) { }
 
   ngOnInit(): void {
+    this.init();
+  }
+
+  init(): void {
+    this.contactForm = new FormGroup({
+
+    });
   }
 
   contact(): void {

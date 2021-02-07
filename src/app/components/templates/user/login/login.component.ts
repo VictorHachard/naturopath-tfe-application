@@ -2,8 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {UserSecurityService} from '../../../../service/security/UserSecurity.service';
 import {Router} from '@angular/router';
-import {TestService} from '../../../../test.service';
 import {Response} from '../../../../model/my/Response';
+import {User} from '../../../../model/view/User';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   response: Response;
   count = 1;
 
-  constructor(private router: Router, private userSecurityService: UserSecurityService, private test: TestService) { }
+  constructor(private router: Router, private userSecurityService: UserSecurityService) { }
 
   ngOnInit(): void {
     this.init();
@@ -32,19 +32,18 @@ export class LoginComponent implements OnInit {
   login(): void {
     const loginValue = this.loginForm.value;
 
-    this.userSecurityService.login({emailOrUsername: loginValue.emailOrUsername,
-      password: loginValue.password}).subscribe(data => {
-        console.log(data);
-        this.userSecurityService.setValue(data);
-        this.userSecurityService.user = data;
-        this.router.navigate(['/home']);
+    this.userSecurityService.login(loginValue.emailOrUsername, loginValue.password).subscribe(value => {
+      const user: User = value;
+      localStorage.setItem('currentUser', JSON.stringify(user));
+      this.userSecurityService.logger.next(true);
+      this.router.navigate(['/home']);
     }, error => {
-        if (this.response !== undefined) {
-          this.count += 1;
-          this.response = new Response('The username/email or password is incorrect - ' + this.count, 'alert-danger');
-        } else {
-          this.response = new Response('The username/email or password is incorrect', 'alert-danger');
-        }
+      if (this.response !== undefined) {
+        this.count += 1;
+        this.response = new Response('The username or password is incorrect - ' + this.count, 'alert-danger');
+      } else {
+        this.response = new Response('The username or password is incorrect', 'alert-danger');
+      }
     });
   }
 }
