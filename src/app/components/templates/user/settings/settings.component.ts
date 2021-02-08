@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {UserSecurityService} from '../../../../service/security/UserSecurity.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {Response} from '../../../../model/my/Response';
+import {AlertManager} from '../../../../model/my/AlertManager';
 import {User} from '../../../../model/view/User';
 
 @Component({
@@ -14,10 +14,7 @@ export class SettingsComponent implements OnInit {
 
   param: string;
   user: any;
-  response: Response;
-  count = 1;
-  responseDone = new Response('The modification has been done', 'alert-success');
-  responseEmail = new Response('An email with instructions has been sent to you', 'alert-success');
+  alertManagerManager: AlertManager;
 
   updateUsernameEmailForm: FormGroup;
   updateNameForm: FormGroup;
@@ -34,14 +31,14 @@ export class SettingsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.alertManagerManager = new AlertManager();
     this.param = this.route.snapshot.paramMap.get('param');
-    this.response = undefined;
   }
 
   initData(): void {
     this.userSecurityService.getEditDto().subscribe(value => {
       this.user = value;
-      console.log(value);
+      this.userSecurityService.change.next(true);
       this.init();
     });
   }
@@ -77,12 +74,12 @@ export class SettingsComponent implements OnInit {
     this.userSecurityService.updateUsernameEmail({email: updateUsernameEmailValue.email,
       password: updateUsernameEmailValue.password,
       username: updateUsernameEmailValue.username}).subscribe(value => {
-        this.response = this.responseDone;
+        this.alertManagerManager.addAlert('The modification has been done', 'alert-success');
         const user: User = value;
         localStorage.setItem('currentUser', JSON.stringify(user));
         this.initData();
     }, error => {
-      this.response = new Response(error.error.message, 'alert-danger'); //TODO check email
+      this.alertManagerManager.addAlert(error.error.message, 'alert-danger'); //TODO check email
     });
   }
 
@@ -91,10 +88,10 @@ export class SettingsComponent implements OnInit {
 
     this.userSecurityService.updateName({firstName: updateNameValue.firstName,
       lastName: updateNameValue.lastName}).subscribe(data => {
-      this.response = this.responseDone;
+      this.alertManagerManager.addAlert('The modification has been done', 'alert-success');
       this.initData();
     }, error => {
-      this.response = new Response(error.error.message, 'alert-danger');
+      this.alertManagerManager.addAlert(error.error.message, 'alert-danger');
     });
 
   }
@@ -103,10 +100,10 @@ export class SettingsComponent implements OnInit {
     const updatePrivacyValue = this.updatePrivacyForm.value;
 
     this.userSecurityService.updatePrivacy({isPrivate: updatePrivacyValue.isPrivate}).subscribe(data => {
-      this.response = this.responseDone;
+      this.alertManagerManager.addAlert('The modification has been done', 'alert-success');
       this.initData();
     }, error => {
-      this.response = new Response(error.error.message, 'alert-danger');
+      this.alertManagerManager.addAlert(error.error.message, 'alert-danger');
     });
   }
 
@@ -114,19 +111,20 @@ export class SettingsComponent implements OnInit {
     const updateAppearanceValue = this.updateAppearanceForm.value;
 
     this.userSecurityService.updateAppearance({dark: updateAppearanceValue.dark}).subscribe(data => {
-      this.response = this.responseDone;
+      this.userSecurityService.dark.next(updateAppearanceValue.dark);
+      this.alertManagerManager.addAlert('The modification has been done', 'alert-success');
       this.initData();
     }, error => {
-      this.response = new Response(error.error.message, 'alert-danger');
+      this.alertManagerManager.addAlert(error.error.message, 'alert-danger');
     });
   }
 
   setConfirmation(): void {
     this.userSecurityService.setConfirmAccount().subscribe(data => {
-      this.response = this.responseEmail;
+      this.alertManagerManager.addAlert('An email with instructions has been sent to you', 'alert-success');
       this.initData();
     }, error => {
-      this.response = new Response(error.error.message, 'alert-danger');
+      this.alertManagerManager.addAlert(error.error.message, 'alert-danger');
     });
   }
 
@@ -134,16 +132,11 @@ export class SettingsComponent implements OnInit {
     const deleteValue = this.deleteForm.value;
 
     this.userSecurityService.setDeleteAccount({password: deleteValue.password}).subscribe(data => {
-      this.response = this.responseEmail;
+      this.alertManagerManager.addAlert('An email with instructions has been sent to you', 'alert-success');
       this.initData();
     }, error => {
       console.log(error);
-      if (this.response !== undefined) {
-        this.count += 1;
-        this.response = new Response('Wrong password - ' + this.count, 'alert-danger');
-      } else {
-        this.response = new Response('Wrong password', 'alert-danger');
-      }
+      this.alertManagerManager.addAlert(error.error.message, 'alert-danger');
     });
   }
 }

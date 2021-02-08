@@ -4,8 +4,10 @@
     You still need to confirm your account!
   </div>
 
-  <div *ngIf="response" class="alert {{ response.alert }}" role="alert">
-    {{ response.message }}
+  <div *ngFor="let response of alertManagerManager.responseList">
+    <div class="alert {{ response.alert }}" role="alert">
+      {{ response.message }}
+    </div>
   </div>
 
   <h2 class="font-weight-normal mb-4">Settings</h2>

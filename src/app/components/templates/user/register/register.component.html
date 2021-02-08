@@ -1,7 +1,9 @@
 <section class="my-4 container">
 
-  <div *ngIf="response" class="alert {{ response.alert }}" role="alert">
-    {{ response.message }}
+  <div *ngFor="let response of alertManagerManager.responseList">
+    <div class="alert {{ response.alert }}" role="alert">
+      {{ response.message }}
+    </div>
   </div>
 
   <form [formGroup]="registerForm" (ngSubmit)="register()" class="form-setting">

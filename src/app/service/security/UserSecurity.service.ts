@@ -10,6 +10,8 @@ import {NavigationStart, Router} from '@angular/router';
 export class UserSecurityService extends AbstractService {
 
   public logger = new Subject<boolean>();
+  public dark = new Subject<boolean>();
+  public change = new Subject<boolean>();
 
   constructor(http: HttpClient, private router: Router) {
     super(http);
@@ -17,12 +19,21 @@ export class UserSecurityService extends AbstractService {
     router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {
         this.logger.next(localStorage.getItem('currentUser') !== null);
+        this.dark.next(localStorage.getItem('currentUser') !== null && JSON.parse(localStorage.getItem('currentUser')).dark);
       }
     });
   }
 
   public isLoggedIn(): Observable<boolean> {
     return this.logger.asObservable();
+  }
+
+  public settingsChange(): Observable<boolean> {
+    return this.change.asObservable();
+  }
+
+  public isDark(): Observable<boolean> {
+    return this.dark.asObservable();
   }
 
   private authenticateUser(user: string, password: string): string {

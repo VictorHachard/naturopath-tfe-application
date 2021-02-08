@@ -3,7 +3,7 @@ import {FormControl, FormGroup, ValidatorFn, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {UserSecurityService} from '../../../../service/security/UserSecurity.service';
 import {User} from '../../../../model/view/User';
-import {Response} from '../../../../model/my/Response';
+import {AlertManager} from '../../../../model/my/AlertManager';
 
 @Component({
   selector: 'app-register',
@@ -13,7 +13,7 @@ import {Response} from '../../../../model/my/Response';
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
 
-  response: Response;
+  alertManagerManager: AlertManager;
   count = 1;
 
   private debug = true;
@@ -26,6 +26,7 @@ export class RegisterComponent implements OnInit {
   constructor(private router: Router, private userSecurityService: UserSecurityService) { }
 
   ngOnInit(): void {
+    this.alertManagerManager = new AlertManager();
     this.init();
   }
 
@@ -49,13 +50,7 @@ export class RegisterComponent implements OnInit {
         this.userSecurityService.logger.next(true);
         this.router.navigate(['/home']);
     }, error => {
-        /*if (error.status === 400 ) {*/
-          if (this.response !== undefined) {
-            this.count += 1;
-            this.response = new Response('The user already exists - ' + this.count, 'alert-danger');
-          } else {
-            this.response = new Response('The user already exists', 'alert-danger');
-          }
+        this.alertManagerManager.addAlert('The user already exists', 'alert-danger');
     });
   }
 
