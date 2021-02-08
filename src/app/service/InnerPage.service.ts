@@ -2,15 +2,14 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {AbstractService} from './commons/AbstractService';
 import {Observable} from 'rxjs';
-import {UserSecurityService} from './security/UserSecurity.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class InnerPageService extends AbstractService {
 
-  constructor(http: HttpClient, userSecurityService: UserSecurityService) {
-    super(http, userSecurityService);
+  constructor(http: HttpClient) {
+    super(http);
     this.baseUrl = this.baseUrl + 'innerPage/';
   }
 

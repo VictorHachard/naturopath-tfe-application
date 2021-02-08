@@ -16,7 +16,7 @@
     </div>
     <ng-template #elseIfBlock>
       <div *ngIf="page.innerPageList[page.innerPageList.length - 1].state === 'VALIDATING'; else elseBlock">
-        <div class="progress">
+        <div class="progress mb-2">
           <div class="progress-bar bg-success" role="progressbar" style="{{ 'width:' + (page.innerPageList[page.innerPageList.length - 1].favour * 20).toString() + '%' }}" aria-valuenow="{{ page.innerPageList[page.innerPageList.length - 1].favour * 20 }}" aria-valuemin="0" aria-valuemax="100">{{ page.innerPageList[page.innerPageList.length - 1].favour }}/5</div>
           <div class="progress-bar bg-danger" role="progressbar" style="{{ 'width:' + (page.innerPageList[page.innerPageList.length - 1].against * 20).toString() + '%' }}" aria-valuenow="{{ page.innerPageList[page.innerPageList.length - 1].against * 20 }}" aria-valuemin="0" aria-valuemax="100">{{ page.innerPageList[page.innerPageList.length - 1].against }}/5</div>
         </div>
@@ -128,9 +128,6 @@
        </form>
      </div>
    </div>
-
-
-
 
  </section>
 

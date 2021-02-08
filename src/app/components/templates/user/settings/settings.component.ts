@@ -3,6 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import {UserSecurityService} from '../../../../service/security/UserSecurity.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Response} from '../../../../model/my/Response';
+import {User} from '../../../../model/view/User';
 
 @Component({
   selector: 'app-settings',
@@ -38,9 +39,9 @@ export class SettingsComponent implements OnInit {
   }
 
   initData(): void {
-    this.userSecurityService.getEditDto().subscribe(data => {
-      this.user = data;
-      console.log(data);
+    this.userSecurityService.getEditDto().subscribe(value => {
+      this.user = value;
+      console.log(value);
       this.init();
     });
   }
@@ -75,11 +76,11 @@ export class SettingsComponent implements OnInit {
 
     this.userSecurityService.updateUsernameEmail({email: updateUsernameEmailValue.email,
       password: updateUsernameEmailValue.password,
-      username: updateUsernameEmailValue.username}).subscribe(data => {
-      this.response = this.responseDone;
-      this.userSecurityService.setValue(data);
-      this.userSecurityService.user = data;
-      this.initData();
+      username: updateUsernameEmailValue.username}).subscribe(value => {
+        this.response = this.responseDone;
+        const user: User = value;
+        localStorage.setItem('currentUser', JSON.stringify(user));
+        this.initData();
     }, error => {
       this.response = new Response(error.error.message, 'alert-danger'); //TODO check email
     });

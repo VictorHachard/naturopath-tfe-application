@@ -32,48 +32,53 @@ import {EditparatagtypeComponent} from './components/templates/edit/editparatagt
 import {ResetComponent} from './components/actions/reset/reset.component';
 import {ConfirmComponent} from './components/actions/confirm/confirm.component';
 import {DeleteComponent} from './components/actions/delete/delete.component';
+import {AuthGuardService, NotAuthGuardService} from './service/auth-guard.service';
+import {DashboardComponent} from './components/templates/dashboard/dashboard.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home'},
   { path: 'home', pathMatch: 'full', redirectTo: 'pages'},
   { path: 'home', component: AccueilComponent },
   { path: 'contact', component: ContactComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
+  { path: 'login', component: LoginComponent, canActivate: [NotAuthGuardService] },
+  { path: 'register', component: RegisterComponent, canActivate: [NotAuthGuardService] },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuardService] },
   { path: 'forget', component: ForgetComponent },
   { path: 'terms', component: TermsComponent },
   { path: 'privacy', component: PrivacyComponent },
-  { path: 'settings', component: SettingsComponent },
-  { path: 'settings/:param', component: SettingsComponent },
+
+  { path: 'settings', component: SettingsComponent, canActivate: [AuthGuardService] },
+  { path: 'settings/:param', component: SettingsComponent, canActivate: [AuthGuardService] },
+
   { path: 'page/:id', component: PageComponent },
 
   { path: 'pages', component: PagesComponent },
   { path: 'pages/:id', component: PagesComponent },
   { path: 'pages/:id/:index', component: PagesComponent },
 
-  { path: 'editpage/:id', component: EditpageComponent },
-  { path: 'addpage', component: AddpageComponent },
-  { path: 'edittag/:id', component: EdittagComponent },
-  { path: 'addtag', component: AddtagComponent },
-  { path: 'editcategory/:id', component: EditcategoryComponent },
-  { path: 'addcategory', component: AddcategoryComponent },
-  { path: 'admincategories', component: AdmincategoriesComponent },
+  { path: 'editpage/:id', component: EditpageComponent, canActivate: [AuthGuardService] },
+  { path: 'addpage', component: AddpageComponent, canActivate: [AuthGuardService] },
+  { path: 'edittag/:id', component: EdittagComponent, canActivate: [AuthGuardService] },
+  { path: 'addtag', component: AddtagComponent, canActivate: [AuthGuardService] },
+  { path: 'editcategory/:id', component: EditcategoryComponent, canActivate: [AuthGuardService] },
+  { path: 'addcategory', component: AddcategoryComponent, canActivate: [AuthGuardService] },
+  { path: 'admincategories', component: AdmincategoriesComponent, canActivate: [AuthGuardService] },
 
-  { path: 'edittagtype/:id', component: EdittagtypeComponent },
-  { path: 'addtagtype', component: AddtagtypeComponent },
-  { path: 'admintagtypes', component: AdmintagtypesComponent },
+  { path: 'edittagtype/:id', component: EdittagtypeComponent, canActivate: [AuthGuardService] },
+  { path: 'addtagtype', component: AddtagtypeComponent, canActivate: [AuthGuardService] },
+  { path: 'admintagtypes', component: AdmintagtypesComponent, canActivate: [AuthGuardService] },
 
-  { path: 'editparagraphtype/:id', component: EditparagraphtypeComponent },
-  { path: 'addparagraphtype', component: AddparagraphtypeComponent },
-  { path: 'adminparagraphtypes', component: AdminparagraphtypesComponent },
+  { path: 'editparagraphtype/:id', component: EditparagraphtypeComponent, canActivate: [AuthGuardService] },
+  { path: 'addparagraphtype', component: AddparagraphtypeComponent, canActivate: [AuthGuardService] },
+  { path: 'adminparagraphtypes', component: AdminparagraphtypesComponent, canActivate: [AuthGuardService] },
 
-  { path: 'editparatagtype/:id', component: EditparatagtypeComponent },
-  { path: 'addparatagtype', component: AddparatagtypeComponent },
-  { path: 'adminparatagtypes', component: AdminparatagtypesComponent },
+  { path: 'editparatagtype/:id', component: EditparatagtypeComponent, canActivate: [AuthGuardService] },
+  { path: 'addparatagtype', component: AddparatagtypeComponent, canActivate: [AuthGuardService] },
+  { path: 'adminparatagtypes', component: AdminparatagtypesComponent, canActivate: [AuthGuardService] },
 
-  { path: 'editparapagetype/:id', component: EditparapagetypeComponent },
-  { path: 'addparapagetype', component: AddparapagetypeComponent },
-  { path: 'adminparapagetypes', component: AdminparapagetypesComponent },
+  { path: 'editparapagetype/:id', component: EditparapagetypeComponent, canActivate: [AuthGuardService] },
+  { path: 'addparapagetype', component: AddparapagetypeComponent, canActivate: [AuthGuardService] },
+  { path: 'adminparapagetypes', component: AdminparapagetypesComponent, canActivate: [AuthGuardService] },
 
   { path: 'reset/:token', component: ResetComponent },
   { path: 'confirm/:token', component: ConfirmComponent },

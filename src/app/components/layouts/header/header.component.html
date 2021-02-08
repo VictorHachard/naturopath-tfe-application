@@ -64,6 +64,7 @@
         <div *ngIf="!user">
           <button class="btn btn-outline-success my-2 my-sm-0 mr-1" routerLink="/login">Sign in</button>
           <button class="btn btn-outline-success my-2 my-sm-0" routerLink="/register">Sign up</button>
+          <button (click)="logOut();">Log out</button>
         </div>
         <!-- End if not auth -->
       </div>

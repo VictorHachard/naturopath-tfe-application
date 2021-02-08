@@ -46,8 +46,7 @@ export class AddtagComponent implements OnInit {
 
     this.tagService.addTag({tagTypeId: tagTypeId.toString(),
       content: addTagValue.content,
-      name: addTagValue.name,
-      userId: '1'}).subscribe(data => {
+      name: addTagValue.name}).subscribe(data => {
       this.router.navigate(['/edittag/' + data.toString()]);
     });
   }

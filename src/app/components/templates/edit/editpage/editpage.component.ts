@@ -75,7 +75,11 @@ export class EditpageComponent implements OnInit {
     const editInnerParagraphValue = this.editInnerParagraphForm[index].value;
     this.innerParagraph.updateInnerParagraph(id.toString(),
       {content: editInnerParagraphValue.contentParagraph,
-        title: editInnerParagraphValue.titleParagraph});
+        title: editInnerParagraphValue.titleParagraph}).subscribe(value => {
+          this.ngOnInit();
+        }, error => {
+
+        });
   }
 
   updateInnerPage(): void {
@@ -83,46 +87,70 @@ export class EditpageComponent implements OnInit {
     const innerPageId: string = this.page.innerPageList[this.page.innerPageList.length - 1].id;
     this.innerPage.updateInnerPage(innerPageId.toString(),
       {description: editInnerPageValue.descriptionPage,
-        title: editInnerPageValue.titlePage});
+        title: editInnerPageValue.titlePage}).subscribe(value => {
+          this.ngOnInit();
+        }, error => {
+
+        });
   }
 
   validationInnerPage(): void {
     const innerPageId: string = this.page.innerPageList[this.page.innerPageList.length - 1].id;
-    this.innerPage.validationInnerPage(innerPageId);
+    this.innerPage.validationInnerPage(innerPageId).subscribe(value => {
+      this.ngOnInit();
+    }, error => {
+
+    });
   }
 
   voteInnerPage(id: number, choice: number): void {
     this.voteService.addVote({choice: choice.toString(),
       type: 'InnerPage',
-      typeId: id.toString(),
-      userId: 1});
+      typeId: id.toString()}).subscribe(value => {
+        this.ngOnInit();
+      }, error => {
+
+      });
   }
 
   addInnerPage(id: number, pageId: number): void {
     const editInnerPageValue = this.editInnerPageForm.value;
     this.innerPage.addInnerPage({content: editInnerPageValue.descriptionPage,
       paragraphId: pageId.toString(),
-      title: editInnerPageValue.titlePage,
-      userId: 1});
+      title: editInnerPageValue.titlePage}).subscribe(value => {
+        this.ngOnInit();
+      }, error => {
+
+      });
   }
 
   validationInnerParagraph(index: number, id: number): void {
-    this.innerParagraph.validationInnerParagraph(id.toString());
+    this.innerParagraph.validationInnerParagraph(id.toString()).subscribe(value => {
+      this.ngOnInit();
+    }, error => {
+
+    });
   }
 
   voteInnerParagraph(index: number, id: number, choice: number): void {
     this.voteService.addVote({choice: choice.toString(),
       type: 'InnerParagraph',
-      typeId: id.toString(),
-      userId: 1});
+      typeId: id.toString()}).subscribe(value => {
+        this.ngOnInit();
+      }, error => {
+
+      });
   }
 
   addInnerParagraph(index: number, id: number, paragraphId: number): void {
     const editInnerParagraphValue = this.editInnerParagraphForm[index].value;
     this.innerParagraph.addInnerParagraph({content: editInnerParagraphValue.contentParagraph,
       paragraphId: paragraphId.toString(),
-      title: editInnerParagraphValue.titleParagraph,
-      userId: 1});
+      title: editInnerParagraphValue.titleParagraph}).subscribe(value => {
+        this.ngOnInit();
+      }, error => {
+
+      });
   }
 
   dropItem(event: CdkDragDrop<any[]>): void {

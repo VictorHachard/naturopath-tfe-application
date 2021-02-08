@@ -1,11 +1,15 @@
 <section class="my-4 container">
 
+  <div *ngIf="response" class="alert {{ response.alert }}" role="alert">
+    {{ response.message }}
+  </div>
+
   <form [formGroup]="registerForm" (ngSubmit)="register()" class="form-setting">
     <h2 class="mb-4">Create your personal account</h2>
     <div class="form-group">
       <label class="my-0">Username</label>
       <input type="text" formControlName="username" class="form-control mt-2">
-      <p class="note">This will be your username. You can update your username later.</p>
+      <small class="form-text text-muted">This will be your username. You can update your username later.</small>
       <div *ngIf="registerForm.get('username').invalid &&
         (registerForm.get('username').dirty || registerForm.get('username').touched)" >
         <p *ngIf="registerForm.get('username').errors.required"
@@ -15,7 +19,7 @@
     <div class="form-group">
       <label class="my-0">Email address</label>
       <input type="email" formControlName="email" class="form-control mt-2">
-      <p class="note">We’ll never share your email address with anyone. The tested email service provider are hotmail, outlook and gmail.</p>
+      <small class="form-text text-muted">We’ll never share your email address with anyone. The tested email service provider are hotmail, outlook and gmail.</small>
     </div>
     <div *ngIf="registerForm.get('email').invalid &&
         (registerForm.get('email').dirty || registerForm.get('email').touched)" >
@@ -26,7 +30,7 @@
     <div class="form-group">
       <label class="my-0">Password</label>
       <input type="password" formControlName="password" class="form-control mt-2">
-      <p class="note">Make sure it's at least 8 characters.</p>
+      <small class="form-text text-muted">Make sure it's at least 8 characters.</small>
     </div>
     <div *ngIf="registerForm.get('password').invalid &&
         (registerForm.get('password').dirty || registerForm.get('password').touched)" >

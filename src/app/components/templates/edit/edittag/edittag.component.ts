@@ -45,26 +45,40 @@ export class EdittagComponent implements OnInit {
     const innerTagId: string = this.tag.innerTagList[this.tag.innerTagList.length - 1].id;
     this.innerTag.updateInnerTag(innerTagId.toString(),
       {content: editInnerTagValue.contentTag,
-        name: editInnerTagValue.nameTag});
+        name: editInnerTagValue.nameTag}).subscribe(value => {
+          this.ngOnInit();
+        }, error => {
+
+        });
   }
 
   validationInnerTag(): void {
     const innerTagId: string = this.tag.innerTagList[this.tag.innerTagList.length - 1].id;
-    this.innerTag.validationInnerTag(innerTagId);
+    this.innerTag.validationInnerTag(innerTagId).subscribe(value => {
+      this.ngOnInit();
+    }, error => {
+
+    });
   }
 
   voteInnerTag(id: number, choice: number): void {
     this.voteService.addVote({choice: choice.toString(),
       type: 'InnerTag',
-      typeId: id.toString(),
-      userId: 1});
+      typeId: id.toString()}).subscribe(value => {
+        this.ngOnInit();
+      }, error => {
+
+      });
   }
 
   addInnerTag(id: number,  tagId: number): void {
     const editInnerTagValue = this.editInnerTagForm.value;
     this.innerTag.addInnerTag({content: editInnerTagValue.contentTag,
       name: editInnerTagValue.nameTag,
-      tagId: tagId.toString(),
-      userId: 1});
+      tagId: tagId.toString()}).subscribe(value => {
+        this.ngOnInit();
+      }, error => {
+
+      });
   }
 }

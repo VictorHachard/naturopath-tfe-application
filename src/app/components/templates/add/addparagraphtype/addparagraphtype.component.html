@@ -6,7 +6,7 @@
     <div class="form-group">
       <label for="name">Name</label>
       <input type="text" class="form-control" id="name" formControlName="name">
-      <p class="note">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</p>
+      <small class="form-text text-muted">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</small>
       <div *ngIf="addParagraphTypeForm.get('name').invalid &&
         (addParagraphTypeForm.get('name').dirty || addParagraphTypeForm.get('name').touched)" >
         <p *ngIf="addParagraphTypeForm.get('name').errors.required"
@@ -18,7 +18,7 @@
     <div class="form-group">
       <label for="description">Description</label>
       <textarea class="form-control" id="description" rows="3" formControlName="description"></textarea>
-      <p class="note">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</p>
+      <small class="form-text text-muted">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</small>
       <div *ngIf="addParagraphTypeForm.get('description').invalid &&
         (addParagraphTypeForm.get('description').dirty || addParagraphTypeForm.get('description').touched)" >
         <p *ngIf="addParagraphTypeForm.get('description').errors.required"

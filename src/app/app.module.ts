@@ -44,6 +44,7 @@ import {AdminparapagetypesComponent} from './components/templates/admin/adminpar
 import {ResetComponent} from './components/actions/reset/reset.component';
 import {ConfirmComponent} from './components/actions/confirm/confirm.component';
 import {DeleteComponent} from './components/actions/delete/delete.component';
+import {AuthGuardService} from './service/auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -97,7 +98,7 @@ import {DeleteComponent} from './components/actions/delete/delete.component';
   exports: [
     HttpClientModule
   ],
-  providers: [],
+  providers: [AuthGuardService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

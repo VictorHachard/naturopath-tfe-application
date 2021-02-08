@@ -6,7 +6,7 @@
     <div class="form-group">
       <label for="nameTag">Title:</label>
       <input type="text" class="form-control" formControlName="nameTag" id="nameTag" >
-      <p class="note">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</p>
+      <small class="form-text text-muted">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</small>
       <div *ngIf="editInnerTagForm.get('nameTag').invalid &&
         (editInnerTagForm.get('nameTag').dirty || editInnerTagForm.get('nameTag').touched)" >
         <p *ngIf="editInnerTagForm.get('nameTag').errors.required"
@@ -18,7 +18,7 @@
     <div class="form-group">
       <label for="contentTag">Description:</label>
       <textarea id="contentTag" formControlName="contentTag" class="form-control"></textarea>
-      <p class="note">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</p>
+      <small class="form-text text-muted">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</small>
       <div *ngIf="editInnerTagForm.get('contentTag').invalid &&
         (editInnerTagForm.get('contentTag').dirty || editInnerTagForm.get('contentTag').touched)" >
         <p *ngIf="editInnerTagForm.get('contentTag').errors.required"
@@ -34,7 +34,7 @@
       </div>
       <ng-template #elseIfBlock>
         <div *ngIf="tag.innerTagList[tag.innerTagList.length - 1].state === 'VALIDATING'; else elseBlock">
-          <div class="progress">
+          <div class="progress mb-2">
             <div class="progress-bar bg-success" role="progressbar" style="{{ 'width:' + (tag.innerTagList[tag.innerTagList.length - 1].favour * 20).toString() + '%' }}" aria-valuenow="{{ tag.innerTagList[tag.innerTagList.length - 1].favour * 20 }}" aria-valuemin="0" aria-valuemax="100">{{ tag.innerTagList[tag.innerTagList.length - 1].favour }}/5</div>
             <div class="progress-bar bg-danger" role="progressbar" style="{{ 'width:' + (tag.innerTagList[tag.innerTagList.length - 1].against * 20).toString() + '%' }}" aria-valuenow="{{ tag.innerTagList[tag.innerTagList.length - 1].against * 20 }}" aria-valuemin="0" aria-valuemax="100">{{ tag.innerTagList[tag.innerTagList.length - 1].against }}/5</div>
           </div>

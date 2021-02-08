@@ -2,18 +2,24 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, Subject} from 'rxjs';
 import {AbstractService} from '../commons/AbstractService';
+import {NavigationStart, Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserSecurityService extends AbstractService {
 
-  constructor(http: HttpClient) {
+  public logger = new Subject<boolean>();
+
+  constructor(http: HttpClient, private router: Router) {
     super(http);
     this.baseUrl = this.baseUrl + 'userSecurity/';
+    router.events.subscribe((event) => {
+      if (event instanceof NavigationStart) {
+        this.logger.next(localStorage.getItem('currentUser') !== null);
+      }
+    });
   }
-
-  public logger = new Subject<boolean>();
 
   public isLoggedIn(): Observable<boolean> {
     return this.logger.asObservable();
