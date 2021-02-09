@@ -13,6 +13,7 @@ export class PagesComponent implements OnInit {
   id: string;
 
   categories: any[];
+  name: string;
 
   pages: any;
   offset: 10;
@@ -23,9 +24,8 @@ export class PagesComponent implements OnInit {
   pagi: number[] = [];
 
   constructor(private route: ActivatedRoute, private pageService: PageService, private categoryService: CategoryService) {
-    this.categoryService.getAllCategory().subscribe(data => {
-      this.categories = data;
-      console.log(this.categories);
+    this.categoryService.getAllCategory().subscribe(value => {
+      this.categories = value;
     });
     this.route.paramMap.subscribe(params => {
       this.ngOnInit();
@@ -34,10 +34,9 @@ export class PagesComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id') === undefined ? null : this.route.snapshot.paramMap.get('id');
-
     if (this.id !== null) {
+      //this.name = this.categories[].name;
       this.pageService.getAllPageByCategory(this.id).subscribe(data => {
-        console.log(this.pages);
         this.pages = data;
         this.minPagi = this.index;
         this.maxPagi = this.index;

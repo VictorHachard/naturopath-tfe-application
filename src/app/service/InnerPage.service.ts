@@ -13,8 +13,8 @@ export class InnerPageService extends AbstractService {
     this.baseUrl = this.baseUrl + 'innerPage/';
   }
 
-  public addInnerPage(body: any): Observable<any>  {
-    return this.http.post<any>(this.baseUrl, body,
+  public addInnerPage(id: string, body: any): Observable<any>  {
+    return this.http.post<any>(this.baseUrl + id, body,
       {headers : new HttpHeaders().set('Authorization', this.getUserJwt())});
   }
 
@@ -23,8 +23,8 @@ export class InnerPageService extends AbstractService {
       {headers : new HttpHeaders().set('Authorization', this.getUserJwt())});
   }
 
-  public validationInnerPage(id: string): Observable<any> {
-    return this.http.post<any>(this.baseUrl + 'validation/' + id, {},
+  public validationInnerPage(id: string, body: any): Observable<any> {
+    return this.http.post<any>(this.baseUrl + 'validation/' + id, body,
       {headers : new HttpHeaders().set('Authorization', this.getUserJwt())});
   }
 }

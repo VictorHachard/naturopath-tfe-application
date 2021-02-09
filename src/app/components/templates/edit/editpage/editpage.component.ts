@@ -17,7 +17,7 @@ export class EditpageComponent implements OnInit {
 
   allParaTagForm: FormGroup[] = [];
 
-  allTagTypeList =  [];
+  allTagTypeList = [];
   tagTypeListSend = [];
   editInnerPageForm: FormGroup;
   editInnerParagraphForm: FormGroup[] = [];
@@ -28,9 +28,40 @@ export class EditpageComponent implements OnInit {
 
   paraTag: any;
 
-  constructor(private route: ActivatedRoute, private pageService: PageService, private voteService: VoteService, private router: Router,
+  constructor(private route: ActivatedRoute,
+              private pageService: PageService,
+              private voteService: VoteService,
+              private router: Router,
               private tagType: TagTypeService,
-              private innerParagraph: InnerParagraphService, private innerPage: InnerPageService) { }
+              private innerParagraph: InnerParagraphService,
+              private innerPage: InnerPageService) { }
+
+  canVote(id: string): boolean {
+    if (JSON.parse(localStorage.getItem('currentUser')).roleList.includes('ROLE_OWNER')) {
+      return true;
+    }
+    if (!JSON.parse(localStorage.getItem('currentUser')).roleList.includes('ROLE_ADMINISTRATOR') ||
+      this.page.user.username === JSON.parse(localStorage.getItem('currentUser')).username) {
+      return false;
+    }
+    if (this.page.innerPageList[0].id === id) {
+      for (const vote of this.page.innerPageList[0].voteList) {
+        if (vote.user.username === JSON.parse(localStorage.getItem('currentUser')).username) {
+          return false;
+        }
+      }
+    }
+    for (const paragraph of this.page.paragraphList) {
+      if (paragraph.innerParagraphList[paragraph.innerParagraphList.length - 1].id === id) {
+        for (const vote of paragraph.innerParagraphList[0].voteList) {
+          if (vote.user.username === JSON.parse(localStorage.getItem('currentUser')).username) {
+            return false;
+          }
+        }
+      }
+    }
+    return true;
+  }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
@@ -71,33 +102,40 @@ export class EditpageComponent implements OnInit {
     });
   }
 
-  updateInnerParagraph(index: number, id: number): void {
-    const editInnerParagraphValue = this.editInnerParagraphForm[index].value;
-    this.innerParagraph.updateInnerParagraph(id.toString(),
-      {content: editInnerParagraphValue.contentParagraph,
-        title: editInnerParagraphValue.titleParagraph}).subscribe(value => {
-          this.ngOnInit();
-        }, error => {
+  /*
+    InnerPage
+   */
 
-        });
+  addInnerPage(pageId: number): void {
+    const editInnerPageValue = this.editInnerPageForm.value;
+    this.innerPage.addInnerPage(pageId.toString(), {
+      description: editInnerPageValue.descriptionPage,
+      title: editInnerPageValue.titlePage}).subscribe(value => {
+        this.ngOnInit();
+    }, error => {
+
+    });
   }
 
   updateInnerPage(): void {
     const editInnerPageValue = this.editInnerPageForm.value;
     const innerPageId: string = this.page.innerPageList[this.page.innerPageList.length - 1].id;
-    this.innerPage.updateInnerPage(innerPageId.toString(),
-      {description: editInnerPageValue.descriptionPage,
-        title: editInnerPageValue.titlePage}).subscribe(value => {
-          this.ngOnInit();
-        }, error => {
+    this.innerPage.updateInnerPage(innerPageId.toString(), {
+      description: editInnerPageValue.descriptionPage,
+      title: editInnerPageValue.titlePage}).subscribe(value => {
+        this.ngOnInit();
+      }, error => {
 
-        });
+      });
   }
 
   validationInnerPage(): void {
+    const editInnerPageValue = this.editInnerPageForm.value;
     const innerPageId: string = this.page.innerPageList[this.page.innerPageList.length - 1].id;
-    this.innerPage.validationInnerPage(innerPageId).subscribe(value => {
-      this.ngOnInit();
+    this.innerPage.validationInnerPage(innerPageId, {
+      description: editInnerPageValue.descriptionPage,
+      title: editInnerPageValue.titlePage}).subscribe(value => {
+        this.ngOnInit();
     }, error => {
 
     });
@@ -113,20 +151,39 @@ export class EditpageComponent implements OnInit {
       });
   }
 
-  addInnerPage(id: number, pageId: number): void {
-    const editInnerPageValue = this.editInnerPageForm.value;
-    this.innerPage.addInnerPage({content: editInnerPageValue.descriptionPage,
-      paragraphId: pageId.toString(),
-      title: editInnerPageValue.titlePage}).subscribe(value => {
-        this.ngOnInit();
-      }, error => {
+  /*
+    InnerParagraph
+   */
 
-      });
+  addInnerParagraph(index: number, paragraphId: number): void {
+    const editInnerParagraphValue = this.editInnerParagraphForm[index].value;
+    this.innerParagraph.addInnerParagraph(paragraphId.toString(), {
+      content: editInnerParagraphValue.contentParagraph,
+      title: editInnerParagraphValue.titleParagraph}).subscribe(value => {
+        this.ngOnInit();
+    }, error => {
+
+    });
+  }
+
+  updateInnerParagraph(index: number, id: number): void {
+    const editInnerParagraphValue = this.editInnerParagraphForm[index].value;
+    this.innerParagraph.updateInnerParagraph(id.toString(), {
+      content: editInnerParagraphValue.contentParagraph,
+      title: editInnerParagraphValue.titleParagraph}).subscribe(value => {
+        this.ngOnInit();
+    }, error => {
+
+    });
   }
 
   validationInnerParagraph(index: number, id: number): void {
-    this.innerParagraph.validationInnerParagraph(id.toString()).subscribe(value => {
-      this.ngOnInit();
+    const editInnerParagraphValue = this.editInnerParagraphForm[index].value;
+
+    this.innerParagraph.validationInnerParagraph(id.toString(), {
+      content: editInnerParagraphValue.contentParagraph,
+      title: editInnerParagraphValue.titleParagraph}).subscribe(value => {
+        this.ngOnInit();
     }, error => {
 
     });
@@ -142,16 +199,9 @@ export class EditpageComponent implements OnInit {
       });
   }
 
-  addInnerParagraph(index: number, id: number, paragraphId: number): void {
-    const editInnerParagraphValue = this.editInnerParagraphForm[index].value;
-    this.innerParagraph.addInnerParagraph({content: editInnerParagraphValue.contentParagraph,
-      paragraphId: paragraphId.toString(),
-      title: editInnerParagraphValue.titleParagraph}).subscribe(value => {
-        this.ngOnInit();
-      }, error => {
 
-      });
-  }
+
+
 
   dropItem(event: CdkDragDrop<any[]>): void {
     if (event.previousContainer === event.container) {

@@ -38,6 +38,9 @@ export class SettingsComponent implements OnInit {
   initData(): void {
     this.userSecurityService.getEditDto().subscribe(value => {
       this.user = value;
+      const user: User = value;
+      user.token = JSON.parse(localStorage.getItem('currentUser')).token;
+      localStorage.setItem('currentUser', JSON.stringify(user));
       this.userSecurityService.change.next(true);
       this.init();
     });
@@ -75,8 +78,6 @@ export class SettingsComponent implements OnInit {
       password: updateUsernameEmailValue.password,
       username: updateUsernameEmailValue.username}).subscribe(value => {
         this.alertManagerManager.addAlert('The modification has been done', 'alert-success');
-        const user: User = value;
-        localStorage.setItem('currentUser', JSON.stringify(user));
         this.initData();
     }, error => {
       this.alertManagerManager.addAlert(error.error.message, 'alert-danger'); //TODO check email
@@ -87,7 +88,7 @@ export class SettingsComponent implements OnInit {
     const updateNameValue = this.updateNameForm.value;
 
     this.userSecurityService.updateName({firstName: updateNameValue.firstName,
-      lastName: updateNameValue.lastName}).subscribe(data => {
+      lastName: updateNameValue.lastName}).subscribe(value => {
       this.alertManagerManager.addAlert('The modification has been done', 'alert-success');
       this.initData();
     }, error => {
@@ -99,7 +100,7 @@ export class SettingsComponent implements OnInit {
   updatePrivacy(): void {
     const updatePrivacyValue = this.updatePrivacyForm.value;
 
-    this.userSecurityService.updatePrivacy({isPrivate: updatePrivacyValue.isPrivate}).subscribe(data => {
+    this.userSecurityService.updatePrivacy({isPrivate: updatePrivacyValue.isPrivate}).subscribe(value => {
       this.alertManagerManager.addAlert('The modification has been done', 'alert-success');
       this.initData();
     }, error => {
@@ -110,8 +111,7 @@ export class SettingsComponent implements OnInit {
   updateAppearance(): void {
     const updateAppearanceValue = this.updateAppearanceForm.value;
 
-    this.userSecurityService.updateAppearance({dark: updateAppearanceValue.dark}).subscribe(data => {
-      this.userSecurityService.dark.next(updateAppearanceValue.dark);
+    this.userSecurityService.updateAppearance({dark: updateAppearanceValue.dark}).subscribe(value => {
       this.alertManagerManager.addAlert('The modification has been done', 'alert-success');
       this.initData();
     }, error => {
@@ -120,7 +120,7 @@ export class SettingsComponent implements OnInit {
   }
 
   setConfirmation(): void {
-    this.userSecurityService.setConfirmAccount().subscribe(data => {
+    this.userSecurityService.setConfirmAccount().subscribe(value => {
       this.alertManagerManager.addAlert('An email with instructions has been sent to you', 'alert-success');
       this.initData();
     }, error => {
@@ -131,7 +131,7 @@ export class SettingsComponent implements OnInit {
   setDelete(): void {
     const deleteValue = this.deleteForm.value;
 
-    this.userSecurityService.setDeleteAccount({password: deleteValue.password}).subscribe(data => {
+    this.userSecurityService.setDeleteAccount({password: deleteValue.password}).subscribe(value => {
       this.alertManagerManager.addAlert('An email with instructions has been sent to you', 'alert-success');
       this.initData();
     }, error => {

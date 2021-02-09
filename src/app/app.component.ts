@@ -10,13 +10,20 @@ export class AppComponent implements OnDestroy {
   title = 'tfe-application';
 
   constructor(private renderer: Renderer2, private userSecurityService: UserSecurityService) {
-    this.userSecurityService.isDark().subscribe(value => {
-      if (value) {
-        this.renderer.addClass(document.body, 'dark');
-      } else {
-        this.renderer.removeClass(document.body, 'dark');
-      }
+    this.userSecurityService.isLoggedIn().subscribe(value => {
+      this.switchTheme();
     });
+    this.userSecurityService.settingsChange().subscribe(value => {
+      this.switchTheme();
+    });
+  }
+
+  private switchTheme(): void {
+    if (localStorage.getItem('currentUser') && JSON.parse(localStorage.getItem('currentUser')).dark) {
+      this.renderer.addClass(document.body, 'dark');
+    } else {
+      this.renderer.removeClass(document.body, 'dark');
+    }
   }
 
   ngOnDestroy(): void {

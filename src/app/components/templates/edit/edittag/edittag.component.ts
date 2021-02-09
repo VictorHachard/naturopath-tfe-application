@@ -31,30 +31,51 @@ export class EdittagComponent implements OnInit {
     });
   }
 
+  canVote(id: string): boolean {
+    if (JSON.parse(localStorage.getItem('currentUser')).roleList.includes('ROLE_OWNER')) {
+      return true;
+    }
+    if (!JSON.parse(localStorage.getItem('currentUser')).roleList.includes('ROLE_ADMINISTRATOR') ||
+      this.tag.user.username === JSON.parse(localStorage.getItem('currentUser')).username) {
+      return false;
+    }
+    if (this.tag.innerTagList[this.tag.innerTagList.length - 1].id === id) {
+      for (const vote of this.tag.innerTagList[this.tag.innerTagList.length - 1].voteList) {
+        if (vote.user.username === JSON.parse(localStorage.getItem('currentUser')).username) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
   init(): void {
     this.editInnerTagForm = new FormGroup({
       nameTag: new FormControl(this.tag.innerTagList[this.tag.innerTagList.length - 1].name,
-        [Validators.required, Validators.minLength(8), Validators.maxLength(128)]),
+        [Validators.required, Validators.minLength(2), Validators.maxLength(32)]),
       contentTag: new FormControl(this.tag.innerTagList[this.tag.innerTagList.length - 1].content,
-        [Validators.required, Validators.minLength(64), Validators.maxLength(1024)]),
+        [Validators.required, Validators.minLength(32), Validators.maxLength(1024)]),
     });
   }
 
   updateInnerTag(): void {
     const editInnerTagValue = this.editInnerTagForm.value;
     const innerTagId: string = this.tag.innerTagList[this.tag.innerTagList.length - 1].id;
-    this.innerTag.updateInnerTag(innerTagId.toString(),
-      {content: editInnerTagValue.contentTag,
-        name: editInnerTagValue.nameTag}).subscribe(value => {
-          this.ngOnInit();
-        }, error => {
+    this.innerTag.updateInnerTag(innerTagId.toString(), {
+      content: editInnerTagValue.contentTag,
+      name: editInnerTagValue.nameTag}).subscribe(value => {
+        this.ngOnInit();
+      }, error => {
 
-        });
+      });
   }
 
   validationInnerTag(): void {
+    const editInnerTagValue = this.editInnerTagForm.value;
     const innerTagId: string = this.tag.innerTagList[this.tag.innerTagList.length - 1].id;
-    this.innerTag.validationInnerTag(innerTagId).subscribe(value => {
+    this.innerTag.validationInnerTag(innerTagId, {
+      content: editInnerTagValue.contentTag,
+      name: editInnerTagValue.nameTag}).subscribe(value => {
       this.ngOnInit();
     }, error => {
 
@@ -71,11 +92,11 @@ export class EdittagComponent implements OnInit {
       });
   }
 
-  addInnerTag(id: number,  tagId: number): void {
+  addInnerTag(id: number, tagId: number): void {
     const editInnerTagValue = this.editInnerTagForm.value;
-    this.innerTag.addInnerTag({content: editInnerTagValue.contentTag,
-      name: editInnerTagValue.nameTag,
-      tagId: tagId.toString()}).subscribe(value => {
+    this.innerTag.addInnerTag(tagId.toString(), {
+      content: editInnerTagValue.contentTag,
+      name: editInnerTagValue.nameTag}).subscribe(value => {
         this.ngOnInit();
       }, error => {
 

@@ -13,8 +13,8 @@ export class InnerTagService extends AbstractService {
     this.baseUrl = this.baseUrl + 'innerTag/';
   }
 
-  public validationInnerTag(innerTagId: string): Observable<any> {
-    return this.http.post<any>(this.baseUrl + 'validation/' + innerTagId, {},
+  public validationInnerTag(innerTagId: string, body: any): Observable<any> {
+    return this.http.post<any>(this.baseUrl + 'validation/' + innerTagId, body,
       {headers : new HttpHeaders().set('Authorization', this.getUserJwt())});
   }
 
@@ -23,8 +23,8 @@ export class InnerTagService extends AbstractService {
       {headers : new HttpHeaders().set('Authorization', this.getUserJwt())});
   }
 
-  public addInnerTag(body: any): Observable<any> {
-    return this.http.post<any>(this.baseUrl, body,
+  public addInnerTag(id: string, body: any): Observable<any> {
+    return this.http.post<any>(this.baseUrl + id, body,
       {headers : new HttpHeaders().set('Authorization', this.getUserJwt())});
   }
 }

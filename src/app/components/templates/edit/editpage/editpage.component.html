@@ -20,8 +20,10 @@
           <div class="progress-bar bg-success" role="progressbar" style="{{ 'width:' + (page.innerPageList[page.innerPageList.length - 1].favour * 20).toString() + '%' }}" aria-valuenow="{{ page.innerPageList[page.innerPageList.length - 1].favour * 20 }}" aria-valuemin="0" aria-valuemax="100">{{ page.innerPageList[page.innerPageList.length - 1].favour }}/5</div>
           <div class="progress-bar bg-danger" role="progressbar" style="{{ 'width:' + (page.innerPageList[page.innerPageList.length - 1].against * 20).toString() + '%' }}" aria-valuenow="{{ page.innerPageList[page.innerPageList.length - 1].against * 20 }}" aria-valuemin="0" aria-valuemax="100">{{ page.innerPageList[page.innerPageList.length - 1].against }}/5</div>
         </div>
-        <button type="button" class="btn btn-primary mr-2" (click)="voteInnerPage(page.innerPageList[page.innerPageList.length - 1].id, 1)">Favour</button>
-        <button type="button" class="btn btn-primary" (click)="voteInnerPage(page.innerPageList[page.innerPageList.length - 1].id, 0)">Against</button>
+        <div *ngIf="canVote(page.innerPageList[page.innerPageList.length - 1].id)">
+          <button type="button" class="btn btn-primary mr-2" (click)="voteInnerPage(page.innerPageList[page.innerPageList.length - 1].id, 1)">Favour</button>
+          <button type="button" class="btn btn-primary" (click)="voteInnerPage(page.innerPageList[page.innerPageList.length - 1].id, 0)">Against</button>
+        </div>
       </div>
     </ng-template>
     <ng-template #elseBlock>
@@ -29,7 +31,7 @@
         <div class="progress-bar bg-success" role="progressbar" style="{{ 'width:' + (page.innerPageList[page.innerPageList.length - 1].favour * 20).toString() + '%' }}" aria-valuenow="{{ page.innerPageList[page.innerPageList.length - 1].favour * 20 }}" aria-valuemin="0" aria-valuemax="100">{{ page.innerPageList[page.innerPageList.length - 1].favour }}/5</div>
         <div class="progress-bar bg-danger" role="progressbar" style="{{ 'width:' + (page.innerPageList[page.innerPageList.length - 1].against * 20).toString() + '%' }}" aria-valuenow="{{ page.innerPageList[page.innerPageList.length - 1].against * 20 }}" aria-valuemin="0" aria-valuemax="100">{{ page.innerPageList[page.innerPageList.length - 1].against }}/5</div>
       </div>
-      <button type="button" class="btn btn-primary" id="new" (click)="addInnerPage(page.innerPageList[page.innerPageList.length - 1].id, page.id)">New title/description</button>
+      <button type="button" class="btn btn-primary" id="new" (click)="addInnerPage(page.id)">New title/description</button>
     </ng-template>
     </div>
   </form>
@@ -58,8 +60,10 @@
                 <div class="progress-bar bg-success" role="progressbar" style="{{ 'width:' + (page.paragraphList[index].innerParagraphList[page.paragraphList[index].innerParagraphList.length - 1].favour * 20).toString() + '%' }}" aria-valuenow="{{ page.paragraphList[index].innerParagraphList[page.paragraphList[index].innerParagraphList.length - 1].favour * 20 }}" aria-valuemin="0" aria-valuemax="100">{{ page.paragraphList[index].innerParagraphList[page.paragraphList[index].innerParagraphList.length - 1].favour }}/5</div>
                 <div class="progress-bar bg-danger" role="progressbar" style="{{ 'width:' + (page.paragraphList[index].innerParagraphList[page.paragraphList[index].innerParagraphList.length - 1].against * 20).toString() + '%' }}" aria-valuenow="{{ page.paragraphList[index].innerParagraphList[page.paragraphList[index].innerParagraphList.length - 1].against * 20 }}" aria-valuemin="0" aria-valuemax="100">{{ page.paragraphList[index].innerParagraphList[page.paragraphList[index].innerParagraphList.length - 1].against }}/5</div>
               </div>
-              <button type="button" class="btn btn-primary mr-2" (click)="voteInnerParagraph(index, page.paragraphList[index].innerParagraphList[page.paragraphList[index].innerParagraphList.length - 1].id, 1)">Favour</button>
-              <button type="button" class="btn btn-primary" (click)="voteInnerParagraph(index, page.paragraphList[index].innerParagraphList[page.paragraphList[index].innerParagraphList.length - 1].id, 0)">Against</button>
+              <div *ngIf="canVote(page.paragraphList[index].innerParagraphList[page.paragraphList[index].innerParagraphList.length - 1].id)">
+                <button type="button" class="btn btn-primary mr-2" (click)="voteInnerParagraph(index, page.paragraphList[index].innerParagraphList[page.paragraphList[index].innerParagraphList.length - 1].id, 1)">Favour</button>
+                <button type="button" class="btn btn-primary" (click)="voteInnerParagraph(index, page.paragraphList[index].innerParagraphList[page.paragraphList[index].innerParagraphList.length - 1].id, 0)">Against</button>
+              </div>
             </div>
           </ng-template>
           <ng-template #elseBlock>

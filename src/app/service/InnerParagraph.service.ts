@@ -18,13 +18,13 @@ export class InnerParagraphService extends AbstractService {
       {headers : new HttpHeaders().set('Authorization', this.getUserJwt())});
   }
 
-  public validationInnerParagraph(id: string): Observable<any> {
-    return this.http.post<any>(this.baseUrl + 'validation/' + id, {},
+  public validationInnerParagraph(id: string, body: any): Observable<any> {
+    return this.http.post<any>(this.baseUrl + 'validation/' + id, body,
       {headers : new HttpHeaders().set('Authorization', this.getUserJwt())});
   }
 
-  public addInnerParagraph(body: any): Observable<any> {
-    return this.http.post<any>(this.baseUrl, body,
+  public addInnerParagraph(id: string, body: any): Observable<any> {
+    return this.http.post<any>(this.baseUrl + id, body,
       {headers : new HttpHeaders().set('Authorization', this.getUserJwt())});
   }
 }
