@@ -1,9 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 .form-control.ng-touched.ng-invalid{
-  border: 1px solid red;
+  border: 1px solid red !important;
 }
 .form-control.ng-touched.ng-valid{
-  border: 1px solid green;
+  border: 1px solid green !important;
 }
 h1,
 h2,

@@ -27,4 +27,9 @@ export class InnerPageService extends AbstractService {
     return this.http.post<any>(this.baseUrl + 'validation/' + id, body,
       {headers : new HttpHeaders().set('Authorization', this.getUserJwt())});
   }
+
+  public addMessage(id: string, body: any): Observable<any> {
+    return this.http.post<any>(this.baseUrl + 'addMessage/' + id, body,
+      {headers : new HttpHeaders().set('Authorization', this.getUserJwt())});
+  }
 }

@@ -54,8 +54,8 @@ export class SettingsComponent implements OnInit {
     });
 
     this.updateNameForm = new FormGroup({
-      firstName: new FormControl(this.user.firstName),
-      lastName: new FormControl(this.user.lastName)
+      firstName: new FormControl(this.user.firstName !== null ? this.user.firstName : ''),
+      lastName: new FormControl(this.user.lastName !== null ? this.user.lastName : '')
     });
 
     this.deleteForm = new FormGroup({

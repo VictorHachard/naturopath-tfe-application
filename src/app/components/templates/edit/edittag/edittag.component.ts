@@ -11,15 +11,13 @@ import {InnerTagService} from '../../../../service/InnerTag.service';
   styleUrls: ['./edittag.component.css']
 })
 export class EdittagComponent implements OnInit {
-
+  messageInnerTagForm: FormGroup;
   editInnerTagForm: FormGroup;
-
   private id: string;
-
   tag: any;
 
   constructor(private route: ActivatedRoute, private tagService: TagService, private voteService: VoteService, private router: Router,
-              private innerTag: InnerTagService) {
+              private innerTagService: InnerTagService) {
   }
 
   ngOnInit(): void {
@@ -39,8 +37,8 @@ export class EdittagComponent implements OnInit {
       this.tag.user.username === JSON.parse(localStorage.getItem('currentUser')).username) {
       return false;
     }
-    if (this.tag.innerTagList[this.tag.innerTagList.length - 1].id === id) {
-      for (const vote of this.tag.innerTagList[this.tag.innerTagList.length - 1].voteList) {
+    if (this.tag.innerTagList[0].id === id) {
+      for (const vote of this.tag.innerTagList[0].voteList) {
         if (vote.user.username === JSON.parse(localStorage.getItem('currentUser')).username) {
           return false;
         }
@@ -51,19 +49,23 @@ export class EdittagComponent implements OnInit {
 
   init(): void {
     this.editInnerTagForm = new FormGroup({
-      nameTag: new FormControl(this.tag.innerTagList[this.tag.innerTagList.length - 1].name,
+      name: new FormControl(this.tag.innerTagList[0].name,
         [Validators.required, Validators.minLength(2), Validators.maxLength(32)]),
-      contentTag: new FormControl(this.tag.innerTagList[this.tag.innerTagList.length - 1].content,
+      content: new FormControl(this.tag.innerTagList[0].content,
         [Validators.required, Validators.minLength(32), Validators.maxLength(1024)]),
+    });
+    this.messageInnerTagForm = new FormGroup({
+      content: new FormControl('',
+        [Validators.required, Validators.minLength(8), Validators.maxLength(2048)])
     });
   }
 
   updateInnerTag(): void {
     const editInnerTagValue = this.editInnerTagForm.value;
-    const innerTagId: string = this.tag.innerTagList[this.tag.innerTagList.length - 1].id;
-    this.innerTag.updateInnerTag(innerTagId.toString(), {
-      content: editInnerTagValue.contentTag,
-      name: editInnerTagValue.nameTag}).subscribe(value => {
+    const innerTagId: string = this.tag.innerTagList[0].id;
+    this.innerTagService.updateInnerTag(innerTagId.toString(), {
+      content: editInnerTagValue.content,
+      name: editInnerTagValue.name}).subscribe(value => {
         this.ngOnInit();
       }, error => {
 
@@ -72,10 +74,10 @@ export class EdittagComponent implements OnInit {
 
   validationInnerTag(): void {
     const editInnerTagValue = this.editInnerTagForm.value;
-    const innerTagId: string = this.tag.innerTagList[this.tag.innerTagList.length - 1].id;
-    this.innerTag.validationInnerTag(innerTagId, {
-      content: editInnerTagValue.contentTag,
-      name: editInnerTagValue.nameTag}).subscribe(value => {
+    const innerTagId: string = this.tag.innerTagList[0].id;
+    this.innerTagService.validationInnerTag(innerTagId, {
+      content: editInnerTagValue.content,
+      name: editInnerTagValue.name}).subscribe(value => {
       this.ngOnInit();
     }, error => {
 
@@ -83,7 +85,8 @@ export class EdittagComponent implements OnInit {
   }
 
   voteInnerTag(id: number, choice: number): void {
-    this.voteService.addVote({choice: choice.toString(),
+    this.voteService.addVote({
+      choice: choice.toString(),
       type: 'InnerTag',
       typeId: id.toString()}).subscribe(value => {
         this.ngOnInit();
@@ -94,12 +97,23 @@ export class EdittagComponent implements OnInit {
 
   addInnerTag(id: number, tagId: number): void {
     const editInnerTagValue = this.editInnerTagForm.value;
-    this.innerTag.addInnerTag(tagId.toString(), {
-      content: editInnerTagValue.contentTag,
-      name: editInnerTagValue.nameTag}).subscribe(value => {
+    this.innerTagService.addInnerTag(tagId.toString(), {
+      content: editInnerTagValue.content,
+      name: editInnerTagValue.name}).subscribe(value => {
         this.ngOnInit();
       }, error => {
 
       });
+  }
+
+  addInnerTagMessage(id: number): void {
+    const messageInnerValue = this.messageInnerTagForm.value;
+    this.innerTagService.addMessage(id.toString(), {
+      content: messageInnerValue.content
+    }).subscribe(value => {
+      this.ngOnInit();
+    }, error => {
+
+    });
   }
 }
