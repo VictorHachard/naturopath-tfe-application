@@ -11,6 +11,7 @@ import {ImageService} from '../../../../service/Image.service';
 })
 export class AddimageComponent extends AbstractComponents implements OnInit {
   addImageForm: FormGroup;
+  imgURL: any;
 
   constructor(route: ActivatedRoute,
               router: Router,
@@ -35,7 +36,14 @@ export class AddimageComponent extends AbstractComponents implements OnInit {
 
   onFileChange(event): void {
     if (event.target.files.length > 0) {
-      const file = event.target.files[0];
+      const file: File = event.target.files[0];
+
+      const reader = new FileReader();
+      reader.onload = (event: any) => {
+        this.imgURL = event.target.result;
+      };
+      reader.readAsDataURL(file);
+
       this.addImageForm.patchValue({
         fileSource: file
       });
@@ -45,15 +53,18 @@ export class AddimageComponent extends AbstractComponents implements OnInit {
   addImage(): void {
     const addImageValue = this.addImageForm.value;
 
-    console.log(addImageValue);
+    const formData: FormData = new FormData();
+    const name: string = (new Date()).valueOf().toString() + Math.random().toString(36).substring(10) + JSON.parse(localStorage.getItem('currentUser')).token.slice(JSON.parse(localStorage.getItem('currentUser')).token.lastIndexOf('-')).substring(10) + addImageValue.fileSource.name.slice(addImageValue.fileSource.name.lastIndexOf('.'));
+    formData.append('file', addImageValue.fileSource, name);
 
-    //file: new FormData().append('file', addImageValue.fileSource)
-
-    this.imageService.addImage({
-      title: addImageValue.title,
-      description: addImageValue.description
-    }).subscribe(value => {
-      this.router.navigate(['/editimage/' + value.toString()]);
+    this.imageService.upload(formData).subscribe(value1 => {
+      this.imageService.addImage({
+        title: addImageValue.title,
+        description: addImageValue.description,
+        url: name
+      }).subscribe(value => {
+        this.router.navigate(['/editimage/' + value.toString()]);
+      });
     });
   }
 }
