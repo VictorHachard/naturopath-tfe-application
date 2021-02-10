@@ -1,19 +1,24 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {CategoryService} from '../../../../service/Category.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Category} from '../../../../model/view/Category';
+import {AbstractComponents} from '../../../commons/AbstractComponents';
 
 @Component({
   selector: 'app-addcategory',
   templateUrl: './addcategory.component.html',
   styleUrls: ['./addcategory.component.css']
 })
-export class AddcategoryComponent implements OnInit {
+export class AddcategoryComponent extends AbstractComponents implements OnInit {
   addCategoryForm: FormGroup;
   categories: Category[];
 
-  constructor(private categoryService: CategoryService, private router: Router) { }
+  constructor(route: ActivatedRoute,
+              router: Router,
+              private categoryService: CategoryService) {
+    super(route, router);
+  }
 
   ngOnInit(): void {
     this.categoryService.getAllParentCategoryDto().subscribe(data => {

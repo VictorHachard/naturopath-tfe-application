@@ -1,16 +1,17 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, ValidatorFn, Validators} from '@angular/forms';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {UserSecurityService} from '../../../../service/security/UserSecurity.service';
 import {User} from '../../../../model/view/User';
 import {AlertManager} from '../../../../model/my/AlertManager';
+import {AbstractComponents} from '../../../commons/AbstractComponents';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent extends AbstractComponents implements OnInit {
   registerForm: FormGroup;
 
   alertManagerManager: AlertManager;
@@ -23,7 +24,11 @@ export class RegisterComponent implements OnInit {
     password: 'Test123*',
   };
 
-  constructor(private router: Router, private userSecurityService: UserSecurityService) { }
+  constructor(route: ActivatedRoute,
+              router: Router,
+              private userSecurityService: UserSecurityService) {
+    super(route, router);
+  }
 
   ngOnInit(): void {
     this.alertManagerManager = new AlertManager();

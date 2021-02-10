@@ -1,18 +1,23 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {ParagraphTypeService} from '../../../../service/ParagraphType.service';
+import {AbstractComponents} from '../../../commons/AbstractComponents';
 
 @Component({
   selector: 'app-addparagraphtype',
   templateUrl: './addparagraphtype.component.html',
   styleUrls: ['./addparagraphtype.component.css']
 })
-export class AddparagraphtypeComponent implements OnInit {
+export class AddparagraphtypeComponent extends AbstractComponents implements OnInit {
 
   addParagraphTypeForm: FormGroup;
 
-  constructor(private paragraphtypeService: ParagraphTypeService, private router: Router) { }
+  constructor(route: ActivatedRoute,
+              router: Router,
+              private paragraphtypeService: ParagraphTypeService) {
+    super(route, router);
+  }
 
   ngOnInit(): void {
     this.init();

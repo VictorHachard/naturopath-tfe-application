@@ -1,7 +1,5 @@
 <section class="my-4 container">
-
   <h2 class="mb-4">Edit paratagType</h2>
-
   <form *ngIf="tagTypes" [formGroup]="editParatagTypeForm">
     <div class="form-group">
       <div class="input-group mb-0">
@@ -32,25 +30,13 @@
       <label for="name">Name:</label>
       <input type="text" class="form-control" formControlName="name" id="name" >
       <small class="form-text text-muted">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</small>
-      <div *ngIf="editParatagTypeForm.get('name').invalid &&
-            (editParatagTypeForm.get('name').dirty || editParatagTypeForm.get('name').touched)" >
-        <p *ngIf="editParatagTypeForm.get('name').errors.required"
-           class="note text-danger">Please type a description.</p>
-        <p *ngIf="editParatagTypeForm.get('name').errors.minlength || editParatagTypeForm.get('name').errors.minlength"
-           class="note text-danger">Please insert minimum of 8 characters and a maximum of 128 characters.</p>
-      </div>
+      <small class="text-danger">{{ printError(editParatagTypeForm.get('name')) }}</small>
     </div>
     <div class="form-group">
       <label for="description">Description:</label>
       <textarea id="description" formControlName="description" class="form-control"></textarea>
       <small class="form-text text-muted">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</small>
-      <div *ngIf="editParatagTypeForm.get('description').invalid &&
-            (editParatagTypeForm.get('description').dirty || editParatagTypeForm.get('description').touched)" >
-        <p *ngIf="editParatagTypeForm.get('description').errors.required"
-           class="note text-danger">Please type a description.</p>
-        <p *ngIf="editParatagTypeForm.get('description').errors.minlength || editParatagTypeForm.get('description').errors.minlength"
-           class="note text-danger">Please insert minimum of 64 characters and a maximum of 1024 characters.</p>
-      </div>
+      <small class="text-danger">{{ printError(editParatagTypeForm.get('description')) }}</small>
     </div>
     <button type="button" class="btn btn-primary" [disabled]="editParatagTypeForm.invalid" (click)="update()">Update</button>
   </form>

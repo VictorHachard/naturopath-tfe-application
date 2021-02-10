@@ -1,15 +1,12 @@
 <section *ngIf="user" class="my-4 container">
-
   <div *ngIf="!user.confirmed" class="alert alert-warning" role="alert">
     You still need to confirm your account!
   </div>
-
   <div *ngFor="let response of alertManagerManager.responseList">
     <div class="alert {{ response.alert }}" role="alert">
       {{ response.message }}
     </div>
   </div>
-
   <h2 class="font-weight-normal mb-4">Settings</h2>
   <nav>
     <div class="nav nav-tabs mb-4" role="tablist">
@@ -35,11 +32,7 @@
           <label class="my-0">Password</label>
             <a class="label-link ml-2 mb-4" routerLink="/forget">Forgot password?</a>
           <input type="password" formControlName="password" class="form-control mt-2">
-          <div *ngIf="updateUsernameEmailForm.get('password').invalid &&
-                   (updateUsernameEmailForm.get('password').dirty || updateUsernameEmailForm.get('password').touched)" >
-            <p *ngIf="updateUsernameEmailForm.get('password').errors.required"
-               class="note text-danger">Please type a password.</p>
-          </div>
+          <small class="text-danger">{{ printError(updateUsernameEmailForm.get('password')) }}</small>
         </div>
         <button [disabled]="updateUsernameEmailForm.invalid" class="btn btn-primary mb-2" type="submit">Update</button>
       </form>
@@ -64,11 +57,7 @@
           <label class="my-0">Password</label>
             <a class="label-link ml-2 mb-4" routerLink="/forget">Forgot password?</a>
           <input type="password" formControlName="password" class="form-control mt-2">
-          <div *ngIf="deleteForm.get('password').invalid &&
-                   (deleteForm.get('password').dirty || deleteForm.get('password').touched)" >
-            <p *ngIf="deleteForm.get('password').errors.required"
-               class="note text-danger">Please type a password.</p>
-          </div>
+          <small class="text-danger">{{ printError(deleteForm.get('password')) }}</small>
         </div>
         <button [disabled]="deleteForm.invalid" class="btn btn-danger mb-2" type="submit">Delete Account</button>
       </form>
@@ -117,5 +106,4 @@
     <!-- End Appearance -->
   </div>
   <p class="note my-3">You have agreed to our <a routerLink="/terms">Terms of Service</a> and <a routerLink="/privacy">Privacy Statement</a>.</p>
-
 </section>

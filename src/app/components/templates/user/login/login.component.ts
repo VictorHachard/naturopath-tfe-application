@@ -1,22 +1,27 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {UserSecurityService} from '../../../../service/security/UserSecurity.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {AlertManager} from '../../../../model/my/AlertManager';
 import {User} from '../../../../model/view/User';
+import {AbstractComponents} from '../../../commons/AbstractComponents';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent extends AbstractComponents implements OnInit {
   loginForm: FormGroup;
 
   alertManagerManager: AlertManager;
   count = 1;
 
-  constructor(private router: Router, private userSecurityService: UserSecurityService) { }
+  constructor(route: ActivatedRoute,
+              router: Router,
+              private userSecurityService: UserSecurityService) {
+    super(route, router);
+  }
 
   ngOnInit(): void {
     this.alertManagerManager = new AlertManager();

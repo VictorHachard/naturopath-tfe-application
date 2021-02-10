@@ -4,24 +4,27 @@ import {VoteService} from '../../../../service/Vote.service';
 import {TagService} from '../../../../service/Tag.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {InnerTagService} from '../../../../service/InnerTag.service';
+import {AbstractComponents} from '../../../commons/AbstractComponents';
+import {AbstractEdit} from '../../../commons/AbstractEdit';
 
 @Component({
   selector: 'app-edittag',
   templateUrl: './edittag.component.html',
   styleUrls: ['./edittag.component.css']
 })
-export class EdittagComponent implements OnInit {
-  messageInnerTagForm: FormGroup;
+export class EdittagComponent extends AbstractEdit implements OnInit {
   editInnerTagForm: FormGroup;
-  private id: string;
   tag: any;
 
-  constructor(private route: ActivatedRoute, private tagService: TagService, private voteService: VoteService, private router: Router,
+  constructor(route: ActivatedRoute,
+              router: Router,
+              private tagService: TagService,
+              private voteService: VoteService,
               private innerTagService: InnerTagService) {
+    super(route, router);
   }
 
   ngOnInit(): void {
-    this.id = this.route.snapshot.paramMap.get('id');
     this.tagService.getEditTagDto(this.id).subscribe(data => {
       console.log(data);
       this.tag = data;
@@ -29,44 +32,13 @@ export class EdittagComponent implements OnInit {
     });
   }
 
-  canVote(inner: any): boolean {
-    if (JSON.parse(localStorage.getItem('currentUser')).roleList.includes('ROLE_OWNER')) {
-      return true;
-    }
-    if (!JSON.parse(localStorage.getItem('currentUser')).roleList.includes('ROLE_ADMINISTRATOR') ||
-      inner.user.username === JSON.parse(localStorage.getItem('currentUser')).username) { //TODO error c'est du tag en question
-      return false;
-    }
-    for (const vote of inner.voteList) {
-      if (vote.user.username === JSON.parse(localStorage.getItem('currentUser')).username) {
-        return false;
-      }
-    }
-    return true;
-  }
-
-  userColor(UserId: number, Inner: any): string {
-    if (Inner.user.id === UserId) {
-      return 'primary';
-    }
-    for (const vote of Inner.voteList) {
-      if (vote.user.id === UserId) {
-        return vote.choice === 1 ? 'success' : 'danger';
-      }
-    }
-    return 'info';
-  }
-
   init(): void {
+    super.init();
     this.editInnerTagForm = new FormGroup({
       name: new FormControl(this.tag.innerTagList[0].name,
         [Validators.required, Validators.minLength(2), Validators.maxLength(32)]),
       content: new FormControl(this.tag.innerTagList[0].content,
         [Validators.required, Validators.minLength(32), Validators.maxLength(1024)]),
-    });
-    this.messageInnerTagForm = new FormGroup({
-      content: new FormControl('',
-        [Validators.required, Validators.minLength(8), Validators.maxLength(2048)])
     });
   }
 
@@ -120,7 +92,7 @@ export class EdittagComponent implements OnInit {
   }
 
   addInnerTagMessage(id: number): void {
-    const messageInnerValue = this.messageInnerTagForm.value;
+    const messageInnerValue = this.messageInnerForm.value;
     this.innerTagService.addMessage(id.toString(), {
       content: messageInnerValue.content
     }).subscribe(value => {

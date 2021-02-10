@@ -3,28 +3,16 @@
   <h2 class="mb-4">Edit tagType</h2>
     <form *ngIf="tagType" [formGroup]="editTagTypeForm">
       <div class="form-group">
-        <label for="name">Name:</label>
-        <input type="text" class="form-control" formControlName="name" id="name" >
+        <label>Name:</label>
+        <input type="text" class="form-control" formControlName="name">
         <small class="form-text text-muted">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</small>
-        <div *ngIf="editTagTypeForm.get('name').invalid &&
-            (editTagTypeForm.get('name').dirty || editTagTypeForm.get('name').touched)" >
-          <p *ngIf="editTagTypeForm.get('name').errors.required"
-             class="note text-danger">Please type a description.</p>
-          <p *ngIf="editTagTypeForm.get('name').errors.minlength || editTagTypeForm.get('name').errors.minlength"
-             class="note text-danger">Please insert minimum of 8 characters and a maximum of 128 characters.</p>
-        </div>
+        <small class="text-danger">{{ printError(editTagTypeForm.get('name')) }}</small>
       </div>
       <div class="form-group">
-        <label for="description">Description:</label>
-        <textarea id="description" formControlName="description" class="form-control"></textarea>
+        <label>Description:</label>
+        <textarea formControlName="description" rows="6" class="form-control"></textarea>
         <small class="form-text text-muted">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</small>
-        <div *ngIf="editTagTypeForm.get('description').invalid &&
-            (editTagTypeForm.get('description').dirty || editTagTypeForm.get('description').touched)" >
-          <p *ngIf="editTagTypeForm.get('description').errors.required"
-             class="note text-danger">Please type a description.</p>
-          <p *ngIf="editTagTypeForm.get('description').errors.minlength || editTagTypeForm.get('description').errors.minlength"
-             class="note text-danger">Please insert minimum of 64 characters and a maximum of 1024 characters.</p>
-        </div>
+        <small class="text-danger">{{ printError(editTagTypeForm.get('description')) }}</small>
       </div>
       <button type="button" class="btn btn-primary" [disabled]="editTagTypeForm.invalid" (click)="update()">Update</button>
     </form>

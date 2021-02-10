@@ -1,16 +1,22 @@
 import {Component, OnInit} from '@angular/core';
 import {CategoryService} from '../../../../service/Category.service';
+import {AbstractComponents} from '../../../commons/AbstractComponents';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-admincategories',
   templateUrl: './admincategories.component.html',
   styleUrls: ['./admincategories.component.css']
 })
-export class AdmincategoriesComponent implements OnInit {
+export class AdmincategoriesComponent extends AbstractComponents implements OnInit {
 
   categories: any[];
 
-  constructor(private categoryService: CategoryService) { }
+  constructor(route: ActivatedRoute,
+              router: Router,
+              private categoryService: CategoryService) {
+    super(route, router);
+  }
 
   ngOnInit(): void {
     this.categoryService.getAllCategory().subscribe(data => {

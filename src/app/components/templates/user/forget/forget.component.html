@@ -1,7 +1,4 @@
 <section class="my-4 container">
-
-  <div id="alertPlacement"></div>
-
   <div class="vertical-center">
     <div class="w-100">
       <div class="forget-center">
@@ -9,27 +6,18 @@
         <form [formGroup]="setResetForm" (ngSubmit)="setReset()" class="form-setting border rounded-lg">
           <div class="form-group">
             <label class="my-0">Email address or username</label>
-            <input type="text" formControlName="emailOrUsername" class="form-control mt-2 mb-3">
-              <div *ngIf="setResetForm.get('emailOrUsername').invalid &&
-                   (setResetForm.get('emailOrUsername').dirty || setResetForm.get('emailOrUsername').touched)" >
-                <p *ngIf="setResetForm.get('emailOrUsername').errors.required"
-                   class="note text-danger">Please type a email.</p>
-              </div>
+            <input type="text" formControlName="emailOrUsername" class="form-control mt-2">
+            <small class="text-danger">{{ printError(setResetForm.get('emailOrUsername')) }}</small>
           </div>
           <div class="form-group">
             <label class="my-0">Old password</label>
-            <input type="password" formControlName="forgetPassword" class="form-control mt-2 mb-3">
-            <p class="note">Enter your last password, if you are wrong it does not matter.</p>
-            <div *ngIf="setResetForm.get('forgetPassword').invalid &&
-                   (setResetForm.get('forgetPassword').dirty || setResetForm.get('forgetPassword').touched)" >
-              <p *ngIf="setResetForm.get('forgetPassword').errors.required"
-                 class="note text-danger">Please type a password.</p>
-            </div>
+            <input type="password" formControlName="forgetPassword" class="form-control mt-2">
+            <small class="form-text text-muted">Enter your last password, if you are wrong it does not matter.</small>
+            <small class="text-danger">{{ printError(setResetForm.get('forgetPassword')) }}</small>
           </div>
           <button [disabled]="setResetForm.invalid" class="btn btn-lg btn-primary btn-block" type="submit">Reset your password</button>
         </form>
       </div>
     </div>
   </div>
-
 </section>

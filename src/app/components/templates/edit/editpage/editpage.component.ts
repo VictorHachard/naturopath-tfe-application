@@ -7,48 +7,37 @@ import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag
 import {InnerParagraphService} from '../../../../service/InnerParagraph.service';
 import {InnerPageService} from '../../../../service/InnerPage.service';
 import {TagTypeService} from '../../../../service/TagType.service';
+import {AbstractComponents} from '../../../commons/AbstractComponents';
+import {AbstractEdit} from '../../../commons/AbstractEdit';
 
 @Component({
   selector: 'app-addpage',
   templateUrl: './editpage.component.html',
   styleUrls: ['./editpage.component.css']
 })
-export class EditpageComponent implements OnInit {
+export class EditpageComponent extends AbstractEdit implements OnInit {
   allTagTypeList = [];
   tagTypeListSend = [];
-  messageInnerPageForm: FormGroup;
   editInnerPageForm: FormGroup;
   editInnerParagraphForm: FormGroup[];
   editInnerParatagForm: FormGroup[];
 
-  private id: string;
   page: any;
   paraTag: any;
 
-  constructor(private route: ActivatedRoute,
+  constructor(route: ActivatedRoute,
+              router: Router,
               private pageService: PageService,
               private voteService: VoteService,
-              private router: Router,
               private tagTypeService: TagTypeService,
               private innerParagraphService: InnerParagraphService,
-              private innerPageService: InnerPageService) { }
+              private innerPageService: InnerPageService) {
+    super(route, router);
+  }
 
-  canVote(id: string): boolean {
-    if (JSON.parse(localStorage.getItem('currentUser')).roleList.includes('ROLE_OWNER')) {
-      return true;
-    }
-    if (!JSON.parse(localStorage.getItem('currentUser')).roleList.includes('ROLE_ADMINISTRATOR') ||
-      this.page.user.username === JSON.parse(localStorage.getItem('currentUser')).username) {
-      return false;
-    }
-    if (this.page.innerPageList[0].id === id) {
-      for (const vote of this.page.innerPageList[0].voteList) {
-        if (vote.user.username === JSON.parse(localStorage.getItem('currentUser')).username) {
-          return false;
-        }
-      }
-    }
-    for (const paragraph of this.page.paragraphList) {
+  canVote(inner: any): boolean {
+    super.canVote(inner);
+    /*for (const paragraph of this.page.paragraphList) {
       if (paragraph.innerParagraphList[paragraph.innerParagraphList.length - 1].id === id) {
         for (const vote of paragraph.innerParagraphList[0].voteList) {
           if (vote.user.username === JSON.parse(localStorage.getItem('currentUser')).username) {
@@ -56,12 +45,11 @@ export class EditpageComponent implements OnInit {
           }
         }
       }
-    }
+    }*/
     return true;
   }
 
   ngOnInit(): void {
-    this.id = this.route.snapshot.paramMap.get('id');
     this.pageService.getEditPageDto(this.id).subscribe(data => {
       console.log(data);
       this.page = data;
@@ -98,10 +86,6 @@ export class EditpageComponent implements OnInit {
         descriptionParaTag: new FormControl(p.paratagType.description,
           [Validators.required, Validators.minLength(64), Validators.maxLength(1024)]),
       }));
-    });
-    this.messageInnerPageForm = new FormGroup({
-      content: new FormControl('',
-        [Validators.required, Validators.minLength(8), Validators.maxLength(2048)])
     });
   }
 
@@ -155,7 +139,7 @@ export class EditpageComponent implements OnInit {
   }
 
   addInnerPageMessage(id: number): void {
-    const messageInnerValue = this.messageInnerPageForm.value;
+    const messageInnerValue = this.messageInnerForm.value;
     this.innerPageService.addMessage(id.toString(), {
       content: messageInnerValue.content
     }).subscribe(value => {

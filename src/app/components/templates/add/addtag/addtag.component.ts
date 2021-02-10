@@ -2,19 +2,25 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {TagService} from '../../../../service/Tag.service';
 import {TagTypeService} from '../../../../service/TagType.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
+import {AbstractComponents} from '../../../commons/AbstractComponents';
 
 @Component({
   selector: 'app-addtag',
   templateUrl: './addtag.component.html',
   styleUrls: ['./addtag.component.css']
 })
-export class AddtagComponent implements OnInit {
+export class AddtagComponent extends AbstractComponents implements OnInit {
   addTagForm: FormGroup;
 
   tagTypeList: any;
 
-  constructor(private router: Router, private tagService: TagService, private tagTypeService: TagTypeService) { }
+  constructor(route: ActivatedRoute,
+              router: Router,
+              private tagService: TagService,
+              private tagTypeService: TagTypeService) {
+    super(route, router);
+  }
 
   ngOnInit(): void {
     this.tagTypeService.getAllTagType().subscribe(data => {

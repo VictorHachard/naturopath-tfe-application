@@ -1,14 +1,15 @@
 import {Component, OnInit} from '@angular/core';
 import {PageService} from '../../../service/Page.service';
 import {CategoryService} from '../../../service/Category.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
+import {AbstractComponents} from '../../commons/AbstractComponents';
 
 @Component({
   selector: 'app-pages',
   templateUrl: './pages.component.html',
   styleUrls: ['./pages.component.css']
 })
-export class PagesComponent implements OnInit {
+export class PagesComponent extends AbstractComponents implements OnInit {
 
   id: string;
 
@@ -23,7 +24,11 @@ export class PagesComponent implements OnInit {
 
   pagi: number[] = [];
 
-  constructor(private route: ActivatedRoute, private pageService: PageService, private categoryService: CategoryService) {
+  constructor(route: ActivatedRoute,
+              router: Router,
+              private pageService: PageService,
+              private categoryService: CategoryService) {
+    super(route, router);
     this.categoryService.getAllCategory().subscribe(value => {
       this.categories = value;
     });

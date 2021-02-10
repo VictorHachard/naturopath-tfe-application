@@ -2,13 +2,14 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {TagTypeService} from '../../../../service/TagType.service';
+import {AbstractComponents} from '../../../commons/AbstractComponents';
 
 @Component({
   selector: 'app-edittagtype',
   templateUrl: './edittagtype.component.html',
   styleUrls: ['./edittagtype.component.css']
 })
-export class EdittagtypeComponent implements OnInit {
+export class EdittagtypeComponent extends AbstractComponents implements OnInit {
 
   editTagTypeForm: FormGroup;
 
@@ -16,7 +17,10 @@ export class EdittagtypeComponent implements OnInit {
 
   tagType: any;
 
-  constructor(private route: ActivatedRoute, private tagTypeService: TagTypeService, private router: Router) {
+  constructor(route: ActivatedRoute,
+              router: Router,
+              private tagTypeService: TagTypeService) {
+    super(route, router);
   }
 
   ngOnInit(): void {

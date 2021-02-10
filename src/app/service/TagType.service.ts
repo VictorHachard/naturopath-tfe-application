@@ -14,7 +14,7 @@ export class TagTypeService extends AbstractService {
   }
 
   public getTagType(id: string): Observable<any> {
-    return this.http.get<any>(this.baseUrl + 'dto' + id,
+    return this.http.get<any>(this.baseUrl + 'dto/' + id,
       {headers : new HttpHeaders().set('Authorization', this.getUserJwt())});
   }
 

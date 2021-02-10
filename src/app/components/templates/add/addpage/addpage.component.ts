@@ -3,18 +3,24 @@ import {CategoryService} from '../../../../service/Category.service';
 import {Category} from '../../../../model/view/Category';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {PageService} from '../../../../service/Page.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
+import {AbstractComponents} from '../../../commons/AbstractComponents';
 
 @Component({
   selector: 'app-addpageselectcategory',
   templateUrl: './addpage.component.html',
   styleUrls: ['./addpage.component.css']
 })
-export class AddpageComponent implements OnInit {
+export class AddpageComponent extends AbstractComponents implements OnInit {
   addPageForm: FormGroup;
   categories: Category[];
 
-  constructor(private router: Router, private categoryService: CategoryService, private pageService: PageService) { }
+  constructor(route: ActivatedRoute,
+              router: Router,
+              private categoryService: CategoryService,
+              private pageService: PageService) {
+    super(route, router);
+  }
 
   ngOnInit(): void {
     this.categoryService.getAllCategory().subscribe(data => {

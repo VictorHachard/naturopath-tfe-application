@@ -1,30 +1,17 @@
 <section class="my-4 container">
-
   <h2 class="mb-4">Edit paragraphType</h2>
   <form *ngIf="paragraphType" [formGroup]="editParagraphTypeForm">
     <div class="form-group">
       <label for="name">Name:</label>
       <input type="text" class="form-control" formControlName="name" id="name" >
       <small class="form-text text-muted">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</small>
-      <div *ngIf="editParagraphTypeForm.get('name').invalid &&
-            (editParagraphTypeForm.get('name').dirty || editParagraphTypeForm.get('name').touched)" >
-        <p *ngIf="editParagraphTypeForm.get('name').errors.required"
-           class="note text-danger">Please type a description.</p>
-        <p *ngIf="editParagraphTypeForm.get('name').errors.minlength || editParagraphTypeForm.get('name').errors.minlength"
-           class="note text-danger">Please insert minimum of 8 characters and a maximum of 128 characters.</p>
-      </div>
+      <small class="text-danger">{{ printError(editParagraphTypeForm.get('name')) }}</small>
     </div>
     <div class="form-group">
       <label for="description">Description:</label>
       <textarea id="description" formControlName="description" class="form-control"></textarea>
       <small class="form-text text-muted">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</small>
-      <div *ngIf="editParagraphTypeForm.get('description').invalid &&
-            (editParagraphTypeForm.get('description').dirty || editParagraphTypeForm.get('description').touched)" >
-        <p *ngIf="editParagraphTypeForm.get('description').errors.required"
-           class="note text-danger">Please type a description.</p>
-        <p *ngIf="editParagraphTypeForm.get('description').errors.minlength || editParagraphTypeForm.get('description').errors.minlength"
-           class="note text-danger">Please insert minimum of 64 characters and a maximum of 1024 characters.</p>
-      </div>
+      <small class="text-danger">{{ printError(editParagraphTypeForm.get('description')) }}</small>
     </div>
     <button type="button" class="btn btn-primary" [disabled]="editParagraphTypeForm.invalid" (click)="update()">Update</button>
   </form>

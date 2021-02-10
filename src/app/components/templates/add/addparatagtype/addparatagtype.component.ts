@@ -2,18 +2,24 @@ import {Component, OnInit} from '@angular/core';
 import {TagTypeService} from '../../../../service/TagType.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ParatagTypeService} from '../../../../service/ParatagType.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
+import {AbstractComponents} from '../../../commons/AbstractComponents';
 
 @Component({
   selector: 'app-addparatagtype',
   templateUrl: './addparatagtype.component.html',
   styleUrls: ['./addparatagtype.component.css']
 })
-export class AddparatagtypeComponent implements OnInit {
+export class AddparatagtypeComponent extends AbstractComponents implements OnInit {
   addTagTypeForm: FormGroup;
   tagTypes: any[];
 
-  constructor(private tagTypeService: TagTypeService, private paratagTypeService: ParatagTypeService, private router: Router) { }
+  constructor(route: ActivatedRoute,
+              router: Router,
+              private tagTypeService: TagTypeService,
+              private paratagTypeService: ParatagTypeService) {
+    super(route, router);
+  }
 
   ngOnInit(): void {
     this.tagTypeService.getAllTagType().subscribe(data => {

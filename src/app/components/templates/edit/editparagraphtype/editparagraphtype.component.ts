@@ -2,20 +2,24 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ParagraphTypeService} from '../../../../service/ParagraphType.service';
+import {AbstractComponents} from '../../../commons/AbstractComponents';
 
 @Component({
   selector: 'app-editparagraphtype',
   templateUrl: './editparagraphtype.component.html',
   styleUrls: ['./editparagraphtype.component.css']
 })
-export class EditparagraphtypeComponent implements OnInit {
+export class EditparagraphtypeComponent extends AbstractComponents implements OnInit {
   editParagraphTypeForm: FormGroup;
 
   private id: string;
 
   paragraphType: any;
 
-  constructor(private route: ActivatedRoute, private paragraphTypeService: ParagraphTypeService, private router: Router) {
+  constructor(route: ActivatedRoute,
+              router: Router,
+              private paragraphTypeService: ParagraphTypeService) {
+    super(route, router);
   }
 
   ngOnInit(): void {

@@ -1,16 +1,13 @@
 <section class="my-4 container">
-
   <h2 class="mb-4">Add a new page</h2>
-
   <form *ngIf="categories" [formGroup]="addPageForm" (ngSubmit)="addPage()">
     <div class="form-group">
       <div class="input-group mb-0">
         <div class="input-group-prepend">
-          <label class="input-group-text" for="category" >Select category</label>
+          <label class="input-group-text">Select category</label>
         </div>
-        <select class="custom-select" id="category" formControlName="category">
-          <option *ngFor="let category of categories" aria-label="breadcrumb">
-            {{ category.name }}
+        <select class="custom-select" formControlName="category">
+          <option *ngFor="let category of categories" aria-label="breadcrumb">{{ category.name }}
             <!-- <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="#">{{ category.name }}</a></li>
                 <li *ngFor="let ca of category.childCategory" class="breadcrumb-item active" aria-current="page"><a href="#">
@@ -23,32 +20,19 @@
       <small class="form-text text-muted">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</small>
     </div>
     <div class="form-group">
-      <label for="title">Title</label>
-      <input type="text" class="form-control" id="title" formControlName="title">
+      <label>Title</label>
+      <input type="text" class="form-control" formControlName="title">
       <small class="form-text text-muted">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</small>
-      <div *ngIf="addPageForm.get('title').invalid &&
-        (addPageForm.get('title').dirty || addPageForm.get('title').touched)" >
-        <p *ngIf="addPageForm.get('title').errors.required"
-           class="note text-danger">Please type a description.</p>
-        <p *ngIf="addPageForm.get('title').errors.minlength || addPageForm.get('title').errors.minlength"
-           class="note text-danger">Please insert minimum of 8 characters and a maximum of 128 characters.</p>
-      </div>
+      <small class="text-danger">{{ printError(addPageForm.get('title')) }}</small>
     </div>
     <div class="form-group">
-      <label for="description">Description</label>
-      <textarea class="form-control" id="description" rows="3" formControlName="description"></textarea>
+      <label>Description</label>
+      <textarea class="form-control" rows="6" formControlName="description"></textarea>
       <small class="form-text text-muted">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</small>
-      <div *ngIf="addPageForm.get('description').invalid &&
-        (addPageForm.get('description').dirty || addPageForm.get('description').touched)" >
-        <p *ngIf="addPageForm.get('description').errors.required"
-           class="note text-danger">Please type a description.</p>
-        <p *ngIf="addPageForm.get('description').errors.minlength || addPageForm.get('description').errors.minlength"
-         class="note text-danger">Please insert minimum of 64 characters and a maximum of 1024 characters.</p>
-      </div>
+      <small class="text-danger">{{ printError(addPageForm.get('description')) }}</small>
     </div>
     <button class="btn btn-lg btn-primary btn-block mt-3" [disabled]="addPageForm.invalid" type="submit">Add a page</button>
   </form>
-
 </section>
 
 

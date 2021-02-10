@@ -1,16 +1,17 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {UserSecurityService} from '../../../../service/security/UserSecurity.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AlertManager} from '../../../../model/my/AlertManager';
 import {User} from '../../../../model/view/User';
+import {AbstractComponents} from '../../../commons/AbstractComponents';
 
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.css']
 })
-export class SettingsComponent implements OnInit {
+export class SettingsComponent extends AbstractComponents implements OnInit {
 
   param: string;
   user: any;
@@ -23,7 +24,10 @@ export class SettingsComponent implements OnInit {
   deleteForm: FormGroup;
   confirmForm: FormGroup = new FormGroup({});
 
-  constructor(private route: ActivatedRoute, private userSecurityService: UserSecurityService) {
+  constructor(route: ActivatedRoute,
+              router: Router,
+              private userSecurityService: UserSecurityService) {
+    super(route, router);
     this.initData();
     this.route.paramMap.subscribe(params => {
       this.ngOnInit();

@@ -1,13 +1,18 @@
 import {Component, OnInit} from '@angular/core';
+import {AbstractComponents} from '../../commons/AbstractComponents';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent extends AbstractComponents implements OnInit {
 
-  constructor() { }
+  constructor(route: ActivatedRoute,
+              router: Router) {
+    super(route, router);
+  }
 
   ngOnInit(): void {
   }

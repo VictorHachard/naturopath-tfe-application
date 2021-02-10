@@ -1,18 +1,23 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {TagTypeService} from '../../../../service/TagType.service';
+import {AbstractComponents} from '../../../commons/AbstractComponents';
 
 @Component({
   selector: 'app-addtagtype',
   templateUrl: './addtagtype.component.html',
   styleUrls: ['./addtagtype.component.css']
 })
-export class AddtagtypeComponent implements OnInit {
+export class AddtagtypeComponent extends AbstractComponents implements OnInit {
 
   addTagTypeForm: FormGroup;
 
-  constructor(private tagTypeService: TagTypeService, private router: Router) { }
+  constructor(route: ActivatedRoute,
+              router: Router,
+              private tagTypeService: TagTypeService) {
+    super(route, router);
+  }
 
   ngOnInit(): void {
     this.init();

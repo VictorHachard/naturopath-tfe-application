@@ -1,15 +1,16 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {ParatagTypeService} from '../../../../service/ParatagType.service';
 import {TagTypeService} from '../../../../service/TagType.service';
+import {AbstractComponents} from '../../../commons/AbstractComponents';
 
 @Component({
   selector: 'app-editparatagtype',
   templateUrl: './editparatagtype.component.html',
   styleUrls: ['./editparatagtype.component.css']
 })
-export class EditparatagtypeComponent implements OnInit {
+export class EditparatagtypeComponent extends AbstractComponents implements OnInit {
   editParatagTypeForm: FormGroup;
 
   private id: string;
@@ -17,7 +18,11 @@ export class EditparatagtypeComponent implements OnInit {
   paratagType: any;
   tagTypes: any[];
 
-  constructor(private tagTypeService: TagTypeService, private route: ActivatedRoute, private paratagtypeService: ParatagTypeService) {
+  constructor(route: ActivatedRoute,
+              router: Router,
+              private tagTypeService: TagTypeService,
+              private paratagtypeService: ParatagTypeService) {
+    super(route, router);
   }
 
   ngOnInit(): void {

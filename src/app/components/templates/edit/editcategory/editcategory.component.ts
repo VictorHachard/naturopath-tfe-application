@@ -2,13 +2,14 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CategoryService} from '../../../../service/Category.service';
+import {AbstractComponents} from '../../../commons/AbstractComponents';
 
 @Component({
   selector: 'app-editcategory',
   templateUrl: './editcategory.component.html',
   styleUrls: ['./editcategory.component.css']
 })
-export class EditcategoryComponent implements OnInit {
+export class EditcategoryComponent extends AbstractComponents implements OnInit {
 
   editCategoryForm: FormGroup;
 
@@ -16,7 +17,10 @@ export class EditcategoryComponent implements OnInit {
 
   category: any;
 
-  constructor(private route: ActivatedRoute, private categoryService: CategoryService, private router: Router) {
+  constructor(route: ActivatedRoute,
+              router: Router,
+              private categoryService: CategoryService) {
+    super(route, router);
   }
 
   ngOnInit(): void {
