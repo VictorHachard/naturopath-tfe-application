@@ -44,8 +44,8 @@ export class AddcategoryComponent extends AbstractComponents implements OnInit {
     if (addCategoryValue.category === 'No category') {
       this.categoryService.addCategory({description: addCategoryValue.description,
         isParent: addCategoryValue.isParent,
-        name: addCategoryValue.name}).subscribe(data => {
-        this.router.navigate(['/editcategory/' + data.toString()]);
+        name: addCategoryValue.name}).subscribe(value => {
+        this.router.navigate(['/editcategory/' + value.toString()]);
       });
     } else {
       this.categories.forEach(value => {
@@ -56,8 +56,8 @@ export class AddcategoryComponent extends AbstractComponents implements OnInit {
       this.categoryService.addCategory({description: addCategoryValue.description,
         isParent: addCategoryValue.isParent,
         name: addCategoryValue.name,
-        parentCategoryId: categoryId.toString()}).subscribe(data => {
-        this.router.navigate(['/editcategory/' + data.toString()]);
+        parentCategoryId: categoryId.toString()}).subscribe(value => {
+        this.router.navigate(['/editcategory/' + value.toString()]);
       });
     }
   }

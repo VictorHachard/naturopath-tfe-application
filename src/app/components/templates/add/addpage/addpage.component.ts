@@ -23,8 +23,8 @@ export class AddpageComponent extends AbstractComponents implements OnInit {
   }
 
   ngOnInit(): void {
-    this.categoryService.getAllCategory().subscribe(data => {
-      this.categories = data;
+    this.categoryService.getAllCategory().subscribe(value => {
+      this.categories = value;
       console.log(this.categories);
       this.init();
     });
@@ -50,8 +50,8 @@ export class AddpageComponent extends AbstractComponents implements OnInit {
 
     this.pageService.addPage({categoryId: categoryId.toString(),
       description: addPageValue.description,
-      title: addPageValue.title}).subscribe(data => {
-        this.router.navigate(['/editpage/' + data.toString()]);
+      title: addPageValue.title}).subscribe(value => {
+        this.router.navigate(['/editpage/' + value.toString()]);
     });
   }
 }

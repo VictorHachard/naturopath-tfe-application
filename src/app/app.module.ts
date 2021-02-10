@@ -45,6 +45,8 @@ import {ResetComponent} from './components/actions/reset/reset.component';
 import {ConfirmComponent} from './components/actions/confirm/confirm.component';
 import {DeleteComponent} from './components/actions/delete/delete.component';
 import {AuthGuardService} from './service/auth-guard.service';
+import { AddimageComponent } from './components/templates/add/addimage/addimage.component';
+import { EditimageComponent } from './components/templates/edit/editimage/editimage.component';
 
 @NgModule({
   declarations: [
@@ -86,6 +88,8 @@ import {AuthGuardService} from './service/auth-guard.service';
     ResetComponent,
     ConfirmComponent,
     DeleteComponent,
+    AddimageComponent,
+    EditimageComponent,
   ],
   imports: [
     BrowserModule,

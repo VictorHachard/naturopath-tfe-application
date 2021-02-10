@@ -34,6 +34,8 @@ import {ConfirmComponent} from './components/actions/confirm/confirm.component';
 import {DeleteComponent} from './components/actions/delete/delete.component';
 import {AuthGuardService, NotAuthGuardService} from './service/auth-guard.service';
 import {DashboardComponent} from './components/templates/dashboard/dashboard.component';
+import {EditimageComponent} from './components/templates/edit/editimage/editimage.component';
+import {AddimageComponent} from './components/templates/add/addimage/addimage.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home'},
@@ -58,8 +60,13 @@ const routes: Routes = [
 
   { path: 'editpage/:id', component: EditpageComponent, canActivate: [AuthGuardService] },
   { path: 'addpage', component: AddpageComponent, canActivate: [AuthGuardService] },
+
   { path: 'edittag/:id', component: EdittagComponent, canActivate: [AuthGuardService] },
   { path: 'addtag', component: AddtagComponent, canActivate: [AuthGuardService] },
+
+  { path: 'editimage/:id', component: EditimageComponent, canActivate: [AuthGuardService] },
+  { path: 'addimage', component: AddimageComponent, canActivate: [AuthGuardService] },
+
   { path: 'editcategory/:id', component: EditcategoryComponent, canActivate: [AuthGuardService] },
   { path: 'addcategory', component: AddcategoryComponent, canActivate: [AuthGuardService] },
   { path: 'admincategories', component: AdmincategoriesComponent, canActivate: [AuthGuardService] },

@@ -4,7 +4,6 @@ import {VoteService} from '../../../../service/Vote.service';
 import {TagService} from '../../../../service/Tag.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {InnerTagService} from '../../../../service/InnerTag.service';
-import {AbstractComponents} from '../../../commons/AbstractComponents';
 import {AbstractEdit} from '../../../commons/AbstractEdit';
 
 @Component({

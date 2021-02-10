@@ -7,7 +7,6 @@ import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag
 import {InnerParagraphService} from '../../../../service/InnerParagraph.service';
 import {InnerPageService} from '../../../../service/InnerPage.service';
 import {TagTypeService} from '../../../../service/TagType.service';
-import {AbstractComponents} from '../../../commons/AbstractComponents';
 import {AbstractEdit} from '../../../commons/AbstractEdit';
 
 @Component({
@@ -63,6 +62,7 @@ export class EditpageComponent extends AbstractEdit implements OnInit {
   }
 
   init(): void {
+    super.init();
     this.editInnerParagraphForm = [];
     this.editInnerParatagForm = [];
     this.editInnerPageForm = new FormGroup({
