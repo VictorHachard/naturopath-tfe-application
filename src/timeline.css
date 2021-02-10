@@ -152,9 +152,23 @@ ul.timeline-message > li:before {
   display: inline-block;
   position: absolute;
   border-radius: 50%;
-  border: 3px solid grey;
   left: 20px;
   width: 20px;
   height: 20px;
   z-index: 400;
+}
+ul.timeline-message > li.primary:before {
+  background-color: #2e6da4 !important;
+}
+ul.timeline-message > li.success:before {
+  background-color: #3f903f !important;
+}
+ul.timeline-message > li.warning:before {
+  background-color: #f0ad4e !important;
+}
+ul.timeline-message > li.danger:before {
+  background-color: #d9534f !important;
+}
+ul.timeline-message > li.info:before {
+  background-color: #5bc0de !important;
 }

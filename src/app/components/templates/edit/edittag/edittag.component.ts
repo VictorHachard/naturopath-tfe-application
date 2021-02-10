@@ -29,22 +29,32 @@ export class EdittagComponent implements OnInit {
     });
   }
 
-  canVote(id: string): boolean {
+  canVote(inner: any): boolean {
     if (JSON.parse(localStorage.getItem('currentUser')).roleList.includes('ROLE_OWNER')) {
       return true;
     }
     if (!JSON.parse(localStorage.getItem('currentUser')).roleList.includes('ROLE_ADMINISTRATOR') ||
-      this.tag.user.username === JSON.parse(localStorage.getItem('currentUser')).username) {
+      inner.user.username === JSON.parse(localStorage.getItem('currentUser')).username) { //TODO error c'est du tag en question
       return false;
     }
-    if (this.tag.innerTagList[0].id === id) {
-      for (const vote of this.tag.innerTagList[0].voteList) {
-        if (vote.user.username === JSON.parse(localStorage.getItem('currentUser')).username) {
-          return false;
-        }
+    for (const vote of inner.voteList) {
+      if (vote.user.username === JSON.parse(localStorage.getItem('currentUser')).username) {
+        return false;
       }
     }
     return true;
+  }
+
+  userColor(UserId: number, Inner: any): string {
+    if (Inner.user.id === UserId) {
+      return 'primary';
+    }
+    for (const vote of Inner.voteList) {
+      if (vote.user.id === UserId) {
+        return vote.choice === 1 ? 'success' : 'danger';
+      }
+    }
+    return 'info';
   }
 
   init(): void {
@@ -85,6 +95,9 @@ export class EdittagComponent implements OnInit {
   }
 
   voteInnerTag(id: number, choice: number): void {
+    if (choice === 0) {
+      this.addInnerTagMessage(id);
+    }
     this.voteService.addVote({
       choice: choice.toString(),
       type: 'InnerTag',
