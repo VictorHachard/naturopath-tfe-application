@@ -32,23 +32,24 @@ import {EditparatagtypeComponent} from './components/templates/edit/editparatagt
 import {ResetComponent} from './components/actions/reset/reset.component';
 import {ConfirmComponent} from './components/actions/confirm/confirm.component';
 import {DeleteComponent} from './components/actions/delete/delete.component';
-import {AuthGuardService, NotAuthGuardService} from './service/auth-guard.service';
+import {AuthGuardService, NotAuthGuardService} from './service/guards/auth-guard.service';
 import {DashboardComponent} from './components/templates/dashboard/dashboard.component';
 import {EditimageComponent} from './components/templates/edit/editimage/editimage.component';
 import {AddimageComponent} from './components/templates/add/addimage/addimage.component';
 import {TicketComponent} from './components/templates/ticket/ticket.component';
 import {AdminticketComponent} from './components/templates/admin/adminticket/adminticket.component';
+import {RolesGuardAdminService, RolesGuardOwnerService} from './service/guards/roles-guard.service';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home'},
   { path: 'home', pathMatch: 'full', redirectTo: 'pages'},
   { path: 'home', component: AccueilComponent },
 
-  { path: 'contact', component: ContactComponent },
-  { path: 'ticket', component: TicketComponent },
-  { path: 'ticket/:id', component: TicketComponent },
-  { path: 'adminticket', component: AdminticketComponent },
-  { path: 'adminticket/:id', component: AdminticketComponent },
+  { path: 'contact', component: ContactComponent, canActivate: [AuthGuardService] },
+  { path: 'ticket', component: TicketComponent, canActivate: [AuthGuardService] },
+  { path: 'ticket/:id', component: TicketComponent, canActivate: [AuthGuardService] },
+  { path: 'adminticket', component: AdminticketComponent, canActivate: [RolesGuardAdminService] },
+  { path: 'adminticket/:id', component: AdminticketComponent, canActivate: [RolesGuardAdminService] },
 
   { path: 'login', component: LoginComponent, canActivate: [NotAuthGuardService] },
   { path: 'register', component: RegisterComponent, canActivate: [NotAuthGuardService] },
@@ -77,23 +78,23 @@ const routes: Routes = [
 
   { path: 'editcategory/:id', component: EditcategoryComponent, canActivate: [AuthGuardService] },
   { path: 'addcategory', component: AddcategoryComponent, canActivate: [AuthGuardService] },
-  { path: 'admincategories', component: AdmincategoriesComponent, canActivate: [AuthGuardService] },
+  { path: 'admincategories', component: AdmincategoriesComponent, canActivate: [RolesGuardOwnerService] },
 
   { path: 'edittagtype/:id', component: EdittagtypeComponent, canActivate: [AuthGuardService] },
   { path: 'addtagtype', component: AddtagtypeComponent, canActivate: [AuthGuardService] },
-  { path: 'admintagtypes', component: AdmintagtypesComponent, canActivate: [AuthGuardService] },
+  { path: 'admintagtypes', component: AdmintagtypesComponent, canActivate: [RolesGuardOwnerService] },
 
   { path: 'editparagraphtype/:id', component: EditparagraphtypeComponent, canActivate: [AuthGuardService] },
   { path: 'addparagraphtype', component: AddparagraphtypeComponent, canActivate: [AuthGuardService] },
-  { path: 'adminparagraphtypes', component: AdminparagraphtypesComponent, canActivate: [AuthGuardService] },
+  { path: 'adminparagraphtypes', component: AdminparagraphtypesComponent, canActivate: [RolesGuardOwnerService] },
 
   { path: 'editparatagtype/:id', component: EditparatagtypeComponent, canActivate: [AuthGuardService] },
   { path: 'addparatagtype', component: AddparatagtypeComponent, canActivate: [AuthGuardService] },
-  { path: 'adminparatagtypes', component: AdminparatagtypesComponent, canActivate: [AuthGuardService] },
+  { path: 'adminparatagtypes', component: AdminparatagtypesComponent, canActivate: [RolesGuardOwnerService] },
 
   { path: 'editparapagetype/:id', component: EditparapagetypeComponent, canActivate: [AuthGuardService] },
   { path: 'addparapagetype', component: AddparapagetypeComponent, canActivate: [AuthGuardService] },
-  { path: 'adminparapagetypes', component: AdminparapagetypesComponent, canActivate: [AuthGuardService] },
+  { path: 'adminparapagetypes', component: AdminparapagetypesComponent, canActivate: [RolesGuardOwnerService] },
 
   { path: 'reset/:token', component: ResetComponent },
   { path: 'confirm/:token', component: ConfirmComponent },

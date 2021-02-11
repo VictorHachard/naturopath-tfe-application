@@ -44,7 +44,7 @@ import {AdminparapagetypesComponent} from './components/templates/admin/adminpar
 import {ResetComponent} from './components/actions/reset/reset.component';
 import {ConfirmComponent} from './components/actions/confirm/confirm.component';
 import {DeleteComponent} from './components/actions/delete/delete.component';
-import {AuthGuardService} from './service/auth-guard.service';
+import {AuthGuardService} from './service/guards/auth-guard.service';
 import {AddimageComponent} from './components/templates/add/addimage/addimage.component';
 import {EditimageComponent} from './components/templates/edit/editimage/editimage.component';
 import {TicketComponent} from './components/templates/ticket/ticket.component';
