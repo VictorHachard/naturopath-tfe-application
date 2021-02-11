@@ -36,12 +36,20 @@ import {AuthGuardService, NotAuthGuardService} from './service/auth-guard.servic
 import {DashboardComponent} from './components/templates/dashboard/dashboard.component';
 import {EditimageComponent} from './components/templates/edit/editimage/editimage.component';
 import {AddimageComponent} from './components/templates/add/addimage/addimage.component';
+import {TicketComponent} from './components/templates/ticket/ticket.component';
+import {AdminticketComponent} from './components/templates/admin/adminticket/adminticket.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home'},
   { path: 'home', pathMatch: 'full', redirectTo: 'pages'},
   { path: 'home', component: AccueilComponent },
+
   { path: 'contact', component: ContactComponent },
+  { path: 'ticket', component: TicketComponent },
+  { path: 'ticket/:id', component: TicketComponent },
+  { path: 'adminticket', component: AdminticketComponent },
+  { path: 'adminticket/:id', component: AdminticketComponent },
+
   { path: 'login', component: LoginComponent, canActivate: [NotAuthGuardService] },
   { path: 'register', component: RegisterComponent, canActivate: [NotAuthGuardService] },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuardService] },

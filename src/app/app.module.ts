@@ -45,8 +45,10 @@ import {ResetComponent} from './components/actions/reset/reset.component';
 import {ConfirmComponent} from './components/actions/confirm/confirm.component';
 import {DeleteComponent} from './components/actions/delete/delete.component';
 import {AuthGuardService} from './service/auth-guard.service';
-import { AddimageComponent } from './components/templates/add/addimage/addimage.component';
-import { EditimageComponent } from './components/templates/edit/editimage/editimage.component';
+import {AddimageComponent} from './components/templates/add/addimage/addimage.component';
+import {EditimageComponent} from './components/templates/edit/editimage/editimage.component';
+import {TicketComponent} from './components/templates/ticket/ticket.component';
+import {AdminticketComponent} from './components/templates/admin/adminticket/adminticket.component';
 
 @NgModule({
   declarations: [
@@ -90,6 +92,8 @@ import { EditimageComponent } from './components/templates/edit/editimage/editim
     DeleteComponent,
     AddimageComponent,
     EditimageComponent,
+    TicketComponent,
+    AdminticketComponent,
   ],
   imports: [
     BrowserModule,

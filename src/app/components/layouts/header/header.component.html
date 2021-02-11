@@ -10,7 +10,7 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link nav-w" routerLink="/contact">Contact</a>
+            <a class="nav-link nav-w" routerLink="/contact">test</a>
           </li>
         </ul>
         <!-- If auth -->
@@ -48,6 +48,7 @@
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" routerLink="/dashboard">Dashboard</a>
               <a class="dropdown-item" routerLink="/settings">Settings</a>
+              <a class="dropdown-item" routerLink="/ticket">Tickets</a>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" (click)="logOut();">Log out</a>
               <!-- If admin -->
@@ -55,7 +56,7 @@
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" routerLink="/admindashboard">Admin dashboard</a>
                 <a class="dropdown-item">Admin user</a>
-                <a class="dropdown-item">Admin contact</a>
+                <a class="dropdown-item" routerLink="/adminticket">Admin tickets</a>
               </div>
               <!-- End if admin -->
             </div>

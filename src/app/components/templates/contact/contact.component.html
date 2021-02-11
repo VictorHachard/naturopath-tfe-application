@@ -1,19 +1,19 @@
 <section class="my-4 container">
-
-  <div id="alertPlacement"></div>
-
-  <h2 class="font-weight-normal mb-4">Contact us</h2>
+  <h2 class="font-weight-normal mb-4">Created a new ticket</h2>
   <hr class="style1 mb-4">
-  <form [formGroup]="contactForm" (ngSubmit)="contact()">
+  <form [formGroup]="ticketForm" (ngSubmit)="addTicket()">
     <div class="form-group">
       <label class="my-0">Subject</label>
       <input type="text" formControlName="subject" class="form-control mt-2">
+      <small class="form-text text-muted">What is the subject of your problem</small>
+      <small class="text-danger">{{ printError(ticketForm.get('subject')) }}</small>
     </div>
     <div class="form-group">
       <label class="my-0">Message</label>
-      <textarea class="form-control mt-2" formControlName="message" rows="8"></textarea>
+      <textarea class="form-control mt-2" formControlName="content" rows="8"></textarea>
+      <small class="form-text text-muted">What is your problem in details</small>
+      <small class="text-danger">{{ printError(ticketForm.get('content')) }}</small>
     </div>
-    <button class="btn btn-primary mt-3 mb-4" type="submit">Send</button>
+    <button class="btn btn-primary mt-3 mb-4" type="submit" [disabled]="ticketForm.invalid">Send</button>
   </form>
-
 </section>

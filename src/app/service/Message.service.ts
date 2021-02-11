@@ -12,4 +12,5 @@ export class MessageService extends AbstractService {
     this.baseUrl = this.baseUrl + 'message/';
   }
 
+
 }

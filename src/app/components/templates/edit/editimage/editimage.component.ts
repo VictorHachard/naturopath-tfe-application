@@ -1,10 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AbstractEdit} from '../../../commons/AbstractEdit';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
-import {TagService} from '../../../../service/Tag.service';
 import {VoteService} from '../../../../service/Vote.service';
-import {InnerTagService} from '../../../../service/InnerTag.service';
 import {ImageService} from '../../../../service/Image.service';
 import {InnerImageService} from '../../../../service/InnerImage.service';
 

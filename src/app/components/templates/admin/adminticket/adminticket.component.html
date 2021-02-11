@@ -1,0 +1,50 @@
+<section class="my-4 container">
+  <div *ngIf="!id">
+    <h2 class="font-weight-normal mb-4">Admin tickets</h2>
+    <table class="table">
+      <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Subject</th>
+        <th scope="col">Last message from</th>
+        <th scope="col">Created at</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let ticket of ticketList" routerLink="/adminticket/{{ ticket.id }}" >
+        <th scope="row"><a routerLink="/adminticket/{{ ticket.id }}">{{ ticket.id }}</a></th>
+        <td>{{ ticket.subject }}</td>
+        <td>{{ ticket.contentList[0].userSecurity.username }} <small class="text-muted">{{ username === ticket.contentList[0].userSecurity.username ? 'admin' : 'user' }}</small></td>
+        <td>{{ ticket.createdAt| date:'dd MMMM yyyy - HH:mm' }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div *ngIf="id && ticketList">
+    <div class="row mb-4">
+      <button type="button" class="btn btn-sm btn-outline-secondary col-sm" style="max-width: 130px" routerLink="/adminticket">Back to my ticket</button>
+      <h2 class="font-weight-normal col">Ticket {{ ticketList.id }}</h2>
+    </div>
+    <form *ngIf="!ticketList.close" [formGroup]="ticketMessageForm" class="mt-2">
+      <div class="form-group">
+        <textarea type="text" formControlName="content" class="form-control" placeholder="Type your message here..."></textarea>
+        <small class="text-danger">{{ printError(ticketMessageForm.get('content')) }}</small>
+      </div>
+      <button type="button" class="btn btn-primary mr-2" [disabled]="ticketMessageForm.invalid" (click)="addMessage()">Send</button>
+    </form>
+    <form class="form-inline mt-2" *ngIf="!ticketList.close">
+      <div class="form-group form-check" [formGroup]="ticketCloseForm">
+        <input type="checkbox" class="form-check-input" formControlName="check">
+        <label class="form-check-label">Close</label>
+      </div>
+      <button type="button" class="btn btn-primary ml-3" [disabled]="!ticketCloseForm.get('check').value" (click)="close()">Close ticket</button>
+    </form>
+    <ul *ngIf="ticketList.length !== 0" class="timeline-message" >
+      <li *ngFor="let message of ticketList.contentList" class="{{ username === message.userSecurity.username ? 'primary' : '' }}">
+        <h5>{{ message.userSecurity.username }} <small class="text-muted">{{ username === message.userSecurity.username ? '' : 'user' }}</small></h5>
+        <p><small class="text-muted">{{ message.createdAt| date:'dd MMMM yyyy - HH:mm' }}</small></p>
+        <p>{{ message.content }}</p>
+      </li>
+    </ul>
+  </div>
+</section>

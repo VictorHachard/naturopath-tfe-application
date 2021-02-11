@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { EditimageComponent } from './editimage.component';
+import {EditimageComponent} from './editimage.component';
 
 describe('EditimageComponent', () => {
   let component: EditimageComponent;

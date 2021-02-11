@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {FormGroup} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
-import {UserSecurityService} from '../../../service/security/UserSecurity.service';
 import {AbstractComponents} from '../../commons/AbstractComponents';
+import {TicketService} from '../../../service/Ticket.service';
 
 @Component({
   selector: 'app-contact',
@@ -10,12 +10,11 @@ import {AbstractComponents} from '../../commons/AbstractComponents';
   styleUrls: ['./contact.component.css']
 })
 export class ContactComponent extends AbstractComponents implements OnInit {
-
-  contactForm: FormGroup;
+  ticketForm: FormGroup;
 
   constructor(route: ActivatedRoute,
               router: Router,
-              private userSecuritySecurity: UserSecurityService) {
+              private ticketService: TicketService) {
     super(route, router);
   }
 
@@ -24,12 +23,22 @@ export class ContactComponent extends AbstractComponents implements OnInit {
   }
 
   init(): void {
-    this.contactForm = new FormGroup({
-
+    this.ticketForm = new FormGroup({
+      subject: new FormControl('',
+        [Validators.required, Validators.minLength(2), Validators.maxLength(32)]),
+      content: new FormControl('',
+        [Validators.required, Validators.minLength(32), Validators.maxLength(1024)]),
     });
   }
 
-  contact(): void {
+  addTicket(): void {
+    const ticketValue = this.ticketForm.value;
+    this.ticketService.addTicket({
+      content: ticketValue.content,
+      subject: ticketValue.subject}).subscribe(value => {
+        this.router.navigate(['/ticket']);
+    }, error => {
 
+    });
   }
 }
