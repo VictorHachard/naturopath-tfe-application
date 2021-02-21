@@ -49,6 +49,7 @@ import {AddimageComponent} from './components/templates/add/addimage/addimage.co
 import {EditimageComponent} from './components/templates/edit/editimage/editimage.component';
 import {TicketComponent} from './components/templates/ticket/ticket.component';
 import {AdminticketComponent} from './components/templates/admin/adminticket/adminticket.component';
+import { DoubleAuthComponent } from './double-auth/double-auth.component';
 
 @NgModule({
   declarations: [
@@ -94,6 +95,7 @@ import {AdminticketComponent} from './components/templates/admin/adminticket/adm
     EditimageComponent,
     TicketComponent,
     AdminticketComponent,
+    DoubleAuthComponent,
   ],
   imports: [
     BrowserModule,

@@ -48,6 +48,10 @@ export class UserSecurityService extends AbstractService {
     return this.http.post<any>(this.baseUrl + 'login', {token: this.authenticateUser(usernameOrEmail, password)});
   }
 
+  public confirmAuth(usernameOrEmail: string, password: string, code: string): Observable<any> {
+    return this.http.post<any>(this.baseUrl + 'confirmAuth', {token: this.authenticateUser(usernameOrEmail, password), code: code});
+  }
+
   public getEditDto(): Observable<any> {
     return this.http.get<any>(this.baseUrl + 'dto/edit',
     {headers : new HttpHeaders().set('Authorization', this.getUserJwt())});

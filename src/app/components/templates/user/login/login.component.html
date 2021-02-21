@@ -4,6 +4,9 @@
       {{ response.message }}
     </div>
   </div>
+  <div class="modal fade" id="emailAuthModal" tabindex="-1" role="dialog" aria-labelledby="emailAuthLabel" aria-hidden="true">
+    <app-double-auth [user]="user"></app-double-auth>
+  </div>
   <div class="vertical-center">
     <div class="w-100">
       <h2 class="h3 mb-3 text-center">Sign in to Naturopath</h2>
