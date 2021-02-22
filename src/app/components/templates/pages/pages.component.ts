@@ -1,8 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {PageService} from '../../../service/Page.service';
 import {CategoryService} from '../../../service/Category.service';
-import {ActivatedRoute, Router} from '@angular/router';
 import {AbstractComponents} from '../../commons/AbstractComponents';
+import {UserSecurityService} from '../../../service/security/UserSecurity.service';
+import {CookieService} from 'ngx-cookie-service';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-pages',
@@ -24,11 +26,13 @@ export class PagesComponent extends AbstractComponents implements OnInit {
 
   pagi: number[] = [];
 
-  constructor(route: ActivatedRoute,
-              router: Router,
+  constructor(private userSecurityService: UserSecurityService,
+              private cookieService: CookieService,
+              private route: ActivatedRoute,
+              private router: Router,
               private pageService: PageService,
               private categoryService: CategoryService) {
-    super(route, router);
+    super();
     this.categoryService.getAllCategory().subscribe(value => {
       this.categories = value;
     });

@@ -49,9 +49,9 @@ import {AddimageComponent} from './components/templates/add/addimage/addimage.co
 import {EditimageComponent} from './components/templates/edit/editimage/editimage.component';
 import {TicketComponent} from './components/templates/ticket/ticket.component';
 import {AdminticketComponent} from './components/templates/admin/adminticket/adminticket.component';
-import { DoubleAuthComponent } from './double-auth/double-auth.component';
+import {DoubleAuthComponent} from './double-auth/double-auth.component';
 import {CookieService} from 'ngx-cookie-service';
-import { ConnectFromCookieComponent } from './components/templates/user/connect-from-cookie/connect-from-cookie.component';
+import {ConnectFromCookieComponent} from './components/templates/user/connect-from-cookie/connect-from-cookie.component';
 
 @NgModule({
   declarations: [

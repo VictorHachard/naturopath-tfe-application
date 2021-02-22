@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ConnectFromCookieComponent } from './connect-from-cookie.component';
+import {ConnectFromCookieComponent} from './connect-from-cookie.component';
 
 describe('ConnectFromCookieComponent', () => {
   let component: ConnectFromCookieComponent;

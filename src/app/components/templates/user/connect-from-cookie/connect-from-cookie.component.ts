@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AbstractComponents} from '../../../commons/AbstractComponents';
-import {ActivatedRoute, Router} from '@angular/router';
+import {User} from '../../../../model/view/User';
 import {UserSecurityService} from '../../../../service/security/UserSecurity.service';
 import {CookieService} from 'ngx-cookie-service';
-import {User} from '../../../../model/view/User';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-connect-from-cookie',
@@ -12,11 +12,11 @@ import {User} from '../../../../model/view/User';
 })
 export class ConnectFromCookieComponent extends AbstractComponents implements OnInit {
 
-  constructor(route: ActivatedRoute,
-              router: Router,
-              private userSecurityService: UserSecurityService,
-              private cookieService: CookieService) {
-    super(route, router);
+  constructor(private userSecurityService: UserSecurityService,
+              private cookieService: CookieService,
+              private route: ActivatedRoute,
+              private router: Router) {
+    super();
   }
 
   ngOnInit(): void {

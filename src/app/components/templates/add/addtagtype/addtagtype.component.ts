@@ -1,8 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router';
 import {TagTypeService} from '../../../../service/TagType.service';
 import {AbstractComponents} from '../../../commons/AbstractComponents';
+import {UserSecurityService} from '../../../../service/security/UserSecurity.service';
+import {CookieService} from 'ngx-cookie-service';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-addtagtype',
@@ -13,10 +15,12 @@ export class AddtagtypeComponent extends AbstractComponents implements OnInit {
 
   addTagTypeForm: FormGroup;
 
-  constructor(route: ActivatedRoute,
-              router: Router,
+  constructor(private userSecurityService: UserSecurityService,
+              private cookieService: CookieService,
+              private route: ActivatedRoute,
+              private router: Router,
               private tagTypeService: TagTypeService) {
-    super(route, router);
+    super();
   }
 
   ngOnInit(): void {

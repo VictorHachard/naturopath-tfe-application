@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {UserSecurityService} from '../../../../service/security/UserSecurity.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AlertManager} from '../../../../model/my/AlertManager';
 import {User} from '../../../../model/view/User';
 import {AbstractComponents} from '../../../commons/AbstractComponents';
+import {UserSecurityService} from '../../../../service/security/UserSecurity.service';
+import {CookieService} from 'ngx-cookie-service';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-settings',
@@ -26,10 +27,11 @@ export class SettingsComponent extends AbstractComponents implements OnInit {
   confirmForm: FormGroup;
   emailAuthForm: FormGroup;
 
-  constructor(route: ActivatedRoute,
-              router: Router,
-              private userSecurityService: UserSecurityService) {
-    super(route, router);
+  constructor(private userSecurityService: UserSecurityService,
+              private cookieService: CookieService,
+              private route: ActivatedRoute,
+              private router: Router) {
+    super();
     this.initData();
     this.route.paramMap.subscribe(params => {
       this.ngOnInit();

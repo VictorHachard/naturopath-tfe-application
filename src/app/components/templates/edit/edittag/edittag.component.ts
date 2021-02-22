@@ -1,10 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
 import {VoteService} from '../../../../service/Vote.service';
 import {TagService} from '../../../../service/Tag.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {InnerTagService} from '../../../../service/InnerTag.service';
 import {AbstractEdit} from '../../../commons/AbstractEdit';
+import {UserSecurityService} from '../../../../service/security/UserSecurity.service';
+import {CookieService} from 'ngx-cookie-service';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-edittag',
@@ -15,12 +17,14 @@ export class EdittagComponent extends AbstractEdit implements OnInit {
   editInnerTagForm: FormGroup;
   tag: any;
 
-  constructor(route: ActivatedRoute,
-              router: Router,
+  constructor(private userSecurityService: UserSecurityService,
+              private cookieService: CookieService,
+              private route: ActivatedRoute,
+              private router: Router,
               private tagService: TagService,
               private voteService: VoteService,
               private innerTagService: InnerTagService) {
-    super(route, router);
+    super();
   }
 
   ngOnInit(): void {

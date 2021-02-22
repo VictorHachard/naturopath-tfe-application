@@ -1,5 +1,9 @@
 <section class="my-4 container">
-
+  <div *ngFor="let response of alertManagerManager.responseList">
+    <div class="alert {{ response.alert }}" role="alert">
+      {{ response.message }}
+    </div>
+  </div>
   <div class="vertical-center">
     <div class="w-100">
       <h2 class="h3 mb-3 text-center">Reset your password</h2>
@@ -35,5 +39,4 @@
       </div>
     </div>
   </div>
-
 </section>

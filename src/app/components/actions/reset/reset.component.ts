@@ -1,7 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {UserSecurityService} from '../../../service/security/UserSecurity.service';
 import {FormControl, FormGroup, ValidatorFn, Validators} from '@angular/forms';
+import {AbstractComponents} from '../../commons/AbstractComponents';
+import {AlertManager} from '../../../model/my/AlertManager';
+import {UserSecurityService} from '../../../service/security/UserSecurity.service';
+import {CookieService} from 'ngx-cookie-service';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-reset',
@@ -9,14 +12,26 @@ import {FormControl, FormGroup, ValidatorFn, Validators} from '@angular/forms';
   styleUrls: ['./reset.component.css']
 })
 export class ResetComponent implements OnInit {
-
-  error: any = '';
+  alertManagerManager: AlertManager;
   resetForm: FormGroup;
 
-  constructor(private route: ActivatedRoute, private userSecurityService: UserSecurityService) { }
+  constructor(private userSecurityService: UserSecurityService,
+              private cookieService: CookieService,
+              private route: ActivatedRoute,
+              private router: Router) { }
 
   ngOnInit(): void {
+    this.alertManagerManager = new AlertManager();
+    this.logOut();
     this.init();
+  }
+
+  logOut(): void {
+    localStorage.removeItem('currentUser');
+    this.cookieService.delete('remember');
+    this.userSecurityService.logger.next(false);
+    this.userSecurityService.dark.next(false);
+    this.router.navigate(['/home']);
   }
 
   init(): void {
@@ -31,10 +46,12 @@ export class ResetComponent implements OnInit {
 
     this.userSecurityService.resetAccount({token: this.route.snapshot.paramMap.get('token'),
     password: resetValue.password}).subscribe(value => {
-      console.log(value);
+      this.alertManagerManager.addAlert('You password has been change', 'alert-success');
+      setTimeout(() => {
+        this.router.navigate(['/login']);
+      }, 2000);
     }, error => {
-      this.error = error;
-      console.log(error);
+      this.alertManagerManager.addAlert(error.error.message, 'alert-danger');
     });
 
   }

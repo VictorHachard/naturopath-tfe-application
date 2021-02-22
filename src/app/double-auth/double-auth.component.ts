@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Injector, Input, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserSecurityService} from '../service/security/UserSecurity.service';
 import {AbstractComponents} from '../components/commons/AbstractComponents';
@@ -15,7 +15,7 @@ declare let $: any;
   templateUrl: './double-auth.component.html',
   styleUrls: ['./double-auth.component.css']
 })
-export class DoubleAuthComponent extends AbstractComponents implements OnInit {
+export class DoubleAuthComponent implements OnInit {
   doubleForm: FormGroup;
 
   alertManagerManager: AlertManager;
@@ -24,11 +24,10 @@ export class DoubleAuthComponent extends AbstractComponents implements OnInit {
   @Input() user;
   @Input() rememberMe;
 
-  constructor(route: ActivatedRoute,
-              router: Router,
-              private userSecurityService: UserSecurityService,
-              private cookieService: CookieService) {
-    super(route, router);
+  constructor(private userSecurityService: UserSecurityService,
+              private cookieService: CookieService,
+              private route: ActivatedRoute,
+              private router: Router) {
   }
 
   ngOnInit(): void {

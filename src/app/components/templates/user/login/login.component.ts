@@ -1,11 +1,11 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {UserSecurityService} from '../../../../service/security/UserSecurity.service';
-import {ActivatedRoute, Router} from '@angular/router';
 import {AlertManager} from '../../../../model/my/AlertManager';
 import {User} from '../../../../model/view/User';
 import {AbstractComponents} from '../../../commons/AbstractComponents';
+import {UserSecurityService} from '../../../../service/security/UserSecurity.service';
 import {CookieService} from 'ngx-cookie-service';
+import {ActivatedRoute, Router} from '@angular/router';
 
 // jQuery Sign $
 declare let $: any;
@@ -24,11 +24,11 @@ export class LoginComponent extends AbstractComponents implements OnInit {
   rememberMe;
   user: {username: string, password: string};
 
-  constructor(route: ActivatedRoute,
-              router: Router,
-              private userSecurityService: UserSecurityService,
-              private cookieService: CookieService) {
-    super(route, router);
+  constructor(private userSecurityService: UserSecurityService,
+              private cookieService: CookieService,
+              private route: ActivatedRoute,
+              private router: Router) {
+    super();
   }
 
   ngOnInit(): void {

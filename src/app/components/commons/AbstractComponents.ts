@@ -1,11 +1,12 @@
 import {ActivatedRoute, Router} from '@angular/router';
 import {AbstractControl} from '@angular/forms';
+import {UserSecurityService} from '../../service/security/UserSecurity.service';
+import {CookieService} from 'ngx-cookie-service';
+import {HttpClient} from '@angular/common/http';
+import {Injector} from '@angular/core';
 
 export class AbstractComponents {
-
-  constructor(protected route: ActivatedRoute,
-              protected router: Router) {
-  }
+  constructor() { }
 
   printError(formControl: AbstractControl): string {
     //console.log(formControl);
@@ -39,5 +40,4 @@ export class AbstractComponents {
   private hasToPrintError(formControl: AbstractControl): boolean {
     return formControl.invalid && (formControl.dirty || formControl.touched);
   }
-
 }

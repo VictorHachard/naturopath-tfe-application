@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
 import {PageService} from '../../../../service/Page.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {VoteService} from '../../../../service/Vote.service';
@@ -8,6 +7,9 @@ import {InnerParagraphService} from '../../../../service/InnerParagraph.service'
 import {InnerPageService} from '../../../../service/InnerPage.service';
 import {TagTypeService} from '../../../../service/TagType.service';
 import {AbstractEdit} from '../../../commons/AbstractEdit';
+import {UserSecurityService} from '../../../../service/security/UserSecurity.service';
+import {CookieService} from 'ngx-cookie-service';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-addpage',
@@ -24,14 +26,16 @@ export class EditpageComponent extends AbstractEdit implements OnInit {
   page: any;
   paraTag: any;
 
-  constructor(route: ActivatedRoute,
-              router: Router,
+  constructor(private userSecurityService: UserSecurityService,
+              private cookieService: CookieService,
+              private route: ActivatedRoute,
+              private router: Router,
               private pageService: PageService,
               private voteService: VoteService,
               private tagTypeService: TagTypeService,
               private innerParagraphService: InnerParagraphService,
               private innerPageService: InnerPageService) {
-    super(route, router);
+    super();
   }
 
   canVote(inner: any): boolean {

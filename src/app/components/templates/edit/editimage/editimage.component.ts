@@ -1,10 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {AbstractEdit} from '../../../commons/AbstractEdit';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router';
 import {VoteService} from '../../../../service/Vote.service';
 import {ImageService} from '../../../../service/Image.service';
 import {InnerImageService} from '../../../../service/InnerImage.service';
+import {UserSecurityService} from '../../../../service/security/UserSecurity.service';
+import {CookieService} from 'ngx-cookie-service';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-editimage',
@@ -15,12 +17,14 @@ export class EditimageComponent extends AbstractEdit implements OnInit {
   editInnerImageForm: FormGroup;
   image: any;
 
-  constructor(route: ActivatedRoute,
-              router: Router,
+  constructor(private userSecurityService: UserSecurityService,
+              private cookieService: CookieService,
+              private route: ActivatedRoute,
+              private router: Router,
               private imageService: ImageService,
               private voteService: VoteService,
               private innerImageService: InnerImageService) {
-    super(route, router);
+    super();
   }
 
   ngOnInit(): void {

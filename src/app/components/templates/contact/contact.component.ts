@@ -1,8 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router';
 import {AbstractComponents} from '../../commons/AbstractComponents';
 import {TicketService} from '../../../service/Ticket.service';
+import {UserSecurityService} from '../../../service/security/UserSecurity.service';
+import {CookieService} from 'ngx-cookie-service';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-contact',
@@ -12,10 +14,12 @@ import {TicketService} from '../../../service/Ticket.service';
 export class ContactComponent extends AbstractComponents implements OnInit {
   ticketForm: FormGroup;
 
-  constructor(route: ActivatedRoute,
-              router: Router,
+  constructor(private userSecurityService: UserSecurityService,
+              private cookieService: CookieService,
+              private route: ActivatedRoute,
+              private router: Router,
               private ticketService: TicketService) {
-    super(route, router);
+    super();
   }
 
   ngOnInit(): void {

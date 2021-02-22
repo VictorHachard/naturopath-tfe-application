@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
 import {AbstractComponents} from '../../commons/AbstractComponents';
+import {UserSecurityService} from '../../../service/security/UserSecurity.service';
+import {CookieService} from 'ngx-cookie-service';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-terms',
@@ -9,9 +11,11 @@ import {AbstractComponents} from '../../commons/AbstractComponents';
 })
 export class TermsComponent extends AbstractComponents implements OnInit {
 
-  constructor(route: ActivatedRoute,
-              router: Router) {
-    super(route, router);
+  constructor(private userSecurityService: UserSecurityService,
+              private cookieService: CookieService,
+              private route: ActivatedRoute,
+              private router: Router) {
+    super();
   }
 
   ngOnInit(): void {

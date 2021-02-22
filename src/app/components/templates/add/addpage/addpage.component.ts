@@ -3,8 +3,10 @@ import {CategoryService} from '../../../../service/Category.service';
 import {Category} from '../../../../model/view/Category';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {PageService} from '../../../../service/Page.service';
-import {ActivatedRoute, Router} from '@angular/router';
 import {AbstractComponents} from '../../../commons/AbstractComponents';
+import {UserSecurityService} from '../../../../service/security/UserSecurity.service';
+import {CookieService} from 'ngx-cookie-service';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-addpageselectcategory',
@@ -15,11 +17,13 @@ export class AddpageComponent extends AbstractComponents implements OnInit {
   addPageForm: FormGroup;
   categories: Category[];
 
-  constructor(route: ActivatedRoute,
-              router: Router,
+  constructor(private userSecurityService: UserSecurityService,
+              private cookieService: CookieService,
+              private route: ActivatedRoute,
+              private router: Router,
               private categoryService: CategoryService,
               private pageService: PageService) {
-    super(route, router);
+    super();
   }
 
   ngOnInit(): void {

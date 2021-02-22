@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { DoubleAuthComponent } from './double-auth.component';
+import {DoubleAuthComponent} from './double-auth.component';
 
 describe('DoubleAuthComponent', () => {
   let component: DoubleAuthComponent;

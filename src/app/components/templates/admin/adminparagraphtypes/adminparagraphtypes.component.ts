@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ParagraphTypeService} from '../../../../service/ParagraphType.service';
 import {AbstractComponents} from '../../../commons/AbstractComponents';
+import {UserSecurityService} from '../../../../service/security/UserSecurity.service';
+import {CookieService} from 'ngx-cookie-service';
 import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
@@ -12,10 +14,12 @@ export class AdminparagraphtypesComponent extends AbstractComponents implements 
 
   parapgraphTypes: any[];
 
-  constructor(route: ActivatedRoute,
-              router: Router,
+  constructor(private userSecurityService: UserSecurityService,
+              private cookieService: CookieService,
+              private route: ActivatedRoute,
+              private router: Router,
               private paragraphTypeService: ParagraphTypeService) {
-    super(route, router);
+    super();
   }
 
   ngOnInit(): void {

@@ -1,14 +1,15 @@
-import {ActivatedRoute, Router} from '@angular/router';
 import {AbstractComponents} from './AbstractComponents';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {UserSecurityService} from '../../service/security/UserSecurity.service';
+import {CookieService} from 'ngx-cookie-service';
+import {ActivatedRoute, Router} from '@angular/router';
 
 export class AbstractEdit extends AbstractComponents {
   id: string;
   messageInnerForm: FormGroup;
 
-  constructor(protected route: ActivatedRoute,
-              protected router: Router) {
-    super(route, router);
+  constructor(protected route: ActivatedRoute) {
+    super();
     this.id = this.route.snapshot.paramMap.get('id');
   }
 

@@ -1,24 +1,23 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Injector, OnInit} from '@angular/core';
 import {User} from '../../../model/view/User';
-import {UserSecurityService} from '../../../service/security/UserSecurity.service';
-import {ActivatedRoute, Router} from '@angular/router';
-import {CookieService} from 'ngx-cookie-service';
 import {AbstractComponents} from '../../commons/AbstractComponents';
+import {UserSecurityService} from '../../../service/security/UserSecurity.service';
+import {CookieService} from 'ngx-cookie-service';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent extends AbstractComponents implements OnInit {
+export class HeaderComponent implements OnInit {
 
   user: User;
 
-  constructor(route: ActivatedRoute,
-              router: Router,
-              private userSecurityService: UserSecurityService,
-              private cookieService: CookieService) {
-    super(route, router);
+  constructor(private userSecurityService: UserSecurityService,
+              private cookieService: CookieService,
+              private route: ActivatedRoute,
+              private router: Router) {
     this.userSecurityService.isLoggedIn().subscribe(value => {
       this.logIn();
     });

@@ -1,8 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {AbstractComponents} from '../../../commons/AbstractComponents';
-import {ActivatedRoute, Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ImageService} from '../../../../service/Image.service';
+import {UserSecurityService} from '../../../../service/security/UserSecurity.service';
+import {CookieService} from 'ngx-cookie-service';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-addimage',
@@ -13,10 +15,12 @@ export class AddimageComponent extends AbstractComponents implements OnInit {
   addImageForm: FormGroup;
   imgURL: any;
 
-  constructor(route: ActivatedRoute,
-              router: Router,
+  constructor(private userSecurityService: UserSecurityService,
+              private cookieService: CookieService,
+              private route: ActivatedRoute,
+              private router: Router,
               private imageService: ImageService) {
-    super(route, router);
+    super();
   }
 
   ngOnInit(): void {

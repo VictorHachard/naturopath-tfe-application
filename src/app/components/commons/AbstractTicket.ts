@@ -1,18 +1,15 @@
-import {ActivatedRoute, Router} from '@angular/router';
 import {AbstractComponents} from './AbstractComponents';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute} from '@angular/router';
 
 export class AbstractTicket extends AbstractComponents {
-  id: string;
-  username = JSON.parse(localStorage.getItem('currentUser')).username;
+    username = JSON.parse(localStorage.getItem('currentUser')).username;
   ticketMessageForm: FormGroup;
   ticketCloseForm: FormGroup;
   ticketList: any;
 
-  constructor(protected route: ActivatedRoute,
-              protected router: Router) {
-    super(route, router);
-    this.id = this.route.snapshot.paramMap.get('id');
+  constructor() {
+    super();
   }
 
   init(): void {

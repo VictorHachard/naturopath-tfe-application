@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, ValidatorFn, Validators} from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router';
-import {UserSecurityService} from '../../../../service/security/UserSecurity.service';
 import {User} from '../../../../model/view/User';
 import {AlertManager} from '../../../../model/my/AlertManager';
 import {AbstractComponents} from '../../../commons/AbstractComponents';
+import {UserSecurityService} from '../../../../service/security/UserSecurity.service';
+import {CookieService} from 'ngx-cookie-service';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -23,10 +24,11 @@ export class RegisterComponent extends AbstractComponents implements OnInit {
     password: 'Test123*',
   };
 
-  constructor(route: ActivatedRoute,
-              router: Router,
-              private userSecurityService: UserSecurityService) {
-    super(route, router);
+  constructor(private userSecurityService: UserSecurityService,
+              private cookieService: CookieService,
+              private route: ActivatedRoute,
+              private router: Router) {
+    super();
   }
 
   ngOnInit(): void {
