@@ -17,6 +17,7 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./editpage.component.css']
 })
 export class EditpageComponent extends AbstractEdit implements OnInit {
+  private id: string;
   allTagTypeList = [];
   tagTypeListSend = [];
   editInnerPageForm: FormGroup;
@@ -53,6 +54,7 @@ export class EditpageComponent extends AbstractEdit implements OnInit {
   }
 
   ngOnInit(): void {
+    this.id = this.route.snapshot.paramMap.get('id');
     this.pageService.getEditPageDto(this.id).subscribe(data => {
       console.log(data);
       this.page = data;

@@ -11,9 +11,17 @@
 .dark textarea,
 .dark select,
 .dark td,
+.dark .custom-file-label,
 .dark th {
   border-color: #575757;
   color: #e8e6e3;
+}
+.dark .form-control,
+.custom-file-input:lang(en) ~ .custom-file-label::after,
+.dark .custom-file-label {
+  color: rgb(202, 198, 190) !important;
+  background-color: rgb(24, 26, 27) !important;
+  border-color: rgb(54, 63, 72) !important;
 }
 .dark a {
   color: #3391ff;
@@ -64,34 +72,22 @@
 .dark .alert-success {
   color: rgb(168, 234, 183) !important;
   background-color: rgb(23, 54, 30) !important;
-  border-top-color: rgb(41, 99, 54) !important;
-  border-right-color: rgb(41, 99, 54) !important;
-  border-bottom-color: rgb(41, 99, 54) !important;
-  border-left-color: rgb(41, 99, 54) !important;
+  border-color: rgb(41, 99, 54) !important;
 }
 .dark .alert-danger {
   color: rgb(230, 155, 162) !important;
   background-color: rgb(64, 11, 16) !important;
-  border-top-color: rgb(129, 23, 34) !important;
-  border-right-color: rgb(129, 23, 34) !important;
-  border-bottom-color: rgb(129, 23, 34) !important;
-  border-left-color: rgb(129, 23, 34) !important;
+  border-color: rgb(129, 23, 34) !important;
 }
 .dark .alert-warning {
   color: rgb(251, 219, 127);
   background-color: rgb(81, 62, 0);
-  border-top-color: rgb(167, 126, 0);
-  border-right-color: rgb(167, 126, 0);
-  border-bottom-color: rgb(167, 126, 0);
-  border-left-color: rgb(167, 126, 0);
+  border-color: rgb(167, 126, 0);
 }
 .dark .dropdown-menu {
   color: rgb(218, 215, 210) !important;
   background-color: rgb(24, 26, 27) !important;
-  border-top-color: rgba(102, 102, 102, 0.15) !important;
-  border-right-color: rgba(102, 102, 102, 0.15) !important;
-  border-bottom-color: rgba(102, 102, 102, 0.15) !important;
-  border-left-color: rgba(102, 102, 102, 0.15) !important;
+  border-color: rgba(102, 102, 102, 0.15) !important;
 }
 .dark .dropdown-item {
   color: rgb(218, 215, 210) !important;
@@ -102,20 +98,9 @@
 .dark .dropdown-divider {
   border-top-color: rgb(50, 59, 68) !important;
 }
-.dark .form-control {
-  color: rgb(202, 198, 190) !important;
-  background-color: rgb(24, 26, 27) !important;
-  border-top-color: rgb(54, 63, 72) !important;
-  border-right-color: rgb(54, 63, 72) !important;
-  border-bottom-color: rgb(54, 63, 72) !important;
-  border-left-color: rgb(54, 63, 72) !important;
-}
 .dark .rc-anchor-light.rc-anchor-normal {
   /* MARCHE PAS */
-  border-top-color: rgb(60, 60, 60) !important;
-  border-right-color: rgb(60, 60, 60) !important;
-  border-bottom-color: rgb(60, 60, 60) !important;
-  border-left-color: rgb(60, 60, 60) !important;
+  border-color: rgb(60, 60, 60) !important;
 }
 .dark .rc-anchor-light {
   /* MARCHE PAS */

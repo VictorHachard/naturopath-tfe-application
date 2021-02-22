@@ -62,28 +62,22 @@ export class SettingsComponent extends AbstractComponents implements OnInit {
       email: new FormControl(this.user.email, [Validators.required, Validators.email]),
       password: new FormControl('',  Validators.required)
     });
-
     this.updateNameForm = new FormGroup({
       firstName: new FormControl(this.user.firstName !== null ? this.user.firstName : ''),
       lastName: new FormControl(this.user.lastName !== null ? this.user.lastName : '')
     });
-
     this.deleteForm = new FormGroup({
       password: new FormControl('',  Validators.required)
     });
-
     this.updatePrivacyForm = new FormGroup({
       isPrivate: new FormControl(this.user.isPrivate)
     });
-
     this.emailAuthForm = new FormGroup({
       emailAuth: new FormControl(this.user.emailAuth)
     });
-
     this.updateAppearanceForm = new FormGroup({
       dark: new FormControl(this.user.dark)
     });
-
     this.confirmForm = new FormGroup({});
   }
 

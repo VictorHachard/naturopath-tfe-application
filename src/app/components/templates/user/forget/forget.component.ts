@@ -4,6 +4,7 @@ import {AbstractComponents} from '../../../commons/AbstractComponents';
 import {UserSecurityService} from '../../../../service/security/UserSecurity.service';
 import {CookieService} from 'ngx-cookie-service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {AlertManager} from '../../../../model/my/AlertManager';
 
 @Component({
   selector: 'app-forget',
@@ -11,7 +12,7 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./forget.component.css']
 })
 export class ForgetComponent extends AbstractComponents implements OnInit {
-
+  alertManagerManager: AlertManager;
   setResetForm: FormGroup;
 
   constructor(private userSecurityService: UserSecurityService,
@@ -22,6 +23,7 @@ export class ForgetComponent extends AbstractComponents implements OnInit {
   }
 
   ngOnInit(): void {
+    this.alertManagerManager = new AlertManager();
     this.init();
   }
 
@@ -36,10 +38,10 @@ export class ForgetComponent extends AbstractComponents implements OnInit {
     const setResetValue = this.setResetForm.value;
 
     this.userSecurityService.setResetAccount({emailOrUsername: setResetValue.emailOrUsername,
-      forgetPassword: setResetValue.forgetPassword}).subscribe(data => {
-        console.log(data);
+      forgetPassword: setResetValue.forgetPassword}).subscribe(value => {
+        this.alertManagerManager.addAlert('An email with instructions has been sent to you', 'alert-success');
       }, error => {
-        console.log(error);
+      this.alertManagerManager.addAlert(error.error.message, 'alert-danger');
     });
   }
 }

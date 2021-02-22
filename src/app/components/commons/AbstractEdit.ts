@@ -5,12 +5,10 @@ import {CookieService} from 'ngx-cookie-service';
 import {ActivatedRoute, Router} from '@angular/router';
 
 export class AbstractEdit extends AbstractComponents {
-  id: string;
   messageInnerForm: FormGroup;
 
-  constructor(protected route: ActivatedRoute) {
+  constructor() {
     super();
-    this.id = this.route.snapshot.paramMap.get('id');
   }
 
   init(): void {

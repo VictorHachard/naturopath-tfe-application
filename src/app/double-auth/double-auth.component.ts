@@ -15,7 +15,7 @@ declare let $: any;
   templateUrl: './double-auth.component.html',
   styleUrls: ['./double-auth.component.css']
 })
-export class DoubleAuthComponent implements OnInit {
+export class DoubleAuthComponent extends AbstractComponents implements OnInit {
   doubleForm: FormGroup;
 
   alertManagerManager: AlertManager;
@@ -28,6 +28,7 @@ export class DoubleAuthComponent implements OnInit {
               private cookieService: CookieService,
               private route: ActivatedRoute,
               private router: Router) {
+    super();
   }
 
   ngOnInit(): void {
@@ -45,7 +46,6 @@ export class DoubleAuthComponent implements OnInit {
   complete(): void {
     console.log(this.user);
     this.userSecurityService.confirmAuth(this.user.username, this.user.password, this.doubleForm.get('code').value, this.rememberMe).subscribe(value => {
-
       const user: User = value;
       localStorage.setItem('currentUser', JSON.stringify(user));
       if (value.cookieToken !== null) {

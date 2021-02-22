@@ -15,6 +15,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class EdittagComponent extends AbstractEdit implements OnInit {
   editInnerTagForm: FormGroup;
+  private id: string;s
   tag: any;
 
   constructor(private userSecurityService: UserSecurityService,
@@ -28,6 +29,7 @@ export class EdittagComponent extends AbstractEdit implements OnInit {
   }
 
   ngOnInit(): void {
+    this.id = this.route.snapshot.paramMap.get('id');
     this.tagService.getEditTagDto(this.id).subscribe(data => {
       console.log(data);
       this.tag = data;

@@ -17,7 +17,6 @@ declare let $: any;
 })
 export class LoginComponent extends AbstractComponents implements OnInit {
   loginForm: FormGroup;
-
   alertManagerManager: AlertManager;
   count = 1;
   doubleAuth;

@@ -14,9 +14,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class EditparatagtypeComponent extends AbstractComponents implements OnInit {
   editParatagTypeForm: FormGroup;
-
   private id: string;
-
   paratagType: any;
   tagTypes: any[];
 
@@ -30,7 +28,6 @@ export class EditparatagtypeComponent extends AbstractComponents implements OnIn
   }
 
   ngOnInit(): void {
-
     this.id = this.route.snapshot.paramMap.get('id');
     this.paratagtypeService.getParatagType(this.id).subscribe(data => {
       console.log(data);

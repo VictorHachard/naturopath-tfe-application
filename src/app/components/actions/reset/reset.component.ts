@@ -31,7 +31,6 @@ export class ResetComponent implements OnInit {
     this.cookieService.delete('remember');
     this.userSecurityService.logger.next(false);
     this.userSecurityService.dark.next(false);
-    this.router.navigate(['/home']);
   }
 
   init(): void {

@@ -15,6 +15,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class EditimageComponent extends AbstractEdit implements OnInit {
   editInnerImageForm: FormGroup;
+  private id: string;
   image: any;
 
   constructor(private userSecurityService: UserSecurityService,
@@ -28,6 +29,7 @@ export class EditimageComponent extends AbstractEdit implements OnInit {
   }
 
   ngOnInit(): void {
+    this.id = this.route.snapshot.paramMap.get('id');
     this.imageService.getEditImageDto(this.id).subscribe(data => {
       console.log(data);
       this.image = data;

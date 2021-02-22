@@ -13,9 +13,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class EditparagraphtypeComponent extends AbstractComponents implements OnInit {
   editParagraphTypeForm: FormGroup;
-
   private id: string;
-
   paragraphType: any;
 
   constructor(private userSecurityService: UserSecurityService,
