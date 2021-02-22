@@ -44,12 +44,16 @@ export class UserSecurityService extends AbstractService {
     return this.http.post<any>(this.baseUrl + 'register', body);
   }
 
-  public login(usernameOrEmail: string, password: string): Observable<any> {
-    return this.http.post<any>(this.baseUrl + 'login', {token: this.authenticateUser(usernameOrEmail, password)});
+  public login(usernameOrEmail: string, password: string, rememberMe: boolean): Observable<any> {
+    return this.http.post<any>(this.baseUrl + 'login', {token: this.authenticateUser(usernameOrEmail, password), rememberMe: rememberMe});
   }
 
-  public confirmAuth(usernameOrEmail: string, password: string, code: string): Observable<any> {
-    return this.http.post<any>(this.baseUrl + 'confirmAuth', {token: this.authenticateUser(usernameOrEmail, password), code: code});
+  public connectFromCookie(username: string, token: string): Observable<any> {
+    return this.http.post<any>(this.baseUrl + 'connectFromCookie', {token: this.authenticateUser(username, token)});
+  }
+
+  public confirmAuth(usernameOrEmail: string, password: string, code: string, rememberMe: boolean): Observable<any> {
+    return this.http.post<any>(this.baseUrl + 'confirmAuth', {token: this.authenticateUser(usernameOrEmail, password), code: code, rememberMe: rememberMe});
   }
 
   public getEditDto(): Observable<any> {
@@ -95,6 +99,11 @@ export class UserSecurityService extends AbstractService {
 
   public updatePassword(body: any): Observable<any> {
     return this.http.put<any>(this.baseUrl + 'updatePassword', body,
+      {headers : new HttpHeaders().set('Authorization', this.getUserJwt())});
+  }
+
+  public updateSecurity(body: any): Observable<any> {
+    return this.http.put<any>(this.baseUrl + 'updateSecurity', body,
       {headers : new HttpHeaders().set('Authorization', this.getUserJwt())});
   }
 

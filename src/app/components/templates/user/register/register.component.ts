@@ -13,13 +13,12 @@ import {AbstractComponents} from '../../../commons/AbstractComponents';
 })
 export class RegisterComponent extends AbstractComponents implements OnInit {
   registerForm: FormGroup;
-
   alertManagerManager: AlertManager;
   count = 1;
 
   private debug = true;
   private default = {
-    username: 'paulin',
+    username: 'Paulin',
     email: 'test@test.test',
     password: 'Test123*',
   };

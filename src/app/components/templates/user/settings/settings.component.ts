@@ -15,6 +15,7 @@ export class SettingsComponent extends AbstractComponents implements OnInit {
 
   param: string;
   user: any;
+  notUser: boolean;
   alertManagerManager: AlertManager;
 
   updateUsernameEmailForm: FormGroup;
@@ -22,7 +23,8 @@ export class SettingsComponent extends AbstractComponents implements OnInit {
   updatePrivacyForm: FormGroup;
   updateAppearanceForm: FormGroup;
   deleteForm: FormGroup;
-  confirmForm: FormGroup = new FormGroup({});
+  confirmForm: FormGroup;
+  emailAuthForm: FormGroup;
 
   constructor(route: ActivatedRoute,
               router: Router,
@@ -46,7 +48,9 @@ export class SettingsComponent extends AbstractComponents implements OnInit {
       user.token = JSON.parse(localStorage.getItem('currentUser')).token;
       localStorage.setItem('currentUser', JSON.stringify(user));
       this.userSecurityService.change.next(true);
+      this.notUser = !(JSON.parse(localStorage.getItem('currentUser')).roleList.length > 1);
       this.init();
+      console.log(this.user);
     });
   }
 
@@ -70,9 +74,15 @@ export class SettingsComponent extends AbstractComponents implements OnInit {
       isPrivate: new FormControl(this.user.isPrivate)
     });
 
+    this.emailAuthForm = new FormGroup({
+      emailAuth: new FormControl(this.user.emailAuth)
+    });
+
     this.updateAppearanceForm = new FormGroup({
       dark: new FormControl(this.user.dark)
     });
+
+    this.confirmForm = new FormGroup({});
   }
 
   updateUsernameEmail(): void {
@@ -140,6 +150,17 @@ export class SettingsComponent extends AbstractComponents implements OnInit {
       this.initData();
     }, error => {
       console.log(error);
+      this.alertManagerManager.addAlert(error.error.message, 'alert-danger');
+    });
+  }
+
+  setEmailAuth(): void {
+    const emailAuthValue = this.emailAuthForm.value;
+
+    this.userSecurityService.updateSecurity({emailAuth: emailAuthValue.emailAuth}).subscribe(value => {
+      this.alertManagerManager.addAlert('The modification has been done', 'alert-success');
+      this.initData();
+    }, error => {
       this.alertManagerManager.addAlert(error.error.message, 'alert-danger');
     });
   }

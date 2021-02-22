@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {AlertManager} from '../../../../model/my/AlertManager';
 import {User} from '../../../../model/view/User';
 import {AbstractComponents} from '../../../commons/AbstractComponents';
+import {CookieService} from 'ngx-cookie-service';
 
 // jQuery Sign $
 declare let $: any;
@@ -20,11 +21,13 @@ export class LoginComponent extends AbstractComponents implements OnInit {
   alertManagerManager: AlertManager;
   count = 1;
   doubleAuth;
+  rememberMe;
   user: {username: string, password: string};
 
   constructor(route: ActivatedRoute,
               router: Router,
-              private userSecurityService: UserSecurityService) {
+              private userSecurityService: UserSecurityService,
+              private cookieService: CookieService) {
     super(route, router);
   }
 
@@ -32,22 +35,26 @@ export class LoginComponent extends AbstractComponents implements OnInit {
     this.alertManagerManager = new AlertManager();
     this.init();
     this.doubleAuth = false;
+    this.rememberMe = false;
     this.user = {username: undefined, password: undefined};
   }
 
   init(): void {
     this.loginForm = new FormGroup({
       emailOrUsername: new FormControl('Paulin', Validators.required),
-      password: new FormControl('Test123*',  Validators.required)
+      password: new FormControl('Test123*',  Validators.required),
+      rememberMe: new FormControl(false)
     });
   }
+
+
 
   login(): void {
     const loginValue = this.loginForm.value;
 
-    this.userSecurityService.login(loginValue.emailOrUsername, loginValue.password).subscribe(value => {
-      console.log(value);
+    this.userSecurityService.login(loginValue.emailOrUsername, loginValue.password, loginValue.rememberMe).subscribe(value => {
       if (value.emailAuthValidate === false && value.token === null) {
+        this.rememberMe = loginValue.rememberMe;
         this.user.username = value.username;
         this.user.password = loginValue.password;
         this.doubleAuth = true;
@@ -55,6 +62,9 @@ export class LoginComponent extends AbstractComponents implements OnInit {
       } else {
         const user: User = value;
         localStorage.setItem('currentUser', JSON.stringify(user));
+        if (value.cookieToken !== null) {
+          this.cookieService.set('remember', user.username + '==' + value.cookieToken);
+        }
         this.userSecurityService.logger.next(true);
         this.router.navigate(['/home']);
       }

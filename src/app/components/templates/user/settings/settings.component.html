@@ -47,7 +47,7 @@
         <form [formGroup]="confirmForm" (ngSubmit)="setConfirmation()">
           <button class="btn btn-primary mb-2" type="submit">Resend a confirmation</button>
         </form>
-    </div>
+      </div>
     </div>
     <!-- End Account -->
     <!-- Security -->
@@ -66,6 +66,17 @@
       <form class="form-setting">
         <button class="btn btn-primary mb-2" type="submit">Request data</button>
       </form>
+      <div *ngIf="notUser">
+        <hr class="style1 my-4">
+        <p>Double authentication</p>
+        <form [formGroup]="emailAuthForm" (ngSubmit)="setEmailAuth()">
+          <div class="mb-3 form-check form-switch">
+            <input type="checkbox" class="form-check-input" formControlName="emailAuth">
+            <label class="form-check-label">Email authentication</label>
+          </div>
+          <button class="btn btn-primary mb-2" type="submit">Update</button>
+        </form>
+      </div>
     </div>
     <!-- End Security -->
     <!-- Profile -->

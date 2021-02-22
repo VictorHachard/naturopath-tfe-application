@@ -50,6 +50,8 @@ import {EditimageComponent} from './components/templates/edit/editimage/editimag
 import {TicketComponent} from './components/templates/ticket/ticket.component';
 import {AdminticketComponent} from './components/templates/admin/adminticket/adminticket.component';
 import { DoubleAuthComponent } from './double-auth/double-auth.component';
+import {CookieService} from 'ngx-cookie-service';
+import { ConnectFromCookieComponent } from './components/templates/user/connect-from-cookie/connect-from-cookie.component';
 
 @NgModule({
   declarations: [
@@ -96,6 +98,7 @@ import { DoubleAuthComponent } from './double-auth/double-auth.component';
     TicketComponent,
     AdminticketComponent,
     DoubleAuthComponent,
+    ConnectFromCookieComponent,
   ],
   imports: [
     BrowserModule,
@@ -108,7 +111,10 @@ import { DoubleAuthComponent } from './double-auth/double-auth.component';
   exports: [
     HttpClientModule
   ],
-  providers: [AuthGuardService],
+  providers: [
+    AuthGuardService,
+    CookieService,
+  ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
