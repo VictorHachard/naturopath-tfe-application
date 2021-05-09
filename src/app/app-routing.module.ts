@@ -39,6 +39,9 @@ import {AddimageComponent} from './components/templates/add/addimage/addimage.co
 import {TicketComponent} from './components/templates/ticket/ticket.component';
 import {AdminticketComponent} from './components/templates/admin/adminticket/adminticket.component';
 import {RolesGuardAdminService, RolesGuardOwnerService} from './service/guards/roles-guard.service';
+import {AdminimagesComponent} from './components/templates/admin/adminimages/adminimages.component';
+import {AdminpagesComponent} from './components/templates/admin/adminpages/adminpages.component';
+import {AdmintagsComponent} from './components/templates/admin/admintags/admintags.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home'},
@@ -69,12 +72,15 @@ const routes: Routes = [
 
   { path: 'editpage/:id', component: EditpageComponent, canActivate: [AuthGuardService] },
   { path: 'addpage', component: AddpageComponent, canActivate: [AuthGuardService] },
+  { path: 'adminpages', component: AdminpagesComponent, canActivate: [AuthGuardService] },
 
   { path: 'edittag/:id', component: EdittagComponent, canActivate: [AuthGuardService] },
   { path: 'addtag', component: AddtagComponent, canActivate: [AuthGuardService] },
+  { path: 'admintags', component: AdmintagsComponent, canActivate: [AuthGuardService] },
 
   { path: 'editimage/:id', component: EditimageComponent, canActivate: [AuthGuardService] },
   { path: 'addimage', component: AddimageComponent, canActivate: [AuthGuardService] },
+  { path: 'adminimages', component: AdminimagesComponent, canActivate: [AuthGuardService] },
 
   { path: 'editcategory/:id', component: EditcategoryComponent, canActivate: [AuthGuardService] },
   { path: 'addcategory', component: AddcategoryComponent, canActivate: [AuthGuardService] },

@@ -50,7 +50,7 @@ export class EdittagComponent extends AbstractEdit implements OnInit {
   updateInnerTag(): void {
     const editInnerTagValue = this.editInnerTagForm.value;
     const innerTagId: string = this.tag.innerTagList[0].id;
-    this.innerTagService.updateInnerTag(innerTagId.toString(), {
+    this.innerTagService.updateInner(innerTagId.toString(), {
       content: editInnerTagValue.content,
       name: editInnerTagValue.name}).subscribe(value => {
         this.ngOnInit();
@@ -62,7 +62,7 @@ export class EdittagComponent extends AbstractEdit implements OnInit {
   validationInnerTag(): void {
     const editInnerTagValue = this.editInnerTagForm.value;
     const innerTagId: string = this.tag.innerTagList[0].id;
-    this.innerTagService.validationInnerTag(innerTagId, {
+    this.innerTagService.validationInner(innerTagId, {
       content: editInnerTagValue.content,
       name: editInnerTagValue.name}).subscribe(value => {
       this.ngOnInit();
@@ -87,7 +87,7 @@ export class EdittagComponent extends AbstractEdit implements OnInit {
 
   addInnerTag(id: number, tagId: number): void {
     const editInnerTagValue = this.editInnerTagForm.value;
-    this.innerTagService.addInnerTag(tagId.toString(), {
+    this.innerTagService.addInner(tagId.toString(), {
       content: editInnerTagValue.content,
       name: editInnerTagValue.name}).subscribe(value => {
         this.ngOnInit();

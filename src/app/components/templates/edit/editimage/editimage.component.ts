@@ -7,6 +7,8 @@ import {InnerImageService} from '../../../../service/InnerImage.service';
 import {UserSecurityService} from '../../../../service/security/UserSecurity.service';
 import {CookieService} from 'ngx-cookie-service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {DomSanitizer} from '@angular/platform-browser';
+import {element} from 'protractor';
 
 @Component({
   selector: 'app-editimage',
@@ -17,6 +19,9 @@ export class EditimageComponent extends AbstractEdit implements OnInit {
   editInnerImageForm: FormGroup;
   private id: string;
   image: any;
+  imgURL: any;
+  trustedUrl: any;
+  tmpImage: any;
 
   constructor(private userSecurityService: UserSecurityService,
               private cookieService: CookieService,
@@ -24,7 +29,8 @@ export class EditimageComponent extends AbstractEdit implements OnInit {
               private router: Router,
               private imageService: ImageService,
               private voteService: VoteService,
-              private innerImageService: InnerImageService) {
+              private innerImageService: InnerImageService,
+              private sanitization: DomSanitizer){
     super();
   }
 
@@ -34,6 +40,10 @@ export class EditimageComponent extends AbstractEdit implements OnInit {
       console.log(data);
       this.image = data;
       this.init();
+      this.imgURL = 'C:/test/' + this.image.innerImageList[0].url;
+      console.log(this.imgURL);
+      this.trustedUrl = this.sanitization.bypassSecurityTrustUrl(this.imgURL);
+      console.log(this.trustedUrl.toString());
     });
   }
 
@@ -44,40 +54,32 @@ export class EditimageComponent extends AbstractEdit implements OnInit {
         [Validators.required, Validators.minLength(2), Validators.maxLength(32)]),
       description: new FormControl(this.image.innerImageList[0].description,
         [Validators.required, Validators.minLength(32), Validators.maxLength(1024)]),
+      image: new FormControl(null, [Validators.required]),
+      fileSource: new FormControl('', [Validators.required])
     });
   }
 
-  updateInnerTag(): void {
-    const editInnerTagValue = this.editInnerImageForm.value;
+  validationInnerImage(): void {
+    const editInnerImageValue = this.editInnerImageForm.value;
     const innerImageId: string = this.image.innerImageList[0].id;
-    this.innerImageService.updateInnerTag(innerImageId.toString(), {
-      description: editInnerTagValue.description,
-      title: editInnerTagValue.title}).subscribe(value => {
+    this.innerImageService.validationInner(innerImageId, {
+      description: editInnerImageValue.description,
+      title: editInnerImageValue.title,
+      url: editInnerImageValue.fileSource
+    }).subscribe(value => {
       this.ngOnInit();
     }, error => {
 
     });
   }
 
-  validationInnerTag(): void {
-    const editInnerTagValue = this.editInnerImageForm.value;
-    const innerImageId: string = this.image.innerImageList[0].id;
-    this.innerImageService.validationInnerTag(innerImageId, {
-      description: editInnerTagValue.description,
-      title: editInnerTagValue.title}).subscribe(value => {
-      this.ngOnInit();
-    }, error => {
-
-    });
-  }
-
-  voteInnerTag(id: number, choice: number): void {
+  voteInnerImage(id: number, choice: number): void {
     if (choice === 0) {
       this.addInnerImageMessage(id);
     }
     this.voteService.addVote({
       choice: choice.toString(),
-      type: 'InnerImage', //todo remove
+      type: 'InnerImage', // todo remove
       typeId: id.toString()}).subscribe(value => {
       this.ngOnInit();
     }, error => {
@@ -85,16 +87,20 @@ export class EditimageComponent extends AbstractEdit implements OnInit {
     });
   }
 
-  addInnerTag(id: number, tagId: number): void {
-    const editInnerTagValue = this.editInnerImageForm.value;
-    this.innerImageService.addInnerTag(tagId.toString(), {
-      description: editInnerTagValue.description,
-      title: editInnerTagValue.title}).subscribe(value => {
-      this.ngOnInit();
+  addInnerImage(id: number, tagId: number): void {
+    const editInnerImageValue = this.editInnerImageForm.value;
+    console.log(this.tmpImage);
+    editInnerImageValue.fileSource = this.tmpImage;
+    this.innerImageService.addInner(tagId.toString(), {
+      description: editInnerImageValue.description,
+      title: editInnerImageValue.title,
+       url: editInnerImageValue.fileSource}).subscribe(value => {
+         this.ngOnInit();
     }, error => {
-
     });
   }
+
+  // TODO regler le fait de devoir reload l'image a chque appui sur send message
 
   addInnerImageMessage(id: number): void {
     const messageInnerValue = this.messageInnerForm.value;
@@ -104,6 +110,44 @@ export class EditimageComponent extends AbstractEdit implements OnInit {
       this.ngOnInit();
     }, error => {
 
+    });
+  }
+
+  onFileChange(event): void {
+    if (event.target.files.length > 0) {
+      const file: File = event.target.files[0];
+
+      const reader = new FileReader();
+      reader.onload = (event: any) => {
+        this.trustedUrl = event.target.result;
+      };
+      reader.readAsDataURL(file);
+
+      this.editInnerImageForm.patchValue({
+        fileSource: file
+      });
+    }
+  }
+
+
+  updateImage(): void {
+    const editImageValue = this.editInnerImageForm.value;
+
+    const formData: FormData = new FormData();
+    const name: string = (new Date()).valueOf().toString() + Math.random().toString(36).substring(10) + JSON.parse(localStorage.getItem('currentUser')).token.slice(JSON.parse(localStorage.getItem('currentUser')).token.lastIndexOf('-')).substring(10) + editImageValue.fileSource.name.slice(editImageValue.fileSource.name.lastIndexOf('.'));
+    formData.append('file', editImageValue.fileSource, name);
+    this.imageService.upload(formData).subscribe(value1 => {
+      this.innerImageService.updateImage(this.image.innerImageList[0].id,
+        {
+        title: editImageValue.title,
+        description: editImageValue.description,
+        url: name
+      });
+    });
+    this.tmpImage = name;
+    console.log(this.tmpImage);
+    this.editInnerImageForm.patchValue({
+      fileSource: name
     });
   }
 }

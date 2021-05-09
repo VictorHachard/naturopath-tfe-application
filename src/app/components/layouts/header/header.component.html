@@ -28,6 +28,10 @@
               <!-- If owner -->
               <div *ngIf="user.roleList.includes('ROLE_OWNER')">
                 <div class="dropdown-divider"></div>
+                <a class="dropdown-item" routerLink="/adminpages">List of pages</a>
+                <a class="dropdown-item" routerLink="/admintags">List of tags</a>
+                <a class="dropdown-item" routerLink="/adminimages">List of images</a>
+
                 <a class="dropdown-item" routerLink="/admincategories">List of category</a>
                 <a class="dropdown-item" routerLink="/admintagtypes">List of tagTypes</a>
                 <a class="dropdown-item" routerLink="/adminparagraphtypes">List of paragraphTypes</a>

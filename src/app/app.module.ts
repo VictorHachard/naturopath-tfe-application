@@ -52,6 +52,9 @@ import {AdminticketComponent} from './components/templates/admin/adminticket/adm
 import {DoubleAuthComponent} from './double-auth/double-auth.component';
 import {CookieService} from 'ngx-cookie-service';
 import {ConnectFromCookieComponent} from './components/templates/user/connect-from-cookie/connect-from-cookie.component';
+import { AdminpagesComponent } from './components/templates/admin/adminpages/adminpages.component';
+import { AdmintagsComponent } from './components/templates/admin/admintags/admintags.component';
+import { AdminimagesComponent } from './components/templates/admin/adminimages/adminimages.component';
 
 @NgModule({
   declarations: [
@@ -99,6 +102,9 @@ import {ConnectFromCookieComponent} from './components/templates/user/connect-fr
     AdminticketComponent,
     DoubleAuthComponent,
     ConnectFromCookieComponent,
+    AdminpagesComponent,
+    AdmintagsComponent,
+    AdminimagesComponent,
   ],
   imports: [
     BrowserModule,
