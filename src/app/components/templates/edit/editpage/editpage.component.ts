@@ -10,6 +10,7 @@ import {AbstractEdit} from '../../../commons/AbstractEdit';
 import {UserSecurityService} from '../../../../service/security/UserSecurity.service';
 import {CookieService} from 'ngx-cookie-service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {ImageService} from '../../../../service/Image.service';
 
 @Component({
   selector: 'app-addpage',
@@ -23,8 +24,10 @@ export class EditpageComponent extends AbstractEdit implements OnInit {
   editInnerPageForm: FormGroup;
   editInnerParagraphForm: FormGroup[];
   editInnerParatagForm: FormGroup[];
+  imageList = [];
 
   page: any;
+  imageId: any;
   paraTag: any;
 
   constructor(private userSecurityService: UserSecurityService,
@@ -35,7 +38,8 @@ export class EditpageComponent extends AbstractEdit implements OnInit {
               private voteService: VoteService,
               private tagTypeService: TagTypeService,
               private innerParagraphService: InnerParagraphService,
-              private innerPageService: InnerPageService) {
+              private innerPageService: InnerPageService,
+              private imageService: ImageService) {
     super();
   }
 
@@ -65,6 +69,10 @@ export class EditpageComponent extends AbstractEdit implements OnInit {
       this.paraTag.forEach( p => { this.allTagTypeList.push(p.name); });
       console.log(this.paraTag);
     });
+    this.imageService.getAllImageDto().subscribe(value => {
+      this.imageList = value;
+      console.log(value);
+    });
   }
 
   init(): void {
@@ -76,7 +84,10 @@ export class EditpageComponent extends AbstractEdit implements OnInit {
         [Validators.required, Validators.minLength(8), Validators.maxLength(128)]),
       descriptionPage: new FormControl(this.page.innerPageList[0].description,
         [Validators.required, Validators.minLength(64), Validators.maxLength(1024)]),
+      imagePage: new FormControl(this.page.innerPageList[0].image == null ? '' : this.page.innerPageList[0].image.parentId,
+        [Validators.required]),
     });
+
     this.page.paragraphList.forEach(p => {
       this.editInnerParagraphForm.push(new FormGroup({
         titleParagraph : new FormControl(p.innerParagraphList[p.innerParagraphList.length - 1].title,
@@ -103,7 +114,8 @@ export class EditpageComponent extends AbstractEdit implements OnInit {
     const editInnerPageValue = this.editInnerPageForm.value;
     this.innerPageService.addInnerPage(pageId.toString(), {
       description: editInnerPageValue.descriptionPage,
-      title: editInnerPageValue.titlePage}).subscribe(value => {
+      title: editInnerPageValue.titlePage,
+      imageId: editInnerPageValue.imagePage}).subscribe(value => {
         this.ngOnInit();
     }, error => {
 
@@ -115,7 +127,8 @@ export class EditpageComponent extends AbstractEdit implements OnInit {
     const innerPageId: string = this.page.innerPageList[0].id;
     this.innerPageService.updateInnerPage(innerPageId.toString(), {
       description: editInnerPageValue.descriptionPage,
-      title: editInnerPageValue.titlePage}).subscribe(value => {
+      title: editInnerPageValue.titlePage,
+      imageId: editInnerPageValue.imagePage}).subscribe(value => {
         this.ngOnInit();
       }, error => {
 
@@ -127,7 +140,8 @@ export class EditpageComponent extends AbstractEdit implements OnInit {
     const innerPageId: string = this.page.innerPageList[0].id;
     this.innerPageService.validationInnerPage(innerPageId, {
       description: editInnerPageValue.descriptionPage,
-      title: editInnerPageValue.titlePage}).subscribe(value => {
+      title: editInnerPageValue.titlePage,
+      imageId: editInnerPageValue.imagePage}).subscribe(value => {
         this.ngOnInit();
     }, error => {
 
@@ -205,6 +219,16 @@ export class EditpageComponent extends AbstractEdit implements OnInit {
 
 
 
+  /* images */
+
+  imageClick(id): void {
+    if (this.imageId !== undefined) {
+      document.getElementById('modalImage' + this.imageId).classList.remove('border', 'border-primary');
+    }
+    this.id = id;
+    this.editInnerPageForm.get('imagePage').setValue(id);
+    document.getElementById('modalImage' + id).classList.add('border', 'border-primary');
+  }
 
 
   dropItem(event: CdkDragDrop<any[]>): void {
@@ -217,5 +241,6 @@ export class EditpageComponent extends AbstractEdit implements OnInit {
         event.currentIndex);
     }
   }
+
 
 }

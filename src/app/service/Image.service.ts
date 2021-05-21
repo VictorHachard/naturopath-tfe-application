@@ -18,17 +18,16 @@ export class ImageService extends AbstractService {
       {headers : new HttpHeaders().set('Authorization', this.getUserJwt())});
   }
 
-
-  public getAllImagesType(): Observable<any[]> {
+  public getAllImageDto(): Observable<any[]> {
     return this.http.get<any[]>(this.baseUrl + 'dto',
       {headers : new HttpHeaders().set('Authorization', this.getUserJwt())});
   }
-
 
   public getEditImageDto(id: string): Observable<any> {
     return this.http.get<any>(this.baseUrl + 'dto/edit/' + id,
       {headers : new HttpHeaders().set('Authorization', this.getUserJwt())});
   }
+
 
   public upload(file: any): Observable<any> {
     return this.http.post<any>(this.baseUrl + 'upload/', file,
