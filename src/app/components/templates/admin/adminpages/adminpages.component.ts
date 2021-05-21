@@ -14,6 +14,7 @@ import {PageService} from '../../../../service/Page.service';
 export class AdminpagesComponent  extends AbstractComponents  implements OnInit {
 
   pages: any[];
+  infos;
 
   constructor(private userSecurityService: UserSecurityService,
               private cookieService: CookieService,
@@ -24,9 +25,20 @@ export class AdminpagesComponent  extends AbstractComponents  implements OnInit 
   }
 
   ngOnInit(): void {
-    this.pagesService.getAllPage().subscribe(data => {
+    this.infos = new Map();
+    this.pagesService.getAllEditPage().subscribe(data => {
       this.pages = data;
       console.log(this.pages);
+
+      for (const page of this.pages) {
+        for (const inner of page.innerPageList) {
+          if (inner.state === 'VALIDATED') {
+            this.infos.set(page.id, 'VALIDATED');
+            break;
+          }
+        }
+      }
+
     });
   }
 }

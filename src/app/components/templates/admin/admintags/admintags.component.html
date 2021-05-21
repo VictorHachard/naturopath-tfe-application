@@ -10,8 +10,8 @@
     </thead>
     <tbody>
     <tr *ngFor="let tag of tags; let index = index">
-      <th scope="row">{{ index }}</th>
-      <td>{{ tag.name }}</td>
+      <th scope="row">{{ index + ' ' + infos.get(tag.id) }}</th>
+      <td>{{ tag.innerTagList[0].name }}</td>
       <td><button type="button" class="btn btn-primary" [routerLink]="['/edittag', tag.id]">Edit</button></td>
     </tr>
     </tbody>

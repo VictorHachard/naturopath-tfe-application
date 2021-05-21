@@ -14,6 +14,7 @@ import {TagService} from '../../../../service/Tag.service';
 export class AdmintagsComponent  extends AbstractComponents implements OnInit {
 
   tags: any[];
+  infos;
 
   constructor(private userSecurityService: UserSecurityService,
               private cookieService: CookieService,
@@ -24,9 +25,20 @@ export class AdmintagsComponent  extends AbstractComponents implements OnInit {
   }
 
   ngOnInit(): void {
-    this.tagService.getAllTag().subscribe(data => {
+    this.infos = new Map();
+    this.tagService.getAllEditTag().subscribe(data => {
       this.tags = data;
       console.log(this.tags);
+
+      for (const tag of this.tags) {
+        for (const inner of tag.innerTagList) {
+          if (inner.state === 'VALIDATED') {
+            this.infos.set(tag.id, 'VALIDATED');
+            break;
+          }
+        }
+      }
+
     });
   }
 }

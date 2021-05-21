@@ -2,9 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {UserSecurityService} from '../../../../service/security/UserSecurity.service';
 import {CookieService} from 'ngx-cookie-service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {ParagraphTypeService} from '../../../../service/ParagraphType.service';
 import {AbstractComponents} from '../../../commons/AbstractComponents';
-import {InnerImageService} from '../../../../service/InnerImage.service';
 import {ImageService} from '../../../../service/Image.service';
 
 @Component({
@@ -15,6 +13,7 @@ import {ImageService} from '../../../../service/Image.service';
 export class AdminimagesComponent extends AbstractComponents implements OnInit {
 
   images: any[];
+  infos;
 
   constructor(private userSecurityService: UserSecurityService,
               private cookieService: CookieService,
@@ -25,9 +24,20 @@ export class AdminimagesComponent extends AbstractComponents implements OnInit {
   }
 
   ngOnInit(): void {
-    this.ImagesService.getAllImagesType().subscribe(data => {
+    this.infos = new Map();
+    this.ImagesService.getAllEditImageDto().subscribe(data => {
       this.images = data;
       console.log(this.images);
+
+      for (const image of this.images) {
+        for (const inner of image.innerImageList) {
+          if (inner.state === 'VALIDATED') {
+            this.infos.set(image.id, 'VALIDATED');
+            break;
+          }
+        }
+      }
+
     });
   }
 
