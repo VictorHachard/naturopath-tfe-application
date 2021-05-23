@@ -9,6 +9,7 @@ import {CookieService} from 'ngx-cookie-service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {DomSanitizer} from '@angular/platform-browser';
 import {element} from 'protractor';
+import {getSortHeaderNotContainedWithinSortError} from '@angular/material/sort/sort-errors';
 
 @Component({
   selector: 'app-editimage',
@@ -54,23 +55,37 @@ export class EditimageComponent extends AbstractEdit implements OnInit {
         [Validators.required, Validators.minLength(2), Validators.maxLength(32)]),
       description: new FormControl(this.image.innerImageList[0].description,
         [Validators.required, Validators.minLength(32), Validators.maxLength(1024)]),
-      image: new FormControl(null, [Validators.required]),
-      fileSource: new FormControl('', [Validators.required])
+      image: new FormControl(null, ),
+      fileSource: new FormControl('', )
     });
   }
 
   validationInnerImage(): void {
     const editInnerImageValue = this.editInnerImageForm.value;
     const innerImageId: string = this.image.innerImageList[0].id;
-    this.innerImageService.validationInner(innerImageId, {
-      description: editInnerImageValue.description,
-      title: editInnerImageValue.title,
-      url: editInnerImageValue.fileSource
-    }).subscribe(value => {
-      this.ngOnInit();
-    }, error => {
+    console.log(this.trustedUrl);
+    if (editInnerImageValue.fileSource === '' && this.trustedUrl !== '')
+    {
+      this.innerImageService.validationInner(innerImageId, {
+        description: editInnerImageValue.description,
+        title: editInnerImageValue.title
+      }).subscribe(value => {
+        this.ngOnInit();
+      }, error => {
 
-    });
+      });
+    }else{
+      console.log(editInnerImageValue.fileSource);
+      this.innerImageService.validationInner(innerImageId, {
+        description: editInnerImageValue.description,
+        title: editInnerImageValue.title,
+        url: editInnerImageValue.fileSource
+      }).subscribe(value => {
+        this.ngOnInit();
+      }, error => {
+
+      });
+    }
   }
 
   voteInnerImage(id: number, choice: number): void {
@@ -132,22 +147,24 @@ export class EditimageComponent extends AbstractEdit implements OnInit {
 
   updateImage(): void {
     const editImageValue = this.editInnerImageForm.value;
-
-    const formData: FormData = new FormData();
-    const name: string = (new Date()).valueOf().toString() + Math.random().toString(36).substring(10) + JSON.parse(localStorage.getItem('currentUser')).token.slice(JSON.parse(localStorage.getItem('currentUser')).token.lastIndexOf('-')).substring(10) + editImageValue.fileSource.name.slice(editImageValue.fileSource.name.lastIndexOf('.'));
-    formData.append('file', editImageValue.fileSource, name);
-    this.imageService.upload(formData).subscribe(value1 => {
-      this.innerImageService.updateImage(this.image.innerImageList[0].id,
-        {
-        title: editImageValue.title,
-        description: editImageValue.description,
-        url: name
+    if (editImageValue.image !== null)
+   {
+      const formData: FormData = new FormData();
+      const name: string = (new Date()).valueOf().toString() + Math.random().toString(36).substring(10) + JSON.parse(localStorage.getItem('currentUser')).token.slice(JSON.parse(localStorage.getItem('currentUser')).token.lastIndexOf('-')).substring(10) + editImageValue.fileSource.name.slice(editImageValue.fileSource.name.lastIndexOf('.'));
+      formData.append('file', editImageValue.fileSource, name);
+      this.imageService.upload(formData).subscribe(value1 => {
+        this.innerImageService.updateImage(this.image.innerImageList[0].id,
+          {
+            title: editImageValue.title,
+            description: editImageValue.description,
+            url: name
+          });
       });
-    });
-    this.tmpImage = name;
-    console.log(this.tmpImage);
-    this.editInnerImageForm.patchValue({
-      fileSource: name
-    });
+      this.tmpImage = name;
+      console.log(this.tmpImage);
+      this.editInnerImageForm.patchValue({
+        fileSource: name
+      });
+    }
   }
 }
