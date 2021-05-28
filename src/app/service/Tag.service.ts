@@ -32,4 +32,9 @@ export class TagService extends AbstractService {
     return this.http.get<any[]>(this.baseUrl + 'dto/edit',
       {headers : new HttpHeaders().set('Authorization', this.getUserJwt())});
   }
+
+  public getAllTagByTagType(id: string): Observable<any[]> {
+    return this.http.get<any[]>(this.baseUrl + 'allTagByTagType/dto/' + id,
+      {headers : new HttpHeaders().set('Authorization', this.getUserJwt())});
+  }
 }

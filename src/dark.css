@@ -182,3 +182,12 @@
 .dark .list-group-item-action {
   color: rgb(232, 230, 227) !important
 }
+
+
+/* drag and drop */
+
+.example-list, .example-box {
+  color: rgb(202, 198, 190) !important;
+  background-color: rgb(24, 26, 27) !important;
+  border-color: rgb(54, 63, 72) !important;
+}

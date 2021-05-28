@@ -23,11 +23,6 @@ export class TagTypeService extends AbstractService {
       {headers : new HttpHeaders().set('Authorization', this.getUserJwt())});
   }
 
-  public getAllTagByType(id: string): Observable<any[]> {
-    return this.http.get<any[]>(this.baseUrl + 'tagByCategory/' + id,
-      {headers : new HttpHeaders().set('Authorization', this.getUserJwt())});
-  }
-
   public addTagType(body: any): Observable<any> {
     return this.http.post<any>(this.baseUrl, body,
       {headers : new HttpHeaders().set('Authorization', this.getUserJwt())});

@@ -266,39 +266,43 @@
           <form [formGroup]="formGroup">
             <h4 class="mb-4">Title: {{ page.paratagList[index].paratagType.name }}</h4>
             <div class="form-group">
-              <label for="titleParatag">Title:</label>
-              <input type="text" class="form-control" id="titleParaTag" formControlName="titleParaTag" value="{{ page.paratagList[index].innerParatagList[page.paratagList[index].innerParatagList.length - 1].title }}">
+              <label>Title:</label>
+              <input type="text" class="form-control" formControlName="titleParatag" value="{{ page.paratagList[index].innerParatagList[page.paratagList[index].innerParatagList.length - 1].title }}">
+              <small class="form-text text-muted">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</small>
+              <small class="text-danger">{{ printError(editInnerParatagForm[index].get('titleParatag')) }}</small>
             </div>
             <div class="form-group">
               <label>Content:</label>
-              <textarea id="descriptionParaTag" class="form-control" formControlName="descriptionParaTag" [value]="page.paragraphList[index].innerParagraphList[page.paragraphList[index].innerParagraphList.length - 1].content"></textarea>
+              <textarea class="form-control" formControlName="contentParatag" [value]="page.paragraphList[index].innerParagraphList[page.paragraphList[index].innerParagraphList.length - 1].content"></textarea>
+              <small class="form-text text-muted">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</small>
+              <small class="text-danger">{{ printError(editInnerParatagForm[index].get('contentParatag')) }}</small>
             </div>
             <div cdkDropListGroup>
               <div class="example-container">
                 <h2>To do</h2>
                 <div
                   cdkDropList
-                  [cdkDropListData]="allTagTypeList"
+                  [cdkDropListData]="allTagTypeList.get(page.paratagList[index].paratagType.name).beforeNames"
                   class="example-list"
                   (cdkDropListDropped)="dropItem($event)">
-                  <div class="example-box" *ngFor="let item of allTagTypeList" cdkDrag>{{item}}</div>
+                  <div class="example-box" *ngFor="let item of allTagTypeList.get(page.paratagList[index].paratagType.name).beforeNames" cdkDrag>{{item}}</div>
                 </div>
               </div>
               <div class="example-container">
                 <h2>Done</h2>
                 <div
                   cdkDropList
-                  [cdkDropListData]="tagTypeListSend"
+                  [cdkDropListData]="allTagTypeList.get(page.paratagList[index].paratagType.name).afterNames"
                   class="example-list"
                   (cdkDropListDropped)="dropItem($event)">
-                  <div class="example-box" *ngFor="let item of tagTypeListSend" cdkDrag>{{item}}</div>
+                  <div class="example-box" *ngFor="let item of allTagTypeList.get(page.paratagList[index].paratagType.name).afterNames" cdkDrag>{{item}}</div>
                 </div>
               </div>
             </div>
             <div class="mb-3">
                  <div *ngIf="page.paratagList[index].innerParatagList[page.paratagList[index].innerParatagList.length - 1].state === 'DRAFT'; else elseIfBlock">
-                   <button type="button" class="btn btn-primary mr-2">Save Draft</button>
-                   <button type="button" class="btn btn-primary">Validation</button>
+                   <button type="button" class="btn btn-primary mr-2" (click)="updateInnerParatag(index, page.paratagList[index].innerParatagList[page.paratagList[index].innerParatagList.length - 1].id, page.paratagList[index].paratagType.tagType.name)">Save Draft</button>
+                   <button type="button" class="btn btn-primary" (click)="validationInnerParatag(index, page.paratagList[index].innerParatagList[page.paratagList[index].innerParatagList.length - 1].id)">Validation</button>
                  </div>
                  <ng-template #elseIfBlock>
                    <div class="progress" *ngIf="page.paratagList[index].innerParatagList[page.paratagList[index].innerParatagList.length - 1].state === 'VALIDATING'; else elseBlock">

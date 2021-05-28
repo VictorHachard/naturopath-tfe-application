@@ -11,6 +11,8 @@ import {UserSecurityService} from '../../../../service/security/UserSecurity.ser
 import {CookieService} from 'ngx-cookie-service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ImageService} from '../../../../service/Image.service';
+import {TagService} from '../../../../service/Tag.service';
+import {InnerParatagService} from '../../../../service/inner-paratag.service';
 
 @Component({
   selector: 'app-addpage',
@@ -19,8 +21,7 @@ import {ImageService} from '../../../../service/Image.service';
 })
 export class EditpageComponent extends AbstractEdit implements OnInit {
   private id: string;
-  allTagTypeList = new Map();
-  tagTypeListSend = [];
+  allTagTypeList = new Map(); //{befor : any[], after : any[]}
 
   editInnerPageForm: FormGroup;
   editInnerParagraphForm: FormGroup[];
@@ -37,9 +38,11 @@ export class EditpageComponent extends AbstractEdit implements OnInit {
               private router: Router,
               private pageService: PageService,
               private voteService: VoteService,
+              private tagService: TagService,
               private tagTypeService: TagTypeService,
               private innerParagraphService: InnerParagraphService,
               private innerPageService: InnerPageService,
+              private innerParatagService: InnerParatagService,
               private imageService: ImageService) {
     super();
   }
@@ -59,25 +62,37 @@ export class EditpageComponent extends AbstractEdit implements OnInit {
   }
 
   ngOnInit(): void {
-    this.tagTypeService.getAllTagByType(18).subscribe(data1 => {
-      console.log(data1);
-    });
     this.id = this.route.snapshot.paramMap.get('id');
     this.pageService.getEditPageDto(this.id).subscribe(data => {
+      console.log("*********** PAGE LIST ***********");
       console.log(data);
       this.page = data;
       for (const paratag of this.page.paratagList) {
-        this.tagTypeService.getAllTagByType(paratag.paratagType.tagType.id).subscribe(data1 => {
-          this.allTagTypeList.set(paratag.paratagType.tagType.name, data1);
-          console.log(this.allTagTypeList);
+        this.tagService.getAllTagByTagType(paratag.paratagType.tagType.id).subscribe(data1 => {
+          let beforeNamesTmp = [];
+          let afterNamesTmp = [];
+          for (const tag of data1) {
+            beforeNamesTmp.push(tag.name);
+            for (const tag2 of paratag.innerParatagList[paratag.innerParatagList.length - 1].tagList) {
+              if (tag2.name === tag.name) {
+                beforeNamesTmp.pop();
+                afterNamesTmp.push(tag.name);
+              }
+            }
+          }
+          this.allTagTypeList.set(paratag.paratagType.tagType.name, { after : [], before : data1, afterNames : afterNamesTmp, beforeNames : beforeNamesTmp});
+          if (paratag.id === this.page.paratagList[this.page.paratagList.length - 1].id) {
+            console.log("*********** TAGS BY TAGTYPE LIST ***********");
+            console.log(this.allTagTypeList);
+            this.imageService.getAllImageDto().subscribe(value => {
+              this.imageList = value;
+              console.log("*********** IMAGE LIST ***********");
+              console.log(value);
+              this.init();
+            });
+          }
         });
       }
-      this.init();
-    });
-
-    this.imageService.getAllImageDto().subscribe(value => {
-      this.imageList = value;
-      console.log(value);
     });
   }
 
@@ -104,9 +119,9 @@ export class EditpageComponent extends AbstractEdit implements OnInit {
     });
     this.page.paratagList.forEach(p => {
       this.editInnerParatagForm.push(new FormGroup({
-        titleParaTag: new FormControl(p.paratagType.name,
+        titleParatag: new FormControl(p.paratagType.name,
           [Validators.required, Validators.minLength(8), Validators.maxLength(128)]),
-        descriptionParaTag: new FormControl(p.paratagType.description,
+        contentParatag: new FormControl(p.paratagType.content,
           [Validators.required, Validators.minLength(64), Validators.maxLength(1024)]),
       }));
     });
@@ -225,8 +240,6 @@ export class EditpageComponent extends AbstractEdit implements OnInit {
       });
   }
 
-
-
   /* images */
 
   imageClick(id): void {
@@ -250,5 +263,38 @@ export class EditpageComponent extends AbstractEdit implements OnInit {
     }
   }
 
+
+  updateInnerParatag(index: number, id: number, name: string): void {
+    const editInnerParatagValue = this.editInnerParatagForm[index].value;
+
+    const tagIdListTmp = [];
+    for (const afterName of this.allTagTypeList.get(name).afterNames) {
+      for (const after of this.allTagTypeList.get(name).after) {
+        if (afterName === after.name) {
+          tagIdListTmp.push(after.id);
+        }
+      }
+      for (const before of this.allTagTypeList.get(name).before) {
+        if (afterName === before.name) {
+          tagIdListTmp.push(before.id);
+        }
+      }
+    }
+    console.log(tagIdListTmp);
+    console.log(editInnerParatagValue.contentParatag);
+    console.log(editInnerParatagValue.titleParatag);
+    this.innerParatagService.updateInnerParatag(id.toString(), {
+      content: editInnerParatagValue.content,
+      title: editInnerParatagValue.title,
+      tagIdList: tagIdListTmp}).subscribe(value => {
+      this.ngOnInit();
+    }, error => {
+
+    });
+  }
+
+  validationInnerParatag(index: number, id: number): void {
+
+  }
 
 }
