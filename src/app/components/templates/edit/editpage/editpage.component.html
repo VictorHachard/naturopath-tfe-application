@@ -62,6 +62,7 @@
                           </div>
                           <div class="timeline-body">
                             <p>{{ inner.description }}</p>
+                            <img [src]="inner.image.url" class="mt-2" height="200" [ngStyle]="{'background-image':'url('+inner.image.url+')'}">
                             <div class="overflow-auto" style="max-height: 300px">
                               <ul *ngIf="inner.messageList.length !== 0" class="timeline-message">
                                 <li *ngFor="let message of inner.messageList" class="{{ userColor(message.user.id, inner) }}">
@@ -147,7 +148,7 @@
       </div>
     </div>
 
-    <!-- <div *ngFor="let formGroup of editInnerParagraphForm; let index = index" class="card">
+    <div *ngFor="let formGroup of editInnerParagraphForm; let index = index" class="card">
       <div class="card-header" id="{{ 'heading' + page.paragraphList[index].id }}">
         <h2 class="mb-0">
           <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" [attr.data-target]="'#collapse' + page.paragraphList[index].id" aria-expanded="true" [attr.aria-controls]="'collapse' + page.paragraphList[index].id">
@@ -157,22 +158,40 @@
       </div>
       <div id="{{ 'collapse' + page.paragraphList[index].id }}" class="collapse" aria-labelledby="heading{{ page.paragraphList[index].id }}" data-parent="#accordionExample">
         <div class="card-body">
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal1">View all version</button>
+          <button type="button" class="btn btn-primary mb-2 float-right" data-toggle="modal" data-target="#modal1">View all version</button>
+
           <div class="modal" id="modal1" tabindex="-1" role="dialog" aria-labelledby="modal1-label">
-            <div class="modal-dialog">
+            <div class="modal-dialog" style="max-width: 80%">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title">Modal title</h5>
+                  <h5 class="modal-title">Timeline</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
                 <div class="modal-body">
-                  <ul *ngFor="let innerParagraph of page.paragraphList[index].innerParagraphList" class="timeline">
-                    <li *ngIf="innerParagraph.state !== 'DRAFT'">
-                      <p class="float-right">4 March, 2014</p>
-                      <p>{{ innerParagraph.title }}</p>
-                      <p>{{ innerParagraph.content }}</p>
+                  <ul *ngFor="let inner of page.paragraphList[index].innerParagraphList" class="timeline">
+                    <li *ngIf="inner.state !== 'DRAFT' && inner.state !== 'VALIDATING'" class="timeline-inverted">
+                      <div class="timeline-badge {{ inner.state === 'VALIDATED' ? 'success' : 'danger' }}"></div>
+                      <div class="timeline-panel">
+                        <div class="timeline-heading">
+                          <h4 class="timeline-title">{{ inner.title }}</h4>
+                          <p><small class="text-muted">version {{ inner.version }} is {{ inner.state }} at {{ inner.voteList[inner.voteList.length - 1].createdAt| date:'dd MMMM yyyy' }} by {{ inner.user.username }}</small></p>
+                        </div>
+                        <div class="timeline-body">
+                          <p>{{ inner.content }}</p>
+                          <div class="overflow-auto" style="max-height: 300px">
+                            <ul *ngIf="inner.messageList.length !== 0" class="timeline-message">
+                              <li *ngFor="let message of inner.messageList" class="{{ userColor(message.user.id, inner) }}">
+                                <h5>{{ message.user.username }}</h5>
+                                <p><small class="text-muted">{{ message.createdAt| date:'dd MMMM yyyy - HH:mm' }}</small></p>
+                                <p>{{ message.content }}</p>
+                                <small *ngIf="message.isEdited">Edited</small>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
                     </li>
                   </ul>
                 </div>
@@ -182,14 +201,19 @@
               </div>
             </div>
           </div>
+
           <form [formGroup]="formGroup">
             <div class="form-group">
               <label for="title">Title:</label>
               <input type="text" class="form-control" id="title" formControlName="titleParagraph" value="{{ page.paragraphList[index].innerParagraphList[page.paragraphList[index].innerParagraphList.length - 1].title }}">
+              <small class="form-text text-muted">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</small>
+              <small class="text-danger">{{ printError(editInnerParagraphForm[index].get('titleParagraph')) }}</small>
             </div>
             <div class="form-group">
               <label for="content">Content:</label>
               <textarea id="content" class="form-control" formControlName="contentParagraph" [value]="page.paragraphList[index].innerParagraphList[page.paragraphList[index].innerParagraphList.length - 1].content"></textarea>
+              <small class="form-text text-muted">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</small>
+              <small class="text-danger">{{ printError(editInnerParagraphForm[index].get('contentParagraph')) }}</small>
             </div>
             <div class="mb-3">
               <div *ngIf="page.paragraphList[index].innerParagraphList[page.paragraphList[index].innerParagraphList.length - 1].state === 'DRAFT'; else elseIfBlock">
@@ -229,7 +253,7 @@
 
 
 
-    <div *ngFor="let formGroup of editInnerParatagForm; let index = index" class="card">
+   <div *ngFor="let formGroup of editInnerParatagForm; let index = index" class="card">
       <div class="card-header" id="{{ 'headingPR' + index }}">
         <h2 class="mb-0">
           <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" [attr.data-target]="'#collapsePR' + page.paratagList[index].id" aria-expanded="true" [attr.aria-controls]="'collapsePR' + page.paratagList[index].id">
@@ -272,14 +296,14 @@
               </div>
             </div>
             <div class="mb-3">
-                 <div *ngIf="paratag.innerParatagList[paratag.innerParatagList.length - 1].state === 'DRAFT'; else elseIfBlock">
+                 <div *ngIf="page.paratagList.innerParatagList[page.paratagList.innerParatagList.length - 1].state === 'DRAFT'; else elseIfBlock">
                    <button type="button" class="btn btn-primary mr-2">Save Draft</button>
                    <button type="button" class="btn btn-primary">Validation</button>
                  </div>
                  <ng-template #elseIfBlock>
-                   <div class="progress" *ngIf="paratag.innerParatagList[paratag.innerParatagList.length - 1].state === 'VALIDATING'; else elseBlock">
-                     <div class="progress-bar bg-success" role="progressbar" style="{{ 'width:' + (paratag.innerParatagList[paratag.innerParatagList.length - 1].favour * 20).toString() + '%' }}" aria-valuenow="{{ paratag.innerParatagList[paratag.innerParatagList.length - 1].favour * 20 }}" aria-valuemin="0" aria-valuemax="100">{{ paratag.innerParatagList[paratag.innerParatagList.length - 1].favour }}/5</div>
-                     <div class="progress-bar bg-danger" role="progressbar" style="{{ 'width:' + (paratag.innerParatagList[paratag.innerParatagList.length - 1].against * 20).toString() + '%' }}" aria-valuenow="{{ paratag.innerParatagList[paratag.innerParatagList.length - 1].against * 20 }}" aria-valuemin="0" aria-valuemax="100">{{ paratag.innerParatagList[paratag.innerParatagList.length - 1].against }}/5</div>
+                   <div class="progress" *ngIf="page.paratagList.innerParatagList[page.paratagList.innerParatagList.length - 1].state === 'VALIDATING'; else elseBlock">
+                     <div class="progress-bar bg-success" role="progressbar" style="{{ 'width:' + (page.paratagList.innerParatagList[page.paratagList.innerParatagList.length - 1].favour * 20).toString() + '%' }}" aria-valuenow="{{ page.paratagList.innerParatagList[page.paratagList.innerParatagList.length - 1].favour * 20 }}" aria-valuemin="0" aria-valuemax="100">{{ page.paratagList.innerParatagList[page.paratagList.innerParatagList.length - 1].favour }}/5</div>
+                     <div class="progress-bar bg-danger" role="progressbar" style="{{ 'width:' + (page.paratagList.innerParatagList[page.paratagList.innerParatagList.length - 1].against * 20).toString() + '%' }}" aria-valuenow="{{ page.paratagList.innerParatagList[page.paratagList.innerParatagList.length - 1].against * 20 }}" aria-valuemin="0" aria-valuemax="100">{{ page.paratagList.innerParatagList[page.paratagList.innerParatagList.length - 1].against }}/5</div>
                    </div>
                  </ng-template>
                  <ng-template #elseBlock>
@@ -289,7 +313,7 @@
           </form>
         </div>
       </div>
-    </div> -->
+    </div>
   </div>
  </section>
 

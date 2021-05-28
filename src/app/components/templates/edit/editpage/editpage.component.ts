@@ -91,9 +91,9 @@ export class EditpageComponent extends AbstractEdit implements OnInit {
     this.page.paragraphList.forEach(p => {
       this.editInnerParagraphForm.push(new FormGroup({
         titleParagraph : new FormControl(p.innerParagraphList[p.innerParagraphList.length - 1].title,
-          [Validators.required, Validators.minLength(1), Validators.maxLength(1024)]),
+          [Validators.required, Validators.minLength(8), Validators.maxLength(128)]),
         contentParagraph : new FormControl(p.innerParagraphList[p.innerParagraphList.length - 1].content,
-          [Validators.required, Validators.minLength(64), Validators.maxLength(1024)]),
+          [Validators.required, Validators.minLength(128), Validators.maxLength(8182)]),
       }));
     });
     this.page.paratagList.forEach(p => {
@@ -197,6 +197,8 @@ export class EditpageComponent extends AbstractEdit implements OnInit {
 
   validationInnerParagraph(index: number, id: number): void {
     const editInnerParagraphValue = this.editInnerParagraphForm[index].value;
+
+    console.log(id);
 
     this.innerParagraphService.validationInnerParagraph(id.toString(), {
       content: editInnerParagraphValue.contentParagraph,
