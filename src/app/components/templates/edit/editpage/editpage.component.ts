@@ -25,6 +25,8 @@ export class EditpageComponent extends AbstractEdit implements OnInit {
 
   editInnerPageForm: FormGroup;
   editInnerParagraphForm: FormGroup[];
+  messageInnerFormParatag: FormGroup[];
+  messageInnerFormParagraph: FormGroup[];
   editInnerParatagForm: FormGroup[];
   imageList = [];
 
@@ -98,8 +100,22 @@ export class EditpageComponent extends AbstractEdit implements OnInit {
 
   init(): void {
     super.init();
+    this.messageInnerFormParatag = [];
+    this.messageInnerFormParagraph = [];
     this.editInnerParagraphForm = [];
     this.editInnerParatagForm = [];
+    this.page.paratagList.forEach(p => {
+      this.messageInnerFormParatag.push(new FormGroup({
+        content: new FormControl('',
+          [Validators.required, Validators.minLength(8), Validators.maxLength(2048)])
+      }));
+    });
+    this.page.paragraphList.forEach(p => {
+      this.messageInnerFormParagraph.push(new FormGroup({
+        content: new FormControl('',
+          [Validators.required, Validators.minLength(8), Validators.maxLength(2048)])
+      }));
+    });
     this.editInnerPageForm = new FormGroup({
       titlePage: new FormControl(this.page.innerPageList[0].title,
         [Validators.required, Validators.minLength(8), Validators.maxLength(128)]),
@@ -114,15 +130,15 @@ export class EditpageComponent extends AbstractEdit implements OnInit {
         titleParagraph : new FormControl(p.innerParagraphList[p.innerParagraphList.length - 1].title,
           [Validators.required, Validators.minLength(8), Validators.maxLength(128)]),
         contentParagraph : new FormControl(p.innerParagraphList[p.innerParagraphList.length - 1].content,
-          [Validators.required, Validators.minLength(128), Validators.maxLength(8182)]),
+          [Validators.required, Validators.minLength(64), Validators.maxLength(8182)]),
       }));
     });
     this.page.paratagList.forEach(p => {
       this.editInnerParatagForm.push(new FormGroup({
-        titleParatag: new FormControl(p.paratagType.name,
+        titleParatag: new FormControl(p.innerParatagList[p.innerParatagList.length - 1].title,
           [Validators.required, Validators.minLength(8), Validators.maxLength(128)]),
-        contentParatag: new FormControl(p.paratagType.content,
-          [Validators.required, Validators.minLength(64), Validators.maxLength(1024)]),
+        contentParatag: new FormControl(p.innerParatagList[p.innerParatagList.length - 1].content,
+          [Validators.required, Validators.minLength(64), Validators.maxLength(8182)]),
       }));
     });
   }
@@ -170,6 +186,9 @@ export class EditpageComponent extends AbstractEdit implements OnInit {
   }
 
   voteInnerPage(id: number, choice: number): void {
+    if (choice === 0) {
+      this.addInnerPageMessage(id);
+    }
     this.voteService.addVote({choice: choice.toString(),
       type: 'InnerPage',
       typeId: id.toString()}).subscribe(value => {
@@ -231,6 +250,9 @@ export class EditpageComponent extends AbstractEdit implements OnInit {
   }
 
   voteInnerParagraph(index: number, id: number, choice: number): void {
+    if (choice === 0) {
+      this.addInnerParagraphMessage(index, id);
+    }
     this.voteService.addVote({choice: choice.toString(),
       type: 'InnerParagraph',
       typeId: id.toString()}).subscribe(value => {
@@ -238,6 +260,17 @@ export class EditpageComponent extends AbstractEdit implements OnInit {
       }, error => {
 
       });
+  }
+
+  addInnerParagraphMessage(index: number, id: number): void {
+    const messageInnerValue = this.messageInnerFormParagraph[index].value;
+    this.innerParagraphService.addMessage(id.toString(), {
+      content: messageInnerValue.content
+    }).subscribe(value => {
+      this.ngOnInit();
+    }, error => {
+
+    });
   }
 
   /* images */
@@ -251,7 +284,6 @@ export class EditpageComponent extends AbstractEdit implements OnInit {
     document.getElementById('modalImage' + id).classList.add('border', 'border-primary');
   }
 
-
   dropItem(event: CdkDragDrop<any[]>): void {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
@@ -262,7 +294,6 @@ export class EditpageComponent extends AbstractEdit implements OnInit {
         event.currentIndex);
     }
   }
-
 
   updateInnerParatag(index: number, id: number, name: string): void {
     const editInnerParatagValue = this.editInnerParatagForm[index].value;
@@ -280,12 +311,10 @@ export class EditpageComponent extends AbstractEdit implements OnInit {
         }
       }
     }
-    console.log(tagIdListTmp);
-    console.log(editInnerParatagValue.contentParatag);
-    console.log(editInnerParatagValue.titleParatag);
+
     this.innerParatagService.updateInnerParatag(id.toString(), {
-      content: editInnerParatagValue.content,
-      title: editInnerParatagValue.title,
+      content: editInnerParatagValue.contentParatag,
+      title: editInnerParatagValue.titleParatag,
       tagIdList: tagIdListTmp}).subscribe(value => {
       this.ngOnInit();
     }, error => {
@@ -293,8 +322,82 @@ export class EditpageComponent extends AbstractEdit implements OnInit {
     });
   }
 
-  validationInnerParatag(index: number, id: number): void {
+  validationInnerParatag(index: number, id: number, name: string): void {
+    const editInnerParatagValue = this.editInnerParatagForm[index].value;
 
+    const tagIdListTmp = [];
+    for (const afterName of this.allTagTypeList.get(name).afterNames) {
+      for (const after of this.allTagTypeList.get(name).after) {
+        if (afterName === after.name) {
+          tagIdListTmp.push(after.id);
+        }
+      }
+      for (const before of this.allTagTypeList.get(name).before) {
+        if (afterName === before.name) {
+          tagIdListTmp.push(before.id);
+        }
+      }
+    }
+
+    this.innerParatagService.validationInnerParatag(id.toString(), {
+      content: editInnerParatagValue.contentParatag,
+      title: editInnerParatagValue.titleParatag,
+      tagIdList: tagIdListTmp}).subscribe(value => {
+      this.ngOnInit();
+    }, error => {
+
+    });
   }
 
+  addInnerTagMessage(index: number, id: number): void {
+    const messageInnerValue = this.messageInnerFormParatag[index].value;
+    this.innerParatagService.addMessage(id.toString(), {
+      content: messageInnerValue.content
+    }).subscribe(value => {
+      this.ngOnInit();
+    }, error => {
+
+    });
+  }
+
+  voteInnerTag(index: number, id: number, choice: number): void {
+    if (choice === 0) {
+      this.addInnerTagMessage(index, id);
+    }
+    console.log(id.toString());
+    this.voteService.addVote({choice: choice.toString(),
+      type: 'InnerParatag',
+      typeId: id.toString()}).subscribe(value => {
+      this.ngOnInit();
+    }, error => {
+
+    });
+  }
+
+  addInnerTag(index: number, paratagId: number, name: string): void {
+    const editInnerParatagValue = this.editInnerParagraphForm[index].value;
+
+    const tagIdListTmp = [];
+    for (const afterName of this.allTagTypeList.get(name).afterNames) {
+      for (const after of this.allTagTypeList.get(name).after) {
+        if (afterName === after.name) {
+          tagIdListTmp.push(after.id);
+        }
+      }
+      for (const before of this.allTagTypeList.get(name).before) {
+        if (afterName === before.name) {
+          tagIdListTmp.push(before.id);
+        }
+      }
+    }
+
+    this.innerParatagService.addInnerParatag(paratagId.toString(), {
+      content: editInnerParatagValue.contentParatag,
+      title: editInnerParatagValue.titleParatag,
+      tagIdList: tagIdListTmp}).subscribe(value => {
+      this.ngOnInit();
+    }, error => {
+
+    });
+  }
 }
