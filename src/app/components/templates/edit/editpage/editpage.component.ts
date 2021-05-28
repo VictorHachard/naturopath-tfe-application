@@ -19,8 +19,9 @@ import {ImageService} from '../../../../service/Image.service';
 })
 export class EditpageComponent extends AbstractEdit implements OnInit {
   private id: string;
-  allTagTypeList = [];
+  allTagTypeList = new Map();
   tagTypeListSend = [];
+
   editInnerPageForm: FormGroup;
   editInnerParagraphForm: FormGroup[];
   editInnerParatagForm: FormGroup[];
@@ -58,17 +59,22 @@ export class EditpageComponent extends AbstractEdit implements OnInit {
   }
 
   ngOnInit(): void {
+    this.tagTypeService.getAllTagByType(18).subscribe(data1 => {
+      console.log(data1);
+    });
     this.id = this.route.snapshot.paramMap.get('id');
     this.pageService.getEditPageDto(this.id).subscribe(data => {
       console.log(data);
       this.page = data;
+      for (const paratag of this.page.paratagList) {
+        this.tagTypeService.getAllTagByType(paratag.paratagType.tagType.id).subscribe(data1 => {
+          this.allTagTypeList.set(paratag.paratagType.tagType.name, data1);
+          console.log(this.allTagTypeList);
+        });
+      }
       this.init();
     });
-    this.tagTypeService.getAllTagType().subscribe(data => {
-      this.paraTag = data;
-      this.paraTag.forEach( p => { this.allTagTypeList.push(p.name); });
-      console.log(this.paraTag);
-    });
+
     this.imageService.getAllImageDto().subscribe(value => {
       this.imageList = value;
       console.log(value);

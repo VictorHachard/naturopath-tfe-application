@@ -296,14 +296,14 @@
               </div>
             </div>
             <div class="mb-3">
-                 <div *ngIf="page.paratagList.innerParatagList[page.paratagList.innerParatagList.length - 1].state === 'DRAFT'; else elseIfBlock">
+                 <div *ngIf="page.paratagList[index].innerParatagList[page.paratagList[index].innerParatagList.length - 1].state === 'DRAFT'; else elseIfBlock">
                    <button type="button" class="btn btn-primary mr-2">Save Draft</button>
                    <button type="button" class="btn btn-primary">Validation</button>
                  </div>
                  <ng-template #elseIfBlock>
-                   <div class="progress" *ngIf="page.paratagList.innerParatagList[page.paratagList.innerParatagList.length - 1].state === 'VALIDATING'; else elseBlock">
-                     <div class="progress-bar bg-success" role="progressbar" style="{{ 'width:' + (page.paratagList.innerParatagList[page.paratagList.innerParatagList.length - 1].favour * 20).toString() + '%' }}" aria-valuenow="{{ page.paratagList.innerParatagList[page.paratagList.innerParatagList.length - 1].favour * 20 }}" aria-valuemin="0" aria-valuemax="100">{{ page.paratagList.innerParatagList[page.paratagList.innerParatagList.length - 1].favour }}/5</div>
-                     <div class="progress-bar bg-danger" role="progressbar" style="{{ 'width:' + (page.paratagList.innerParatagList[page.paratagList.innerParatagList.length - 1].against * 20).toString() + '%' }}" aria-valuenow="{{ page.paratagList.innerParatagList[page.paratagList.innerParatagList.length - 1].against * 20 }}" aria-valuemin="0" aria-valuemax="100">{{ page.paratagList.innerParatagList[page.paratagList.innerParatagList.length - 1].against }}/5</div>
+                   <div class="progress" *ngIf="page.paratagList[index].innerParatagList[page.paratagList[index].innerParatagList.length - 1].state === 'VALIDATING'; else elseBlock">
+                     <div class="progress-bar bg-success" role="progressbar" style="{{ 'width:' + (page.paratagList[index].innerParatagList[page.paratagList[index].innerParatagList.length - 1].favour * 20).toString() + '%' }}" aria-valuenow="{{ page.paratagList[index].innerParatagList[page.paratagList[index].innerParatagList.length - 1].favour * 20 }}" aria-valuemin="0" aria-valuemax="100">{{ page.paratagList[index].innerParatagList[page.paratagList[index].innerParatagList.length - 1].favour }}/5</div>
+                     <div class="progress-bar bg-danger" role="progressbar" style="{{ 'width:' + (page.paratagList[index].innerParatagList[page.paratagList[index].innerParatagList.length - 1].against * 20).toString() + '%' }}" aria-valuenow="{{ page.paratagList[index].innerParatagList[page.paratagList[index].innerParatagList.length - 1].against * 20 }}" aria-valuemin="0" aria-valuemax="100">{{ page.paratagList[index].innerParatagList[page.paratagList[index].innerParatagList.length - 1].against }}/5</div>
                    </div>
                  </ng-template>
                  <ng-template #elseBlock>
