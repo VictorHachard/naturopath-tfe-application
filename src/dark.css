@@ -66,7 +66,7 @@
   scrollbar-color: #2a2c2e #1c1e1f;
 }
 /* Dark - Site */
-.dark .border {
+.dark .border:not(.ish) { /* not ish for the modal of images */
   border: 1px solid rgb(64, 60, 53) !important;
 }
 .dark .alert-success {
