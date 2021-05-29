@@ -29,16 +29,6 @@ export class AdminpagesComponent  extends AbstractComponents  implements OnInit 
     this.pagesService.getAllEditPage().subscribe(data => {
       this.pages = data;
       console.log(this.pages);
-
-      for (const page of this.pages) {
-        for (const inner of page.innerPageList) {
-          if (inner.state === 'VALIDATED') {
-            this.infos.set(page.id, 'VALIDATED');
-            break;
-          }
-        }
-      }
-
     });
   }
 }

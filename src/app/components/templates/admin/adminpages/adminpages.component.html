@@ -10,7 +10,7 @@
     </thead>
     <tbody>
     <tr *ngFor="let page of pages; let index = index">
-      <th scope="row">{{ index + ' ' + infos.get(page.id) }}</th>
+      <th scope="row">{{ index + ' ' + page.enumState }}</th>
       <td>{{ page.innerPageList[0].title }}</td>
       <td><button type="button" class="btn btn-primary" [routerLink]="['/editpage', page.id]">Edit</button></td>
     </tr>
