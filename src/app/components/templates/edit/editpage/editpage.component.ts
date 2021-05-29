@@ -130,7 +130,7 @@ export class EditpageComponent extends AbstractEdit implements OnInit {
         titleParagraph : new FormControl(p.innerParagraphList[p.innerParagraphList.length - 1].title,
           [Validators.required, Validators.minLength(8), Validators.maxLength(128)]),
         contentParagraph : new FormControl(p.innerParagraphList[p.innerParagraphList.length - 1].content,
-          [Validators.required, Validators.minLength(64), Validators.maxLength(8182)]),
+          [Validators.required, Validators.minLength(128), Validators.maxLength(8182)]),
       }));
     });
     this.page.paratagList.forEach(p => {
