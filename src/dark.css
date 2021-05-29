@@ -163,7 +163,7 @@
 .dark .table thead th {
   border-color: rgba(255, 255, 255, 0.2);
 }
-.dark .page-link {
+.dark .page-link  {
   background-color: rgb(36, 41, 46) !important;
   border-color: rgba(255, 255, 255, 0.2);
   color: rgb(232, 230, 227) !important;
@@ -189,4 +189,20 @@
   color: rgb(202, 198, 190) !important;
   background-color: rgb(24, 26, 27) !important;
   border-color: rgb(54, 63, 72) !important;
+}
+
+/* mat table */
+
+.dark .mat-select-arrow {
+  color: rgb(232, 230, 227) !important;
+}
+
+.dark .mat-form-field-underline {
+  border-color: rgb(232, 230, 227) !important;
+}
+
+.dark .mat-table, .dark .mat-paginator, .dark .mat-select-value, .dark .mat-paginator-icon {
+  background-color: rgb(36, 41, 46) !important;
+  border-color: rgba(255, 255, 255, 0.2);
+  color: rgb(232, 230, 227) !important;
 }

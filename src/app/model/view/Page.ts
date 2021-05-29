@@ -6,6 +6,7 @@ import {User} from './User';
 
 export class Page {
  constructor(public id: number,
+             public enumState: string,
              public user: User,
              public createdAt: Date,
              public title: string,

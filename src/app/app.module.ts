@@ -55,6 +55,9 @@ import {ConnectFromCookieComponent} from './components/templates/user/connect-fr
 import { AdminpagesComponent } from './components/templates/admin/adminpages/adminpages.component';
 import { AdmintagsComponent } from './components/templates/admin/admintags/admintags.component';
 import { AdminimagesComponent } from './components/templates/admin/adminimages/adminimages.component';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatTableModule} from '@angular/material/table';
+import {MatSortModule} from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -112,7 +115,10 @@ import { AdminimagesComponent } from './components/templates/admin/adminimages/a
     HttpClientModule,
     ReactiveFormsModule,
     DragDropModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatPaginatorModule,
+    MatTableModule,
+    MatSortModule
   ],
   exports: [
     HttpClientModule

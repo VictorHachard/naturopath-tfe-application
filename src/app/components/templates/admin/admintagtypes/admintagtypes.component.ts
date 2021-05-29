@@ -1,17 +1,27 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {TagTypeService} from '../../../../service/TagType.service';
 import {AbstractComponents} from '../../../commons/AbstractComponents';
 import {UserSecurityService} from '../../../../service/security/UserSecurity.service';
 import {CookieService} from 'ngx-cookie-service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {MatTableDataSource} from '@angular/material/table';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
 
 @Component({
   selector: 'app-admintagtypes',
   templateUrl: './admintagtypes.component.html',
   styleUrls: ['./admintagtypes.component.css']
 })
-export class AdmintagtypesComponent extends AbstractComponents implements OnInit {
-  tagTypes: any[];
+export class AdmintagtypesComponent extends AbstractComponents implements OnInit, AfterViewInit {
+
+  tagType: any[] = [];
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+
+  displayedColumns: string[] = ['id', 'name', 'action'];
+  dataSource = new MatTableDataSource<any[]>([]);
 
   constructor(private userSecurityService: UserSecurityService,
               private cookieService: CookieService,
@@ -23,9 +33,18 @@ export class AdmintagtypesComponent extends AbstractComponents implements OnInit
 
   ngOnInit(): void {
     this.tagTypeService.getAllTagType().subscribe(data => {
-      this.tagTypes = data;
-      console.log(this.tagTypes);
+      for (const tagType of data) {
+        this.tagType.push({id: tagType.id, name: tagType.name});
+      }
+      console.log(this.tagType);
+      this.dataSource = new MatTableDataSource<any>(this.tagType);
+      this.ngAfterViewInit();
     });
+  }
+
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
 }

@@ -1,20 +1,28 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {UserSecurityService} from '../../../../service/security/UserSecurity.service';
 import {CookieService} from 'ngx-cookie-service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {ImageService} from '../../../../service/Image.service';
 import {AbstractComponents} from '../../../commons/AbstractComponents';
 import {PageService} from '../../../../service/Page.service';
+import {MatTableDataSource} from '@angular/material/table';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
 
 @Component({
   selector: 'app-adminpages',
   templateUrl: './adminpages.component.html',
   styleUrls: ['./adminpages.component.css']
 })
-export class AdminpagesComponent  extends AbstractComponents  implements OnInit {
 
-  pages: any[];
-  infos;
+export class AdminpagesComponent extends AbstractComponents implements OnInit, AfterViewInit {
+
+  pages: any[] = [];
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+
+  displayedColumns: string[] = ['id', 'enumState', 'title', 'action'];
+  dataSource = new MatTableDataSource<any[]>([]);
 
   constructor(private userSecurityService: UserSecurityService,
               private cookieService: CookieService,
@@ -25,10 +33,19 @@ export class AdminpagesComponent  extends AbstractComponents  implements OnInit 
   }
 
   ngOnInit(): void {
-    this.infos = new Map();
     this.pagesService.getAllEditPage().subscribe(data => {
-      this.pages = data;
+      for (const page of data) {
+        this.pages.push({id: page.id, enumState: page.enumState, title: page.innerPageList[0].title});
+      }
       console.log(this.pages);
+      this.dataSource = new MatTableDataSource<any>(this.pages);
+      this.ngAfterViewInit();
     });
   }
+
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
 }

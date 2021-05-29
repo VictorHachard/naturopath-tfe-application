@@ -1,17 +1,27 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {CategoryService} from '../../../../service/Category.service';
 import {AbstractComponents} from '../../../commons/AbstractComponents';
 import {UserSecurityService} from '../../../../service/security/UserSecurity.service';
 import {CookieService} from 'ngx-cookie-service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
+import {MatTableDataSource} from '@angular/material/table';
 
 @Component({
   selector: 'app-admincategories',
   templateUrl: './admincategories.component.html',
   styleUrls: ['./admincategories.component.css']
 })
-export class AdmincategoriesComponent extends AbstractComponents implements OnInit {
-  categories: any[];
+export class AdmincategoriesComponent extends AbstractComponents implements OnInit, AfterViewInit {
+
+  categories: any[] = [];
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+
+  displayedColumns: string[] = ['id', 'name', 'action'];
+  dataSource = new MatTableDataSource<any[]>([]);
 
   constructor(private userSecurityService: UserSecurityService,
               private cookieService: CookieService,
@@ -23,9 +33,18 @@ export class AdmincategoriesComponent extends AbstractComponents implements OnIn
 
   ngOnInit(): void {
     this.categoryService.getAllCategory().subscribe(data => {
-      this.categories = data;
+      for (const category of data) {
+        this.categories.push({id: category.id, name: category.name});
+      }
       console.log(this.categories);
+      this.dataSource = new MatTableDataSource<any>(this.categories);
+      this.ngAfterViewInit();
     });
+  }
+
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
 }
