@@ -1,7 +1,7 @@
 <section class="my-4 container">
 
   <!-- SelectImageModal -->
-  <div *ngIf="imageList.length != 0" class="modal fade" id="selectImageModal" tabindex="-1" aria-labelledby="selectImageModalLabel" aria-hidden="true">
+  <div *ngIf="imageList && imageList.length != 0" class="modal fade" id="selectImageModal" tabindex="-1" aria-labelledby="selectImageModalLabel" aria-hidden="true">
     <div class="modal-dialog" style="max-width: 70%">
       <div class="modal-content">
         <div class="modal-header">
@@ -11,17 +11,14 @@
           </button>
         </div>
           <div class="modal-body">
-
             <div class="container">
               <div class="row">
                 <div class="col-sm" *ngFor="let image of imageList" [id]="'modalImage' + image.parentId" style="cursor: pointer;" (click)="imageClick(image.parentId)">
                   <img [src]="'http://localhost:8080/api/v1/resource/' + image.url" class="mt-2" height="200">
                   <small class="form-text text-muted">{{ image.title }}</small>
                 </div>
-
               </div>
             </div>
-
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -60,7 +57,6 @@
                           <div class="timeline-body">
                             <p>{{ inner.description }}</p>
                             <img [src]="'http://localhost:8080/api/v1/resource/' + inner.image.url" class="mt-2" height="200">
-
                             <div class="overflow-auto" style="max-height: 300px">
                               <ul *ngIf="inner.messageList.length !== 0" class="timeline-message">
                                 <li *ngFor="let message of inner.messageList" class="{{ userColor(message.user.id, inner) }}">
@@ -93,11 +89,10 @@
               <small class="form-text text-muted">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</small>
               <small class="text-danger">{{ printError(editInnerPageForm.get('descriptionPage')) }}</small>
             </div>
-
             <div class="form-group">
               <label>Image:</label>
               <div class="row">
-                <div class="col-md-auto">
+                <div class="col-md-auto mb-2">
                   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#selectImageModal">Select an image</button>
                 </div>
                 <div class="col-sm">
@@ -107,7 +102,6 @@
               <small class="form-text text-muted">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</small>
               <small class="text-danger">{{ printError(editInnerPageForm.get('imagePage')) }}</small>
             </div>
-
             <button type="button" class="btn btn-primary mr-2" (click)="updateInnerPage()">Save Draft</button>
             <button type="button" class="btn btn-primary" [disabled]="editInnerPageForm.invalid" (click)="validationInnerPage()">Validation</button>
           </form>

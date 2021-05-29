@@ -93,6 +93,8 @@ export class EditpageComponent extends AbstractEdit implements OnInit {
               console.log("*********** IMAGE LIST ***********");
               console.log(value);
               this.init();
+            }, error => {
+              this.init();
             });
           }
         });

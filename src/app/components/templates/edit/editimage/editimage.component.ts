@@ -105,7 +105,7 @@ export class EditimageComponent extends AbstractEdit implements OnInit {
     this.innerImageService.addInnerImage(tagId.toString(), {
       description: editInnerImageValue.description,
       title: editInnerImageValue.title,
-       url: editInnerImageValue.fileSource}).subscribe(value => {
+       url: this.image.innerImageList[0].url}).subscribe(value => {
          this.ngOnInit();
     }, error => {
     });
