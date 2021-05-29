@@ -15,7 +15,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class EdittagComponent extends AbstractEdit implements OnInit {
   editInnerTagForm: FormGroup;
-  private id: string;s
+  private id: string;
   tag: any;
 
   constructor(private userSecurityService: UserSecurityService,

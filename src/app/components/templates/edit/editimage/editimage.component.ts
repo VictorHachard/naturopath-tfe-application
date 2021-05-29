@@ -62,7 +62,7 @@ export class EditimageComponent extends AbstractEdit implements OnInit {
     const innerImageId: string = this.image.innerImageList[0].id;
     console.log(this.trustedUrl);
     if (editInnerImageValue.fileSource === '' && this.trustedUrl !== '') {
-      this.innerImageService.validationInnerImage(innerImageId, {
+      this.innerImageService.validationInner(innerImageId, {
         description: editInnerImageValue.description,
         title: editInnerImageValue.title
       }).subscribe(value => {
@@ -72,7 +72,7 @@ export class EditimageComponent extends AbstractEdit implements OnInit {
       });
     } else {
       console.log(editInnerImageValue.fileSource);
-      this.innerImageService.validationInnerImage(innerImageId, {
+      this.innerImageService.validationInner(innerImageId, {
         description: editInnerImageValue.description,
         title: editInnerImageValue.title,
         url: editInnerImageValue.fileSource
@@ -102,7 +102,7 @@ export class EditimageComponent extends AbstractEdit implements OnInit {
     const editInnerImageValue = this.editInnerImageForm.value;
     console.log(this.tmpImage);
     editInnerImageValue.fileSource = this.tmpImage;
-    this.innerImageService.addInnerImage(tagId.toString(), {
+    this.innerImageService.addInner(tagId.toString(), {
       description: editInnerImageValue.description,
       title: editInnerImageValue.title,
        url: this.image.innerImageList[0].url}).subscribe(value => {
@@ -150,7 +150,7 @@ export class EditimageComponent extends AbstractEdit implements OnInit {
       formData.append('file', editImageValue.fileSource, name);
       this.imageService.upload(formData).subscribe(value1 => {
         console.log('sdsdsdsdsdsd----------------'+  name);
-        this.innerImageService.updateInnerImage(this.image.innerImageList[0].id,
+        this.innerImageService.updateInner(this.image.innerImageList[0].id,
           {title: editImageValue.title,
             description: editImageValue.description,
             url: name}).subscribe(value => {
@@ -162,7 +162,7 @@ export class EditimageComponent extends AbstractEdit implements OnInit {
         fileSource: name,
       });
     } else {
-      this.innerImageService.updateInnerImage(this.image.innerImageList[0].id,
+      this.innerImageService.updateInner(this.image.innerImageList[0].id,
         {title: editImageValue.title,
           description: editImageValue.description}).subscribe(value => {
       });

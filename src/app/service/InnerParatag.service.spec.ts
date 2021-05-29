@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { InnerParatagService } from './inner-paratag.service';
+import { InnerParatagService } from './InnerParatag.service';
 
 describe('InnerParatagService', () => {
   let service: InnerParatagService;

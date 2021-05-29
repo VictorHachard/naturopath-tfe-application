@@ -12,7 +12,7 @@ import {CookieService} from 'ngx-cookie-service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ImageService} from '../../../../service/Image.service';
 import {TagService} from '../../../../service/Tag.service';
-import {InnerParatagService} from '../../../../service/inner-paratag.service';
+import {InnerParatagService} from '../../../../service/InnerParatag.service';
 import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
@@ -154,7 +154,7 @@ export class EditpageComponent extends AbstractEdit implements OnInit {
 
   addInnerPage(pageId: number): void {
     const editInnerPageValue = this.editInnerPageForm.value;
-    this.innerPageService.addInnerPage(pageId.toString(), {
+    this.innerPageService.addInner(pageId.toString(), {
       description: editInnerPageValue.descriptionPage,
       title: editInnerPageValue.titlePage,
       imageId: editInnerPageValue.imagePage}).subscribe(value => {
@@ -167,7 +167,7 @@ export class EditpageComponent extends AbstractEdit implements OnInit {
   updateInnerPage(): void {
     const editInnerPageValue = this.editInnerPageForm.value;
     const innerPageId: string = this.page.innerPageList[0].id;
-    this.innerPageService.updateInnerPage(innerPageId.toString(), {
+    this.innerPageService.updateInner(innerPageId.toString(), {
       description: editInnerPageValue.descriptionPage,
       title: editInnerPageValue.titlePage,
       imageId: editInnerPageValue.imagePage}).subscribe(value => {
@@ -180,7 +180,7 @@ export class EditpageComponent extends AbstractEdit implements OnInit {
   validationInnerPage(): void {
     const editInnerPageValue = this.editInnerPageForm.value;
     const innerPageId: string = this.page.innerPageList[0].id;
-    this.innerPageService.validationInnerPage(innerPageId, {
+    this.innerPageService.validationInner(innerPageId, {
       description: editInnerPageValue.descriptionPage,
       title: editInnerPageValue.titlePage,
       imageId: editInnerPageValue.imagePage}).subscribe(value => {
@@ -220,7 +220,7 @@ export class EditpageComponent extends AbstractEdit implements OnInit {
 
   addInnerParagraph(index: number, paragraphId: number): void {
     const editInnerParagraphValue = this.editInnerParagraphForm[index].value;
-    this.innerParagraphService.addInnerParagraph(paragraphId.toString(), {
+    this.innerParagraphService.addInner(paragraphId.toString(), {
       content: editInnerParagraphValue.contentParagraph,
       title: editInnerParagraphValue.titleParagraph}).subscribe(value => {
         this.ngOnInit();
@@ -231,7 +231,7 @@ export class EditpageComponent extends AbstractEdit implements OnInit {
 
   updateInnerParagraph(index: number, id: number): void {
     const editInnerParagraphValue = this.editInnerParagraphForm[index].value;
-    this.innerParagraphService.updateInnerParagraph(id.toString(), {
+    this.innerParagraphService.updateInner(id.toString(), {
       content: editInnerParagraphValue.contentParagraph,
       title: editInnerParagraphValue.titleParagraph}).subscribe(value => {
         this.ngOnInit();
@@ -245,7 +245,7 @@ export class EditpageComponent extends AbstractEdit implements OnInit {
 
     console.log(id);
 
-    this.innerParagraphService.validationInnerParagraph(id.toString(), {
+    this.innerParagraphService.validationInner(id.toString(), {
       content: editInnerParagraphValue.contentParagraph,
       title: editInnerParagraphValue.titleParagraph}).subscribe(value => {
         this.ngOnInit();
@@ -317,7 +317,7 @@ export class EditpageComponent extends AbstractEdit implements OnInit {
       }
     }
 
-    this.innerParatagService.updateInnerParatag(id.toString(), {
+    this.innerParatagService.updateInner(id.toString(), {
       content: editInnerParatagValue.contentParatag,
       title: editInnerParatagValue.titleParatag,
       tagIdList: tagIdListTmp}).subscribe(value => {
@@ -344,7 +344,7 @@ export class EditpageComponent extends AbstractEdit implements OnInit {
       }
     }
 
-    this.innerParatagService.validationInnerParatag(id.toString(), {
+    this.innerParatagService.validationInner(id.toString(), {
       content: editInnerParatagValue.contentParatag,
       title: editInnerParatagValue.titleParatag,
       tagIdList: tagIdListTmp}).subscribe(value => {
@@ -396,7 +396,7 @@ export class EditpageComponent extends AbstractEdit implements OnInit {
       }
     }
 
-    this.innerParatagService.addInnerParatag(paratagId.toString(), {
+    this.innerParatagService.addInner(paratagId.toString(), {
       content: editInnerParatagValue.contentParatag,
       title: editInnerParatagValue.titleParatag,
       tagIdList: tagIdListTmp}).subscribe(value => {
