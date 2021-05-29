@@ -21,8 +21,9 @@ import {DomSanitizer} from '@angular/platform-browser';
   styleUrls: ['./editpage.component.css']
 })
 export class EditpageComponent extends AbstractEdit implements OnInit {
+
   private id: string;
-  allTagTypeList = new Map(); //{befor : any[], after : any[]}
+  allTagTypeList = new Map(); // {befor : any[], after : any[]}
 
   editInnerPageForm: FormGroup;
   editInnerParagraphForm: FormGroup[];
@@ -68,13 +69,13 @@ export class EditpageComponent extends AbstractEdit implements OnInit {
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
     this.pageService.getEditPageDto(this.id).subscribe(data => {
-      console.log("*********** PAGE LIST ***********");
+      console.log('*********** PAGE LIST ***********');
       console.log(data);
       this.page = data;
       for (const paratag of this.page.paratagList) {
         this.tagService.getAllTagByTagType(paratag.paratagType.tagType.id).subscribe(data1 => {
-          let beforeNamesTmp = [];
-          let afterNamesTmp = [];
+          const beforeNamesTmp = [];
+          const afterNamesTmp = [];
           for (const tag of data1) {
             beforeNamesTmp.push(tag.name);
             for (const tag2 of paratag.innerParatagList[paratag.innerParatagList.length - 1].tagList) {
@@ -86,11 +87,12 @@ export class EditpageComponent extends AbstractEdit implements OnInit {
           }
           this.allTagTypeList.set(paratag.paratagType.tagType.name, { after : [], before : data1, afterNames : afterNamesTmp, beforeNames : beforeNamesTmp});
           if (paratag.id === this.page.paratagList[this.page.paratagList.length - 1].id) {
-            console.log("*********** TAGS BY TAGTYPE LIST ***********");
+            console.log('*********** TAGS BY TAGTYPE LIST ***********');
             console.log(this.allTagTypeList);
             this.imageService.getAllImageDto().subscribe(value => {
               this.imageList = value;
-              console.log("*********** IMAGE LIST ***********");
+              this.imageId = this.page.innerPageList[0].image == null ? '' : this.page.innerPageList[0].image.parentId;
+              console.log('*********** IMAGE LIST ***********');
               console.log(value);
               this.init();
             }, error => {
@@ -128,7 +130,6 @@ export class EditpageComponent extends AbstractEdit implements OnInit {
       imagePage: new FormControl(this.page.innerPageList[0].image == null ? '' : this.page.innerPageList[0].image.parentId,
         [Validators.required]),
     });
-
     this.page.paragraphList.forEach(p => {
       this.editInnerParagraphForm.push(new FormGroup({
         titleParagraph : new FormControl(p.innerParagraphList[p.innerParagraphList.length - 1].title,
@@ -283,7 +284,7 @@ export class EditpageComponent extends AbstractEdit implements OnInit {
     if (this.imageId !== undefined) {
       document.getElementById('modalImage' + this.imageId).classList.remove('border', 'border-primary');
     }
-    this.id = id;
+    this.imageId = id;
     this.editInnerPageForm.get('imagePage').setValue(id);
     document.getElementById('modalImage' + id).classList.add('border', 'border-primary');
   }

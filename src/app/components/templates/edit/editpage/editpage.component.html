@@ -13,7 +13,7 @@
           <div class="modal-body">
             <div class="container">
               <div class="row">
-                <div class="col-sm" *ngFor="let image of imageList" [id]="'modalImage' + image.parentId" style="cursor: pointer;" (click)="imageClick(image.parentId)">
+                <div class="col-sm {{ page.innerPageList[0].image.parentId === image.parentId ? 'border border-primary' : '' }}" *ngFor="let image of imageList" [id]="'modalImage' + image.parentId" style="cursor: pointer;" (click)="imageClick(image.parentId)">
                   <img [src]="'http://localhost:8080/api/v1/resource/' + image.url" class="mt-2" height="200">
                   <small class="form-text text-muted">{{ image.title }}</small>
                 </div>

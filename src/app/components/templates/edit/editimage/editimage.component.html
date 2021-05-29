@@ -61,7 +61,7 @@
       <div class="mb-3">
         <div class="custom-file">
           <input type="file" class="custom-file-input" accept="image/*" formControlName="image" (change)="onFileChange($event)">
-          <label class="custom-file-label"> {{ this.editInnerImageForm.get('fileSource').value.name !== undefined ? this.editInnerImageForm.get('fileSource').value.name : 'Choose file' }}</label>
+          <label class="custom-file-label">{{ this.editInnerImageForm.get('fileSource').value.name !== undefined ? this.editInnerImageForm.get('fileSource').value.name : 'Choose file' }}</label>
           <img *ngIf="!trustedUrl" [src]="'http://localhost:8080/api/v1/resource/' + image.innerImageList[0].url" class="mt-2" height="200">
           <img [src]="trustedUrl" class="mt-2" height="200">
           <small class="form-text text-muted">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</small>
