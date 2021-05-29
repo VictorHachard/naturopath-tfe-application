@@ -1,8 +1,7 @@
 <section class="my-4 container">
   <div *ngIf="image">
     <h2 class="mb-4">Edit image</h2>
-    <div *ngIf="image.innerImageList[image.innerImageList.length - 1].state !== 'VALIDATING' &&
-     image.innerImageList[image.innerImageList.length - 1].state !== 'DRAFT'">
+    <div *ngIf="image.innerImageList.length > 1">
       <button type="button" class="btn btn-primary mb-2 float-right" data-toggle="modal" data-target="#modalInnerPage">View all version</button>
       <br>
       <div class="modal" id="modalInnerPage" tabindex="-1" role="dialog" aria-labelledby="modal1-label">
@@ -19,7 +18,7 @@
                   <div class="timeline-panel">
                     <div class="timeline-heading">
                       <h4 class="timeline-title">{{ inner.title }}</h4>
-                      <p class="mb-0"><small class="text-muted">version {{ inner.version }} is {{ inner.state }} at {{ inner.voteList[inner.voteList.length - 1].createdAt| date:'dd MMMM yyyy' }} by {{ inner.user.username }}</small></p>
+                      <p class="mb-0" *ngIf="inner.voteList.length !== 0"><small class="text-muted">version {{ inner.version }} is {{ inner.state }} at {{ inner.voteList[inner.voteList.length - 1].createdAt| date:'dd MMMM yyyy' }} by {{ inner.user.username }}</small></p>
                       <p><small *ngFor="let vote of inner.voteList; let index = index" class="text-muted">{{ vote.user.username + (inner.voteList.length - 1 !== index ? ', ' : ' have voted') }}</small></p>
                     </div>
                     <div class="timeline-body">

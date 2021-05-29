@@ -91,7 +91,7 @@ export class EditpageComponent extends AbstractEdit implements OnInit {
             console.log(this.allTagTypeList);
             this.imageService.getAllImageDto().subscribe(value => {
               this.imageList = value;
-              this.imageId = this.page.innerPageList[0].image == null ? '' : this.page.innerPageList[0].image.parentId;
+              this.imageId = this.page.innerPageList[0].image == null ? undefined : this.page.innerPageList[0].image.parentId;
               console.log('*********** IMAGE LIST ***********');
               console.log(value);
               this.init();
@@ -132,17 +132,17 @@ export class EditpageComponent extends AbstractEdit implements OnInit {
     });
     this.page.paragraphList.forEach(p => {
       this.editInnerParagraphForm.push(new FormGroup({
-        titleParagraph : new FormControl(p.innerParagraphList[p.innerParagraphList.length - 1].title,
+        titleParagraph : new FormControl(p.innerParagraphList[0].title,
           [Validators.required, Validators.minLength(8), Validators.maxLength(128)]),
-        contentParagraph : new FormControl(p.innerParagraphList[p.innerParagraphList.length - 1].content,
+        contentParagraph : new FormControl(p.innerParagraphList[0].content,
           [Validators.required, Validators.minLength(128), Validators.maxLength(8182)]),
       }));
     });
     this.page.paratagList.forEach(p => {
       this.editInnerParatagForm.push(new FormGroup({
-        titleParatag: new FormControl(p.innerParatagList[p.innerParatagList.length - 1].title,
+        titleParatag: new FormControl(p.innerParatagList[0].title,
           [Validators.required, Validators.minLength(8), Validators.maxLength(128)]),
-        contentParatag: new FormControl(p.innerParatagList[p.innerParatagList.length - 1].content,
+        contentParatag: new FormControl(p.innerParatagList[0].content,
           [Validators.required, Validators.minLength(64), Validators.maxLength(8182)]),
       }));
     });
@@ -380,20 +380,12 @@ export class EditpageComponent extends AbstractEdit implements OnInit {
   }
 
   addInnerTag(index: number, paratagId: number, name: string): void {
-    const editInnerParatagValue = this.editInnerParagraphForm[index].value;
+    const editInnerParatagValue = this.editInnerParatagForm[index].value;
 
     const tagIdListTmp = [];
-    for (const afterName of this.allTagTypeList.get(name).afterNames) {
-      for (const after of this.allTagTypeList.get(name).after) {
-        if (afterName === after.name) {
-          tagIdListTmp.push(after.id);
-        }
-      }
-      for (const before of this.allTagTypeList.get(name).before) {
-        if (afterName === before.name) {
-          tagIdListTmp.push(before.id);
-        }
-      }
+    for (const t of this.page.paratagList[index].innerParatagList[0].tagList) {
+      tagIdListTmp.push(t.id);
+      console.log(t.name);
     }
 
     this.innerParatagService.addInner(paratagId.toString(), {

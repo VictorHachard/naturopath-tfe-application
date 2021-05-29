@@ -13,7 +13,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class PagesComponent extends AbstractComponents implements OnInit {
 
-  id: string;
+  private id: string;
 
   categories: any[];
   name: string;
@@ -35,6 +35,7 @@ export class PagesComponent extends AbstractComponents implements OnInit {
     super();
     this.categoryService.getAllCategory().subscribe(value => {
       this.categories = value;
+      console.log(value);
     });
     this.route.paramMap.subscribe(params => {
       this.ngOnInit();
@@ -47,6 +48,7 @@ export class PagesComponent extends AbstractComponents implements OnInit {
       //this.name = this.categories[].name;
       this.pageService.getAllPageByCategory(this.id).subscribe(data => {
         this.pages = data;
+        console.log(data);
         this.minPagi = this.index;
         this.maxPagi = this.index;
 

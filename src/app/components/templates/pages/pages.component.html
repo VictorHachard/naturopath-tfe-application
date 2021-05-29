@@ -26,9 +26,10 @@
         <div *ngFor="let page of pages.pageList" class="col-md-4 mb-4">
           <a class="card" [routerLink]="['/page', page.id]">
             <div class="card-header">
-              <h2 title="{{ page.title }}" class="font-weight-normal">{{ page.title }}</h2>
+              <h4 title="{{ page.title }}" class="font-weight-normal">{{ page.title }}</h4>
             </div>
-            <div class="card-body">
+            <div class="card-body p-0">
+              <img [src]="'http://localhost:8080/api/v1/resource/' + page.image.url" width="100%">
             </div>
           </a>
         </div>
