@@ -63,7 +63,7 @@
           <label class="custom-file-label"> {{ this.editInnerImageForm.get('fileSource').value.name !== undefined ? this.editInnerImageForm.get('fileSource').value.name : 'Choose file' }}</label>
           <img [src]="'http://localhost:8080/api/v1/resource/' + image.innerImageList[0].url" class="mt-2" height="200">
           <small class="form-text text-muted">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</small>
-          <small class="text-danger">{{ printError(editInnerImageForm.get('description')) }}</small>
+          <small class="text-danger">{{ printError(editInnerImageForm.get('fileSource')) }}</small>
         </div>
       </div>
 

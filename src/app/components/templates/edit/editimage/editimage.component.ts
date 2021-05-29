@@ -32,8 +32,7 @@ export class EditimageComponent extends AbstractEdit implements OnInit {
               private router: Router,
               private imageService: ImageService,
               private voteService: VoteService,
-              private innerImageService: InnerImageService,
-              private sanitization: DomSanitizer){
+              private innerImageService: InnerImageService){
     super();
   }
 
@@ -62,8 +61,7 @@ export class EditimageComponent extends AbstractEdit implements OnInit {
     const editInnerImageValue = this.editInnerImageForm.value;
     const innerImageId: string = this.image.innerImageList[0].id;
     console.log(this.trustedUrl);
-    if (editInnerImageValue.fileSource === '' && this.trustedUrl !== '')
-    {
+    if (editInnerImageValue.fileSource === '' && this.trustedUrl !== '') {
       this.innerImageService.validationInner(innerImageId, {
         description: editInnerImageValue.description,
         title: editInnerImageValue.title
@@ -72,7 +70,7 @@ export class EditimageComponent extends AbstractEdit implements OnInit {
       }, error => {
 
       });
-    }else{
+    } else {
       console.log(editInnerImageValue.fileSource);
       this.innerImageService.validationInner(innerImageId, {
         description: editInnerImageValue.description,
@@ -142,11 +140,9 @@ export class EditimageComponent extends AbstractEdit implements OnInit {
     }
   }
 
-
   updateImage(): void {
     const editImageValue = this.editInnerImageForm.value;
-    if (editImageValue.image !== null)
-   {
+    if (editImageValue.image !== null) {
       const formData: FormData = new FormData();
       const name: string = (new Date()).valueOf().toString() + Math.random().toString(36).substring(10) + JSON.parse(localStorage.getItem('currentUser')).token.slice(JSON.parse(localStorage.getItem('currentUser')).token.lastIndexOf('-')).substring(10) + editImageValue.fileSource.name.slice(editImageValue.fileSource.name.lastIndexOf('.'));
       formData.append('file', editImageValue.fileSource, name);
