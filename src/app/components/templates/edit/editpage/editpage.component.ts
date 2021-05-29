@@ -13,6 +13,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {ImageService} from '../../../../service/Image.service';
 import {TagService} from '../../../../service/Tag.service';
 import {InnerParatagService} from '../../../../service/inner-paratag.service';
+import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-addpage',
@@ -34,7 +35,8 @@ export class EditpageComponent extends AbstractEdit implements OnInit {
   imageId: any;
   paraTag: any;
 
-  constructor(private userSecurityService: UserSecurityService,
+  constructor(private sanitizer: DomSanitizer,
+              private userSecurityService: UserSecurityService,
               private cookieService: CookieService,
               private route: ActivatedRoute,
               private router: Router,

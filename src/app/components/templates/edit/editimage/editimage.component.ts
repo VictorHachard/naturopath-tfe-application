@@ -10,6 +10,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {DomSanitizer} from '@angular/platform-browser';
 import {element} from 'protractor';
 import {getSortHeaderNotContainedWithinSortError} from '@angular/material/sort/sort-errors';
+import {Observable} from 'rxjs';
+import {HttpHeaders} from '@angular/common/http';
 
 @Component({
   selector: 'app-editimage',
@@ -41,10 +43,6 @@ export class EditimageComponent extends AbstractEdit implements OnInit {
       console.log(data);
       this.image = data;
       this.init();
-      this.imgURL = 'C:/test/' + this.image.innerImageList[0].url;
-      console.log(this.imgURL);
-      this.trustedUrl = this.sanitization.bypassSecurityTrustUrl(this.imgURL);
-      console.log(this.trustedUrl.toString());
     });
   }
 

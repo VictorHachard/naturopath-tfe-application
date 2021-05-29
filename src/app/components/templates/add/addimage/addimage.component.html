@@ -16,7 +16,7 @@
     <div class="custom-file">
       <input type="file" class="custom-file-input" accept="image/*" formControlName="image" (change)="onFileChange($event)">
       <label class="custom-file-label"> {{ this.addImageForm.get('fileSource').value.name !== undefined ? this.addImageForm.get('fileSource').value.name : 'Choose file' }}</label>
-      <img [src]="imgURL" class="mt-2" height="200" *ngIf="imgURL">
+      <img [src]="imgURL" class="mt-2" height="200">
       <small class="form-text text-muted">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</small>
       <small class="text-danger">{{ printError(addImageForm.get('description')) }}</small>
     </div>
