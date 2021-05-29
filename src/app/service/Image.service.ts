@@ -33,7 +33,6 @@ export class ImageService extends AbstractService {
       {headers : new HttpHeaders().set('Authorization', this.getUserJwt())});
   }
 
-
   public upload(file: any): Observable<any> {
     return this.http.post<any>(this.baseUrl + 'upload/', file,
       {headers: new HttpHeaders().set('Authorization', this.getUserJwt())}); //{ 'Content-Type': 'multipart/form-data' }

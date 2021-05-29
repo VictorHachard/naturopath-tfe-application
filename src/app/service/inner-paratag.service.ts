@@ -32,4 +32,5 @@ export class InnerParatagService extends AbstractService {
     return this.http.post<any>(this.baseUrl + 'addMessage/' + id, body,
       {headers : new HttpHeaders().set('Authorization', this.getUserJwt())});
   }
+
 }

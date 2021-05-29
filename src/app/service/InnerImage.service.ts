@@ -13,8 +13,24 @@ export class InnerImageService extends AbstractInner {
     this.baseUrl = this.baseUrl + 'innerImage/';
   }
 
-  public updateImage(id: { this: undefined }, body: any): Observable<any> {
+  public addInnerImage(id: string, body: any): Observable<any> {
+    return this.http.post<any>(this.baseUrl + id, body,
+      {headers : new HttpHeaders().set('Authorization', this.getUserJwt())});
+  }
+
+  public updateInnerImage(id: any, body: any): Observable<any> {
     return this.http.put<any>(this.baseUrl + 'update/' + id, body,
       {headers : new HttpHeaders().set('Authorization', this.getUserJwt())});
   }
+
+  public validationInnerImage(id: string, body: any): Observable<any> {
+    return this.http.post<any>(this.baseUrl + 'validation/' + id, body,
+      {headers : new HttpHeaders().set('Authorization', this.getUserJwt())});
+  }
+
+  public addMessage(id: string, body: any): Observable<any> {
+    return this.http.post<any>(this.baseUrl + 'addMessage/' + id, body,
+      {headers : new HttpHeaders().set('Authorization', this.getUserJwt())});
+  }
+
 }
