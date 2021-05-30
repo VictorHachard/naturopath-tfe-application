@@ -65,7 +65,9 @@ export class EditparatagtypeComponent extends AbstractComponents implements OnIn
       {description: editParatagTypeValue.description,
         size: editParatagTypeValue.size,
         name: editParatagTypeValue.name,
-        tagTypeId: tagTypeId.toString()});
+        tagTypeId: tagTypeId.toString()}).subscribe(value => {
+      this.ngOnInit();
+    });
   }
 
 }

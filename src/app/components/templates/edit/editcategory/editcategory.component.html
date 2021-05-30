@@ -2,7 +2,7 @@
 
   <h2 class="mb-4">Edit category</h2>
 
-  <form *ngIf="category" [formGroup]="editCategoryForm">
+  <form *ngIf="category && paratag && paragraph" [formGroup]="editCategoryForm">
     <div class="form-group">
       <label>Name:</label>
       <input type="text" class="form-control" formControlName="name">
@@ -15,6 +15,41 @@
       <small class="form-text text-muted">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</small>
       <small class="text-danger">{{ printError(editCategoryForm.get('description')) }}</small>
     </div>
+    <div cdkDropListGroup>
+      <div class="example-container">
+        <label>Available</label>
+        <div
+          cdkDropList
+          [cdkDropListData]="drag.before"
+          class="example-list"
+          (cdkDropListDropped)="drop($event)">
+          <div class="example-box" *ngFor="let item of drag.before" cdkDrag>
+            <p class="d-inline">{{ this.typeData.get(item).name }}</p>
+            <span *ngIf="this.typeData.get(item).type === 'ParagraphType'" class="badge badge-primary float-right mt-1">Paragraph</span>
+            <span *ngIf="this.typeData.get(item).type === 'ParatagType'" class="badge badge-success float-right mt-1">Paratag</span>
+
+            <p class="m-0 text-muted">{{ this.typeData.get(item).description }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="example-container">
+        <label>Use</label>
+        <div
+          cdkDropList
+          [cdkDropListData]="drag.after"
+          class="example-list"
+          (cdkDropListDropped)="drop($event)">
+          <div class="example-box" *ngFor="let item of drag.after" cdkDrag>
+            <p class="d-inline">{{ this.typeData.get(item).name }}</p>
+            <span *ngIf="this.typeData.get(item).type === 'ParagraphType'" class="badge badge-primary float-right mt-1">Paragraph</span>
+            <span *ngIf="this.typeData.get(item).type === 'ParatagType'" class="badge badge-success float-right mt-1">Paratag</span>
+
+            <p class="m-0 text-muted">{{ this.typeData.get(item).description }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <button type="button" class="btn btn-primary" (click)="update()">Update</button>
   </form>
 </section>

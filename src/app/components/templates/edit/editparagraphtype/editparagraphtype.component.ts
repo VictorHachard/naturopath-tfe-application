@@ -46,6 +46,8 @@ export class EditparagraphtypeComponent extends AbstractComponents implements On
     const editTagTypeValue = this.editParagraphTypeForm.value;
     this.paragraphTypeService.updateParagraphType(this.paragraphType.id.toString(),
       {description: editTagTypeValue.description,
-        name: editTagTypeValue.name});
+        name: editTagTypeValue.name}).subscribe(value => {
+      this.ngOnInit();
+    });
   }
 }

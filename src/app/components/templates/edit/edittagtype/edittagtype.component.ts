@@ -46,6 +46,8 @@ export class EdittagtypeComponent extends AbstractComponents implements OnInit {
     const editTagTypeValue = this.editTagTypeForm.value;
     this.tagTypeService.updateTagType(this.tagType.id.toString(),
       {description: editTagTypeValue.description,
-        name: editTagTypeValue.name});
+        name: editTagTypeValue.name}).subscribe(value => {
+      this.ngOnInit();
+    });
   }
 }

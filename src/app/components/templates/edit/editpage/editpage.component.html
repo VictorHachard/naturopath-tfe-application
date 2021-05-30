@@ -319,23 +319,27 @@
             </div>
             <div cdkDropListGroup>
               <div class="example-container">
-                <h2>Available</h2>
+                <label>Available</label>
                 <div
                   cdkDropList
                   [cdkDropListData]="allTagTypeList.get(page.paratagList[index].paratagType.name).beforeNames"
                   class="example-list"
                   (cdkDropListDropped)="dropItem($event)">
-                  <div class="example-box" *ngFor="let item of allTagTypeList.get(page.paratagList[index].paratagType.name).beforeNames" cdkDrag>{{item}}</div>
+                  <div class="example-box" *ngFor="let item of allTagTypeList.get(page.paratagList[index].paratagType.name).beforeNames" cdkDrag>
+                    <p class="d-inline">{{ item }}</p>
+                  </div>
                 </div>
               </div>
               <div class="example-container">
-                <h2>Use</h2>
+                <label>Use</label>
                 <div
                   cdkDropList
                   [cdkDropListData]="allTagTypeList.get(page.paratagList[index].paratagType.name).afterNames"
                   class="example-list"
                   (cdkDropListDropped)="dropItem($event)">
-                  <div class="example-box" *ngFor="let item of allTagTypeList.get(page.paratagList[index].paratagType.name).afterNames" cdkDrag>{{item}}</div>
+                  <div class="example-box" *ngFor="let item of allTagTypeList.get(page.paratagList[index].paratagType.name).afterNames" cdkDrag>
+                    <p class="d-inline">{{ item }}</p>
+                  </div>
                 </div>
               </div>
             </div>
