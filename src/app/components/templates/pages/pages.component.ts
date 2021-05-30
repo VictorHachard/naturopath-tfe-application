@@ -15,7 +15,8 @@ export class PagesComponent extends AbstractComponents implements OnInit {
 
   private id: string;
 
-  categories: any[];
+  categories: any[] = [];
+  description: string;
   name: string;
 
   pages: any;
@@ -36,25 +37,32 @@ export class PagesComponent extends AbstractComponents implements OnInit {
     this.categoryService.getAllCategory().subscribe(value => {
       this.categories = value;
       console.log(value);
-    });
-    this.route.paramMap.subscribe(params => {
-      this.ngOnInit();
+      this.route.paramMap.subscribe(params => {
+        this.ngOnInit();
+      });
     });
   }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id') === undefined ? null : this.route.snapshot.paramMap.get('id');
     if (this.id !== null) {
-      //this.name = this.categories[].name;
-      this.pageService.getAllPageByCategory(this.id).subscribe(data => {
-        this.pages = data;
-        console.log(data);
-        this.minPagi = this.index;
-        this.maxPagi = this.index;
-
-        for (let i = this.minPagi + 1; i <= this.maxPagi - 1; i++) {
-          this.pagi.push(i);
+      this.categoryService.getAllCategory().subscribe(value => {
+        for (const c of value) {
+          if (c.id == this.id) {
+            this.name = c.name;
+            this.description = c.description;
+          }
         }
+        this.pageService.getAllPageByCategory(this.id).subscribe(data => {
+          this.pages = data;
+          console.log(data);
+          this.minPagi = this.index;
+          this.maxPagi = this.index;
+
+          for (let i = this.minPagi + 1; i <= this.maxPagi - 1; i++) {
+            this.pagi.push(i);
+          }
+        });
       });
     }
   }

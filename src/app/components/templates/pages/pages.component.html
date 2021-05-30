@@ -1,7 +1,7 @@
 <section class="my-4 container-fluid">
   <div class="row justify-content-md-center">
     <div class="col-md-auto">
-      <nav class="nav flex-column">
+      <nav class="nav flex-column jumbotron jumbotron-fluid p-4">
         <div *ngFor="let category of categories">
           <li *ngIf="category.childCategory.length === 0; else notEmpty" class="nav-item">
             <a class="nav-link" [routerLink]="['/pages', category.id]">{{ category.name }}</a>
@@ -20,17 +20,17 @@
       </nav>
     </div>
     <div class="col" style="max-width: 1500px">
-      <h2 class="font-weight-normal mb-4">{{ name }}</h2>
-      <hr class="style1 mb-4">
+      <div class="jumbotron p-4">
+        <h1 class="display-4">{{ name }}</h1>
+        <p class="lead">{{ description }}</p>
+      </div>
       <div *ngIf="pages" class="row">
         <div *ngFor="let page of pages.pageList" class="col-md-4 mb-4">
           <a class="card" [routerLink]="['/page', page.id]">
             <div class="card-header">
               <h4 title="{{ page.title }}" class="font-weight-normal">{{ page.title }}</h4>
             </div>
-            <div class="card-body p-0 page-image" [style]="'height:300px;background-image:url(http://localhost:8080/api/v1/resource/' +  page.image.url + ');'">
-
-            </div>
+            <div class="card-body p-0 page-image" [style]="'height:300px;background-image:url(http://localhost:8080/api/v1/resource/' +  page.image.url + ');'"></div>
           </a>
         </div>
       </div>
