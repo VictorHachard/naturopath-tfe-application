@@ -154,6 +154,7 @@ export class EditimageComponent extends AbstractEdit implements OnInit {
           {title: editImageValue.title,
             description: editImageValue.description,
             url: name}).subscribe(value => {
+          this.ngOnInit();
         });
       });
       this.tmpImage = name;
@@ -165,8 +166,8 @@ export class EditimageComponent extends AbstractEdit implements OnInit {
       this.innerImageService.updateInner(this.image.innerImageList[0].id,
         {title: editImageValue.title,
           description: editImageValue.description}).subscribe(value => {
+        this.ngOnInit();
       });
     }
-    this.ngOnInit();
   }
 }
