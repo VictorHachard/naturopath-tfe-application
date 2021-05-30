@@ -19,7 +19,7 @@ export class PagesComponent extends AbstractComponents implements OnInit {
   name: string;
 
   pages: any;
-  offset: 10;
+  offset: 6;
   index: 1;
   minPagi;
   maxPagi;
