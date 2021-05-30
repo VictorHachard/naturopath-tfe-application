@@ -48,9 +48,20 @@ export class PagesComponent extends AbstractComponents implements OnInit {
     if (this.id !== null) {
       this.categoryService.getAllCategory().subscribe(value => {
         for (const c of value) {
-          if (c.id == this.id) {
-            this.name = c.name;
-            this.description = c.description;
+          if (c.childCategory.length > 0) {
+            for (const child of c.childCategory) {
+              if (child.id == this.id) {
+                this.name = child.name;
+                this.description = child.description;
+                break;
+              }
+            }
+          } else {
+            if (c.id == this.id) {
+              this.name = c.name;
+              this.description = c.description;
+              break;
+            }
           }
         }
         this.pageService.getAllPageByCategory(this.id).subscribe(data => {
