@@ -3,7 +3,7 @@
   background-repeat: no-repeat!important;
   background-size: cover!important;
 }
-.card:hover {
+.card:hover, .cur:hover {
   cursor: pointer;
 }
 .nav-link:hover {
