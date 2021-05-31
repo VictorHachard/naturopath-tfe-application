@@ -21,6 +21,7 @@ export class PagesComponent extends AbstractComponents implements OnInit {
   description: string;
   name: string;
   noId = false;
+  url: string;
 
   pageEvent: PageEvent;
   dataSource: any[];
@@ -46,42 +47,46 @@ export class PagesComponent extends AbstractComponents implements OnInit {
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id') === undefined ? null : this.route.snapshot.paramMap.get('id');
-      this.categoryService.getAllCategory().subscribe(value => {
-        if (this.id === null) {
-          this.noId = true;
-          const cat = value[Math.floor(Math.random() * value.length)];
-          if (cat.childCategory.length > 0) {
-            this.id = cat.childCategory[Math.floor(Math.random() * cat.childCategory.length)].id;
-          } else {
-            this.id = cat.id;
-          }
+    this.url = null;
+    this.categoryService.getAllCategory().subscribe(value => {
+      if (this.id === null) {
+        this.noId = true;
+        const cat = value[Math.floor(Math.random() * value.length)];
+        if (cat.childCategory.length > 0) {
+          this.id = cat.childCategory[Math.floor(Math.random() * cat.childCategory.length)].id;
+        } else {
+          this.id = cat.id;
         }
-        for (const c of value) {
-          if (c.childCategory.length > 0) {
-            for (const child of c.childCategory) {
-              if (child.id == this.id) {
-                this.name = child.name;
-                this.description = child.description;
-                break;
-              }
-            }
-          } else {
-            if (c.id == this.id) {
-              this.name = c.name;
-              this.description = c.description;
+      }
+      for (const c of value) {
+        if (c.childCategory.length > 0) {
+          for (const child of c.childCategory) {
+            if (child.id == this.id) {
+              this.name = child.name;
+              this.description = child.description;
               break;
             }
           }
+        } else {
+          if (c.id == this.id) {
+            this.name = c.name;
+            this.description = c.description;
+            break;
+          }
         }
-        this.pageService.getAllPageByCategory(this.id).subscribe(data => {
-          this.pages = data;
-          console.log(data);
-          this.pageIndex = 0;
-          this.pageSize = 9;
-          this.length = data.number;
-          this.updateData(null);
-        });
+      }
+      this.pageService.getAllPageByCategory(this.id).subscribe(data => {
+        this.pages = data;
+        if (data.pageList.length !== 0) {
+          this.url = data.pageList[Math.floor(Math.random() * data.pageList.length)].image.url;
+        }
+        console.log(data);
+        this.pageIndex = 0;
+        this.pageSize = 9;
+        this.length = data.number;
+        this.updateData(null);
       });
+    });
   }
 
   public updateData(event?: PageEvent) {

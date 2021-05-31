@@ -73,3 +73,16 @@ footer {
   font-weight: 250;
   line-height: 1;
 }
+.zoom {
+  -moz-transform: scale(1);
+  -webkit-transform: scale(1);
+  transform: scale(1);
+  transition:0.2s ease all;
+  -webkit-transition:0.2s ease all;
+  -moz-transition:0.2s ease all;}
+
+.zoom:hover {
+  -moz-transform: scale(1.025);
+  -webkit-transform: scale(1.025);
+  transform: scale(1.025);
+}

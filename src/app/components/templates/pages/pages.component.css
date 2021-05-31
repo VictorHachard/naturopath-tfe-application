@@ -3,3 +3,12 @@
   background-repeat: no-repeat!important;
   background-size: cover!important;
 }
+.card:hover {
+  cursor: pointer;
+}
+.nav-link:hover {
+  text-decoration: underline;
+}
+.display-5 {
+  font-weight: 280!important;
+}

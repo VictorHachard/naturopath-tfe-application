@@ -20,22 +20,37 @@
       </nav>
     </div>
     <div class="col" style="max-width: 1500px">
-      <div *ngIf="noId" class="jumbotron p-4">
+      <div *ngIf="noId" class="jumbotron mb-4 p-4">
         <h5>You have not selected a category!</h5>
         <p class="lead">So we suggest you to discover the <span class="display-5 text-primary">{{ name }}</span> category.</p>
       </div>
-      <div class="jumbotron p-4">
-        <p class="display-4">{{ name }}</p>
-        <p class="lead">{{ description }}</p>
+
+      <div *ngIf="url !== null; else elseBlock">
+        <div class="page-image" [style]="'background-image:url(http://localhost:8080/api/v1/resource/' +  url + ');'">
+          <div style="background-color: rgba(30, 32, 34, 0.6);">
+            <div class="jumbotron p-5 mb-3 text-white" style="background-color: rgba(0, 0, 0, 0)!important;">
+              <p class="display-3">{{ name }}</p>
+              <p class="lead">{{ description }}</p>
+            </div>
+          </div>
+        </div>
       </div>
+      <ng-template #elseBlock>
+        <div class="jumbotron p-4">
+          <p class="display-4">{{ name }}</p>
+          <p class="lead">{{ description }}</p>
+        </div>
+      </ng-template>
+
       <div *ngIf="dataSource" class="row">
         <div *ngFor="let page of dataSource" class="col-md mb-4">
-          <a class="card" [routerLink]="['/page', page.id]" style="min-width: 400px">
+          <div class="card zoom" [routerLink]="['/page', page.id]" style="min-width: 400px">
             <div class="card-header">
-              <h4 title="{{ page.title }}" class="font-weight-normal">{{ page.title }}</h4>
+              <h4 class="display-5 text-primary">{{ page.title }}</h4>
+              <p class="lead text-white" style="font-size: 1.15rem;">{{ page.description }}</p>
             </div>
             <div class="card-body p-0 page-image" [style]="'height:300px;background-image:url(http://localhost:8080/api/v1/resource/' +  page.image.url + ');'"></div>
-          </a>
+          </div>
         </div>
       </div>
       <mat-paginator #paginator
