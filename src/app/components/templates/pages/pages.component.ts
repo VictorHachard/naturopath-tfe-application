@@ -5,6 +5,7 @@ import {AbstractComponents} from '../../commons/AbstractComponents';
 import {UserSecurityService} from '../../../service/security/UserSecurity.service';
 import {CookieService} from 'ngx-cookie-service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {PageEvent} from '@angular/material/paginator';
 
 @Component({
   selector: 'app-pages',
@@ -16,16 +17,15 @@ export class PagesComponent extends AbstractComponents implements OnInit {
   private id: string;
 
   categories: any[] = [];
+  pages: any;
   description: string;
   name: string;
 
-  pages: any;
-  offset: 6;
-  index: 1;
-  minPagi;
-  maxPagi;
-
-  pagi: number[] = [];
+  pageEvent: PageEvent;
+  dataSource: any[];
+  pageIndex: number;
+  pageSize: number;
+  length: number;
 
   constructor(private userSecurityService: UserSecurityService,
               private cookieService: CookieService,
@@ -67,14 +67,23 @@ export class PagesComponent extends AbstractComponents implements OnInit {
         this.pageService.getAllPageByCategory(this.id).subscribe(data => {
           this.pages = data;
           console.log(data);
-          this.minPagi = this.index;
-          this.maxPagi = this.index;
-
-          for (let i = this.minPagi + 1; i <= this.maxPagi - 1; i++) {
-            this.pagi.push(i);
-          }
+          this.pageIndex = 0;
+          this.pageSize = 9;
+          this.length = data.number;
+          this.updateData(null);
         });
       });
     }
+  }
+
+  public updateData(event?: PageEvent) {
+    if (event !== null) {
+      this.pageSize = event.pageSize;
+      this.pageIndex = event.pageIndex;
+    }
+    const end = (this.pageIndex + 1) * this.pageSize;
+    const start = this.pageIndex * this.pageSize;
+    this.dataSource = this.pages.pageList.slice(start, end);
+    return event;
   }
 }

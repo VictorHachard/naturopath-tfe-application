@@ -24,9 +24,9 @@
         <h1 class="display-4">{{ name }}</h1>
         <p class="lead">{{ description }}</p>
       </div>
-      <div *ngIf="pages" class="row">
-        <div *ngFor="let page of pages.pageList" class="col-md-4 mb-4">
-          <a class="card" [routerLink]="['/page', page.id]">
+      <div *ngIf="dataSource" class="row">
+        <div *ngFor="let page of dataSource" class="col-md mb-4">
+          <a class="card" [routerLink]="['/page', page.id]" style="min-width: 400px">
             <div class="card-header">
               <h4 title="{{ page.title }}" class="font-weight-normal">{{ page.title }}</h4>
             </div>
@@ -34,21 +34,14 @@
           </a>
         </div>
       </div>
-      <nav *ngIf="pages && pages.number <= index" aria-label="Page navigation example">
-        <ul class="pagination justify-content-center">
-          <li class="page-item">
-            <a class="page-link" [routerLink]="['/pages', id, 1]">1</a>
-          </li>
-          <div *ngFor="let x of pagi">
-            <li class="page-item>">
-              <a class="page-link" [routerLink]="['/pages', id, x]">{{ x }}</a>
-            </li>
-          </div>
-          <li class="page-item">
-            <a class="page-link" [routerLink]="['/pages', id, index]">{{ pages.number / offset}}</a>
-          </li>
-        </ul>
-      </nav>
+      <mat-paginator #paginator
+                     [length]="length"
+                     [pageIndex]="pageIndex"
+                     [pageSize]="pageSize"
+                     [pageSizeOptions]="[9, 18, 25, 99]"
+                     (page)="pageEvent = updateData($event)">
+      </mat-paginator>
+
     </div>
   </div>
 </section>
