@@ -13,6 +13,7 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./addtag.component.css']
 })
 export class AddtagComponent extends AbstractComponents implements OnInit {
+
   addTagForm: FormGroup;
   tagTypeList: any;
 

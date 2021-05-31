@@ -197,7 +197,7 @@
 }
 
 .dark .mat-table, .dark .mat-paginator, .dark .mat-select-value, .dark .mat-paginator-icon {
-  background-color: rgb(36, 41, 46) !important;
+  background-color: rgb(30, 32, 34) !important;
   border-color: rgba(255, 255, 255, 0.2);
   color: rgb(232, 230, 227) !important;
 }

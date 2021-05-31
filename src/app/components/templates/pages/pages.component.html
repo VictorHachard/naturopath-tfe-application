@@ -28,7 +28,7 @@
       <div *ngIf="url !== null; else elseBlock">
         <div class="page-image page-border-radius" [style]="'background-image:url(http://localhost:8080/api/v1/resource/' +  url + ');'">
           <div class="page-border-radius" style="background-color: rgba(30, 32, 34, 0.6);">
-            <div class="jumbotron p-5 mb-3 text-white page-border-radius" style="background-color: rgba(0, 0, 0, 0)!important;">
+            <div class="jumbotron p-5 mb-4 text-white page-border-radius" style="background-color: rgba(0, 0, 0, 0)!important;">
               <p class="display-3">{{ name }}</p>
               <p class="lead">{{ description }}</p>
             </div>
@@ -47,7 +47,7 @@
           <div class="card zoom" [routerLink]="['/page', page.id]" style="min-width: 400px">
             <div class="card-header">
               <h4 class="display-5 text-primary">{{ page.title }}</h4>
-              <p class="lead" style="font-size: 1.15rem;">{{ page.description }}</p>
+              <p class="lead mb-0" style="font-size: 1.15rem;">{{ page.description }}</p>
             </div>
             <div class="card-body p-0 page-image" [style]="'height:300px;background-image:url(http://localhost:8080/api/v1/resource/' +  page.image.url + ');border-radius: 0 0 0.20rem 0.20rem;'"></div>
           </div>

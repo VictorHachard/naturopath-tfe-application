@@ -9,7 +9,20 @@
           <span *ngIf="image.innerImageList[0].state === 'VALIDATING'" class="badge badge-warning float-right mt-1">VALIDATING</span>
           <span *ngIf="image.innerImageList[0].state === 'VALIDATED'" class="badge badge-success float-right mt-1">VALIDATED</span>
           <span *ngIf="image.innerImageList[0].state === 'NOT_VALIDATED'" class="badge badge-danger float-right mt-1">NOT_VALIDATED</span>
-          <p class="m-0 text-muted">{{ image.innerImageList[0].description }}</p>
+          <!--<p class="m-0 text-muted">{{ image.innerImageList[0].description }}</p>-->
+        </div>
+      </div>
+    </div>
+    <div class="col p-0 m-0" style="max-width: 400px">
+      <div *ngFor="let tag of tagList" class="card zoom m-0 border-0" [routerLink]="['/edittag', tag.id]" style="min-width: 400px">
+        <div class="card-header border-0" [style]="'border-radius:0'">
+          <p class="d-inline">{{ tag.innerTagList[0].name }}</p>
+          <span class="badge badge-danger float-right ml-2 mt-1">9</span>
+          <span *ngIf="tag.innerTagList[0].state === 'DRAFT'" class="badge badge-primary float-right mt-1">DRAFT</span>
+          <span *ngIf="tag.innerTagList[0].state === 'VALIDATING'" class="badge badge-warning float-right mt-1">VALIDATING</span>
+          <span *ngIf="tag.innerTagList[0].state === 'VALIDATED'" class="badge badge-success float-right mt-1">VALIDATED</span>
+          <span *ngIf="tag.innerTagList[0].state === 'NOT_VALIDATED'" class="badge badge-danger float-right mt-1">NOT_VALIDATED</span>
+          <!--<p class="m-0 text-muted">{{ tag.innerTagList[0].content }}</p>-->
         </div>
       </div>
     </div>
@@ -21,19 +34,7 @@
           <span *ngIf="tag.innerTagList[0].state === 'VALIDATING'" class="badge badge-warning float-right mt-1">VALIDATING</span>
           <span *ngIf="tag.innerTagList[0].state === 'VALIDATED'" class="badge badge-success float-right mt-1">VALIDATED</span>
           <span *ngIf="tag.innerTagList[0].state === 'NOT_VALIDATED'" class="badge badge-danger float-right mt-1">NOT_VALIDATED</span>
-          <p class="m-0 text-muted">{{ tag.innerTagList[0].content }}</p>
-        </div>
-      </div>
-    </div>
-    <div class="col p-0 m-0" style="max-width: 400px">
-      <div *ngFor="let tag of tagList" class="card zoom m-0 border-0" [routerLink]="['/edittag', tag.id]" style="min-width: 400px">
-        <div class="card-header border-0" [style]="'border-radius:0'">
-          <p class="d-inline">{{ tag.innerTagList[0].name }}</p>
-          <span *ngIf="tag.innerTagList[0].state === 'DRAFT'" class="badge badge-primary float-right mt-1">DRAFT</span>
-          <span *ngIf="tag.innerTagList[0].state === 'VALIDATING'" class="badge badge-warning float-right mt-1">VALIDATING</span>
-          <span *ngIf="tag.innerTagList[0].state === 'VALIDATED'" class="badge badge-success float-right mt-1">VALIDATED</span>
-          <span *ngIf="tag.innerTagList[0].state === 'NOT_VALIDATED'" class="badge badge-danger float-right mt-1">NOT_VALIDATED</span>
-          <p class="m-0 text-muted">{{ tag.innerTagList[0].content }}</p>
+          <!--<p class="m-0 text-muted">{{ tag.innerTagList[0].content }}</p>-->
         </div>
       </div>
     </div>
