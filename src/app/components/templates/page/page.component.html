@@ -6,9 +6,9 @@
     </ol>
   </nav>
 
-  <div class="jumbotron-image" [style]="'background-image:url(http://localhost:8080/api/v1/resource/' +  page?.image.url + ');'">
-    <div style="background-color: rgba(30, 32, 34, 0.6);">
-      <div class="jumbotron mb-3 text-white" style="background-color: rgba(0, 0, 0, 0)!important;">
+  <div class="jumbotron-image page-border-radius" [style]="'background-image:url(http://localhost:8080/api/v1/resource/' +  page?.image.url + ');'">
+    <div class="page-border-radius" style="background-color: rgba(30, 32, 34, 0.6);">
+      <div class="jumbotron mb-3 text-white page-border-radius" style="background-color: rgba(0, 0, 0, 0)!important;">
         <p class="display-3">{{ page?.title }}</p>
         <p class="lead">{{ page?.description }}</p>
         <p class="float-right">by <a href="">{{ page?.user.username }}</a> the {{ page?.createdAt| date:'dd MMMM yyyy' }}</p>

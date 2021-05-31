@@ -86,3 +86,11 @@ footer {
   -webkit-transform: scale(1.025);
   transform: scale(1.025);
 }
+
+.mat-paginator {
+  background: #e9ecef;
+  border-radius: 0.20rem;
+}
+.page-border-radius {
+  border-radius: 0.20rem;
+}
