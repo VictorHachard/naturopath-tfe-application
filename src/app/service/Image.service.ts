@@ -28,6 +28,11 @@ export class ImageService extends AbstractService {
   {headers : new HttpHeaders().set('Authorization', this.getUserJwt())});
   }
 
+  public getAllUserImageDto(): Observable<any[]> {
+    return this.http.get<any[]>(this.baseUrl + 'dto/user',
+      {headers : new HttpHeaders().set('Authorization', this.getUserJwt())});
+  }
+
   public getEditImageDto(id: string): Observable<any> {
     return this.http.get<any>(this.baseUrl + 'dto/edit/' + id,
       {headers : new HttpHeaders().set('Authorization', this.getUserJwt())});

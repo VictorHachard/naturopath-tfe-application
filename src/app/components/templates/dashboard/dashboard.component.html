@@ -1,40 +1,43 @@
-<div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Dropdown button
-  </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" data-toggle="modal" data-target="#modal1" href="#">Action</a>
-    <a class="dropdown-item" data-toggle="modal" data-target="#modal2" href="#">Another action</a>
-  </div>
-</div>
+<section class="my-4 container-fluid">
 
-
-
-<!--Modal code -->
-
-<div class="modal" id="modal1" tabindex="-1" role="dialog" aria-labelledby="modal1-label">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+  <div *ngIf="imageList && tagList" class="row justify-content-md-center">
+    <div class="col p-0 m-0" style="max-width: 400px">
+      <div *ngFor="let image of imageList" class="card zoom m-0 border-0" [routerLink]="['/editimage', image.id]" style="min-width: 400px">
+        <div class="card-header border-0" [style]="'border-radius:0'">
+          <p class="d-inline">{{ image.innerImageList[0].title }}</p>
+          <span *ngIf="image.innerImageList[0].state === 'DRAFT'" class="badge badge-primary float-right mt-1">DRAFT</span>
+          <span *ngIf="image.innerImageList[0].state === 'VALIDATING'" class="badge badge-warning float-right mt-1">VALIDATING</span>
+          <span *ngIf="image.innerImageList[0].state === 'VALIDATED'" class="badge badge-success float-right mt-1">VALIDATED</span>
+          <span *ngIf="image.innerImageList[0].state === 'NOT_VALIDATED'" class="badge badge-danger float-right mt-1">NOT_VALIDATED</span>
+          <p class="m-0 text-muted">{{ image.innerImageList[0].description }}</p>
+        </div>
       </div>
-      <div class="modal-body">
-
-        <ul class="timeline">
-          <li>
-            <a>21 000 Job Seekers</a>
-            <p class="float-right">4 March, 2014</p>
-            <p>Curabitur purus sem, malesuada eu luctus eget, suscipit sed turpis. Nam pellentesque felis vitae justo accumsan, sed semper nisi sollicitudin...</p>
-          </li>
-        </ul>
+    </div>
+    <div class="col p-0 m-0" style="max-width: 400px">
+      <div *ngFor="let tag of tagList" class="card zoom m-0 border-0" [routerLink]="['/edittag', tag.id]" style="min-width: 400px">
+        <div class="card-header border-0" [style]="'border-radius:0'">
+          <p class="d-inline">{{ tag.innerTagList[0].name }}</p>
+          <span *ngIf="tag.innerTagList[0].state === 'DRAFT'" class="badge badge-primary float-right mt-1">DRAFT</span>
+          <span *ngIf="tag.innerTagList[0].state === 'VALIDATING'" class="badge badge-warning float-right mt-1">VALIDATING</span>
+          <span *ngIf="tag.innerTagList[0].state === 'VALIDATED'" class="badge badge-success float-right mt-1">VALIDATED</span>
+          <span *ngIf="tag.innerTagList[0].state === 'NOT_VALIDATED'" class="badge badge-danger float-right mt-1">NOT_VALIDATED</span>
+          <p class="m-0 text-muted">{{ tag.innerTagList[0].content }}</p>
+        </div>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    </div>
+    <div class="col p-0 m-0" style="max-width: 400px">
+      <div *ngFor="let tag of tagList" class="card zoom m-0 border-0" [routerLink]="['/edittag', tag.id]" style="min-width: 400px">
+        <div class="card-header border-0" [style]="'border-radius:0'">
+          <p class="d-inline">{{ tag.innerTagList[0].name }}</p>
+          <span *ngIf="tag.innerTagList[0].state === 'DRAFT'" class="badge badge-primary float-right mt-1">DRAFT</span>
+          <span *ngIf="tag.innerTagList[0].state === 'VALIDATING'" class="badge badge-warning float-right mt-1">VALIDATING</span>
+          <span *ngIf="tag.innerTagList[0].state === 'VALIDATED'" class="badge badge-success float-right mt-1">VALIDATED</span>
+          <span *ngIf="tag.innerTagList[0].state === 'NOT_VALIDATED'" class="badge badge-danger float-right mt-1">NOT_VALIDATED</span>
+          <p class="m-0 text-muted">{{ tag.innerTagList[0].content }}</p>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
+
+</section>

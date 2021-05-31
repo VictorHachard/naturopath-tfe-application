@@ -27,13 +27,13 @@ export class AdminimagesComponent extends AbstractComponents implements OnInit, 
               private cookieService: CookieService,
               private route: ActivatedRoute,
               private router: Router,
-              private ImagesService: ImageService) {
+              private imagesService: ImageService) {
     super();
   }
 
   ngOnInit(): void {
-    this.ImagesService.getAllEditImageDto().subscribe(data => {
-      console.log(this.images);
+    this.imagesService.getAllEditImageDto().subscribe(data => {
+      console.log(data);
       for (const image of data) {
         let tmp = 'DRAFT';
         for (const inner of image.innerImageList) {

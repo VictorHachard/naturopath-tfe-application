@@ -65,12 +65,12 @@ footer {
 }
 .display-5 {
   font-size: 2.5rem;
-  font-weight: 280;
+  font-weight: 280!important;
   line-height: 1;
 }
 .display-6 {
   font-size: 2rem;
-  font-weight: 250;
+  font-weight: 250!important;
   line-height: 1;
 }
 .zoom {

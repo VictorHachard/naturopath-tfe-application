@@ -28,6 +28,11 @@ export class TagService extends AbstractService {
       {headers : new HttpHeaders().set('Authorization', this.getUserJwt())});
   }
 
+  public getAllUserTagDto(): Observable<any[]> {
+    return this.http.get<any[]>(this.baseUrl + 'dto/user',
+      {headers : new HttpHeaders().set('Authorization', this.getUserJwt())});
+  }
+
   public getAllEditTag(): Observable<any[]> {
     return this.http.get<any[]>(this.baseUrl + 'dto/edit',
       {headers : new HttpHeaders().set('Authorization', this.getUserJwt())});
