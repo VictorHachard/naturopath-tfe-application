@@ -84,16 +84,14 @@
   background-color: rgb(81, 62, 0);
   border-color: rgb(167, 126, 0);
 }
-.dark .dropdown-menu {
+.dark .dropdown-menu, .dark .mat-select-panel {
   color: rgb(218, 215, 210) !important;
   background-color: rgb(24, 26, 27) !important;
   border-color: rgba(102, 102, 102, 0.15) !important;
 }
-.dark .dropdown-item {
-  color: rgb(218, 215, 210) !important;
-}
-.dark .dropdown-item:hover {
-  background-color: rgb(24, 26, 27) !important;
+.dark .dropdown-item:hover, .dark .mat-option  {
+  background-color: rgba(255, 255, 255, 0.03) !important;
+  color: rgb(232, 230, 227) !important;
 }
 .dark .dropdown-divider {
   border-top-color: rgb(50, 59, 68) !important;
@@ -154,9 +152,6 @@
 }
 .dark .nav-tabs {
   border-color: rgb(54, 63, 72);
-}
-.dark .dropdown-item:hover {
-  background-color: rgba(255, 255, 255, 0.03) !important;
 }
 .dark .table td,
 .dark .table th,

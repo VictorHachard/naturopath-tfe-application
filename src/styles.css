@@ -63,3 +63,13 @@ footer {
   -webkit-justify-content: center;
   justify-content: center;
 }
+.display-5 {
+  font-size: 2.5rem;
+  font-weight: 280;
+  line-height: 1;
+}
+.display-6 {
+  font-size: 2rem;
+  font-weight: 250;
+  line-height: 1;
+}

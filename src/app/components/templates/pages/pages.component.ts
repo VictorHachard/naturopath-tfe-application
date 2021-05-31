@@ -20,6 +20,7 @@ export class PagesComponent extends AbstractComponents implements OnInit {
   pages: any;
   description: string;
   name: string;
+  noId = false;
 
   pageEvent: PageEvent;
   dataSource: any[];
@@ -45,8 +46,16 @@ export class PagesComponent extends AbstractComponents implements OnInit {
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id') === undefined ? null : this.route.snapshot.paramMap.get('id');
-    if (this.id !== null) {
       this.categoryService.getAllCategory().subscribe(value => {
+        if (this.id === null) {
+          this.noId = true;
+          const cat = value[Math.floor(Math.random() * value.length)];
+          if (cat.childCategory.length > 0) {
+            this.id = cat.childCategory[Math.floor(Math.random() * cat.childCategory.length)].id;
+          } else {
+            this.id = cat.id;
+          }
+        }
         for (const c of value) {
           if (c.childCategory.length > 0) {
             for (const child of c.childCategory) {
@@ -73,7 +82,6 @@ export class PagesComponent extends AbstractComponents implements OnInit {
           this.updateData(null);
         });
       });
-    }
   }
 
   public updateData(event?: PageEvent) {

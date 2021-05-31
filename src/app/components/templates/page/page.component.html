@@ -9,7 +9,7 @@
   <div class="jumbotron-image" [style]="'background-image:url(http://localhost:8080/api/v1/resource/' +  page?.image.url + ');'">
     <div style="background-color: rgba(30, 32, 34, 0.6);">
       <div class="jumbotron mb-3 text-white" style="background-color: rgba(0, 0, 0, 0)!important;">
-        <h1 class="display-4">{{ page?.title }}</h1>
+        <p class="display-3">{{ page?.title }}</p>
         <p class="lead">{{ page?.description }}</p>
         <p class="float-right">by <a href="">{{ page?.user.username }}</a> the {{ page?.createdAt| date:'dd MMMM yyyy' }}</p>
       </div>
@@ -21,7 +21,8 @@
       <div class="mb-3" *ngIf="sortedType.type === 'ParagraphType'">
         <div *ngFor="let paragraph of page.paragraphList">
           <div *ngIf="paragraph.paragraphType.id === sortedType.typeId" class="jumbotron mb-0 p-4">
-            <p class="h4">{{ paragraph.paragraphType.name }} - {{ paragraph.title }}</p>
+            <p class="display-5">{{ paragraph.paragraphType.name }}</p>
+            <p class="ml-4 display-6">{{ paragraph.title }}</p>
             <p class="ml-4 text-justify">{{ paragraph.content }}</p>
           </div>
         </div>
@@ -29,18 +30,19 @@
       <div class="mb-3" *ngIf="sortedType.type === 'ParatagType'">
         <div *ngFor="let paratag of page.paratagList">
           <div *ngIf="paratag.paratagType.id === sortedType.typeId" class="jumbotron mb-0 p-4">
-            <p class="h4 d-inline">{{ paratag.paratagType.name }} - {{ paratag.title }}</p>
-            <p class="ml-4 mt-1 text-justify">{{ paratag.content }}</p>
-            <div *ngIf="paratag.paratagType.size === 'SMALL'" class="d-inline">
-              <div class="ml-4 d-inline" *ngFor="let tag of paratag.tagList">
-                <span class="ml-4 badge rounded-pill bg-primary mr-2" data-toggle="tooltip" data-placement="right" title="Tooltip on right">{{ tag.name }}</span><!--<span *ngIf="tag.content.length != 0">- {{ tag.content }}</span>-->
+            <p class="display-5">{{ paratag.paratagType.name }}</p>
+            <p class="ml-4 display-6">{{ paratag.title }}</p>
+            <div *ngIf="paratag.paratagType.size === 'SMALL'" class="d-inline ml-4">
+              <div class="d-inline" *ngFor="let tag of paratag.tagList">
+                <span class="mr-4 badge rounded-pill bg-primary mr-2" data-toggle="tooltip" data-placement="right" title="{{ tag.description }}">{{ tag.name }}</span>
               </div>
             </div>
-            <div *ngIf="paratag.paratagType.size === 'LARGE'" class="d-inline">
-              <div class="ml-4" *ngFor="let tag of paratag.tagList">
-                <span class="ml-4 badge rounded-pill bg-primary mr-1">{{ tag.name }}</span><!--<span *ngIf="tag.content.length != 0">- {{ tag.content }}</span>-->
+            <div class="ml-4" *ngIf="paratag.paratagType.size === 'LARGE'">
+              <div class="d-inline" *ngFor="let tag of paratag.tagList">
+                <span class="mr-4 badge rounded-pill bg-primary" data-toggle="tooltip" data-placement="right" title="{{ tag.description }}">{{ tag.name }}</span>
               </div>
             </div>
+            <p class="ml-4 mt-2 text-justify">{{ paratag.content }}</p>
           </div>
         </div>
       </div>
