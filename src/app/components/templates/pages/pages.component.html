@@ -1,23 +1,74 @@
 <section class="my-4 container-fluid">
+
   <div class="row justify-content-md-center">
     <div class="col-md-auto">
-      <nav class="nav flex-column jumbotron jumbotron-fluid p-4 page-border-radius">
-        <div *ngFor="let category of categories">
-          <li *ngIf="category.childCategory.length === 0; else notEmpty" class="nav-item">
-            <a class="nav-link" [routerLink]="['/pages', category.id]">{{ category.name }}</a>
-          </li>
-          <ng-template #notEmpty>
-            <li class="nav-item dropdown">
-              <p class="nav-link dropdown-toggle m-0" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                {{ category.name }}
-              </p>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a *ngFor="let ca of category.childCategory" class="dropdown-item" style="font-size: 14px" [routerLink]="['/pages', ca.id]">{{ ca.name }}</a>
+      <div class="jumbotron jumbotron-fluid p-4 page-border-radius">
+        <form *ngIf="categories && searchForm" [formGroup]="searchForm" (ngSubmit)="search()" class="mb-2">
+          <!--<div class="form-group">
+            <div class="input-group mb-0">
+              <div class="input-group-prepend">
+                <label class="input-group-text">Select category</label>
               </div>
+              <select class="custom-select" formControlName="category">
+                <option *ngFor="let category of categories" aria-label="breadcrumb">{{ category.name }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="input-group mb-0">
+              <div class="input-group-prepend">
+                <label class="input-group-text">Input</label>
+              </div>
+              <input type="text" class="form-control" formControlName="input">
+            </div>
+            <small class="text-danger">{{ printError(searchForm.get('input')) }}</small>
+          </div>-->
+
+          <mat-form-field class="example-chip-list mt-0">
+            <mat-chip-list #chipList aria-label="Tag selection">
+              <mat-chip
+                *ngFor="let fruit of fruits"
+                [selectable]="selectable"
+                [removable]="removable"
+                (removed)="remove(fruit)">
+                {{fruit}}
+                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+              </mat-chip>
+              <input
+                placeholder="add tags"
+                #fruitInput
+                [formControl]="fruitCtrl"
+                [matAutocomplete]="auto"
+                [matChipInputFor]="chipList"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes">
+            </mat-chip-list>
+            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+              <mat-option *ngFor="let fruit of filteredFruits | async" [value]="fruit">
+                {{fruit}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+          <button class="btn btn-sm btn-primary btn-block" [disabled]="searchForm.invalid" type="submit">Search</button>
+        </form>
+        <nav class="nav flex-column">
+          <div *ngFor="let category of categories">
+            <li *ngIf="category.childCategory.length === 0; else notEmpty" class="nav-item">
+              <a class="nav-link" [routerLink]="['/pages', category.id]">{{ category.name }}</a>
             </li>
-          </ng-template>
-        </div>
-      </nav>
+            <ng-template #notEmpty>
+              <li class="nav-item dropdown">
+                <p class="nav-link dropdown-toggle m-0" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  {{ category.name }}
+                </p>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <a *ngFor="let ca of category.childCategory" class="dropdown-item" style="font-size: 14px" [routerLink]="['/pages', ca.id]">{{ ca.name }}</a>
+                </div>
+              </li>
+            </ng-template>
+          </div>
+        </nav>
+      </div>
     </div>
     <div class="col" style="max-width: 1500px">
       <div *ngIf="noId" class="jumbotron mb-4 p-4 page-border-radius">

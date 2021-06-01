@@ -3,10 +3,23 @@
   background-repeat: no-repeat!important;
   background-size: cover!important;
 }
-
 .card:hover, .cur:hover {
   cursor: pointer;
 }
 .nav-link:hover {
   text-decoration: underline;
+}
+.example-chip-list {
+  width: 100%;
+}
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+.example-full-width {
+  width: 100%;
+}
+.example-container .mat-form-field + .mat-form-field {
+  margin-left: 8px;
 }

@@ -58,6 +58,12 @@ import { AdminimagesComponent } from './components/templates/admin/adminimages/a
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatOptionModule} from '@angular/material/core';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatIconModule} from '@angular/material/icon';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -118,7 +124,13 @@ import {MatSortModule} from '@angular/material/sort';
     BrowserAnimationsModule,
     MatPaginatorModule,
     MatTableModule,
-    MatSortModule
+    MatSortModule,
+    MatFormFieldModule,
+    MatChipsModule,
+    MatOptionModule,
+    MatAutocompleteModule,
+    MatIconModule,
+    MatSelectModule
   ],
   exports: [
     HttpClientModule

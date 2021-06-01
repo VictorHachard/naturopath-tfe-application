@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, NgModule, OnInit, ViewChild} from '@angular/core';
 import {PageService} from '../../../service/Page.service';
 import {CategoryService} from '../../../service/Category.service';
 import {AbstractComponents} from '../../commons/AbstractComponents';
@@ -6,6 +6,15 @@ import {UserSecurityService} from '../../../service/security/UserSecurity.servic
 import {CookieService} from 'ngx-cookie-service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {PageEvent} from '@angular/material/paginator';
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import {MatChipInputEvent} from '@angular/material/chips';
+import {MatAutocomplete, MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Observable} from 'rxjs';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
+import {map, startWith} from 'rxjs/operators';
+import {TagService} from '../../../service/Tag.service';
 
 @Component({
   selector: 'app-pages',
@@ -15,6 +24,7 @@ import {PageEvent} from '@angular/material/paginator';
 export class PagesComponent extends AbstractComponents implements OnInit {
 
   private id: string;
+  searchForm: FormGroup;
 
   categories: any[] = [];
   pages: any;
@@ -23,17 +33,32 @@ export class PagesComponent extends AbstractComponents implements OnInit {
   noId = false;
   url: string;
 
+  //pagi
   pageEvent: PageEvent;
   dataSource: any[];
   pageIndex: number;
   pageSize: number;
   length: number;
 
+  //chip
+  visible = true;
+  selectable = true;
+  removable = true;
+  separatorKeysCodes: number[] = [ENTER, COMMA];
+  fruitCtrl = new FormControl();
+  filteredFruits: Observable<string[]>;
+  fruits: string[] = ['t'];
+  allFruits: string[] = ['Apple', 'Lemon', 'Lime', 'Orange', 'Strawberry'];
+
+  @ViewChild('fruitInput') fruitInput: ElementRef<HTMLInputElement>;
+  @ViewChild('auto') matAutocomplete: MatAutocomplete;
+
   constructor(private userSecurityService: UserSecurityService,
               private cookieService: CookieService,
               private route: ActivatedRoute,
               private router: Router,
               private pageService: PageService,
+              private tagService: TagService,
               private categoryService: CategoryService) {
     super();
     this.categoryService.getAllCategory().subscribe(value => {
@@ -75,21 +100,36 @@ export class PagesComponent extends AbstractComponents implements OnInit {
           }
         }
       }
-      this.pageService.getAllPageByCategory(this.id).subscribe(data => {
-        this.pages = data;
-        if (data.pageList.length !== 0) {
-          this.url = data.pageList[Math.floor(Math.random() * data.pageList.length)].image.url;
-        }
-        console.log(data);
-        this.pageIndex = 0;
-        this.pageSize = 9;
-        this.length = data.number;
-        this.updateData(null);
+      this.init();
+
+      this.tagService.getAllTag().subscribe(data3 => {
+        this.filteredFruits = this.fruitCtrl.valueChanges.pipe(
+          startWith(null),
+          map((fruit: string | null) => fruit ? this._filter(fruit) : this.allFruits.slice()));
+
+        this.pageService.getAllPageByCategory(this.id).subscribe(data => {
+          this.pages = data;
+          if (data.pageList.length !== 0) {
+            this.url = data.pageList[Math.floor(Math.random() * data.pageList.length)].image.url;
+          }
+          console.log(data);
+          this.pageIndex = 0;
+          this.pageSize = 9;
+          this.length = data.number;
+          this.updateData(null);
+        });
       });
     });
   }
 
-  public updateData(event?: PageEvent) {
+  init(): void {
+    this.searchForm = new FormGroup({
+      category: new FormControl(this.categories[0].name, Validators.required),
+      input: new FormControl('', Validators.required)
+    });
+  }
+
+  public updateData(event?: PageEvent): PageEvent {
     if (event !== null) {
       this.pageSize = event.pageSize;
       this.pageIndex = event.pageIndex;
@@ -98,5 +138,29 @@ export class PagesComponent extends AbstractComponents implements OnInit {
     const start = this.pageIndex * this.pageSize;
     this.dataSource = this.pages.pageList.slice(start, end);
     return event;
+  }
+
+  remove(fruit: string): void {
+    const index = this.fruits.indexOf(fruit);
+
+    if (index >= 0) {
+      this.fruits.splice(index, 1);
+    }
+  }
+
+  selected(event: MatAutocompleteSelectedEvent): void {
+    this.fruits.push(event.option.viewValue);
+    this.fruitInput.nativeElement.value = '';
+    this.fruitCtrl.setValue(null);
+  }
+
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.allFruits.filter(fruit => fruit.toLowerCase().indexOf(filterValue) === 0);
+  }
+
+  search(): void {
+
   }
 }

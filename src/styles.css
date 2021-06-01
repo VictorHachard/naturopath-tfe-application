@@ -94,3 +94,9 @@ footer {
 .page-border-radius {
   border-radius: 0.20rem;
 }
+mat-icon {
+  font-family: 'Material Icons' !important;
+}
+.mat-standard-chip .mat-chip-remove, .mat-standard-chip .mat-chip-trailing-icon {
+  font-size: 16px!important;
+}
