@@ -22,7 +22,7 @@ import {Alert} from '../../../model/my/AlertManager';
   templateUrl: './pages.component.html',
   styleUrls: ['./pages.component.css']
 })
-export class PagesComponent extends AbstractComponents implements OnInit {
+export class PagesComponent implements OnInit {
 
   private id: string;
   searchForm: FormGroup;
@@ -62,7 +62,6 @@ export class PagesComponent extends AbstractComponents implements OnInit {
               private pageService: PageService,
               private tagService: TagService,
               private categoryService: CategoryService) {
-    super();
     this.categoryService.getAllCategory().subscribe(value => {
       this.categories = value;
       console.log(value);
@@ -75,7 +74,7 @@ export class PagesComponent extends AbstractComponents implements OnInit {
         }
         console.log(this.tagsMap);
         this.route.paramMap.subscribe(params => {
-          this.ngOnInit();
+          this.ngOnInitDebug();
         });
       });
     });
@@ -88,12 +87,12 @@ export class PagesComponent extends AbstractComponents implements OnInit {
     this.noId = false;
   }
 
-  ngOnInit(): void {
+  ngOnInitDebug(): void {
     this.id = this.route.snapshot.paramMap.get('id') === undefined ? null : this.route.snapshot.paramMap.get('id');
     if (this.id === null) {
       this.removeSuggest();
       const cat = this.categories[Math.floor(Math.random() * this.categories.length)];
-      if (cat.childCategory.length > 0) {
+      if (cat.childCategory.length !== 0) {
         this.id = cat.childCategory[Math.floor(Math.random() * cat.childCategory.length)].id;
       } else {
         this.id = cat.id;
@@ -103,9 +102,8 @@ export class PagesComponent extends AbstractComponents implements OnInit {
     this.searchDone = null;
     this.tagSearch = [];
     this.allTagsSearch = [];
-
     for (const c of this.categories) {
-      if (c.childCategory.length > 0) {
+      if (c.childCategory.length !== 0) {
         for (const child of c.childCategory) {
           if (child.id == this.id) {
             this.name = child.name;
@@ -142,6 +140,8 @@ export class PagesComponent extends AbstractComponents implements OnInit {
       this.updateData(null);
     });
   }
+
+  ngOnInit(): void { }
 
   init(): void {
     this.searchForm = new FormGroup({

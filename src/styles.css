@@ -100,3 +100,18 @@ mat-icon {
 .mat-standard-chip .mat-chip-remove, .mat-standard-chip .mat-chip-trailing-icon {
   font-size: 16px!important;
 }
+.mat-form-field.mat-focused .mat-form-field-ripple {
+  background-color: #007bff !important
+}
+.mat-input-element {
+  caret-color: black !important
+}
+.mat-form-field-appearance-legacy .mat-form-field-underline {
+  background-color: rgb(151, 151, 151) !important
+}
+mat-form-field input {
+  color: rgb(232, 230, 227) !important
+}
+.mat-form-field-appearance-legacy.mat-focused .mat-form-field-label {
+  color: #0061c6 !important
+}

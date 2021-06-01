@@ -84,12 +84,14 @@
   background-color: rgb(81, 62, 0);
   border-color: rgb(167, 126, 0);
 }
-.dark .dropdown-menu, .dark .mat-select-panel {
+.dark .dropdown-menu,
+.dark .mat-select-panel {
   color: rgb(218, 215, 210) !important;
   background-color: rgb(24, 26, 27) !important;
   border-color: rgba(102, 102, 102, 0.15) !important;
 }
-.dark .dropdown-item:hover, .dark .mat-option  {
+.dark .dropdown-item:hover,
+.dark .mat-option  {
   background-color: rgba(255, 255, 255, 0.03) !important;
   color: rgb(232, 230, 227) !important;
 }
@@ -167,17 +169,30 @@
   background-color: rgb(36, 41, 46) !important;
   border-color: #007bff;
 }
-.dark .jumbotron {
+.dark .jumbotron,
+.dark mat-form-field input {
   background-color: rgb(30, 32, 34) !important;
 }
 .dark .list-group-item {
   background-color: rgba(0, 0, 0, 0.1) !important;
   border-bottom-color: rgba(102, 102, 102, 0.13) !important;
 }
-.dark .list-group-item-action {
+.dark .list-group-item-action,
+.dark mat-form-field input {
   color: rgb(232, 230, 227) !important
 }
-
+.dark .mat-form-field-appearance-legacy .mat-form-field-label {
+  color: rgb(163, 163, 163) !important
+}
+.dark .mat-form-field.mat-focused .mat-form-field-ripple {
+  background-color: rgb(220, 220, 220) !important
+}
+.dark .mat-input-element {
+  caret-color: white !important
+}
+.dark .mat-form-field-appearance-legacy .mat-form-field-underline {
+  background-color: rgb(151, 151, 151) !important
+}
 /* drag and drop */
 
 .dark .example-list, .dark .example-box {
@@ -191,12 +206,14 @@
 .dark .mat-select-arrow {
   color: rgb(232, 230, 227) !important;
 }
-
 .dark .mat-form-field-underline {
   border-color: rgb(232, 230, 227) !important;
 }
-
-.dark .mat-table, .dark .mat-paginator, .dark .mat-select-value, .dark .mat-paginator-icon {
+.dark .mat-table,
+.dark .mat-paginator,
+.dark .mat-select-value,
+.dark .mat-paginator-icon,
+.dark .mat-autocomplete-panel {
   background-color: rgb(30, 32, 34) !important;
   border-color: rgba(255, 255, 255, 0.2);
   color: rgb(232, 230, 227) !important;
