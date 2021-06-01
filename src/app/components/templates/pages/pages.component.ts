@@ -90,58 +90,56 @@ export class PagesComponent extends AbstractComponents implements OnInit {
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id') === undefined ? null : this.route.snapshot.paramMap.get('id');
+    if (this.id === null) {
+      this.removeSuggest();
+      const cat = this.categories[Math.floor(Math.random() * this.categories.length)];
+      if (cat.childCategory.length > 0) {
+        this.id = cat.childCategory[Math.floor(Math.random() * cat.childCategory.length)].id;
+      } else {
+        this.id = cat.id;
+      }
+    }
     this.url = null;
     this.searchDone = null;
     this.tagSearch = [];
     this.allTagsSearch = [];
 
-    this.categoryService.getAllCategory().subscribe(value => {
-      if (this.id === null) {
-        this.removeSuggest();
-        const cat = value[Math.floor(Math.random() * value.length)];
-        if (cat.childCategory.length > 0) {
-          this.id = cat.childCategory[Math.floor(Math.random() * cat.childCategory.length)].id;
-        } else {
-          this.id = cat.id;
-        }
-      }
-      for (const c of value) {
-        if (c.childCategory.length > 0) {
-          for (const child of c.childCategory) {
-            if (child.id == this.id) {
-              this.name = child.name;
-              this.description = child.description;
-              break;
-            }
-          }
-        } else {
-          if (c.id == this.id) {
-            this.name = c.name;
-            this.description = c.description;
+    for (const c of this.categories) {
+      if (c.childCategory.length > 0) {
+        for (const child of c.childCategory) {
+          if (child.id == this.id) {
+            this.name = child.name;
+            this.description = child.description;
             break;
           }
         }
-      }
-      this.init();
-      for (const tag of this.tags) {
-        this.allTagsSearch.push(tag.id);
-      }
-
-      this.filteredFruits = this.fruitCtrl.valueChanges.pipe(
-        startWith(null),
-        map(tagSearch => this.allTagsSearch.filter(item => this.tagSearch.indexOf(item) < 0)));
-
-      this.pageService.getAllPageByCategory(this.id).subscribe(data => {
-        this.pages = data;
-        if (data.pageList.length !== 0) {
-          this.url = data.pageList[Math.floor(Math.random() * data.pageList.length)].image.url;
+      } else {
+        if (c.id == this.id) {
+          this.name = c.name;
+          this.description = c.description;
+          break;
         }
-        console.log(data);
-        this.pageIndex = 0;
-        this.pageSize = 9;
-        this.length = data.number;
-        this.updateData(null);
-      });
+      }
+    }
+    this.init();
+    for (const tag of this.tags) {
+      this.allTagsSearch.push(tag.id);
+    }
+
+    this.filteredFruits = this.fruitCtrl.valueChanges.pipe(
+      startWith(null),
+      map(tagSearch => this.allTagsSearch.filter(item => this.tagSearch.indexOf(item) < 0)));
+    console.log(this.id);
+    this.pageService.getAllPageByCategory(this.id).subscribe(data => {
+      this.pages = data;
+      if (data.pageList.length !== 0) {
+        this.url = data.pageList[Math.floor(Math.random() * data.pageList.length)].image.url;
+      }
+      console.log(data);
+      this.pageIndex = 0;
+      this.pageSize = 9;
+      this.length = data.number;
+      this.updateData(null);
     });
   }
 
