@@ -221,6 +221,9 @@ export class PagesComponent implements OnInit {
         }
       }
       // remove duplicated
+      this.dataSource = this.dataSource.filter((elem, index, self) => {
+        return index === self.indexOf(elem);
+      });
       this.pageIndex = 0;
       this.length = this.dataSource.length;
     }
