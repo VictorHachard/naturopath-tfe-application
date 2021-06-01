@@ -45,7 +45,7 @@ import {AdmintagsComponent} from './components/templates/admin/admintags/adminta
 import {SearchComponent} from './components/templates/search/search.component';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'home'},
+  { path: '', pathMatch: 'full', redirectTo: 'pages'},
   { path: 'home', pathMatch: 'full', redirectTo: 'pages'},
   { path: 'home', component: AccueilComponent },
 

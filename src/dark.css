@@ -23,6 +23,9 @@
   background-color: rgb(24, 26, 27) !important;
   border-color: rgb(54, 63, 72) !important;
 }
+.dark .dropdown-item {
+  color: #c5c1b9!important;
+}
 .dark a {
   color: #3391ff;
 }

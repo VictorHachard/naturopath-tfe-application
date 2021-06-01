@@ -3,12 +3,11 @@
   <div class="row">
     <div class="col-md-auto" >
       <div class="jumbotron jumbotron-fluid p-4 page-border-radius">
-        <small class="text-danger">{{ printError(searchForm.get('input')) }}</small>
+        <small *ngIf="categories && searchForm" class="text-danger">{{ printError(searchForm.get('input')) }}</small>
         <form *ngIf="categories && searchForm" [formGroup]="searchForm" (ngSubmit)="search()" class="mb-2">
           <mat-form-field class="example-full-width">
             <mat-label>Search</mat-label>
             <input matInput type="text" formControlName="input"/>
-
           </mat-form-field>
           <mat-form-field class="example-chip-list mt-0">
             <mat-chip-list #chipList aria-label="Tag selection">
@@ -97,7 +96,7 @@
       </div>
       <ng-template #elseBlockSearch>
         <div *ngIf="searchDone " class="jumbotron p-4">
-          <p class="display-5">Your search: <span class="text-primary">{{ searchDone }}</span> did not match any documents</p>
+          <p class="display-5">Your search <span class="text-primary">{{ searchDone }}</span> did not match any documents</p>
           <p class="lead mb-1">Suggestions:</p>
           <ul>
             <li class="lead">Make sure that all words are spelled correctly.</li>

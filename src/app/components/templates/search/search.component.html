@@ -1,5 +1,19 @@
-<section class="my-4 container-fluid" style="max-width: 1900px">
-
+<section class="my-4 container">
+  <div *ngIf="searchList && searchList.length !== 0; else error" class="jumbotron mb-4 p-4 page-border-radius">
+    <h5 class="display-5">We found you something!</h5>
+    <h5 class="display-6">Your search <span class="display-5 text-primary">{{ str }}</span></h5>
+  </div>
+  <ng-template #error>
+    <div class="jumbotron mb-4 p-4 page-border-radius">
+      <p class="display-5">Your search <span class="text-primary">{{ str }}</span> did not match any documents</p>
+      <p class="lead mb-1">Suggestions:</p>
+      <ul>
+        <li class="lead">Make sure that all words are spelled correctly.</li>
+        <li class="lead">Try different keywords.</li>
+        <li class="lead">Try more general keywords.</li>
+      </ul>
+    </div>
+  </ng-template>
   <div *ngFor="let search of searchList">
     <div class="page-image zoom" [routerLink]="['/pages', search.categoryViewDto.id]" [style]="'background-image:url(http://localhost:8080/api/v1/resource/' +  searchListCategoryUrl.get(search.categoryViewDto.id) + ');border-radius: 0.20rem 0.20rem 0 0;'">
       <div style="background-color: rgba(30, 32, 34, 0.6);border-radius: 0.25rem 0.25rem 0 0;">
@@ -16,8 +30,4 @@
       </nav>
     </div>
   </div>
-
-
-
-
 </section>

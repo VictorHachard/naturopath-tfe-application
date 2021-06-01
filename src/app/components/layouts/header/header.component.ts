@@ -14,7 +14,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 export class HeaderComponent implements OnInit {
 
   user: User;
-  searchForm: FormGroup;
+  searchFormHeader: FormGroup;
 
   constructor(private userSecurityService: UserSecurityService,
               private cookieService: CookieService,
@@ -29,7 +29,7 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.searchForm = new FormGroup({
+    this.searchFormHeader = new FormGroup({
       input: new FormControl('', [Validators.required, Validators.minLength(3)])
     });
   }
@@ -47,6 +47,6 @@ export class HeaderComponent implements OnInit {
   }
 
   search(): void {
-    this.router.navigate(['/search', this.searchForm.get('input').value]);
+    this.router.navigate(['/search', this.searchFormHeader.get('input').value]);
   }
 }
