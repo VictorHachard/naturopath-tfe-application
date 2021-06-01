@@ -16,6 +16,7 @@ export class SearchComponent extends AbstractComponents implements OnInit {
 
   searchList: any[];
   searchListCategoryUrl;
+  str;
 
   constructor(private userSecurityService: UserSecurityService,
               private cookieService: CookieService,
@@ -25,11 +26,15 @@ export class SearchComponent extends AbstractComponents implements OnInit {
               private tagService: TagService,
               private categoryService: CategoryService) {
     super();
+    this.route.paramMap.subscribe(params => {
+      this.ngOnInitDebug();
+    });
   }
 
-  ngOnInit(): void {
+  ngOnInitDebug(): void {
+    this.str = this.route.snapshot.paramMap.get('str') === undefined ? null : this.route.snapshot.paramMap.get('str');
     this.searchListCategoryUrl = new Map();
-    this.pageService.getAllPageSearch({search: 'menthe'}).subscribe(value => {
+    this.pageService.getAllPageSearch({search: this.str}).subscribe(value => {
       this.searchList = value;
       for (const v of value) {
         this.searchListCategoryUrl.set(v.categoryViewDto.id, v.pageSimplifiedViewDto2List[Math.floor(Math.random() * v.pageSimplifiedViewDto2List.length)].image.url);
@@ -37,5 +42,7 @@ export class SearchComponent extends AbstractComponents implements OnInit {
       console.log(value);
     });
   }
+
+  ngOnInit(): void { }
 
 }

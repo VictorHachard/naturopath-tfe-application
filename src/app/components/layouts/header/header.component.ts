@@ -4,6 +4,7 @@ import {AbstractComponents} from '../../commons/AbstractComponents';
 import {UserSecurityService} from '../../../service/security/UserSecurity.service';
 import {CookieService} from 'ngx-cookie-service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-header',
@@ -13,6 +14,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class HeaderComponent implements OnInit {
 
   user: User;
+  searchForm: FormGroup;
 
   constructor(private userSecurityService: UserSecurityService,
               private cookieService: CookieService,
@@ -27,6 +29,9 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.searchForm = new FormGroup({
+      input: new FormControl('', [Validators.required, Validators.minLength(3)])
+    });
   }
 
   logIn(): void {
@@ -41,4 +46,7 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['/home']);
   }
 
+  search(): void {
+    this.router.navigate(['/search', this.searchForm.get('input').value]);
+  }
 }

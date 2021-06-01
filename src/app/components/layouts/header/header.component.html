@@ -16,6 +16,10 @@
             <a class="nav-link nav-w" routerLink="/contact">Contact</a>
           </li>
         </ul>
+        <form [formGroup]="searchForm" (ngSubmit)="search()" class="form-inline mr-2">
+          <input class="form-control mr-sm-2" type="search" formControlName="input" placeholder="Search" aria-label="Search">
+          <button class="btn  btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+        </form>
         <!-- If auth -->
         <ul *ngIf="user" class="navbar-nav">
           <li class="nav-item dropdown">

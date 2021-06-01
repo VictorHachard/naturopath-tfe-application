@@ -71,6 +71,7 @@ const routes: Routes = [
   { path: 'pages/:id', component: PagesComponent },
   { path: 'pages/:id/:index', component: PagesComponent },
   { path: 'search', component: SearchComponent },
+  { path: 'search/:str', component: SearchComponent },
 
   { path: 'editpage/:id', component: EditpageComponent, canActivate: [AuthGuardService] },
   { path: 'addpage', component: AddpageComponent, canActivate: [AuthGuardService] },
