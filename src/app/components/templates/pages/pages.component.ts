@@ -13,8 +13,9 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
-import {map, startWith} from 'rxjs/operators';
+import {delay, map, startWith} from 'rxjs/operators';
 import {TagService} from '../../../service/Tag.service';
+import {Alert} from '../../../model/my/AlertManager';
 
 @Component({
   selector: 'app-pages',
@@ -27,11 +28,14 @@ export class PagesComponent extends AbstractComponents implements OnInit {
   searchForm: FormGroup;
 
   categories: any[] = [];
+  tags: any[] = [];
+  tagsMap;
   pages: any;
   description: string;
   name: string;
   noId = false;
   url: string;
+  searchDone: string;
 
   //pagi
   pageEvent: PageEvent;
@@ -41,14 +45,12 @@ export class PagesComponent extends AbstractComponents implements OnInit {
   length: number;
 
   //chip
-  visible = true;
   selectable = true;
   removable = true;
-  separatorKeysCodes: number[] = [ENTER, COMMA];
   fruitCtrl = new FormControl();
   filteredFruits: Observable<string[]>;
-  fruits: string[] = ['t'];
-  allFruits: string[] = ['Apple', 'Lemon', 'Lime', 'Orange', 'Strawberry'];
+  tagSearch: string[];
+  allTagsSearch: string[];
 
   @ViewChild('fruitInput') fruitInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
@@ -64,18 +66,38 @@ export class PagesComponent extends AbstractComponents implements OnInit {
     this.categoryService.getAllCategory().subscribe(value => {
       this.categories = value;
       console.log(value);
-      this.route.paramMap.subscribe(params => {
-        this.ngOnInit();
+      this.tagService.getAllTag().subscribe(data3 => {
+        this.tags = data3;
+        console.log(data3);
+        this.tagsMap = new Map();
+        for (const tag of this.tags) {
+          this.tagsMap.set(tag.id, tag);
+        }
+        console.log(this.tagsMap);
+        this.route.paramMap.subscribe(params => {
+          this.ngOnInit();
+        });
       });
     });
+  }
+
+  private async removeSuggest(): Promise<void> {
+    const delay = ms => new Promise(res => setTimeout(res, ms));
+    this.noId = true;
+    await delay(5000);
+    this.noId = false;
   }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id') === undefined ? null : this.route.snapshot.paramMap.get('id');
     this.url = null;
+    this.searchDone = null;
+    this.tagSearch = [];
+    this.allTagsSearch = [];
+
     this.categoryService.getAllCategory().subscribe(value => {
       if (this.id === null) {
-        this.noId = true;
+        this.removeSuggest();
         const cat = value[Math.floor(Math.random() * value.length)];
         if (cat.childCategory.length > 0) {
           this.id = cat.childCategory[Math.floor(Math.random() * cat.childCategory.length)].id;
@@ -101,31 +123,31 @@ export class PagesComponent extends AbstractComponents implements OnInit {
         }
       }
       this.init();
+      for (const tag of this.tags) {
+        this.allTagsSearch.push(tag.id);
+      }
 
-      this.tagService.getAllTag().subscribe(data3 => {
-        this.filteredFruits = this.fruitCtrl.valueChanges.pipe(
-          startWith(null),
-          map((fruit: string | null) => fruit ? this._filter(fruit) : this.allFruits.slice()));
+      this.filteredFruits = this.fruitCtrl.valueChanges.pipe(
+        startWith(null),
+        map(tagSearch => this.allTagsSearch.filter(item => this.tagSearch.indexOf(item) < 0)));
 
-        this.pageService.getAllPageByCategory(this.id).subscribe(data => {
-          this.pages = data;
-          if (data.pageList.length !== 0) {
-            this.url = data.pageList[Math.floor(Math.random() * data.pageList.length)].image.url;
-          }
-          console.log(data);
-          this.pageIndex = 0;
-          this.pageSize = 9;
-          this.length = data.number;
-          this.updateData(null);
-        });
+      this.pageService.getAllPageByCategory(this.id).subscribe(data => {
+        this.pages = data;
+        if (data.pageList.length !== 0) {
+          this.url = data.pageList[Math.floor(Math.random() * data.pageList.length)].image.url;
+        }
+        console.log(data);
+        this.pageIndex = 0;
+        this.pageSize = 9;
+        this.length = data.number;
+        this.updateData(null);
       });
     });
   }
 
   init(): void {
     this.searchForm = new FormGroup({
-      category: new FormControl(this.categories[0].name, Validators.required),
-      input: new FormControl('', Validators.required)
+      input: new FormControl('', Validators.minLength(3))
     });
   }
 
@@ -141,26 +163,68 @@ export class PagesComponent extends AbstractComponents implements OnInit {
   }
 
   remove(fruit: string): void {
-    const index = this.fruits.indexOf(fruit);
-
+    const index = this.tagSearch.indexOf(fruit);
     if (index >= 0) {
-      this.fruits.splice(index, 1);
+      this.tagSearch.splice(index, 1);
     }
+    this.filteredFruits = this.fruitCtrl.valueChanges.pipe(
+      startWith(null),
+      map(tagSearch => this.allTagsSearch.filter(item => this.tagSearch.indexOf(item) < 0)));
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
-    this.fruits.push(event.option.viewValue);
+    this.tagSearch.push(event.option.value);
     this.fruitInput.nativeElement.value = '';
     this.fruitCtrl.setValue(null);
-  }
-
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
-
-    return this.allFruits.filter(fruit => fruit.toLowerCase().indexOf(filterValue) === 0);
+    this.filteredFruits = this.fruitCtrl.valueChanges.pipe(
+      startWith(null),
+      map(tagSearch => this.allTagsSearch.filter(item => this.tagSearch.indexOf(item) < 0)));
   }
 
   search(): void {
 
+    console.log(this.tagSearch);
+    console.log(this.filteredFruits);
+    console.log(this.allTagsSearch);
+
+    const value = this.searchForm.value;
+    this.searchDone = value.input;
+    const keep = value.input.toLowerCase().split(' ');
+
+    if (this.searchDone && this.searchDone.length >= 3) {
+      this.dataSource = [];
+
+      for (const data of this.pages.pageList) {
+        const titleSplited = data.title.toLowerCase().split(' ');
+
+        for (const t of titleSplited) {
+          for (const k of keep) {
+            console.log(t + ' ' + k);
+            const titleSplitedChar = t.split('');
+            const titleSplitedChar2 = [];
+            for (let i = 1; i < titleSplitedChar.length - 1; i++) {
+              titleSplitedChar2.push(titleSplitedChar[i - 1] + '' + titleSplitedChar[i] + '' + titleSplitedChar[i + 1]);
+            }
+            const keepSplitedChar = k.split('');
+            const keepSplitedChar2 = [];
+            for (let i = 1; i < keepSplitedChar.length - 1; i++) {
+              keepSplitedChar2.push(keepSplitedChar[i - 1] + '' + keepSplitedChar[i] + '' + keepSplitedChar[i + 1]);
+            }
+            for (const ts of titleSplitedChar2) {
+              for (const ks of keepSplitedChar2) {
+                console.log('double ' + ts + ' ' + ks);
+                if (ts === ks) {
+
+                  this.dataSource.push(data);
+                }
+              }
+            }
+          }
+        }
+      }
+      // remove duplicated
+      this.pageIndex = 0;
+      this.length = this.dataSource.length;
+    }
   }
 }

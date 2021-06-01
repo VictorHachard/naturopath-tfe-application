@@ -4,35 +4,18 @@
     <div class="col-md-auto">
       <div class="jumbotron jumbotron-fluid p-4 page-border-radius">
         <form *ngIf="categories && searchForm" [formGroup]="searchForm" (ngSubmit)="search()" class="mb-2">
-          <!--<div class="form-group">
-            <div class="input-group mb-0">
-              <div class="input-group-prepend">
-                <label class="input-group-text">Select category</label>
-              </div>
-              <select class="custom-select" formControlName="category">
-                <option *ngFor="let category of categories" aria-label="breadcrumb">{{ category.name }}
-                </option>
-              </select>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="input-group mb-0">
-              <div class="input-group-prepend">
-                <label class="input-group-text">Input</label>
-              </div>
-              <input type="text" class="form-control" formControlName="input">
-            </div>
-            <small class="text-danger">{{ printError(searchForm.get('input')) }}</small>
-          </div>-->
-
+          <mat-form-field class="example-full-width">
+            <mat-label>Search</mat-label>
+            <input matInput type="text" formControlName="input"/>
+          </mat-form-field>
           <mat-form-field class="example-chip-list mt-0">
             <mat-chip-list #chipList aria-label="Tag selection">
               <mat-chip
-                *ngFor="let fruit of fruits"
+                *ngFor="let fruit of tagSearch"
                 [selectable]="selectable"
                 [removable]="removable"
                 (removed)="remove(fruit)">
-                {{fruit}}
+                {{ tagsMap.get(fruit).name }}
                 <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
               </mat-chip>
               <input
@@ -40,17 +23,17 @@
                 #fruitInput
                 [formControl]="fruitCtrl"
                 [matAutocomplete]="auto"
-                [matChipInputFor]="chipList"
-                [matChipInputSeparatorKeyCodes]="separatorKeysCodes">
+                [matChipInputFor]="chipList">
             </mat-chip-list>
             <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
               <mat-option *ngFor="let fruit of filteredFruits | async" [value]="fruit">
-                {{fruit}}
+                {{ tagsMap.get(fruit).name }}
               </mat-option>
             </mat-autocomplete>
           </mat-form-field>
           <button class="btn btn-sm btn-primary btn-block" [disabled]="searchForm.invalid" type="submit">Search</button>
         </form>
+        <hr class="style1 mt-4">
         <nav class="nav flex-column">
           <div *ngFor="let category of categories">
             <li *ngIf="category.childCategory.length === 0; else notEmpty" class="nav-item">
@@ -76,7 +59,7 @@
         <p class="lead">So we suggest you to discover the <span class="cur display-5 text-primary" [routerLink]="['/pages', id]">{{ name }}</span> category.</p>
       </div>
 
-      <div *ngIf="url !== null; else elseBlock">
+      <div *ngIf="url !== null; else elseBlockNoId">
         <div class="page-image page-border-radius" [style]="'background-image:url(http://localhost:8080/api/v1/resource/' +  url + ');'">
           <div class="page-border-radius" style="background-color: rgba(30, 32, 34, 0.6);">
             <div class="jumbotron p-5 mb-4 text-white page-border-radius" style="background-color: rgba(0, 0, 0, 0)!important;">
@@ -86,32 +69,44 @@
           </div>
         </div>
       </div>
-      <ng-template #elseBlock>
+      <ng-template #elseBlockNoId>
         <div class="jumbotron p-4">
           <p class="display-4">{{ name }}</p>
           <p class="lead">{{ description }}</p>
         </div>
       </ng-template>
 
-      <div *ngIf="dataSource" class="row">
-        <div *ngFor="let page of dataSource" class="col-md mb-4">
-          <div class="card zoom" [routerLink]="['/page', page.id]" style="min-width: 400px">
-            <div class="card-header">
-              <h4 class="display-5 text-primary">{{ page.title }}</h4>
-              <p class="lead mb-0" style="font-size: 1.15rem;">{{ page.description }}</p>
+      <div *ngIf="dataSource && dataSource.length !== 0; else elseBlockSearch">
+        <div class="row">
+          <div *ngFor="let page of dataSource" class="col-md mb-4">
+            <div class="card zoom" [routerLink]="['/page', page.id]" style="min-width: 400px">
+              <div class="card-header">
+                <h4 class="display-5 text-primary">{{ page.title }}</h4>
+                <p class="lead mb-0" style="font-size: 1.15rem;">{{ page.description }}</p>
+              </div>
+              <div class="card-body p-0 page-image" [style]="'height:300px;background-image:url(http://localhost:8080/api/v1/resource/' +  page.image.url + ');border-radius: 0 0 0.20rem 0.20rem;'"></div>
             </div>
-            <div class="card-body p-0 page-image" [style]="'height:300px;background-image:url(http://localhost:8080/api/v1/resource/' +  page.image.url + ');border-radius: 0 0 0.20rem 0.20rem;'"></div>
           </div>
         </div>
+        <mat-paginator #paginator
+                       [length]="length"
+                       [pageIndex]="pageIndex"
+                       [pageSize]="pageSize"
+                       [pageSizeOptions]="[9, 18, 25, 99]"
+                       (page)="pageEvent = updateData($event)">
+        </mat-paginator>
       </div>
-      <mat-paginator #paginator
-                     [length]="length"
-                     [pageIndex]="pageIndex"
-                     [pageSize]="pageSize"
-                     [pageSizeOptions]="[9, 18, 25, 99]"
-                     (page)="pageEvent = updateData($event)">
-      </mat-paginator>
-
+      <ng-template #elseBlockSearch>
+        <div *ngIf="searchDone " class="jumbotron p-4">
+          <p class="display-5">Your search: <span class="text-primary">{{ searchDone }}</span> did not match any documents</p>
+          <p class="lead mb-1">Suggestions:</p>
+          <ul>
+            <li class="lead">Make sure that all words are spelled correctly.</li>
+            <li class="lead">Try different keywords.</li>
+            <li class="lead">Try more general keywords.</li>
+          </ul>
+        </div>
+      </ng-template>
     </div>
   </div>
 </section>

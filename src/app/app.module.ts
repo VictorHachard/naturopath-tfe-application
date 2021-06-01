@@ -64,6 +64,7 @@ import {MatOptionModule} from '@angular/material/core';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatIconModule} from '@angular/material/icon';
 import {MatSelectModule} from '@angular/material/select';
+import {MatInputModule} from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -130,10 +131,13 @@ import {MatSelectModule} from '@angular/material/select';
     MatOptionModule,
     MatAutocompleteModule,
     MatIconModule,
-    MatSelectModule
+    MatSelectModule,
+    MatInputModule
   ],
   exports: [
-    HttpClientModule
+    HttpClientModule,
+    MatInputModule,
+    MatFormFieldModule
   ],
   providers: [
     AuthGuardService,
