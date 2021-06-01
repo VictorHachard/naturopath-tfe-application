@@ -18,6 +18,11 @@ export class PageService extends AbstractService {
       {headers : new HttpHeaders().set('Authorization', this.getUserJwt())});
   }
 
+  public getAllPageSearch(body: any): Observable<any[]> {
+    return this.http.post<any[]>(this.baseUrl + 'dto/search', body,
+      {headers : new HttpHeaders().set('Authorization', this.getUserJwt())});
+  }
+
   public getAllEditPage(): Observable<any[]> {
     return this.http.get<any[]>(this.baseUrl + 'dto/edit',
       {headers : new HttpHeaders().set('Authorization', this.getUserJwt())});

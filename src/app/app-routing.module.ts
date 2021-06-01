@@ -42,6 +42,7 @@ import {RolesGuardAdminService, RolesGuardOwnerService} from './service/guards/r
 import {AdminimagesComponent} from './components/templates/admin/adminimages/adminimages.component';
 import {AdminpagesComponent} from './components/templates/admin/adminpages/adminpages.component';
 import {AdmintagsComponent} from './components/templates/admin/admintags/admintags.component';
+import {SearchComponent} from './components/templates/search/search.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home'},
@@ -69,6 +70,7 @@ const routes: Routes = [
   { path: 'pages', component: PagesComponent },
   { path: 'pages/:id', component: PagesComponent },
   { path: 'pages/:id/:index', component: PagesComponent },
+  { path: 'search', component: SearchComponent },
 
   { path: 'editpage/:id', component: EditpageComponent, canActivate: [AuthGuardService] },
   { path: 'addpage', component: AddpageComponent, canActivate: [AuthGuardService] },

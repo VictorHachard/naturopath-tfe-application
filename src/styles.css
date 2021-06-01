@@ -101,7 +101,7 @@ mat-icon {
   font-size: 16px!important;
 }
 .mat-form-field.mat-focused .mat-form-field-ripple {
-  background-color: #007bff !important
+  background-color: #007bff
 }
 .mat-input-element {
   caret-color: black !important
@@ -110,8 +110,8 @@ mat-icon {
   background-color: rgb(151, 151, 151) !important
 }
 mat-form-field input {
-  color: rgb(232, 230, 227) !important
+  color: black !important
 }
 .mat-form-field-appearance-legacy.mat-focused .mat-form-field-label {
-  color: #0061c6 !important
+  color: #0061c6
 }

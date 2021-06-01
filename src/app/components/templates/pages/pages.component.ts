@@ -22,9 +22,9 @@ import {Alert} from '../../../model/my/AlertManager';
   templateUrl: './pages.component.html',
   styleUrls: ['./pages.component.css']
 })
-export class PagesComponent implements OnInit {
+export class PagesComponent extends AbstractComponents implements OnInit {
 
-  private id: string;
+  id: string;
   searchForm: FormGroup;
 
   categories: any[] = [];
@@ -37,14 +37,14 @@ export class PagesComponent implements OnInit {
   url: string;
   searchDone: string;
 
-  //pagi
+  // pagi
   pageEvent: PageEvent;
   dataSource: any[];
   pageIndex: number;
   pageSize: number;
   length: number;
 
-  //chip
+  // chip
   selectable = true;
   removable = true;
   fruitCtrl = new FormControl();
@@ -62,6 +62,7 @@ export class PagesComponent implements OnInit {
               private pageService: PageService,
               private tagService: TagService,
               private categoryService: CategoryService) {
+    super();
     this.categoryService.getAllCategory().subscribe(value => {
       this.categories = value;
       console.log(value);
@@ -134,19 +135,23 @@ export class PagesComponent implements OnInit {
         this.url = data.pageList[Math.floor(Math.random() * data.pageList.length)].image.url;
       }
       console.log(data);
-      this.pageIndex = 0;
-      this.pageSize = 9;
-      this.length = data.number;
-      this.updateData(null);
+      this.clear();
     });
   }
 
   ngOnInit(): void { }
 
-  init(): void {
+  private init(): void {
     this.searchForm = new FormGroup({
-      input: new FormControl('', Validators.minLength(3))
+      input: new FormControl('', [Validators.required, Validators.minLength(3)])
     });
+  }
+
+  public clear(): void {
+    this.pageIndex = 0;
+    this.pageSize = 9;
+    this.length = this.pages.number;
+    this.updateData(null);
   }
 
   public updateData(event?: PageEvent): PageEvent {
@@ -180,11 +185,6 @@ export class PagesComponent implements OnInit {
   }
 
   search(): void {
-
-    console.log(this.tagSearch);
-    console.log(this.filteredFruits);
-    console.log(this.allTagsSearch);
-
     const value = this.searchForm.value;
     this.searchDone = value.input;
     const keep = value.input.toLowerCase().split(' ');

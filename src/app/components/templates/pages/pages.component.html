@@ -1,12 +1,14 @@
-<section class="my-4 container-fluid">
+<section class="my-4 container-fluid" style="max-width: 1900px">
 
-  <div class="row justify-content-md-center">
-    <div class="col-md-auto">
+  <div class="row">
+    <div class="col-md-auto" >
       <div class="jumbotron jumbotron-fluid p-4 page-border-radius">
+        <small class="text-danger">{{ printError(searchForm.get('input')) }}</small>
         <form *ngIf="categories && searchForm" [formGroup]="searchForm" (ngSubmit)="search()" class="mb-2">
           <mat-form-field class="example-full-width">
             <mat-label>Search</mat-label>
             <input matInput type="text" formControlName="input"/>
+
           </mat-form-field>
           <mat-form-field class="example-chip-list mt-0">
             <mat-chip-list #chipList aria-label="Tag selection">
@@ -19,7 +21,7 @@
                 <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
               </mat-chip>
               <input
-                placeholder="add tags"
+                placeholder="Add tags"
                 #fruitInput
                 [formControl]="fruitCtrl"
                 [matAutocomplete]="auto"
@@ -33,6 +35,7 @@
           </mat-form-field>
           <button class="btn btn-sm btn-primary btn-block" [disabled]="searchForm.invalid" type="submit">Search</button>
         </form>
+        <button class="btn btn-sm btn-primary btn-block" (click)="clear()">Clear</button>
         <hr class="style1 mt-4">
         <nav class="nav flex-column">
           <div *ngFor="let category of categories">
@@ -40,13 +43,9 @@
               <a class="nav-link" [routerLink]="['/pages', category.id]">{{ category.name }}</a>
             </li>
             <ng-template #notEmpty>
-              <li class="nav-item dropdown">
-                <p class="nav-link dropdown-toggle m-0" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  {{ category.name }}
-                </p>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                  <a *ngFor="let ca of category.childCategory" class="dropdown-item" style="font-size: 14px" [routerLink]="['/pages', ca.id]">{{ ca.name }}</a>
-                </div>
+              <p class="mb-0 ml-3">{{ category.name }}</p>
+              <li *ngFor="let ca of category.childCategory" class="nav-item ml-3">
+                <a class="nav-link" [routerLink]="['/pages', ca.id]">{{ ca.name }}</a>
               </li>
             </ng-template>
           </div>
