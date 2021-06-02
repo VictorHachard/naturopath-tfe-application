@@ -28,6 +28,7 @@ export class SearchComponent extends AbstractComponents implements OnInit {
     super();
     this.route.paramMap.subscribe(params => {
       this.ngOnInitDebug();
+      window.scroll(0, 0);
     });
   }
 

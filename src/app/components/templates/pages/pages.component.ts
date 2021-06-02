@@ -76,6 +76,7 @@ export class PagesComponent extends AbstractComponents implements OnInit {
         console.log(this.tagsMap);
         this.route.paramMap.subscribe(params => {
           this.ngOnInitDebug();
+          window.scroll(0, 0);
         });
       });
     });
