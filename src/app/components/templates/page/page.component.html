@@ -2,7 +2,9 @@
 
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="" [routerLink]="['/pages/' + page?.category.id]">{{ page?.category.name }}</a></li>
+      <li class="breadcrumb-item">
+        <a href="" [routerLink]="['/pages/' + page?.category.id]">{{ page?.category.name }}</a>
+      </li>
     </ol>
   </nav>
 

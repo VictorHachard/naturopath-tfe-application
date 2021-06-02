@@ -7,13 +7,11 @@
           <label class="input-group-text">Select category</label>
         </div>
         <select class="custom-select" formControlName="category">
-          <option *ngFor="let category of categories" aria-label="breadcrumb">{{ category.name }}
-            <!-- <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">{{ category.name }}</a></li>
-                <li *ngFor="let ca of category.childCategory" class="breadcrumb-item active" aria-current="page"><a href="#">
-                  {{ ca.name }}
-                </a></li>
-              </ol> -->
+          <option *ngFor="let category of categoriesChild" aria-label="breadcrumb">
+            {{ category.name }}
+          </option>
+          <option *ngFor="let category of categories" aria-label="breadcrumb">
+            {{ category.name }}
           </option>
         </select>
       </div>
