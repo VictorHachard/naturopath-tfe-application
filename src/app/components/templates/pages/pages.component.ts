@@ -180,7 +180,7 @@ export class PagesComponent extends AbstractComponents implements OnInit {
     this.fruitCtrl.setValue(null);
   }
 
-  private _filter(value: string): string[] {
+  private _filter(value: any): string[] {
     if (!isNumeric(value)) {
       return this.allTagsSearch.filter(fruit => (this.tagSearch.indexOf(fruit) < 0) && this.tagsMap.get(fruit).name.toLowerCase().indexOf(value.toLowerCase()) === 0);
     }
