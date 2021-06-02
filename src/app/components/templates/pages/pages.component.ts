@@ -16,6 +16,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {delay, map, startWith} from 'rxjs/operators';
 import {TagService} from '../../../service/Tag.service';
 import {Alert} from '../../../model/my/AlertManager';
+import {isNumeric} from 'rxjs/internal-compatibility';
 
 @Component({
   selector: 'app-pages',
@@ -26,6 +27,7 @@ export class PagesComponent extends AbstractComponents implements OnInit {
 
   id: string;
   searchForm: FormGroup;
+  searchTagMap;
 
   categories: any[] = [];
   tags: any[] = [];
@@ -125,11 +127,9 @@ export class PagesComponent extends AbstractComponents implements OnInit {
     for (const tag of this.tags) {
       this.allTagsSearch.push(tag.id);
     }
-
     this.filteredFruits = this.fruitCtrl.valueChanges.pipe(
       startWith(null),
-      map(tagSearch => this.allTagsSearch.filter(item => this.tagSearch.indexOf(item) < 0)));
-    console.log(this.id);
+      map((fruit: string | null) => fruit ? this._filter(fruit) : this.allTagsSearch.slice()));
     this.pageService.getAllPageByCategory(this.id).subscribe(data => {
       this.pages = data;
       if (data.pageList.length !== 0) {
@@ -171,34 +171,37 @@ export class PagesComponent extends AbstractComponents implements OnInit {
     if (index >= 0) {
       this.tagSearch.splice(index, 1);
     }
-    this.filteredFruits = this.fruitCtrl.valueChanges.pipe(
-      startWith(null),
-      map(tagSearch => this.allTagsSearch.filter(item => this.tagSearch.indexOf(item) < 0)));
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
+    console.log('test');
     this.tagSearch.push(event.option.value);
     this.fruitInput.nativeElement.value = '';
     this.fruitCtrl.setValue(null);
-    this.filteredFruits = this.fruitCtrl.valueChanges.pipe(
-      startWith(null),
-      map(tagSearch => this.allTagsSearch.filter(item => this.tagSearch.indexOf(item) < 0)));
+  }
+
+  private _filter(value: string): string[] {
+    if (!isNumeric(value)) {
+      return this.allTagsSearch.filter(fruit => (this.tagSearch.indexOf(fruit) < 0) && this.tagsMap.get(fruit).name.toLowerCase().indexOf(value.toLowerCase()) === 0);
+    }
   }
 
   search(): void {
     const value = this.searchForm.value;
     this.searchDone = value.input;
-    const keep = value.input.toLowerCase().split(' ');
-
-    if (this.searchDone && this.searchDone.length >= 3) {
+    this.searchTagMap = new Map();
+    let keep;
+    if (this.searchDone.length >= 3) {
       this.dataSource = [];
+      keep = value.input.toLowerCase().split(' ');
 
-      for (const data of this.pages.pageList) {
+    }
+
+    for (const data of this.pages.pageList) {
+      if (this.searchDone.length >= 3) {
         const titleSplited = data.title.toLowerCase().split(' ');
-
         for (const t of titleSplited) {
           for (const k of keep) {
-            console.log(t + ' ' + k);
             const titleSplitedChar = t.split('');
             const titleSplitedChar2 = [];
             for (let i = 1; i < titleSplitedChar.length - 1; i++) {
@@ -211,9 +214,7 @@ export class PagesComponent extends AbstractComponents implements OnInit {
             }
             for (const ts of titleSplitedChar2) {
               for (const ks of keepSplitedChar2) {
-                console.log('double ' + ts + ' ' + ks);
                 if (ts === ks) {
-
                   this.dataSource.push(data);
                 }
               }
@@ -221,12 +222,29 @@ export class PagesComponent extends AbstractComponents implements OnInit {
           }
         }
       }
-      // remove duplicated
-      this.dataSource = this.dataSource.filter((elem, index, self) => {
-        return index === self.indexOf(elem);
-      });
-      this.pageIndex = 0;
-      this.length = this.dataSource.length;
+
+      // tag
+      for (const pageTag of data.tagList) {
+        for (const tagSearch of this.tagSearch) {
+          if (pageTag.id === tagSearch) {
+            if (this.searchTagMap.has(data.id) && !this.searchTagMap.get(data.id).includes(pageTag.id)) {
+              this.searchTagMap.get(data.id).push(pageTag.id);
+            } else if (!this.searchTagMap.has(data.id)) {
+              this.searchTagMap.set(data.id, [pageTag.id]);
+            }
+          }
+        }
+      }
+
     }
+    console.log(this.searchTagMap);
+
+    // remove duplicated
+    this.dataSource = this.dataSource.filter((elem, index, self) => {
+      return index === self.indexOf(elem);
+    });
+    this.pageIndex = 0;
+    this.length = this.dataSource.length;
   }
+
 }

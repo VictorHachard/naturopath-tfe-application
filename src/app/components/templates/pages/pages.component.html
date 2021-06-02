@@ -24,7 +24,8 @@
                 #fruitInput
                 [formControl]="fruitCtrl"
                 [matAutocomplete]="auto"
-                [matChipInputFor]="chipList">
+                [matChipInputFor]="chipList"
+                >
             </mat-chip-list>
             <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
               <mat-option *ngFor="let fruit of filteredFruits | async" [value]="fruit">
@@ -32,7 +33,7 @@
               </mat-option>
             </mat-autocomplete>
           </mat-form-field>
-          <button class="btn btn-sm btn-outline-primary btn-block" [disabled]="searchForm.invalid" type="submit">Search</button>
+          <button class="btn btn-sm btn-outline-primary btn-block" type="submit">Search</button>
         </form>
         <button class="btn btn-sm btn-outline-primary btn-block" (click)="clear()">Clear</button>
         <hr class="style1 mt-4">
@@ -81,6 +82,11 @@
               <div class="card-header">
                 <h4 class="display-5 text-primary">{{ page.title }}</h4>
                 <p class="lead mb-0" style="font-size: 1.15rem;">{{ page.description }}</p>
+                <div class="mt-2" *ngIf="searchTagMap && searchTagMap.has(page.id)">
+                  <div class="d-inline" *ngFor="let tag of searchTagMap.get(page.id)">
+                    <span class="mr-2 badge rounded-pill bg-primary">{{ tagsMap.get(tag).name }}</span>
+                  </div>
+                </div>
               </div>
               <div class="card-body p-0 page-image" [style]="'height:300px;background-image:url(http://localhost:8080/api/v1/resource/' +  page.image.url + ');border-radius: 0 0 0.20rem 0.20rem;'"></div>
             </div>
