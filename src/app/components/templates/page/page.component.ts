@@ -43,8 +43,9 @@ export class PageComponent extends AbstractComponents implements OnInit {
           this.like = value;
         });
       }
-      this.pageService.getAllExactPageSearch({search: data.title, limit: 7}).subscribe(data1 => {
-        this.recommendedPage = data1.filter(obj => obj.pageSimplifiedViewDto2List[0].id != this.id);
+      this.pageService.getAllRecommendedPageSearch({search: data.title, limit: 7}).subscribe(data1 => {
+        console.log(data1);
+        this.recommendedPage = data1.filter(obj => obj.pageSimplifiedRecommendedViewDtoList[0].id != this.id);
         if (this.recommendedPage.length > 6) {
           this.recommendedPage.splice(-1, 1);
         }

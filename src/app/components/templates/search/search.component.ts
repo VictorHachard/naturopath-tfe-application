@@ -38,7 +38,7 @@ export class SearchComponent extends AbstractComponents implements OnInit {
     this.pageService.getAllPageSearch({search: this.str}).subscribe(value => {
       this.searchList = value;
       for (const v of value) {
-        this.searchListCategoryUrl.set(v.categoryViewDto.id, v.pageSimplifiedViewDto2List[Math.floor(Math.random() * v.pageSimplifiedViewDto2List.length)].image.url);
+        this.searchListCategoryUrl.set(v.categoryViewDto.id, v.pageSimplifiedRecommendedViewDtoList[Math.floor(Math.random() * v.pageSimplifiedRecommendedViewDtoList.length)].image.url);
       }
       console.log(value);
     });
