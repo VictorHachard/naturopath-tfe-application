@@ -26,6 +26,11 @@ export class PageService extends AbstractService {
     return this.http.post<any[]>(this.baseUrl + 'dto/search/exact', body);
   }
 
+  public getFavoriteAllDto(): Observable<any[]> {
+    return this.http.get<any[]>(this.baseUrl + 'dto/favorite',
+      {headers : new HttpHeaders().set('Authorization', this.getUserJwt())});
+  }
+
   public getAllRecommendedPageSearch(body: any): Observable<any[]> {
     return this.http.post<any[]>(this.baseUrl + 'dto/search/recommended', body);
   }

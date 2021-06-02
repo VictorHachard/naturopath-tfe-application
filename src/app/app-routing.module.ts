@@ -43,6 +43,7 @@ import {AdminimagesComponent} from './components/templates/admin/adminimages/adm
 import {AdminpagesComponent} from './components/templates/admin/adminpages/adminpages.component';
 import {AdmintagsComponent} from './components/templates/admin/admintags/admintags.component';
 import {SearchComponent} from './components/templates/search/search.component';
+import {FavoriteComponent} from './components/templates/favorite/favorite.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'pages'},
@@ -72,6 +73,8 @@ const routes: Routes = [
   { path: 'pages/:id/:index', component: PagesComponent },
   { path: 'search', component: SearchComponent },
   { path: 'search/:str', component: SearchComponent },
+
+  { path: 'favorite', component: FavoriteComponent },
 
   { path: 'editpage/:id', component: EditpageComponent, canActivate: [AuthGuardService] },
   { path: 'addpage', component: AddpageComponent, canActivate: [AuthGuardService] },

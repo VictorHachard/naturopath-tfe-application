@@ -66,6 +66,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
 import { SearchComponent } from './components/templates/search/search.component';
+import { FavoriteComponent } from './components/templates/favorite/favorite.component';
 
 @NgModule({
   declarations: [
@@ -117,6 +118,7 @@ import { SearchComponent } from './components/templates/search/search.component'
     AdmintagsComponent,
     AdminimagesComponent,
     SearchComponent,
+    FavoriteComponent,
   ],
   imports: [
     BrowserModule,
