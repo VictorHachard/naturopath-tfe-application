@@ -32,9 +32,9 @@
               </mat-option>
             </mat-autocomplete>
           </mat-form-field>
-          <button class="btn btn-sm btn-primary btn-block" [disabled]="searchForm.invalid" type="submit">Search</button>
+          <button class="btn btn-sm btn-outline-primary btn-block" [disabled]="searchForm.invalid" type="submit">Search</button>
         </form>
-        <button class="btn btn-sm btn-primary btn-block" (click)="clear()">Clear</button>
+        <button class="btn btn-sm btn-outline-primary btn-block" (click)="clear()">Clear</button>
         <hr class="style1 mt-4">
         <nav class="nav flex-column">
           <div *ngFor="let category of categories">

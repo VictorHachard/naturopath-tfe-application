@@ -15,6 +15,7 @@ export class PageComponent extends AbstractComponents implements OnInit {
   private id: string;
 
   page: any;
+  recommendedPage: any;
 
   constructor(private userSecurityService: UserSecurityService,
               private cookieService: CookieService,
@@ -22,15 +23,26 @@ export class PageComponent extends AbstractComponents implements OnInit {
               private router: Router,
               private pageService: PageService) {
     super();
-  }
-
-  ngOnInit(): void {
-    this.id = this.route.snapshot.paramMap.get('id');
-
-    this.pageService.getPage(this.id).subscribe(data => {
-      this.page = data;
-      console.log(this.page);
+    this.route.paramMap.subscribe(params => {
+      this.ngOnInitDebug();
     });
   }
+
+  ngOnInitDebug(): void {
+    this.id = this.route.snapshot.paramMap.get('id');
+    this.pageService.getPage(this.id).subscribe(data => {
+      this.pageService.getAllExactPageSearch({search: data.title, limit: 7}).subscribe(data1 => {
+        this.page = data;
+        this.recommendedPage = data1.filter(obj => obj.pageSimplifiedViewDto2List[0].id != this.id);
+        if (this.recommendedPage.length > 6) {
+          this.recommendedPage.splice(-1, 1);
+        }
+        console.log(this.page);
+        console.log(this.recommendedPage);
+      });
+    });
+  }
+
+  ngOnInit(): void { }
 
 }

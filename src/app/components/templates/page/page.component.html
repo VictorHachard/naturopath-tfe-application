@@ -50,6 +50,20 @@
 
       </div>
     </div>
+    <div class="jumbotron mb-0 p-4" *ngIf="recommendedPage && recommendedPage.length !== 0">
+      <p class="display-5 mb-3">Recommended pages</p>
+      <div class="row">
+        <div *ngFor="let search of recommendedPage" class="col col-md-6 mb-3">
+            <div class="jumbotron-image zoom" [routerLink]="['/page', search.pageSimplifiedViewDto2List[0].id]" [style]="'background-image:url(http://localhost:8080/api/v1/resource/' + search.pageSimplifiedViewDto2List[0].image.url + ');border-radius: 0.20rem;'">
+              <div style="background-color: rgba(30, 32, 34, 0.6);border-radius: 0.25rem;">
+                <div class="jumbotron mb-0 p-4 text-white" style="background-color: rgba(0, 0, 0, 0)!important;'">
+                  <p class="display-6">{{ search.categoryViewDto.name }} - {{ search.pageSimplifiedViewDto2List[0].title }}</p>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
   </div>
 
 </section>
