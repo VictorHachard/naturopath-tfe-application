@@ -12,7 +12,7 @@
           <li *ngIf="user" class="nav-item">
             <a class="nav-link nav-w" routerLink="/dashboard">Dashboard</a>
           </li>
-          <li class="nav-item">
+          <li *ngIf="user" class="nav-item">
             <a class="nav-link nav-w" routerLink="/contact">Contact</a>
           </li>
         </ul>

@@ -19,13 +19,11 @@ export class PageService extends AbstractService {
   }
 
   public getAllPageSearch(body: any): Observable<any[]> {
-    return this.http.post<any[]>(this.baseUrl + 'dto/search', body,
-      {headers : new HttpHeaders().set('Authorization', this.getUserJwt())});
+    return this.http.post<any[]>(this.baseUrl + 'dto/search', body);
   }
 
   public getAllExactPageSearch(body: any): Observable<any[]> {
-    return this.http.post<any[]>(this.baseUrl + 'dto/search/exact', body,
-      {headers : new HttpHeaders().set('Authorization', this.getUserJwt())});
+    return this.http.post<any[]>(this.baseUrl + 'dto/search/exact', body);
   }
 
   public getAllEditPage(): Observable<any[]> {

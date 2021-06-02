@@ -6,7 +6,11 @@
     </ol>
   </nav>
 
-  <div class="jumbotron-image page-border-radius" [style]="'background-image:url(http://localhost:8080/api/v1/resource/' +  page?.image.url + ');'">
+  <div *ngIf="user" class="breadcrumb mb-3 p-3">
+    <button type="button" class="btn btn-sm btn-outline-primary" (click)="addLike()">{{ like && like.like ? 'Unlike' : 'Like' }}</button>
+  </div>
+
+  <div *ngIf="page" class="jumbotron-image page-border-radius" [style]="'background-image:url(http://localhost:8080/api/v1/resource/' +  page?.image.url + ');'">
     <div class="page-border-radius" style="background-color: rgba(30, 32, 34, 0.6);">
       <div class="jumbotron mb-3 text-white page-border-radius" style="background-color: rgba(0, 0, 0, 0)!important;">
         <p class="display-3">{{ page?.title }}</p>
@@ -54,13 +58,13 @@
       <p class="display-5 mb-3">Recommended pages</p>
       <div class="row">
         <div *ngFor="let search of recommendedPage" class="col col-md-6 mb-3">
-            <div class="jumbotron-image zoom" [routerLink]="['/page', search.pageSimplifiedViewDto2List[0].id]" [style]="'background-image:url(http://localhost:8080/api/v1/resource/' + search.pageSimplifiedViewDto2List[0].image.url + ');border-radius: 0.20rem;'">
-              <div style="background-color: rgba(30, 32, 34, 0.6);border-radius: 0.25rem;">
-                <div class="jumbotron mb-0 p-4 text-white" style="background-color: rgba(0, 0, 0, 0)!important;'">
-                  <p class="display-6">{{ search.categoryViewDto.name }} - {{ search.pageSimplifiedViewDto2List[0].title }}</p>
-                </div>
+          <div class="jumbotron-image zoom" [routerLink]="['/page', search.pageSimplifiedViewDto2List[0].id]" [style]="'background-image:url(http://localhost:8080/api/v1/resource/' + search.pageSimplifiedViewDto2List[0].image.url + ');border-radius: 0.20rem;'">
+            <div style="background-color: rgba(30, 32, 34, 0.6);border-radius: 0.25rem;">
+              <div class="jumbotron mb-0 p-4 text-white" style="background-color: rgba(0, 0, 0, 0)!important;'">
+                <p class="display-6">{{ search.categoryViewDto.name }} - {{ search.pageSimplifiedViewDto2List[0].title }}</p>
               </div>
             </div>
+          </div>
         </div>
       </div>
     </div>

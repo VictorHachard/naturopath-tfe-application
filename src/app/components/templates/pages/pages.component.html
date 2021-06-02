@@ -57,7 +57,7 @@
         <p class="lead">So we suggest you to discover the <span class="cur display-5 text-primary" [routerLink]="['/pages', id]">{{ name }}</span> category.</p>
       </div>
 
-      <div *ngIf="url !== null; else elseBlockNoId">
+      <div *ngIf="url; else elseBlockNoId">
         <div class="page-image page-border-radius" [style]="'background-image:url(http://localhost:8080/api/v1/resource/' +  url + ');'">
           <div class="page-border-radius" style="background-color: rgba(30, 32, 34, 0.6);">
             <div class="jumbotron p-5 mb-4 text-white page-border-radius" style="background-color: rgba(0, 0, 0, 0)!important;">
