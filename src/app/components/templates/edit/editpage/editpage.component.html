@@ -24,6 +24,11 @@
     </div>
   </div>
 
+  <div *ngIf="page && page.canPublish" class="jumbotron p-4">
+    <h3>Everything has been validated you can publish your page!</h3>
+    <button type="button" class="btn btn btn-primary btn-block mt-3" (click)="publish()">Publish</button>
+  </div>
+
   <div *ngIf="page && editInnerParagraphForm && editInnerParatagForm" class="accordion" id="accordionExample">
     <div class="card">
       <div class="card-header" id="headingZero">

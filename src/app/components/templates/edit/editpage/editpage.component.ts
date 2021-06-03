@@ -397,4 +397,10 @@ export class EditpageComponent extends AbstractEdit implements OnInit {
 
     });
   }
+
+  publish(): void {
+    this.pageService.publish(this.page.id).subscribe(value => {
+      this.ngOnInit();
+    });
+  }
 }

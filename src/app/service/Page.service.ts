@@ -57,4 +57,9 @@ export class PageService extends AbstractService {
     return this.http.post<any>(this.baseUrl, body,
       {headers : new HttpHeaders().set('Authorization', this.getUserJwt())});
   }
+
+  public publish(id: string): Observable<any> {
+    return this.http.post<any>(this.baseUrl + 'publish/' + id, {},
+      {headers : new HttpHeaders().set('Authorization', this.getUserJwt())});
+  }
 }
