@@ -23,6 +23,7 @@ export class PageComponent extends AbstractComponents implements OnInit {
   recommendedPage: any;
   like: any;
   user: any;
+  warning;
 
   // pagi
   pageEvent: PageEvent;
@@ -64,6 +65,13 @@ export class PageComponent extends AbstractComponents implements OnInit {
     });
     this.pageService.getPage(this.id).subscribe(data => {
       this.page = data;
+      this.warning = false;
+      for (const t of this.page.paragraphList) {
+        this.warning = this.warning || t.paragraphType.alert;
+      }
+      for (const t of this.page.paratagList) {
+        this.warning = this.warning || t.paratagType.alert;
+      }
       if (this.messageAdded) {
         this.messageAdded = false;
         this.pageIndex = Math.floor(this.page.messageList.length / this.pageSize) - (this.page.messageList.length % this.pageSize === 0 ? 1 : 0);
