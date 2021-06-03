@@ -130,21 +130,33 @@
 ul.timeline-message {
   list-style-type: none;
   position: relative;
+  padding-left: 20px;
+}
+.timeline-message .message-hover {
+  padding: 0 0 20px 10px;
+}
+.timeline-message .message-hover:hover {
+  background-color: rgb(0, 0, 0, .1);
+}
+.dark .timeline-message .message-hover:hover {
+  background-color: rgb(255, 255, 255, .1);
 }
 ul.timeline-message:before {
   content: ' ';
   background: #d4d9df;
   display: inline-block;
   position: absolute;
-  left: 29px;
+  left: 12px;
   width: 2px;
   height: 100%;
   padding-bottom: 4px;
   z-index: 400;
 }
 ul.timeline-message > li {
-  margin: 20px 0 !important;
-  padding-left: 20px;
+  padding: 0 0 0 10px;
+}
+.timeline-message p {
+  margin: 0;
 }
 ul.timeline-message > li:before {
   content: ' ';
@@ -152,9 +164,9 @@ ul.timeline-message > li:before {
   display: inline-block;
   position: absolute;
   border-radius: 50%;
-  left: 20px;
-  width: 20px;
-  height: 20px;
+  left: 2px;
+  width: 22px;
+  height: 22px;
   z-index: 400;
 }
 ul.timeline-message > li.primary:before {

@@ -59,14 +59,16 @@
                           </div>
                           <div class="timeline-body">
                             <p>{{ inner.description }}</p>
-                            <img [src]="'http://localhost:8080/api/v1/resource/' + inner.image.url" class="mt-2" height="200" data-toggle="tooltip" data-placement="top" title="{{ inner.image.title }}">
+                            <img [src]="'http://localhost:8080/api/v1/resource/' + inner.image.url" class="my-3" height="200" data-toggle="tooltip" data-placement="top" title="{{ inner.image.title }}">
                             <div class="overflow-auto" style="max-height: 300px">
                               <ul *ngIf="inner.messageList.length !== 0" class="timeline-message">
                                 <li *ngFor="let message of inner.messageList" class="{{ userColor(message.user.id, inner) }}">
-                                  <h5>{{ message.user.username }}</h5>
-                                  <p><small class="text-muted">{{ message.createdAt| date:'dd MMMM yyyy - HH:mm' }}</small></p>
-                                  <p>{{ message.content }}</p>
-                                  <small *ngIf="message.isEdited">Edited</small>
+                                  <div class="message-hover rounded">
+                                    <h5 class="d-inline mr-2">{{ message.user.username }}</h5>
+                                    <small class="text-muted">{{ message.createdAt| date:'dd MMMM yyyy - HH:mm' }}</small>
+                                    <p>{{ message.content }}</p>
+                                    <small *ngIf="message.isEdited">Edited</small>
+                                  </div>
                                 </li>
                               </ul>
                             </div>
@@ -131,12 +133,14 @@
           </form>
           <div class="overflow-auto" style="max-height: 300px">
             <ul *ngIf="page.innerPageList[0].messageList.length !== 0" class="timeline-message" >
-              <li *ngFor="let message of page.innerPageList[0].messageList" class="{{ userColor(message.user.id, page.innerPageList[0]) }}">
-                <h5>{{ message.user.username }}</h5>
-                <p><small class="text-muted">{{ message.createdAt| date:'dd MMMM yyyy - HH:mm' }}</small></p>
-                <p>{{ message.content }}</p>
-                <small *ngIf="message.isEdited">Edited</small>
-              </li>
+                <li *ngFor="let message of page.innerPageList[0].messageList" class="{{ userColor(message.user.id, page.innerPageList[0]) }}">
+                  <div class="message-hover rounded">
+                    <h5 class="d-inline mr-2">{{ message.user.username }}</h5>
+                    <small class="text-muted">{{ message.createdAt| date:'dd MMMM yyyy - HH:mm' }}</small>
+                    <p>{{ message.content }}</p>
+                    <small *ngIf="message.isEdited">Edited</small>
+                  </div>
+                </li>
             </ul>
           </div>
         </div>
@@ -176,13 +180,15 @@
                           </div>
                           <div class="timeline-body">
                             <p>{{ inner.content }}</p>
-                            <div class="overflow-auto" style="max-height: 300px">
+                            <div class="mt-3 overflow-auto" style="max-height: 300px">
                               <ul *ngIf="inner.messageList.length !== 0" class="timeline-message">
                                 <li *ngFor="let message of inner.messageList" class="{{ userColor(message.user.id, inner) }}">
-                                  <h5>{{ message.user.username }}</h5>
-                                  <p><small class="text-muted">{{ message.createdAt| date:'dd MMMM yyyy - HH:mm' }}</small></p>
-                                  <p>{{ message.content }}</p>
-                                  <small *ngIf="message.isEdited">Edited</small>
+                                  <div class="message-hover rounded">
+                                    <h5 class="d-inline mr-2">{{ message.user.username }}</h5>
+                                    <small class="text-muted">{{ message.createdAt| date:'dd MMMM yyyy - HH:mm' }}</small>
+                                    <p>{{ message.content }}</p>
+                                    <small *ngIf="message.isEdited">Edited</small>
+                                  </div>
                                 </li>
                               </ul>
                             </div>
@@ -236,10 +242,12 @@
           <div class="overflow-auto" style="max-height: 300px">
             <ul *ngIf="page.paragraphList[index].innerParagraphList[0].messageList.length !== 0" class="timeline-message" >
               <li *ngFor="let message of page.paragraphList[index].innerParagraphList[0].messageList" class="{{ userColor(message.user.id, page.paragraphList[index].innerParagraphList[0]) }}">
-                <h5>{{ message.user.username }}</h5>
-                <p><small class="text-muted">{{ message.createdAt| date:'dd MMMM yyyy - HH:mm' }}</small></p>
-                <p>{{ message.content }}</p>
-                <small *ngIf="message.isEdited">Edited</small>
+                <div class="message-hover rounded">
+                  <h5 class="d-inline mr-2">{{ message.user.username }}</h5>
+                  <small class="text-muted">{{ message.createdAt| date:'dd MMMM yyyy - HH:mm' }}</small>
+                  <p>{{ message.content }}</p>
+                  <small *ngIf="message.isEdited">Edited</small>
+                </div>
               </li>
             </ul>
           </div>
@@ -280,16 +288,18 @@
                           </div>
                           <div class="timeline-body">
                             <p class="mb-2">{{ inner.content }}</p>
-                            <div class="d-inline my-2" *ngFor="let tag of inner.tagList">
+                            <div class="d-inline my-3" *ngFor="let tag of inner.tagList">
                               <span class="badge rounded-pill bg-primary mb-2 mr-2" data-toggle="tooltip" data-placement="top" title="{{ tag.content }}">{{ tag.name }}</span>
                             </div>
                             <div class="overflow-auto" style="max-height: 300px">
                               <ul *ngIf="inner.messageList.length !== 0" class="timeline-message">
                                 <li *ngFor="let message of inner.messageList" class="{{ userColor(message.user.id, inner) }}">
-                                  <h5>{{ message.user.username }}</h5>
-                                  <p><small class="text-muted">{{ message.createdAt| date:'dd MMMM yyyy - HH:mm' }}</small></p>
-                                  <p>{{ message.content }}</p>
-                                  <small *ngIf="message.isEdited">Edited</small>
+                                  <div class="message-hover rounded">
+                                    <h5 class="d-inline mr-2">{{ message.user.username }}</h5>
+                                    <small class="text-muted">{{ message.createdAt| date:'dd MMMM yyyy - HH:mm' }}</small>
+                                    <p>{{ message.content }}</p>
+                                    <small *ngIf="message.isEdited">Edited</small>
+                                  </div>
                                 </li>
                               </ul>
                             </div>
@@ -371,10 +381,12 @@
           <div class="overflow-auto" style="max-height: 300px">
             <ul *ngIf="page.paratagList[index].innerParatagList[0].messageList.length !== 0" class="timeline-message" >
               <li *ngFor="let message of page.paratagList[index].innerParatagList[0].messageList" class="{{ userColor(message.user.id, page.paratagList[index].innerParatagList[0]) }}">
-                <h5>{{ message.user.username }}</h5>
-                <p><small class="text-muted">{{ message.createdAt| date:'dd MMMM yyyy - HH:mm' }}</small></p>
-                <p>{{ message.content }}</p>
-                <small *ngIf="message.isEdited">Edited</small>
+                <div class="message-hover rounded">
+                  <h5 class="d-inline mr-2">{{ message.user.username }}</h5>
+                  <small class="text-muted">{{ message.createdAt| date:'dd MMMM yyyy - HH:mm' }}</small>
+                  <p>{{ message.content }}</p>
+                  <small *ngIf="message.isEdited">Edited</small>
+                </div>
               </li>
             </ul>
           </div>

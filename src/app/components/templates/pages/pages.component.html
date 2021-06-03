@@ -24,8 +24,7 @@
                 #fruitInput
                 [formControl]="fruitCtrl"
                 [matAutocomplete]="auto"
-                [matChipInputFor]="chipList"
-                >
+                [matChipInputFor]="chipList">
             </mat-chip-list>
             <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
               <mat-option *ngFor="let fruit of filteredFruits | async" [value]="fruit">
