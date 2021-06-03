@@ -39,6 +39,7 @@ export class EditparagraphtypeComponent extends AbstractComponents implements On
         [Validators.required, Validators.minLength(6), Validators.maxLength(32)]),
       description: new FormControl(this.paragraphType.description,
         [Validators.required, Validators.minLength(16), Validators.maxLength(1024)]),
+      alert: new FormControl(this.paragraphType.alert)
     });
   }
 
@@ -46,6 +47,7 @@ export class EditparagraphtypeComponent extends AbstractComponents implements On
     const editTagTypeValue = this.editParagraphTypeForm.value;
     this.paragraphTypeService.updateParagraphType(this.paragraphType.id.toString(),
       {description: editTagTypeValue.description,
+        alert: editTagTypeValue.alert,
         name: editTagTypeValue.name}).subscribe(value => {
       this.ngOnInit();
     });

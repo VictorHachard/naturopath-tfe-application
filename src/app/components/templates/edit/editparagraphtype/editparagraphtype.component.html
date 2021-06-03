@@ -13,6 +13,10 @@
       <small class="form-text text-muted">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</small>
       <small class="text-danger">{{ printError(editParagraphTypeForm.get('description')) }}</small>
     </div>
+    <div class="form-check mb-2">
+      <input class="form-check-input" type="checkbox" formControlName="alert">
+      <label class="form-check-label">Is an alert</label>
+    </div>
     <button type="button" class="btn btn-primary" [disabled]="editParagraphTypeForm.invalid" (click)="update()">Update</button>
   </form>
 </section>

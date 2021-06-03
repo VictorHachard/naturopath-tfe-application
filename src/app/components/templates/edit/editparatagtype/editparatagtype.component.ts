@@ -46,6 +46,7 @@ export class EditparatagtypeComponent extends AbstractComponents implements OnIn
       tagType: new FormControl(this.paratagType.tagType.name, Validators.required),
       name: new FormControl(this.paratagType.name,
         [Validators.required, Validators.minLength(6), Validators.maxLength(32)]),
+      alert: new FormControl(this.paratagType.alert),
       description: new FormControl(this.paratagType.description,
         [Validators.required, Validators.minLength(16), Validators.maxLength(1024)]),
     });
@@ -65,6 +66,7 @@ export class EditparatagtypeComponent extends AbstractComponents implements OnIn
       {description: editParatagTypeValue.description,
         size: editParatagTypeValue.size,
         name: editParatagTypeValue.name,
+        alert: editParatagTypeValue.alert,
         tagTypeId: tagTypeId.toString()}).subscribe(value => {
       this.ngOnInit();
     });

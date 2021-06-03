@@ -30,6 +30,7 @@ export class AddparagraphtypeComponent extends AbstractComponents implements OnI
     this.addParagraphTypeForm = new FormGroup({
       name: new FormControl('Lorem ipsum dolor.', [Validators.required, Validators.minLength(6), Validators.maxLength(32)]),
       description: new FormControl('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', [Validators.required, Validators.minLength(16), Validators.maxLength(1024)]),
+      alert: new FormControl(false)
     });
   }
 
@@ -37,6 +38,7 @@ export class AddparagraphtypeComponent extends AbstractComponents implements OnI
     const addPragraphTypeValue = this.addParagraphTypeForm.value;
 
     this.paragraphtypeService.addParagraphType({description: addPragraphTypeValue.description,
+      alert: addPragraphTypeValue.isAlert,
       name: addPragraphTypeValue.name}).subscribe(data => {
       this.router.navigate(['/editparagraphtype/' + data.toString()]);
     });
