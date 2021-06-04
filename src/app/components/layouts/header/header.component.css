@@ -8,3 +8,10 @@
   width: 50%;
   margin: 0 0.5rem 0 0.5rem;
 }
+
+.circle-ish {
+  background: lightblue;
+  border-radius: 50%;
+  width: 5px;
+  height: 5px;
+}

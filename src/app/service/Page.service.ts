@@ -40,6 +40,11 @@ export class PageService extends AbstractService {
       {headers : new HttpHeaders().set('Authorization', this.getUserJwt())});
   }
 
+  public getAllSimplifiedDto(): Observable<any[]> {
+    return this.http.get<any[]>(this.baseUrl + 'dto/simplified',
+      {headers : new HttpHeaders().set('Authorization', this.getUserJwt())});
+  }
+
   public getPage(id: string): Observable<any> {
     return this.http.get<any>(this.baseUrl + 'dto/' + id);
   }

@@ -29,7 +29,7 @@
     <button type="button" class="btn btn btn-primary btn-block mt-3" (click)="publish()">Publish</button>
   </div>
 
-  <div *ngIf="page && editInnerParagraphForm && editInnerParatagForm && editInnerParapageForm" class="accordion" id="accordionExample">
+  <div *ngIf="page && editInnerParagraphForm && editInnerParatagForm && editInnerParapageForm && pages" class="accordion" id="accordionExample">
     <div class="card">
       <div class="card-header" id="headingZero">
         <h2 class="mb-0">
@@ -255,7 +255,7 @@
       </div>
     </div>
 
-   <div *ngFor="let formGroup of editInnerParatagForm; let index = index" class="card">
+    <div *ngFor="let formGroup of editInnerParatagForm; let index = index" class="card">
       <div class="card-header" id="{{ 'headingPR' + index }}">
         <h2 class="mb-0">
           <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" [attr.data-target]="'#collapsePR' + page.paratagList[index].id" aria-expanded="true" [attr.aria-controls]="'collapsePR' + page.paratagList[index].id">
@@ -394,9 +394,6 @@
       </div>
     </div>
 
-
-
-
     <div *ngFor="let formGroup of editInnerParapageForm; let index = index" class="card">
       <div class="card-header" id="{{ 'headingPP' + index }}">
         <h2 class="mb-0">
@@ -460,24 +457,24 @@
               <label>Title:</label>
               <input type="text" class="form-control" formControlName="titleParapage" value="{{ page.parapageList[index].innerParapageList[0].title }}">
               <small class="form-text text-muted">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</small>
-              <small class="text-danger">{{ printError(editInnerParatagForm[index].get('titleParapage')) }}</small>
+              <small class="text-danger">{{ printError(editInnerParapageForm[index].get('titleParapage')) }}</small>
             </div>
             <div class="form-group">
               <label>Content:</label>
               <textarea class="form-control" formControlName="contentParapage" [value]="page.parapageList[index].innerParapageList[0].content"></textarea>
               <small class="form-text text-muted">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</small>
-              <small class="text-danger">{{ printError(editInnerParatagForm[index].get('contentParapage')) }}</small>
+              <small class="text-danger">{{ printError(editInnerParapageForm[index].get('contentParapage')) }}</small>
             </div>
             <div cdkDropListGroup>
               <div class="example-container">
                 <label>Available</label>
                 <div
                   cdkDropList
-                  [cdkDropListData]="allTagTypeList.get(page.paratagList[index].paratagType.name).beforeNames"
+                  [cdkDropListData]="allParaTypeList.get(page.parapageList[index].parapageType.name).beforeId"
                   class="example-list"
                   (cdkDropListDropped)="dropItem($event)">
-                  <div class="example-box" *ngFor="let item of allTagTypeList.get(page.paratagList[index].paratagType.name).beforeNames" cdkDrag>
-                    <p class="d-inline">{{ item }}</p>
+                  <div class="example-box" *ngFor="let item of allParaTypeList.get(page.parapageList[index].parapageType.name).beforeId" cdkDrag>
+                    <p class="d-inline">{{ pagesMap.get(item).category + ' - ' + pagesMap.get(item).title }}</p>
                   </div>
                 </div>
               </div>
@@ -485,17 +482,17 @@
                 <label>Use</label>
                 <div
                   cdkDropList
-                  [cdkDropListData]="allTagTypeList.get(page.paratagList[index].paratagType.name).afterNames"
+                  [cdkDropListData]="allParaTypeList.get(page.parapageList[index].parapageType.name).afterId"
                   class="example-list"
                   (cdkDropListDropped)="dropItem($event)">
-                  <div class="example-box" *ngFor="let item of allTagTypeList.get(page.paratagList[index].paratagType.name).afterNames" cdkDrag>
-                    <p class="d-inline">{{ item }}</p>
+                  <div class="example-box" *ngFor="let item of allParaTypeList.get(page.parapageList[index].parapageType.name).afterId" cdkDrag>
+                    <p class="d-inline">{{ pagesMap.get(item).category + ' - ' + pagesMap.get(item).title }}</p>
                   </div>
                 </div>
               </div>
             </div>
-            <button type="button" class="btn btn-primary mr-2" (click)="updateInnerParapage(index, page.parapageList[index].innerParapageList[0].id, page.paratagList[index].paratagType.tagType.name)">Save Draft</button>
-            <button type="button" class="btn btn-primary" (click)="validationInnerParapage(index, page.parapageList[index].innerParapageList[0].id, page.paratagList[index].paratagType.tagType.name)">Validation</button>
+            <button type="button" class="btn btn-primary mr-2" (click)="updateInnerParapage(index, page.parapageList[index].innerParapageList[0].id, page.parapageList[index].parapageType.name)">Save Draft</button>
+            <button type="button" class="btn btn-primary" (click)="validationInnerParapage(index, page.parapageList[index].innerParapageList[0].id, page.parapageList[index].parapageType.name)">Validation</button>
           </form>
           <ng-template #elseBlock>
             <h3>{{ page.parapageList[index].innerParapageList[0].title }}</h3>
@@ -535,9 +532,6 @@
         </div>
       </div>
     </div>
-
-
-
   </div>
 </section>
 

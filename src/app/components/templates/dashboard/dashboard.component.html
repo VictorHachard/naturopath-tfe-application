@@ -1,5 +1,12 @@
 <section class="my-4 container-fluid">
 
+  <div>
+    <div class="zoom jumbotron mb-3 p-4" style="cursor: pointer;" [routerLink]="['/addpage']">
+      <p class="display-2">Create a new page!</p>
+      <p class="display-6">Create and edit your page!</p>
+    </div>
+  </div>
+
   <div *ngIf="imageList && tagList" class="row justify-content-md-center">
     <div class="col p-0 m-0" style="max-width: 400px">
       <div *ngFor="let image of imageList" class="card zoom m-0 border-0" [routerLink]="['/editimage', image.id]" style="min-width: 400px">

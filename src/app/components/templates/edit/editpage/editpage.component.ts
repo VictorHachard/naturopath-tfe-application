@@ -14,6 +14,7 @@ import {ImageService} from '../../../../service/Image.service';
 import {TagService} from '../../../../service/Tag.service';
 import {InnerParatagService} from '../../../../service/InnerParatag.service';
 import {DomSanitizer} from '@angular/platform-browser';
+import {InnerParapageService} from '../../../../service/inner-parapage.service';
 
 @Component({
   selector: 'app-addpage',
@@ -23,7 +24,8 @@ import {DomSanitizer} from '@angular/platform-browser';
 export class EditpageComponent extends AbstractEdit implements OnInit {
 
   private id: string;
-  allTagTypeList = new Map(); // {befor : any[], after : any[]}
+  allTagTypeList = new Map(); // {before : any[], after : any[]}
+  allParaTypeList = new Map(); // {before : any[], after : any[]}
 
   editInnerPageForm: FormGroup;
   editInnerParagraphForm: FormGroup[];
@@ -35,6 +37,8 @@ export class EditpageComponent extends AbstractEdit implements OnInit {
   imageList = [];
 
   page: any;
+  pages;
+  pagesMap = new Map();
   imageId: any;
   paraTag: any;
 
@@ -50,7 +54,8 @@ export class EditpageComponent extends AbstractEdit implements OnInit {
               private innerParagraphService: InnerParagraphService,
               private innerPageService: InnerPageService,
               private innerParatagService: InnerParatagService,
-              private imageService: ImageService) {
+              private imageService: ImageService,
+              private innerParapageService: InnerParapageService) {
     super();
   }
 
@@ -91,18 +96,50 @@ export class EditpageComponent extends AbstractEdit implements OnInit {
           if (paratag.id === this.page.paratagList[this.page.paratagList.length - 1].id) {
             console.log('*********** TAGS BY TAGTYPE LIST ***********');
             console.log(this.allTagTypeList);
-            this.imageService.getAllImageDto().subscribe(value => {
-              this.imageList = value;
-              this.imageId = this.page.innerPageList[0].image == null ? undefined : this.page.innerPageList[0].image.parentId;
-              console.log('*********** IMAGE LIST ***********');
-              console.log(value);
-              this.init();
-            }, error => {
-              this.init();
-            });
           }
         });
       }
+
+      this.pageService.getAllSimplifiedDto().subscribe(value => {
+        this.pagesMap = new Map();
+        console.log(value);
+        for (const page of value) {
+          if (page !== null) { //car pas edit
+            this.pagesMap.set(page.id , page);
+          }
+        }
+        console.log(this.pagesMap);
+
+        for (const parapage of this.page.parapageList) {
+          const beforeNIdTmp2 = [];
+          const afterIdTmp2 = [];
+          for (const page of value) {
+            if (page !== null) { //car pas edit
+              beforeNIdTmp2.push(page.id);
+              for (const page2 of parapage.innerParapageList[parapage.innerParapageList.length - 1].pageList) {
+                if (page2.id === page.id) {
+                  beforeNIdTmp2.pop();
+                  afterIdTmp2.push(page.id);
+                }
+              }
+            }
+          }
+          this.allParaTypeList.set(parapage.parapageType.name, { afterId : afterIdTmp2, beforeId : beforeNIdTmp2});
+        }
+        console.log('*********** allParaTypeList LIST ***********');
+        console.log(this.allParaTypeList);
+        this.pages = value;
+      });
+
+      this.imageService.getAllImageDto().subscribe(value => {
+        this.imageList = value;
+        this.imageId = this.page.innerPageList[0].image == null ? undefined : this.page.innerPageList[0].image.parentId;
+        console.log('*********** IMAGE LIST ***********');
+        console.log(value);
+        this.init();
+      }, error => {
+        this.init();
+      });
     });
   }
 
@@ -261,8 +298,6 @@ export class EditpageComponent extends AbstractEdit implements OnInit {
   validationInnerParagraph(index: number, id: number): void {
     const editInnerParagraphValue = this.editInnerParagraphForm[index].value;
 
-    console.log(id);
-
     this.innerParagraphService.validationInner(id.toString(), {
       content: editInnerParagraphValue.contentParagraph,
       title: editInnerParagraphValue.titleParagraph}).subscribe(value => {
@@ -420,5 +455,28 @@ export class EditpageComponent extends AbstractEdit implements OnInit {
     this.pageService.publish(this.page.id).subscribe(value => {
       this.router.navigate(['/page/' + this.page.id]);
     });
+  }
+
+  updateInnerParapage(index: number, id, name) {
+
+  }
+
+  validationInnerParapage(index: number, id, name) {
+
+  }
+
+  addInnerParapageMessage(index: number, id): void {
+    const messageInnerValue = this.messageInnerFormParapage[index].value;
+    this.innerParapageService.addMessage(id.toString(), {
+      content: messageInnerValue.content
+    }).subscribe(value => {
+      this.ngOnInit();
+    }, error => {
+
+    });
+  }
+
+  voteInnerParapage(index: number, id, number: number) {
+
   }
 }
