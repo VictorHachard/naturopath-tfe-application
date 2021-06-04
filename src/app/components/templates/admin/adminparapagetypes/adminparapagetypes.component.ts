@@ -7,6 +7,7 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {ParagraphTypeService} from '../../../../service/ParagraphType.service';
+import {ParapageTypeService} from '../../../../service/parapage-type.service';
 
 @Component({
   selector: 'app-adminparapagetypes',
@@ -23,23 +24,23 @@ export class AdminparapagetypesComponent extends AbstractComponents implements O
   displayedColumns: string[] = ['id', 'name', 'action'];
   dataSource = new MatTableDataSource<any[]>([]);
 
-  /*constructor(private userSecurityService: UserSecurityService,
+  constructor(private userSecurityService: UserSecurityService,
               private cookieService: CookieService,
               private route: ActivatedRoute,
               private router: Router,
               private parapageTypeService: ParapageTypeService) {
     super();
-  }*/
+  }
 
   ngOnInit(): void {
-    /*this.paragraphTypeService.getAllParagraphType().subscribe(data => {
+    this.parapageTypeService.getAllParapageType().subscribe(data => {
       for (const parapageType of data) {
         this.parapageType.push({id: parapageType.id, name: parapageType.name});
       }
       console.log(this.parapageType);
       this.dataSource = new MatTableDataSource<any>(this.parapageType);
       this.ngAfterViewInit();
-    });*/
+    });
   }
 
   ngAfterViewInit(): void {

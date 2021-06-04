@@ -8,6 +8,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {ParagraphTypeService} from '../../../../service/ParagraphType.service';
 import {ParatagTypeService} from '../../../../service/ParatagType.service';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import {ParapageTypeService} from '../../../../service/parapage-type.service';
 
 @Component({
   selector: 'app-editcategory',
@@ -24,6 +25,7 @@ export class EditcategoryComponent extends AbstractComponents implements OnInit 
   category: any;
   paragraph: any;
   paratag: any;
+  parapage: any;
 
   constructor(private userSecurityService: UserSecurityService,
               private cookieService: CookieService,
@@ -31,7 +33,8 @@ export class EditcategoryComponent extends AbstractComponents implements OnInit 
               private router: Router,
               private categoryService: CategoryService,
               private paragraphTypeService: ParagraphTypeService,
-              private paratagTypeService: ParatagTypeService) {
+              private paratagTypeService: ParatagTypeService,
+              private parapageTypeService: ParapageTypeService) {
     super();
   }
 
@@ -46,43 +49,60 @@ export class EditcategoryComponent extends AbstractComponents implements OnInit 
         console.log('*********** PARAGRAPH LIST ***********');
         console.log(data1);
         this.paragraph = data1;
-        this.paratagTypeService.getAllParatagType().subscribe(data2 => {
-          console.log('*********** PARATAG LIST ***********');
-          console.log(data2);
-          this.paratag = data2;
+        this.parapageTypeService.getAllParapageType().subscribe(data3 => {
+          console.log('*********** PARAPAGE LIST ***********');
+          console.log(data3);
+          this.parapage = data3;
+          this.paratagTypeService.getAllParatagType().subscribe(data2 => {
+            console.log('*********** PARATAG LIST ***********');
+            console.log(data2);
+            this.paratag = data2;
 
-          for (const paragraph of this.paragraph) {
-            this.typeData.set(paragraph.id, {type: 'ParagraphType', name: paragraph.name, description : paragraph.description});
-            let find = false;
-            for (const sortedType of this.category.sortedTypeType) {
-              if (sortedType.typeId === paragraph.id) {
-                find = true;
+            for (const paragraph of this.paragraph) {
+              this.typeData.set(paragraph.id, {type: 'ParagraphType', name: paragraph.name, description : paragraph.description});
+              let find = false;
+              for (const sortedType of this.category.sortedTypeType) {
+                if (sortedType.typeId === paragraph.id) {
+                  find = true;
+                }
+              }
+              if (!find) {
+                this.drag.before.push(paragraph.id);
               }
             }
-            if (!find) {
-              this.drag.before.push(paragraph.id);
-            }
-          }
-          for (const paratag of this.paratag) {
-            this.typeData.set(paratag.id, {type: 'ParatagType', name: paratag.name, tagTypeName: paratag.tagType.name, description : paratag.tagType.description});
-            let find = false;
-            for (const sortedType of this.category.sortedTypeType) {
-              if (sortedType.typeId === paratag.id) {
-                find = true;
+            for (const paratag of this.paratag) {
+              this.typeData.set(paratag.id, {type: 'ParatagType', name: paratag.name, tagTypeName: paratag.tagType.name, description : paratag.tagType.description});
+              let find = false;
+              for (const sortedType of this.category.sortedTypeType) {
+                if (sortedType.typeId === paratag.id) {
+                  find = true;
+                }
+              }
+              if (!find) {
+                this.drag.before.push(paratag.id);
               }
             }
-            if (!find) {
-              this.drag.before.push(paratag.id);
+            for (const parapage of this.parapage) {
+              this.typeData.set(parapage.id, {type: 'ParapageType', name: parapage.name, description : parapage.description});
+              let find = false;
+              for (const sortedType of this.category.sortedTypeType) {
+                if (sortedType.typeId === parapage.id) {
+                  find = true;
+                }
+              }
+              if (!find) {
+                this.drag.before.push(parapage.id);
+              }
             }
-          }
 
-          for (const sortedType of this.category.sortedTypeType) {
-            this.drag.after.push(sortedType.typeId);
-          }
+            for (const sortedType of this.category.sortedTypeType) {
+              this.drag.after.push(sortedType.typeId);
+            }
 
-          console.log('*********** TYPEDATA LIST ***********');
-          console.log(this.typeData);
-          this.init();
+            console.log('*********** TYPEDATA LIST ***********');
+            console.log(this.typeData);
+            this.init();
+          });
         });
       });
     });

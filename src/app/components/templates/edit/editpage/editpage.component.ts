@@ -29,7 +29,9 @@ export class EditpageComponent extends AbstractEdit implements OnInit {
   editInnerParagraphForm: FormGroup[];
   messageInnerFormParatag: FormGroup[];
   messageInnerFormParagraph: FormGroup[];
+  messageInnerFormParapage: FormGroup[];
   editInnerParatagForm: FormGroup[];
+  editInnerParapageForm: FormGroup[];
   imageList = [];
 
   page: any;
@@ -108,8 +110,10 @@ export class EditpageComponent extends AbstractEdit implements OnInit {
     super.init();
     this.messageInnerFormParatag = [];
     this.messageInnerFormParagraph = [];
+    this.messageInnerFormParapage = [];
     this.editInnerParagraphForm = [];
     this.editInnerParatagForm = [];
+    this.editInnerParapageForm = [];
     this.page.paratagList.forEach(p => {
       this.messageInnerFormParatag.push(new FormGroup({
         content: new FormControl('',
@@ -118,6 +122,12 @@ export class EditpageComponent extends AbstractEdit implements OnInit {
     });
     this.page.paragraphList.forEach(p => {
       this.messageInnerFormParagraph.push(new FormGroup({
+        content: new FormControl('',
+          [Validators.required, Validators.minLength(8), Validators.maxLength(2048)])
+      }));
+    });
+    this.page.parapageList.forEach(p => {
+      this.messageInnerFormParapage.push(new FormGroup({
         content: new FormControl('',
           [Validators.required, Validators.minLength(8), Validators.maxLength(2048)])
       }));
@@ -143,6 +153,14 @@ export class EditpageComponent extends AbstractEdit implements OnInit {
         titleParatag: new FormControl(p.innerParatagList[0].title,
           [Validators.required, Validators.minLength(8), Validators.maxLength(128)]),
         contentParatag: new FormControl(p.innerParatagList[0].content,
+          [Validators.required, Validators.minLength(64), Validators.maxLength(8182)]),
+      }));
+    });
+    this.page.parapageList.forEach(p => {
+      this.editInnerParapageForm.push(new FormGroup({
+        titleParapage: new FormControl(p.innerParapageList[0].title,
+          [Validators.required, Validators.minLength(8), Validators.maxLength(128)]),
+        contentParapage: new FormControl(p.innerParapageList[0].content,
           [Validators.required, Validators.minLength(64), Validators.maxLength(8182)]),
       }));
     });

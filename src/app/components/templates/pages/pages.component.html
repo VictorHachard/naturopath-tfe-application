@@ -106,7 +106,7 @@
         </mat-paginator>
       </div>
       <ng-template #elseBlockSearch>
-        <div *ngIf="searchDone " class="jumbotron p-4">
+        <div *ngIf="searchDone; else nothing" class="jumbotron p-4">
           <p class="display-5">Your search <span class="text-primary">{{ searchDone }}</span> did not match any documents</p>
           <p class="lead mb-1">Suggestions:</p>
           <ul>
@@ -115,6 +115,13 @@
             <li class="lead">Try more general keywords.</li>
           </ul>
         </div>
+        <ng-template #nothing>
+          <div class="d-flex justify-content-center">
+            <div class="spinner-border text-primary" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </div>
+        </ng-template>
       </ng-template>
     </div>
   </div>

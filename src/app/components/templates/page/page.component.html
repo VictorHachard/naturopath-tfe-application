@@ -1,19 +1,10 @@
 <section class="container my-4" style="white-space: pre-wrap;">
 
-  <div *ngIf="warning" class="alert alert-danger" role="alert">
-    Be careful this page contains dangers, read them thanks!
-  </div>
-
-  <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item">
-        <a href="" [routerLink]="['/pages/' + page?.category.id]">{{ page?.category.name }}</a>
-      </li>
-    </ol>
-  </nav>
-
-  <div *ngIf="user" class="breadcrumb mb-3 p-3">
-    <button type="button" class="btn btn-sm btn-outline-primary" (click)="addLike()">{{ like && like.like ? 'Unlike' : 'Like' }}</button>
+  <div *ngIf="warning" class="alert alert-danger" role="alert">Be careful this page contains dangers, read them thanks!</div>
+  <div *ngIf="user" class="jumbotron p-3 mb-3">
+    <a href="" [routerLink]="['/pages/' + page?.category.id]">{{ page?.category.name }}</a>
+    <button type="button" class="float-right btn btn-sm btn-outline-primary" (click)="addLike()">{{ like && like.like ? 'Unlike' : 'Like' }}</button>
+    <p class="mb-1"></p>
   </div>
 
   <div *ngIf="page" class="jumbotron-image page-border-radius" [style]="'background-image:url(http://localhost:8080/api/v1/resource/' +  page?.image.url + ');'">
@@ -56,7 +47,25 @@
           </div>
         </div>
       </div>
-      <div *ngIf="sortedType.type === 'ParapageType'">
+      <div class="mb-3" *ngIf="sortedType.type === 'ParapageType'">
+        <div *ngFor="let parapage of page.parapageList">
+          <div *ngIf="parapage.parapageType.id === sortedType.typeId" class="jumbotron mb-0 p-4">
+            <p class="display-5">{{ parapage.parapageType.name }}<span *ngIf="parapage.parapageType.alert" style="font-size: 40%" class="ml-2 float-right badge badge-danger">Warning</span></p>
+            <p class="ml-4 display-6">{{ parapage.title }}</p>
+            <p class="ml-4 text-justify">{{ parapage.content }}</p>
+            <div class="ml-2 row">
+              <div *ngFor="let page of parapage.pageList" class="col col-md-6 mb-3">
+                <div class="jumbotron-image zoom" [routerLink]="['/page', page.id]" [style]="'background-image:url(http://localhost:8080/api/v1/resource/' + page.image.url + ');border-radius: 0.25rem;'">
+                  <div style="background-color: rgba(30, 32, 34, 0.6);border-radius: 0.25rem;">
+                    <div class="jumbotron mb-0 p-4 text-white" style="background-color: rgba(0, 0, 0, 0)!important;'">
+                      <p class="display-6">{{ page.title }}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="jumbotron mb-3 p-4" *ngIf="recommendedPage && recommendedPage.length !== 0">

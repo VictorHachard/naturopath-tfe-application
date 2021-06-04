@@ -44,6 +44,7 @@ import {AdminpagesComponent} from './components/templates/admin/adminpages/admin
 import {AdmintagsComponent} from './components/templates/admin/admintags/admintags.component';
 import {SearchComponent} from './components/templates/search/search.component';
 import {FavoriteComponent} from './components/templates/favorite/favorite.component';
+import {AdmindashboardComponent} from './components/templates/admin/admindashboard/admindashboard.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'pages'},
@@ -55,6 +56,7 @@ const routes: Routes = [
   { path: 'ticket/:id', component: TicketComponent, canActivate: [AuthGuardService] },
   { path: 'adminticket', component: AdminticketComponent, canActivate: [RolesGuardAdminService] },
   { path: 'adminticket/:id', component: AdminticketComponent, canActivate: [RolesGuardAdminService] },
+  { path: 'admindashboard', component: AdmindashboardComponent, canActivate: [RolesGuardAdminService] },
 
   { path: 'login', component: LoginComponent, canActivate: [NotAuthGuardService] },
   { path: 'register', component: RegisterComponent, canActivate: [NotAuthGuardService] },
@@ -74,7 +76,7 @@ const routes: Routes = [
   { path: 'search', component: SearchComponent },
   { path: 'search/:str', component: SearchComponent },
 
-  { path: 'favorite', component: FavoriteComponent },
+  { path: 'favorite', component: FavoriteComponent, canActivate: [AuthGuardService] },
 
   { path: 'editpage/:id', component: EditpageComponent, canActivate: [AuthGuardService] },
   { path: 'addpage', component: AddpageComponent, canActivate: [AuthGuardService] },

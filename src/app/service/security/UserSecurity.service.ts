@@ -24,6 +24,11 @@ export class UserSecurityService extends AbstractService {
     });
   }
 
+  public getAllEdit(): Observable<any[]> {
+    return this.http.get<any[]>(this.baseUrl + 'dto/edit/all',
+      {headers : new HttpHeaders().set('Authorization', this.getUserJwt())});
+  }
+
   public isLoggedIn(): Observable<boolean> {
     return this.logger.asObservable();
   }
