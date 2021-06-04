@@ -116,7 +116,7 @@ export class PageComponent extends AbstractComponents implements OnInit {
   }
 
   userColor(UserId: number): string {
-    if (UserId === this.user.username) {
+    if (this.user && UserId === this.user.username) {
       return 'primary';
     } else {
       return 'info';

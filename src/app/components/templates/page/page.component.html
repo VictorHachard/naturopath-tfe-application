@@ -75,9 +75,9 @@
     </div>
   </div>
 
-  <div class="jumbotron mb-0 p-4" *ngIf="page">
+  <div class="jumbotron mb-0 p-4" *ngIf="page && (page.messageList.length !== 0 || user)">
     <p class="display-5 mb-4">Discussion</p>
-    <div *ngIf="page && page.messageList.length !== 0">
+    <div *ngIf="page.messageList.length !== 0">
       <ul class="timeline-message mb-0">
         <li *ngFor="let message of this.dataSource" class="{{ userColor(message.user.username) }}">
           <div class="message-hover rounded">
