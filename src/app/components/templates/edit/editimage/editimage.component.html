@@ -23,7 +23,7 @@
                     </div>
                     <div class="timeline-body">
                       <p>{{ inner.description }}</p>
-                      <img [src]="'http://localhost:8080/api/v1/resource/' + inner.url" class="mt-2" height="200">
+                      <img [src]="'http://localhost:8080/api/v1/resource/' + inner.url" class="my-2" height="200">
                       <div class="overflow-auto" style="max-height: 300px">
                         <ul *ngIf="inner.messageList.length !== 0" class="timeline-message">
                           <li *ngFor="let message of inner.messageList" class="{{ userColor(message.user.id, inner) }}">

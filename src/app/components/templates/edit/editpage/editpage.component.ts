@@ -235,14 +235,17 @@ export class EditpageComponent extends AbstractEdit implements OnInit {
   validationInnerPage(): void {
     const editInnerPageValue = this.editInnerPageForm.value;
     const innerPageId: string = this.page.innerPageList[0].id;
-    this.innerPageService.validationInner(innerPageId, {
+    this.innerPageService.updateInner(innerPageId.toString(), {
       description: editInnerPageValue.descriptionPage,
       title: editInnerPageValue.titlePage,
       imageId: editInnerPageValue.imagePage}).subscribe(value => {
+      this.innerPageService.validationInner(innerPageId, {
+        description: editInnerPageValue.descriptionPage,
+        title: editInnerPageValue.titlePage,
+        imageId: editInnerPageValue.imagePage}).subscribe(value2 => {
         this.ngOnInit();
-    }, error => {
-
-    });
+      }, error => {});
+    }, error => {});
   }
 
   voteInnerPage(id: number, choice: number): void {
@@ -297,14 +300,15 @@ export class EditpageComponent extends AbstractEdit implements OnInit {
 
   validationInnerParagraph(index: number, id: number): void {
     const editInnerParagraphValue = this.editInnerParagraphForm[index].value;
-
-    this.innerParagraphService.validationInner(id.toString(), {
+    this.innerParagraphService.updateInner(id.toString(), {
       content: editInnerParagraphValue.contentParagraph,
       title: editInnerParagraphValue.titleParagraph}).subscribe(value => {
+      this.innerParagraphService.validationInner(id.toString(), {
+        content: editInnerParagraphValue.contentParagraph,
+        title: editInnerParagraphValue.titleParagraph}).subscribe(value2 => {
         this.ngOnInit();
-    }, error => {
-
-    });
+      }, error => {});
+    }, error => {});
   }
 
   voteInnerParagraph(index: number, id: number, choice: number): void {
@@ -457,12 +461,33 @@ export class EditpageComponent extends AbstractEdit implements OnInit {
     });
   }
 
-  updateInnerParapage(index: number, id, name) {
+  updateInnerParapage(index: number, id): void {
+    const editInnerParapageValue = this.editInnerParapageForm[index].value;
 
+    this.innerParapageService.updateInner(id.toString(), {
+      content: editInnerParapageValue.contentParapage,
+      title: editInnerParapageValue.titleParapage,
+      pageIdList: this.allParaTypeList.get(this.page.parapageList[index].parapageType.name).afterId}).subscribe(value => {
+      this.ngOnInit();
+    }, error => {
+
+    });
   }
 
-  validationInnerParapage(index: number, id, name) {
+  validationInnerParapage(index: number, id): void {
+    const editInnerParapageValue = this.editInnerParapageForm[index].value;
 
+    this.innerParapageService.updateInner(id.toString(), {
+      content: editInnerParapageValue.contentParapage,
+      title: editInnerParapageValue.titleParapage,
+      pageIdList: this.allParaTypeList.get(this.page.parapageList[index].parapageType.name).afterId}).subscribe(value => {
+      this.innerParapageService.validationInner(id.toString(), {
+        content: editInnerParapageValue.contentParapage,
+        title: editInnerParapageValue.titleParapage,
+        pageIdList: this.allParaTypeList.get(this.page.parapageList[index].parapageType.name).afterId}).subscribe(value2 => {
+        this.ngOnInit();
+      }, error => {});
+    }, error => {});
   }
 
   addInnerParapageMessage(index: number, id): void {
@@ -476,7 +501,28 @@ export class EditpageComponent extends AbstractEdit implements OnInit {
     });
   }
 
-  voteInnerParapage(index: number, id, number: number) {
+  voteInnerParapage(index: number, id, choice: number): void {
+    if (choice === 0) {
+      this.addInnerParapageMessage(index, id);
+    }
+    console.log(id.toString());
+    this.voteService.addVote({choice: choice.toString(),
+      type: 'InnerParapage',
+      typeId: id.toString()}).subscribe(value => {
+      this.ngOnInit();
+    }, error => {
 
+    });
+  }
+
+  addInnerParapage(index: number, id): void {
+    const editInnerParapageValue = this.editInnerParapageForm[index].value;
+
+    this.innerParapageService.addInner(id.toString(), {
+      content: editInnerParapageValue.contentParapage,
+      title: editInnerParapageValue.titleParapage,
+      pageIdList: this.allParaTypeList.get(this.page.parapageList[index].parapageType.name).afterId}).subscribe(value2 => {
+      this.ngOnInit();
+    }, error => {});
   }
 }
