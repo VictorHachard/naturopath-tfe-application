@@ -33,7 +33,15 @@
     <div class="card">
       <div class="card-header" id="headingZero">
         <h2 class="mb-0">
-          <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseZero" aria-expanded="true" aria-controls="collapseZero">Title, description and image</button>
+          <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseZero" aria-expanded="true" aria-controls="collapseZero">Title, description and image
+            <div class="float-right mt-1">
+              <span class="badge badge-info mr-2">Page</span>
+              <span *ngIf="page.innerPageList[0].state === 'DRAFT'" class="badge badge-primary">Draft</span>
+              <span *ngIf="page.innerPageList[0].state === 'VALIDATING'" class="badge badge-warning">Validating</span>
+              <span *ngIf="page.innerPageList[0].state === 'VALIDATED'" class="badge badge-success">Validated</span>
+              <span *ngIf="page.innerPageList[0].state === 'NOT_VALIDATED'" class="badge badge-warning">Not Validated</span>
+            </div>
+          </button>
         </h2>
       </div>
       <div id="collapseZero" class="collapse show" aria-labelledby="headingZero" data-parent="#accordionExample">
@@ -152,6 +160,13 @@
         <h2 class="mb-0">
           <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" [attr.data-target]="'#collapse' + page.paragraphList[index].id" aria-expanded="true" [attr.aria-controls]="'collapse' + page.paragraphList[index].id">
             {{ page.paragraphList[index].paragraphType.name }}
+            <div class="float-right mt-1">
+              <span class="badge badge-primary mr-2">Paragraph</span>
+              <span *ngIf="page.paragraphList[index].innerParagraphList[0].state === 'DRAFT'" class="badge badge-primary">Draft</span>
+              <span *ngIf="page.paragraphList[index].innerParagraphList[0].state === 'VALIDATING'" class="badge badge-warning">Validating</span>
+              <span *ngIf="page.paragraphList[index].innerParagraphList[0].state === 'VALIDATED'" class="badge badge-success">Validated</span>
+              <span *ngIf="page.paragraphList[index].innerParagraphList[0].state === 'NOT_VALIDATED'" class="badge badge-warning">Not Validated</span>
+            </div>
           </button>
         </h2>
       </div>
@@ -260,6 +275,13 @@
         <h2 class="mb-0">
           <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" [attr.data-target]="'#collapsePR' + page.paratagList[index].id" aria-expanded="true" [attr.aria-controls]="'collapsePR' + page.paratagList[index].id">
             {{ page.paratagList[index].paratagType.name }}
+            <div class="float-right mt-1">
+              <span class="badge badge-success mr-2">Paratag</span>
+              <span *ngIf="page.paratagList[index].innerParatagList[0].state === 'DRAFT'" class="badge badge-primary">Draft</span>
+              <span *ngIf="page.paratagList[index].innerParatagList[0].state === 'VALIDATING'" class="badge badge-warning">Validating</span>
+              <span *ngIf="page.paratagList[index].innerParatagList[0].state === 'VALIDATED'" class="badge badge-success">Validated</span>
+              <span *ngIf="page.paratagList[index].innerParatagList[0].state === 'NOT_VALIDATED'" class="badge badge-warning">Not Validated</span>
+            </div>
           </button>
         </h2>
       </div>
@@ -399,6 +421,13 @@
         <h2 class="mb-0">
           <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" [attr.data-target]="'#collapsePP' + page.parapageList[index].id" aria-expanded="true" [attr.aria-controls]="'collapsePP' + page.parapageList[index].id">
             {{ page.parapageList[index].parapageType.name }}
+            <div class="float-right mt-1">
+              <span class="badge badge-warning mr-2">Parapage</span>
+              <span *ngIf="page.parapageList[index].innerParapageList[0].state === 'DRAFT'" class="badge badge-primary">Draft</span>
+              <span *ngIf="page.parapageList[index].innerParapageList[0].state === 'VALIDATING'" class="badge badge-warning">Validating</span>
+              <span *ngIf="page.parapageList[index].innerParapageList[0].state === 'VALIDATED'" class="badge badge-success">Validated</span>
+              <span *ngIf="page.parapageList[index].innerParapageList[0].state === 'NOT_VALIDATED'" class="badge badge-warning">Not Validated</span>
+            </div>
           </button>
         </h2>
       </div>
