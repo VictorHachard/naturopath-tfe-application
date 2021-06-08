@@ -121,4 +121,9 @@ export class UserSecurityService extends AbstractService {
     return this.http.put<any>(this.baseUrl + 'updateAppearance', body,
       {headers : new HttpHeaders().set('Authorization', this.getUserJwt())});
   }
+
+  public forceUpdate(id, body: any): Observable<any> {
+    return this.http.put<any>(this.baseUrl + 'forceUpdate/' + id, body,
+      {headers : new HttpHeaders().set('Authorization', this.getUserJwt())});
+  }
 }

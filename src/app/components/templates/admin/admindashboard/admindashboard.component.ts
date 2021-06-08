@@ -36,6 +36,10 @@ export class AdmindashboardComponent extends AbstractComponents implements OnIni
 
   ngOnInit(): void {
     this.alertManagerManager = new AlertManager();
+    this.initUser();
+  }
+
+  initUser(): void {
     this.userSecurityService.getAllEdit().subscribe(value => {
       this.userList = value;
       console.log(value);
@@ -64,19 +68,17 @@ export class AdmindashboardComponent extends AbstractComponents implements OnIni
 
   updateUser(): void {
     const updateUserValue = this.updateUserForm.value;
-    /*this.userSecurityService.updateSecurity(this.editUser.id, {
-      id: this.editUser.id,
-      firstName: updateUserValue.firstName,
-      lastName: updateUserValue.lastName,
-      email: updateUserValue.email
+    this.userSecurityService.forceUpdate(this.editUser.id, {
+      email: updateUserValue.email,
+      owner: updateUserValue.ROLE_OWNER,
+      administrator: updateUserValue.ROLE_ADMINISTRATOR,
+      moderator: updateUserValue.ROLE_MODERATOR,
+      user: updateUserValue.ROLE_USER
     }).subscribe(value => {
       this.initUser();
-      this.initForm();
       document.getElementById('updateUserModal').click();
-      this.newItemEvent.emit('user');
-
-      this.alertManagerManager.addAlert('The username or password is incorrect', 'alert-danger');
-    });*/
+      this.alertManagerManager.addAlert('The user has been updated', 'alert-success');
+    });
   }
 
   ngAfterViewInit(): void {
