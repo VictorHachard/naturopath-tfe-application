@@ -64,7 +64,6 @@ export class AddpageComponent extends AbstractComponents implements OnInit {
       }
     });
     this.categoriesChild.forEach(value => {
-      console.log(addPageValue.category + ' ' + value.name);
       if (addPageValue.category === value.name) {
         categoryId = value.id;
       }

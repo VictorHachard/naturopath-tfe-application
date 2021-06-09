@@ -30,6 +30,7 @@ export class PagesComponent extends AbstractComponents implements OnInit {
   searchTagMap;
 
   categories: any[] = [];
+  categoryList2: any[];
   tags: any[] = [];
   tagsMap;
   pages: any;
@@ -123,6 +124,10 @@ export class PagesComponent extends AbstractComponents implements OnInit {
         }
       }
     }
+    this.categoryList2 = [];
+    this.rec(this.categories, 0);
+    console.log("---- catdeep ----");
+    console.log(this.categoryList2);
     this.init();
     for (const tag of this.tags) {
       this.allTagsSearch.push(tag.id);
@@ -138,6 +143,15 @@ export class PagesComponent extends AbstractComponents implements OnInit {
       console.log(data);
       this.clear();
     });
+  }
+
+  private rec(category2, deep2): void {
+    for (const s of category2) {
+      this.categoryList2.push({ca: s, deep: deep2});
+      if (s.childCategory && s.childCategory.length !== 0) {
+        this.rec(s.childCategory, deep2 + 2);
+      }
+    }
   }
 
   ngOnInit(): void { }

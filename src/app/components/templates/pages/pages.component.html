@@ -37,15 +37,12 @@
         <button class="btn btn-sm btn-outline-primary btn-block" (click)="clear()">Clear</button>
         <hr class="style1 mt-4">
         <nav class="nav flex-column">
-          <div *ngFor="let category of categories">
-            <li *ngIf="category.childCategory.length === 0; else notEmpty" class="nav-item">
-              <a class="nav-link" [routerLink]="['/pages', category.id]">{{ category.name }}</a>
+          <div *ngFor="let category of categoryList2">
+            <li *ngIf="category.ca.childCategory.length === 0; else notEmpty" class="nav-item">
+              <a class="nav-link" style="margin-left:{{ category.deep }}0px" [routerLink]="['/pages', category.ca.id]">{{ category.ca.name }}</a>
             </li>
             <ng-template #notEmpty>
-              <p class="mb-0 ml-3">{{ category.name }}</p>
-              <li *ngFor="let ca of category.childCategory" class="nav-item ml-3">
-                <a class="nav-link" [routerLink]="['/pages', ca.id]">{{ ca.name }}</a>
-              </li>
+              <p class="my-1 pl-3" style="margin-left:{{ category.deep }}0px">{{ category.ca.name }}</p>
             </ng-template>
           </div>
         </nav>

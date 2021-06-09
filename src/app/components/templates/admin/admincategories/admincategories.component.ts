@@ -32,7 +32,7 @@ export class AdmincategoriesComponent extends AbstractComponents implements OnIn
   }
 
   ngOnInit(): void {
-    this.categoryService.getAllCategory().subscribe(data => {
+    this.categoryService.getAllCategoryInAList().subscribe(data => {
       for (const category of data) {
         this.categories.push({id: category.id, name: category.name});
       }

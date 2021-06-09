@@ -17,6 +17,10 @@ export class CategoryService extends AbstractService {
     return this.http.get<any[]>(this.baseUrl + 'dto');
   }
 
+  public getAllCategoryInAList(): Observable<any[]> {
+    return this.http.get<any[]>(this.baseUrl + 'dto/allInAList');
+  }
+
   public getEditCategoryDto(id: string): Observable<any> {
     return this.http.get<any>(this.baseUrl + 'dto/edit/' + id,
       {headers : new HttpHeaders().set('Authorization', this.getUserJwt())});
