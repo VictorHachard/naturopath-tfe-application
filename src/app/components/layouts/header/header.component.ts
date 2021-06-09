@@ -59,7 +59,9 @@ export class HeaderComponent implements OnInit {
 
   inputChange($event: any): void {
     this.proposal = [];
-    this.proposal = this.page.filter(page => page.title.toLowerCase().indexOf(this.searchFormHeader.get('input').value.toLowerCase()) > -1);
+    if (this.searchFormHeader.get('input').value.length > 0) {
+      this.proposal = this.page.filter(page => page.title.toLowerCase().indexOf(this.searchFormHeader.get('input').value.toLowerCase()) > -1);
+    }
   }
 
   select(p): void {
