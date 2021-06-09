@@ -16,9 +16,14 @@
             <a class="nav-link nav-w" routerLink="/contact">Contact</a>
           </li>
         </ul>
-        <form [formGroup]="searchFormHeader" (ngSubmit)="search()" class="form-ish">
+        <form *ngIf="searchFormHeader" [formGroup]="searchFormHeader" (ngSubmit)="search()" class="form-ish">
           <div class="input-group">
-            <input type="text" class="form-control" formControlName="input" placeholder="Search">
+            <div class="autocomplete">
+              <input type="text" class="form-control no-click-ish" formControlName="input" placeholder="Search" (click)="inputChange($event)" (ngModelChange)="inputChange($event)">
+              <div class="autocomplete-items">
+                <div *ngFor="let p of proposal" (click)="select(p)">{{ p.category + ' / ' + p.title }}</div>
+              </div>
+            </div>
             <span class="input-group-append">
               <button class="btn btn-outline-primary" [disabled]="searchFormHeader.invalid" type="submit">Search</button>
             </span>
@@ -68,10 +73,9 @@
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" (click)="logOut();">Log out</a>
               <!-- If admin -->
-              <div *ngIf="user.roleList.includes('ROLE_ADMINISTRATOR')">
+              <div *ngIf="user.roleList.includes('ROLE_ADMINISTRATOR') || user.roleList.includes('ROLE_OWNER')">
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" routerLink="/admindashboard">Admin dashboard</a>
-                <a class="dropdown-item">Admin user</a>
                 <a class="dropdown-item" routerLink="/adminticket">Admin tickets</a>
               </div>
               <!-- End if admin -->

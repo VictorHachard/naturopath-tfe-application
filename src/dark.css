@@ -221,3 +221,12 @@
   border-color: rgba(255, 255, 255, 0.2);
   color: rgb(232, 230, 227) !important;
 }
+.dark .autocomplete-items div {
+  background-color: rgb(30, 32, 34) !important;
+  border-color: rgb(54, 63, 72) !important;
+  color: rgb(232, 230, 227) !important;
+}
+.dark .autocomplete-items div:hover {
+  /*when hovering an item:*/
+  background-color: rgb(57, 57, 57) !important;
+}

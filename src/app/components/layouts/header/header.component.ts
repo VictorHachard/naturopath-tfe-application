@@ -1,10 +1,11 @@
-import {Component, Injector, OnInit} from '@angular/core';
+import {Component, HostListener, Injector, OnInit} from '@angular/core';
 import {User} from '../../../model/view/User';
 import {AbstractComponents} from '../../commons/AbstractComponents';
 import {UserSecurityService} from '../../../service/security/UserSecurity.service';
 import {CookieService} from 'ngx-cookie-service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {PageService} from '../../../service/Page.service';
 
 @Component({
   selector: 'app-header',
@@ -14,9 +15,12 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 export class HeaderComponent implements OnInit {
 
   user: User;
+  page;
+  proposal;
   searchFormHeader: FormGroup;
 
   constructor(private userSecurityService: UserSecurityService,
+              private pageService: PageService,
               private cookieService: CookieService,
               private route: ActivatedRoute,
               private router: Router) {
@@ -29,8 +33,11 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.searchFormHeader = new FormGroup({
-      input: new FormControl('', [Validators.required, Validators.minLength(3)])
+    this.pageService.getAllSimplifiedDto().subscribe(value => {
+      this.page = value;
+      this.searchFormHeader = new FormGroup({
+        input: new FormControl('', [Validators.required, Validators.minLength(3)])
+      });
     });
   }
 
@@ -48,5 +55,21 @@ export class HeaderComponent implements OnInit {
 
   search(): void {
     this.router.navigate(['/search', this.searchFormHeader.get('input').value]);
+  }
+
+  inputChange($event: any): void {
+    this.proposal = [];
+    this.proposal = this.page.filter(page => page.title.toLowerCase().indexOf(this.searchFormHeader.get('input').value.toLowerCase()) > -1);
+  }
+
+  select(p): void {
+    this.searchFormHeader.get('input').setValue(p.title);
+  }
+
+  @HostListener('document:click', ['$event'])
+  documentClick(event): void {
+    if (!(event.target as Element).className.includes('no-click-ish')) {
+      this.proposal = [];
+    }
   }
 }
