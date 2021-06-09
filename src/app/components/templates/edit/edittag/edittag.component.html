@@ -48,13 +48,11 @@
       <div class="form-group">
         <label>Name:</label>
         <input type="text" class="form-control" formControlName="name">
-        <small class="form-text text-muted">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</small>
         <small class="text-danger">{{ printError(editInnerTagForm.get('name')) }}</small>
       </div>
       <div class="form-group">
         <label>Description:</label>
         <textarea formControlName="content" rows="6" class="form-control"></textarea>
-        <small class="form-text text-muted">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</small>
         <small class="text-danger">{{ printError(editInnerTagForm.get('content')) }}</small>
       </div>
       <button type="button" class="btn btn-primary mr-2" (click)="updateInnerTag()">Save Draft</button>

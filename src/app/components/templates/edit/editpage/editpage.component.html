@@ -93,13 +93,11 @@
             <div class="form-group">
               <label>Title:</label>
               <input type="text" class="form-control" formControlName="titlePage">
-              <small class="form-text text-muted">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</small>
               <small class="text-danger">{{ printError(editInnerPageForm.get('titlePage')) }}</small>
             </div>
             <div class="form-group">
               <label>Description:</label>
               <textarea formControlName="descriptionPage" rows="6" class="form-control"></textarea>
-              <small class="form-text text-muted">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</small>
               <small class="text-danger">{{ printError(editInnerPageForm.get('descriptionPage')) }}</small>
             </div>
             <div class="form-group">
@@ -112,7 +110,6 @@
                   <input formControlName="imagePage" type="text" class="form-control">
                 </div>
               </div>
-              <small class="form-text text-muted">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</small>
               <small class="text-danger">{{ printError(editInnerPageForm.get('imagePage')) }}</small>
             </div>
             <button type="button" class="btn btn-primary mr-2" (click)="updateInnerPage()">Save Draft</button>
@@ -221,13 +218,11 @@
             <div class="form-group">
               <label for="title">Title:</label>
               <input type="text" class="form-control" id="title" formControlName="titleParagraph" value="{{ page.paragraphList[index].innerParagraphList[0].title }}">
-              <small class="form-text text-muted">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</small>
               <small class="text-danger">{{ printError(editInnerParagraphForm[index].get('titleParagraph')) }}</small>
             </div>
             <div class="form-group">
               <label for="content">Content:</label>
               <textarea id="content" class="form-control" formControlName="contentParagraph" [value]="page.paragraphList[index].innerParagraphList[0].content"></textarea>
-              <small class="form-text text-muted">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</small>
               <small class="text-danger">{{ printError(editInnerParagraphForm[index].get('contentParagraph')) }}</small>
             </div>
             <button type="button" class="btn btn-primary mr-2" (click)="updateInnerParagraph(index, page.paragraphList[index].innerParagraphList[0].id)">Save Draft</button>
@@ -339,13 +334,11 @@
             <div class="form-group">
               <label>Title:</label>
               <input type="text" class="form-control" formControlName="titleParatag" value="{{ page.paratagList[index].innerParatagList[0].title }}">
-              <small class="form-text text-muted">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</small>
               <small class="text-danger">{{ printError(editInnerParatagForm[index].get('titleParatag')) }}</small>
             </div>
             <div class="form-group">
               <label>Content:</label>
               <textarea class="form-control" formControlName="contentParatag" [value]="page.paratagList[index].innerParatagList[0].content"></textarea>
-              <small class="form-text text-muted">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</small>
               <small class="text-danger">{{ printError(editInnerParatagForm[index].get('contentParatag')) }}</small>
             </div>
             <div cdkDropListGroup>
@@ -485,13 +478,11 @@
             <div class="form-group">
               <label>Title:</label>
               <input type="text" class="form-control" formControlName="titleParapage" value="{{ page.parapageList[index].innerParapageList[0].title }}">
-              <small class="form-text text-muted">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</small>
               <small class="text-danger">{{ printError(editInnerParapageForm[index].get('titleParapage')) }}</small>
             </div>
             <div class="form-group">
               <label>Content:</label>
               <textarea class="form-control" formControlName="contentParapage" [value]="page.parapageList[index].innerParapageList[0].content"></textarea>
-              <small class="form-text text-muted">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</small>
               <small class="text-danger">{{ printError(editInnerParapageForm[index].get('contentParapage')) }}</small>
             </div>
             <div cdkDropListGroup>

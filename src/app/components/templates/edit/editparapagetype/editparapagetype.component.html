@@ -4,13 +4,11 @@
     <div class="form-group">
       <label for="name">Name:</label>
       <input type="text" class="form-control" formControlName="name" id="name" >
-      <small class="form-text text-muted">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</small>
       <small class="text-danger">{{ printError(editParapageForm.get('name')) }}</small>
     </div>
     <div class="form-group">
       <label for="description">Description:</label>
       <textarea id="description" formControlName="description" class="form-control"></textarea>
-      <small class="form-text text-muted">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</small>
       <small class="text-danger">{{ printError(editParapageForm.get('description')) }}</small>
     </div>
     <div class="form-check mb-2">

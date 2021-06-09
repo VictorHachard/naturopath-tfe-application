@@ -49,13 +49,11 @@
       <div class="form-group">
         <label>Title:</label>
         <input type="text" class="form-control" formControlName="title">
-        <small class="form-text text-muted">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</small>
         <small class="text-danger">{{ printError(editInnerImageForm.get('title')) }}</small>
       </div>
       <div class="form-group">
         <label>Description:</label>
         <textarea formControlName="description" rows="6" class="form-control"></textarea>
-        <small class="form-text text-muted">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</small>
         <small class="text-danger">{{ printError(editInnerImageForm.get('description')) }}</small>
       </div>
 
@@ -65,7 +63,7 @@
           <label class="custom-file-label">{{ this.editInnerImageForm.get('fileSource').value.name !== undefined ? this.editInnerImageForm.get('fileSource').value.name : 'Choose file' }}</label>
           <img *ngIf="!trustedUrl" [src]="'http://localhost:8080/api/v1/resource/' + image.innerImageList[0].url" class="mt-2" height="200">
           <img [src]="trustedUrl" class="mt-2" height="200">
-          <small class="form-text text-muted">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</small>
+          <small class="form-text text-muted">you can change the picture here</small>
           <small class="text-danger">{{ printError(editInnerImageForm.get('fileSource')) }}</small>
         </div>
       </div>

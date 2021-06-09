@@ -15,18 +15,15 @@
           </option>
         </select>
       </div>
-      <small class="form-text text-muted">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</small>
     </div>
     <div class="form-group">
       <label>Title</label>
       <input type="text" class="form-control" formControlName="title">
-      <small class="form-text text-muted">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</small>
       <small class="text-danger">{{ printError(addPageForm.get('title')) }}</small>
     </div>
     <div class="form-group">
       <label>Description</label>
       <textarea class="form-control" rows="6" formControlName="description"></textarea>
-      <small class="form-text text-muted">The description is use for je sqis pqs auoi voilq pourauoi faut la taper</small>
       <small class="text-danger">{{ printError(addPageForm.get('description')) }}</small>
     </div>
     <button class="btn btn-lg btn-primary btn-block mt-3" [disabled]="addPageForm.invalid" type="submit">Add a page</button>
