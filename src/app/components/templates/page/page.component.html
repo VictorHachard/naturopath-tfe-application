@@ -12,7 +12,7 @@
       <div class="jumbotron mb-3 text-white page-border-radius" style="background-color: rgba(0, 0, 0, 0)!important;">
         <p class="display-3">{{ page?.title }}</p>
         <p class="lead">{{ page?.description }}</p>
-        <p class="float-right">by <a href="">{{ page?.user.username }}</a> the {{ page?.createdAt| date:'dd MMMM yyyy' }}</p>
+        <p class="float-right">by <i>{{ page?.user.username }}</i> the {{ page?.createdAt| date:'dd MMMM yyyy' }}</p>
       </div>
     </div>
   </div>

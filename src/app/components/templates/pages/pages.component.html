@@ -38,7 +38,7 @@
         <hr class="style1 mt-4">
         <nav class="nav flex-column">
           <div *ngFor="let category of categoryList2">
-            <li *ngIf="category.ca.childCategory.length === 0; else notEmpty" class="nav-item">
+            <li *ngIf="!category.ca.parent; else notEmpty" class="nav-item">
               <a class="nav-link" style="margin-left:{{ category.deep }}0px" [routerLink]="['/pages', category.ca.id]">{{ category.ca.name }}</a>
             </li>
             <ng-template #notEmpty>

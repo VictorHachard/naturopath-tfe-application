@@ -13,7 +13,7 @@
       <textarea formControlName="description" class="form-control"></textarea>
       <small class="text-danger">{{ printError(editCategoryForm.get('description')) }}</small>
     </div>
-    <div cdkDropListGroup>
+    <div *ngIf="!category.parent" cdkDropListGroup>
       <div class="example-container">
         <label>Available</label>
         <div

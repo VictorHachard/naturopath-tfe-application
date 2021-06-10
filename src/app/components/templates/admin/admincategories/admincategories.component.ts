@@ -20,7 +20,7 @@ export class AdmincategoriesComponent extends AbstractComponents implements OnIn
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  displayedColumns: string[] = ['id', 'name', 'action'];
+  displayedColumns: string[] = ['id', 'name', 'parent', 'action'];
   dataSource = new MatTableDataSource<any[]>([]);
 
   constructor(private userSecurityService: UserSecurityService,
@@ -34,7 +34,7 @@ export class AdmincategoriesComponent extends AbstractComponents implements OnIn
   ngOnInit(): void {
     this.categoryService.getAllCategoryInAList().subscribe(data => {
       for (const category of data) {
-        this.categories.push({id: category.id, name: category.name});
+        this.categories.push({id: category.id, name: category.name, parent: category.parent});
       }
       console.log(this.categories);
       this.dataSource = new MatTableDataSource<any>(this.categories);
