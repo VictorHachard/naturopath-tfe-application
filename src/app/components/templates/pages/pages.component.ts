@@ -107,23 +107,7 @@ export class PagesComponent extends AbstractComponents implements OnInit {
     this.searchDone = null;
     this.tagSearch = [];
     this.allTagsSearch = [];
-    for (const c of this.categories) {
-      if (c.childCategory.length !== 0) {
-        for (const child of c.childCategory) {
-          if (child.id == this.id) {
-            this.name = child.name;
-            this.description = child.description;
-            break;
-          }
-        }
-      } else {
-        if (c.id == this.id) {
-          this.name = c.name;
-          this.description = c.description;
-          break;
-        }
-      }
-    }
+    this.recName(this.categories, this.id);
     this.categoryList2 = [];
     this.rec(this.categories, 0);
     console.log("---- catdeep ----");
@@ -150,6 +134,20 @@ export class PagesComponent extends AbstractComponents implements OnInit {
       this.categoryList2.push({ca: s, deep: deep2});
       if (s.childCategory && s.childCategory.length !== 0) {
         this.rec(s.childCategory, deep2 + 2);
+      }
+    }
+  }
+
+  private recName(category2, id): void {
+    for (const s of category2) {
+      if (s.id == id) {
+        this.name = s.name;
+        this.description = s.description;
+        return;
+      } else {
+        if (s.childCategory && s.childCategory.length !== 0) {
+          this.recName(s.childCategory, id);
+        }
       }
     }
   }
