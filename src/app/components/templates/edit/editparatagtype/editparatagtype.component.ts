@@ -30,11 +30,9 @@ export class EditparatagtypeComponent extends AbstractComponents implements OnIn
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
     this.paratagtypeService.getParatagType(this.id).subscribe(data => {
-      console.log(data);
       this.paratagType = data;
       this.tagTypeService.getAllTagType().subscribe(data1 => {
         this.tagTypes = data1;
-        console.log(this.tagTypes);
         this.init();
       });
     });

@@ -36,7 +36,6 @@ export class AdmintagtypesComponent extends AbstractComponents implements OnInit
       for (const tagType of data) {
         this.tagType.push({id: tagType.id, name: tagType.name});
       }
-      console.log(this.tagType);
       this.dataSource = new MatTableDataSource<any>(this.tagType);
       this.ngAfterViewInit();
     });

@@ -37,7 +37,6 @@ export class AdminparapagetypesComponent extends AbstractComponents implements O
       for (const parapageType of data) {
         this.parapageType.push({id: parapageType.id, name: parapageType.name});
       }
-      console.log(this.parapageType);
       this.dataSource = new MatTableDataSource<any>(this.parapageType);
       this.ngAfterViewInit();
     });

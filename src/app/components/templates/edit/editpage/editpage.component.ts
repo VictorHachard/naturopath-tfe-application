@@ -76,8 +76,6 @@ export class EditpageComponent extends AbstractEdit implements OnInit {
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
     this.pageService.getEditPageDto(this.id).subscribe(data => {
-      console.log('*********** PAGE LIST ***********');
-      console.log(data);
       this.page = data;
       for (const paratag of this.page.paratagList) {
         this.tagService.getAllTagByTagType(paratag.paratagType.tagType.id).subscribe(data1 => {
@@ -94,21 +92,17 @@ export class EditpageComponent extends AbstractEdit implements OnInit {
           }
           this.allTagTypeList.set(paratag.paratagType.tagType.name, { after : [], before : data1, afterNames : afterNamesTmp, beforeNames : beforeNamesTmp});
           if (paratag.id === this.page.paratagList[this.page.paratagList.length - 1].id) {
-            console.log('*********** TAGS BY TAGTYPE LIST ***********');
-            console.log(this.allTagTypeList);
           }
         });
       }
 
       this.pageService.getAllSimplifiedDto().subscribe(value => {
         this.pagesMap = new Map();
-        console.log(value);
         for (const page of value) {
           if (page !== null) { //car pas edit
             this.pagesMap.set(page.id , page);
           }
         }
-        console.log(this.pagesMap);
 
         for (const parapage of this.page.parapageList) {
           const beforeNIdTmp2 = [];
@@ -126,16 +120,12 @@ export class EditpageComponent extends AbstractEdit implements OnInit {
           }
           this.allParaTypeList.set(parapage.parapageType.name, { afterId : afterIdTmp2, beforeId : beforeNIdTmp2});
         }
-        console.log('*********** allParaTypeList LIST ***********');
-        console.log(this.allParaTypeList);
         this.pages = value;
       });
 
       this.imageService.getAllImageDto().subscribe(value => {
         this.imageList = value;
         this.imageId = this.page.innerPageList[0].image == null ? undefined : this.page.innerPageList[0].image.parentId;
-        console.log('*********** IMAGE LIST ***********');
-        console.log(value);
         this.init();
       }, error => {
         this.init();
@@ -426,7 +416,6 @@ export class EditpageComponent extends AbstractEdit implements OnInit {
     if (choice === 0) {
       this.addInnerTagMessage(index, id);
     }
-    console.log(id.toString());
     this.voteService.addVote({choice: choice.toString(),
       type: 'InnerParatag',
       typeId: id.toString()}).subscribe(value => {
@@ -442,7 +431,6 @@ export class EditpageComponent extends AbstractEdit implements OnInit {
     const tagIdListTmp = [];
     for (const t of this.page.paratagList[index].innerParatagList[0].tagList) {
       tagIdListTmp.push(t.id);
-      console.log(t.name);
     }
 
     this.innerParatagService.addInner(paratagId.toString(), {
@@ -505,7 +493,6 @@ export class EditpageComponent extends AbstractEdit implements OnInit {
     if (choice === 0) {
       this.addInnerParapageMessage(index, id);
     }
-    console.log(id.toString());
     this.voteService.addVote({choice: choice.toString(),
       type: 'InnerParapage',
       typeId: id.toString()}).subscribe(value => {

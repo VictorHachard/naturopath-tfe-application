@@ -42,7 +42,6 @@ export class AdmindashboardComponent extends AbstractComponents implements OnIni
   initUser(): void {
     this.userSecurityService.getAllEdit().subscribe(value => {
       this.userList = value;
-      console.log(value);
       this.dataSource = new MatTableDataSource<any>(this.userList);
       this.ngAfterViewInit();
       this.initForm();

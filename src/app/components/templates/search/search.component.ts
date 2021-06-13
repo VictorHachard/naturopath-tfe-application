@@ -40,7 +40,6 @@ export class SearchComponent extends AbstractComponents implements OnInit {
       for (const v of value) {
         this.searchListCategoryUrl.set(v.categoryViewDto.id, v.pageSimplifiedRecommendedViewDtoList[Math.floor(Math.random() * v.pageSimplifiedRecommendedViewDtoList.length)].image.url);
       }
-      console.log(value);
     });
   }
 

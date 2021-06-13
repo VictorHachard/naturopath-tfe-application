@@ -27,7 +27,6 @@ export class EditparagraphtypeComponent extends AbstractComponents implements On
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
     this.paragraphTypeService.getParagraphType(this.id).subscribe(data => {
-      console.log(data);
       this.paragraphType = data;
       this.init();
     });

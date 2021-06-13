@@ -34,7 +34,6 @@ export class DoubleAuthComponent extends AbstractComponents implements OnInit {
   ngOnInit(): void {
     this.alertManagerManager = new AlertManager();
     this.init();
-    console.log('test');
   }
 
   init(): void {
@@ -44,12 +43,10 @@ export class DoubleAuthComponent extends AbstractComponents implements OnInit {
   }
 
   complete(): void {
-    console.log(this.user);
     this.userSecurityService.confirmAuth(this.user.username, this.user.password, this.doubleForm.get('code').value, this.rememberMe).subscribe(value => {
       const user: User = value;
       localStorage.setItem('currentUser', JSON.stringify(user));
       if (value.cookieToken !== null) {
-        console.log(user.username + '==' + value.cookieToken);
         this.cookieService.set('remember', user.username + '==' + value.cookieToken);
       }
       this.userSecurityService.logger.next(true);

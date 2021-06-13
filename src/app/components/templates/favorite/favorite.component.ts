@@ -29,7 +29,6 @@ export class FavoriteComponent extends AbstractComponents implements OnInit {
     this.searchListCategoryUrl = new Map();
     this.pageService.getFavoriteAllDto().subscribe(value => {
       this.pages = value;
-      console.log(value);
       for (const v of value) {
         this.searchListCategoryUrl.set(v.categoryViewDto.id, v.pageSimplifiedRecommendedViewDtoList[Math.floor(Math.random() * v.pageSimplifiedRecommendedViewDtoList.length)].image.url);
       }

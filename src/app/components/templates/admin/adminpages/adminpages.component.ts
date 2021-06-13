@@ -37,7 +37,6 @@ export class AdminpagesComponent extends AbstractComponents implements OnInit, A
       for (const page of data) {
         this.pages.push({id: page.id, enumState: page.enumState, title: page.innerPageList[0].title});
       }
-      console.log(this.pages);
       this.dataSource = new MatTableDataSource<any>(this.pages);
       this.ngAfterViewInit();
     });

@@ -28,11 +28,8 @@ export class DashboardComponent extends AbstractComponents implements OnInit {
   ngOnInit(): void {
     this.imagesService.getAllUserImageDto().subscribe(value => {
       this.imageList = value;
-      console.log(value);
       this.tagService.getAllUserTagDto().subscribe(value1 => {
         this.tagList = value1;
-        console.log(value1);
-
       });
     });
   }

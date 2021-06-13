@@ -36,7 +36,6 @@ export class AdminparatagtypesComponent extends AbstractComponents implements On
       for (const paratagtype of data) {
         this.paratagtype.push({id: paratagtype.id, name: paratagtype.name});
       }
-      console.log(this.paratagtype);
       this.dataSource = new MatTableDataSource<any>(this.paratagtype);
       this.ngAfterViewInit();
     });

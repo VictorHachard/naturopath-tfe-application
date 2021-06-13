@@ -28,7 +28,6 @@ export class AddparatagtypeComponent extends AbstractComponents implements OnIni
   ngOnInit(): void {
     this.tagTypeService.getAllTagType().subscribe(data => {
       this.tagTypes = data;
-      console.log(this.tagTypes);
       this.init();
     });
   }

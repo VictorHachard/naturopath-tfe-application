@@ -28,7 +28,6 @@ export class ConnectFromCookieComponent extends AbstractComponents implements On
       const token: string = this.cookieService.get('remember');
       const splitted = token.split('==');
       this.userSecurityService.connectFromCookie(splitted[0], splitted[1]).subscribe(value => {
-        console.log(value);
         const user: User = value;
         localStorage.setItem('currentUser', JSON.stringify(user));
         this.userSecurityService.logger.next(true);

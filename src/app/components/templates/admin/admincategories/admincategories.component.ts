@@ -36,7 +36,6 @@ export class AdmincategoriesComponent extends AbstractComponents implements OnIn
       for (const category of data) {
         this.categories.push({id: category.id, name: category.name, parent: category.parent});
       }
-      console.log(this.categories);
       this.dataSource = new MatTableDataSource<any>(this.categories);
       this.ngAfterViewInit();
     });

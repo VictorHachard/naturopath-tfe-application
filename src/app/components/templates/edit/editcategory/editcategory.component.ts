@@ -42,22 +42,13 @@ export class EditcategoryComponent extends AbstractComponents implements OnInit 
     this.drag = {after:  [], before: []};
     this.id = this.route.snapshot.paramMap.get('id');
     this.categoryService.getEditCategoryDto(this.id).subscribe(data => {
-      console.log('*********** CATEGORY ***********');
-      console.log(data);
       this.category = data;
       this.paragraphTypeService.getAllParagraphType().subscribe(data1 => {
-        console.log('*********** PARAGRAPH LIST ***********');
-        console.log(data1);
         this.paragraph = data1;
         this.parapageTypeService.getAllParapageType().subscribe(data3 => {
-          console.log('*********** PARAPAGE LIST ***********');
-          console.log(data3);
           this.parapage = data3;
           this.paratagTypeService.getAllParatagType().subscribe(data2 => {
-            console.log('*********** PARATAG LIST ***********');
-            console.log(data2);
             this.paratag = data2;
-
             for (const paragraph of this.paragraph) {
               this.typeData.set(paragraph.id, {type: 'ParagraphType', name: paragraph.name, description : paragraph.description});
               let find = false;
@@ -94,13 +85,9 @@ export class EditcategoryComponent extends AbstractComponents implements OnInit 
                 this.drag.before.push(parapage.id);
               }
             }
-
             for (const sortedType of this.category.sortedTypeType) {
               this.drag.after.push(sortedType.typeId);
             }
-
-            console.log('*********** TYPEDATA LIST ***********');
-            console.log(this.typeData);
             this.init();
           });
         });
@@ -130,7 +117,6 @@ export class EditcategoryComponent extends AbstractComponents implements OnInit 
 
   update(): void {
     const editCategoryValue = this.editCategoryForm.value;
-    console.log(this.drag.after);
 
     const tmpList = [];
     for (const t of this.drag.after) {

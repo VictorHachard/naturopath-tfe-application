@@ -27,7 +27,6 @@ export class EdittagtypeComponent extends AbstractComponents implements OnInit {
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
     this.tagTypeService.getTagType(this.id).subscribe(data => {
-      console.log(data);
       this.tagType = data;
       this.init();
     });

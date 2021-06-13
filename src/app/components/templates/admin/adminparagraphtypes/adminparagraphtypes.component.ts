@@ -36,7 +36,6 @@ export class AdminparagraphtypesComponent extends AbstractComponents implements 
       for (const paragraphType of data) {
         this.paragraphType.push({id: paragraphType.id, name: paragraphType.name});
       }
-      console.log(this.paragraphType);
       this.dataSource = new MatTableDataSource<any>(this.paragraphType);
       this.ngAfterViewInit();
     });

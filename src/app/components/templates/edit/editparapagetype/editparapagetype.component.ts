@@ -27,7 +27,6 @@ export class EditparapagetypeComponent extends AbstractComponents implements OnI
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
     this.parapagetypeService.getParapageType(this.id).subscribe(data => {
-      console.log(data);
       this.parapage = data;
       this.init();
     });

@@ -9,7 +9,6 @@ export class AbstractComponents {
   constructor() { }
 
   printError(formControl: AbstractControl): string {
-    //console.log(formControl);
     if (this.hasToPrintError(formControl)) {
       let errors = '';
       if (formControl.errors.required) {

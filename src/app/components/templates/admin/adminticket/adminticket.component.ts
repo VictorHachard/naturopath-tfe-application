@@ -25,13 +25,11 @@ export class AdminticketComponent extends AbstractTicket implements OnInit {
   ngOnInit(): void {
     if (this.id === null) {
       this.ticketService.getAllOpen().subscribe(value => {
-        console.log(value);
         this.ticketList = value;
         this.init();
       });
     } else {
       this.ticketService.get(this.id).subscribe(value => {
-        console.log(value);
         this.ticketList = value;
         this.init();
       });

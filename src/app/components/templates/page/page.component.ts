@@ -75,7 +75,6 @@ export class PageComponent extends AbstractComponents implements OnInit {
       if (this.messageAdded) {
         this.messageAdded = false;
         this.pageIndex = Math.floor(this.page.messageList.length / this.pageSize) - (this.page.messageList.length % this.pageSize === 0 ? 1 : 0);
-        console.log(this.pageIndex);
       } else {
         this.pageSize = 10;
         this.pageIndex = 0;
@@ -88,13 +87,10 @@ export class PageComponent extends AbstractComponents implements OnInit {
       this.length = this.page.messageList.length;
       this.updateData(null);
       this.pageService.getAllRecommendedPageSearch({search: data.title, limit: 7}).subscribe(data1 => {
-        console.log(data1);
         this.recommendedPage = data1.filter(obj => obj.pageSimplifiedRecommendedViewDtoList[0].id != this.id);
         if (this.recommendedPage.length > 6) {
           this.recommendedPage.splice(-1, 1);
         }
-        console.log(this.page);
-        console.log(this.recommendedPage);
       });
     });
   }
@@ -103,12 +99,10 @@ export class PageComponent extends AbstractComponents implements OnInit {
 
   addLike(): void {
     if (this.like) {
-      console.log('up');
       this.likeService.updateLike(this.like.id, {like: !this.like.like}).subscribe(value => {
         this.like.like = !this.like.like;
       });
     } else {
-      console.log('add');
       this.likeService.addLike({like: true, pageId: this.page.id}).subscribe(value => {
         this.ngOnInitDebug();
       });

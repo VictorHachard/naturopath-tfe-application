@@ -39,7 +39,6 @@ export class EditimageComponent extends AbstractEdit implements OnInit {
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
     this.imageService.getEditImageDto(this.id).subscribe(data => {
-      console.log(data);
       this.image = data;
       this.init();
     });
@@ -60,7 +59,6 @@ export class EditimageComponent extends AbstractEdit implements OnInit {
   validationInnerImage(): void {
     const editInnerImageValue = this.editInnerImageForm.value;
     const innerImageId: string = this.image.innerImageList[0].id;
-    console.log(this.trustedUrl);
     if (editInnerImageValue.fileSource === '' && this.trustedUrl !== '') {
       this.innerImageService.validationInner(innerImageId, {
         description: editInnerImageValue.description,
@@ -71,7 +69,6 @@ export class EditimageComponent extends AbstractEdit implements OnInit {
 
       });
     } else {
-      console.log(editInnerImageValue.fileSource);
       this.innerImageService.validationInner(innerImageId, {
         description: editInnerImageValue.description,
         title: editInnerImageValue.title,
@@ -100,7 +97,6 @@ export class EditimageComponent extends AbstractEdit implements OnInit {
 
   addInnerImage(id: number, tagId: number): void {
     const editInnerImageValue = this.editInnerImageForm.value;
-    console.log(this.tmpImage);
     editInnerImageValue.fileSource = this.tmpImage;
     this.innerImageService.addInner(tagId.toString(), {
       description: editInnerImageValue.description,
@@ -142,14 +138,11 @@ export class EditimageComponent extends AbstractEdit implements OnInit {
 
   updateImage(): void {
     const editImageValue = this.editInnerImageForm.value;
-    console.log(editImageValue.title);
-    console.log(editImageValue.description);
     if (editImageValue.image !== null) {
       const formData: FormData = new FormData();
       const name: string = (new Date()).valueOf().toString() + Math.random().toString(36).substring(10) + JSON.parse(localStorage.getItem('currentUser')).token.slice(JSON.parse(localStorage.getItem('currentUser')).token.lastIndexOf('-')).substring(10) + editImageValue.fileSource.name.slice(editImageValue.fileSource.name.lastIndexOf('.'));
       formData.append('file', editImageValue.fileSource, name);
       this.imageService.upload(formData).subscribe(value1 => {
-        console.log('sdsdsdsdsdsd----------------'+  name);
         this.innerImageService.updateInner(this.image.innerImageList[0].id,
           {title: editImageValue.title,
             description: editImageValue.description,
@@ -158,7 +151,6 @@ export class EditimageComponent extends AbstractEdit implements OnInit {
         });
       });
       this.tmpImage = name;
-      console.log(this.tmpImage);
       this.editInnerImageForm.patchValue({
         fileSource: name,
       });

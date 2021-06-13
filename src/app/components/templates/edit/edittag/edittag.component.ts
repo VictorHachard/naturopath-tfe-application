@@ -32,7 +32,6 @@ export class EdittagComponent extends AbstractEdit implements OnInit {
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
     this.tagService.getEditTagDto(this.id).subscribe(data => {
-      console.log(data);
       this.tag = data;
       this.init();
     });

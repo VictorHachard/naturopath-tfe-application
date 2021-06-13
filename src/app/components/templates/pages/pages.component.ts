@@ -68,15 +68,12 @@ export class PagesComponent extends AbstractComponents implements OnInit {
     super();
     this.categoryService.getAllCategory().subscribe(value => {
       this.categories = value;
-      console.log(value);
       this.tagService.getAllTag().subscribe(data3 => {
         this.tags = data3;
-        console.log(data3);
         this.tagsMap = new Map();
         for (const tag of this.tags) {
           this.tagsMap.set(tag.id, tag);
         }
-        console.log(this.tagsMap);
         this.route.paramMap.subscribe(params => {
           this.ngOnInitDebug();
           window.scroll(0, 0);
@@ -110,8 +107,6 @@ export class PagesComponent extends AbstractComponents implements OnInit {
     this.recName(this.categories, this.id);
     this.categoryList2 = [];
     this.rec(this.categories, 0);
-    console.log("---- catdeep ----");
-    console.log(this.categoryList2);
     this.init();
     for (const tag of this.tags) {
       this.allTagsSearch.push(tag.id);
@@ -124,7 +119,6 @@ export class PagesComponent extends AbstractComponents implements OnInit {
       if (data.pageList.length !== 0) {
         this.url = data.pageList[Math.floor(Math.random() * data.pageList.length)].image.url;
       }
-      console.log(data);
       this.clear();
     });
   }
@@ -186,7 +180,6 @@ export class PagesComponent extends AbstractComponents implements OnInit {
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
-    console.log('test');
     this.tagSearch.push(event.option.value);
     this.fruitInput.nativeElement.value = '';
     this.fruitCtrl.setValue(null);
@@ -249,7 +242,6 @@ export class PagesComponent extends AbstractComponents implements OnInit {
       }
 
     }
-    console.log(this.searchTagMap);
 
     // remove duplicated
     this.dataSource = this.dataSource.filter((elem, index, self) => {

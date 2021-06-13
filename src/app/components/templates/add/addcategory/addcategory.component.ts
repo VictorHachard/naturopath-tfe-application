@@ -27,7 +27,6 @@ export class AddcategoryComponent extends AbstractComponents implements OnInit {
   ngOnInit(): void {
     this.categoryService.getAllParentCategoryDto().subscribe(data => {
       this.categories = data;
-      console.log(this.categories);
       this.init();
     });
   }

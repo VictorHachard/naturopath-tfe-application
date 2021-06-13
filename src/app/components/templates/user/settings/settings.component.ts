@@ -52,7 +52,6 @@ export class SettingsComponent extends AbstractComponents implements OnInit {
       this.userSecurityService.change.next(true);
       this.notUser = !(JSON.parse(localStorage.getItem('currentUser')).roleList.length > 1);
       this.init();
-      console.log(this.user);
     });
   }
 
@@ -145,7 +144,6 @@ export class SettingsComponent extends AbstractComponents implements OnInit {
       this.alertManagerManager.addAlert('An email with instructions has been sent to you', 'alert-success');
       this.initData();
     }, error => {
-      console.log(error);
       this.alertManagerManager.addAlert(error.error.message, 'alert-danger');
     });
   }

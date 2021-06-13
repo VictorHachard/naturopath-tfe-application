@@ -33,7 +33,6 @@ export class AdminimagesComponent extends AbstractComponents implements OnInit, 
 
   ngOnInit(): void {
     this.imagesService.getAllEditImageDto().subscribe(data => {
-      console.log(data);
       for (const image of data) {
         let tmp = 'DRAFT';
         for (const inner of image.innerImageList) {

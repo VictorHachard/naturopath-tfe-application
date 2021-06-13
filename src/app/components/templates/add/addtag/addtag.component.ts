@@ -29,7 +29,6 @@ export class AddtagComponent extends AbstractComponents implements OnInit {
   ngOnInit(): void {
     this.tagTypeService.getAllTagType().subscribe(data => {
       this.tagTypeList = data;
-      console.log(this.tagTypeList);
       this.init();
     });
   }

@@ -30,7 +30,6 @@ export class AddpageComponent extends AbstractComponents implements OnInit {
   ngOnInit(): void {
     this.categoryService.getAllChildCategoryDto().subscribe(value => {
       this.categories = value;
-      console.log(this.categories);
       this.init();
     });
   }
@@ -52,8 +51,6 @@ export class AddpageComponent extends AbstractComponents implements OnInit {
         categoryId = value.id;
       }
     });
-
-    console.log(categoryId);
 
     this.pageService.addPage({categoryId: categoryId.toString(),
       description: addPageValue.description,
