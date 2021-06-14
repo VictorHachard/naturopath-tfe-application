@@ -59,20 +59,6 @@ export class EditpageComponent extends AbstractEdit implements OnInit {
     super();
   }
 
-  canVote(inner: any): boolean {
-    super.canVote(inner);
-    /*for (const paragraph of this.page.paragraphList) {
-      if (paragraph.innerParagraphList[paragraph.innerParagraphList.length - 1].id === id) {
-        for (const vote of paragraph.innerParagraphList[0].voteList) {
-          if (vote.user.username === JSON.parse(localStorage.getItem('currentUser')).username) {
-            return false;
-          }
-        }
-      }
-    }*/
-    return true;
-  }
-
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
     this.pageService.getEditPageDto(this.id).subscribe(data => {
@@ -90,38 +76,37 @@ export class EditpageComponent extends AbstractEdit implements OnInit {
               }
             }
           }
-          this.allTagTypeList.set(paratag.paratagType.tagType.name, { after : [], before : data1, afterNames : afterNamesTmp, beforeNames : beforeNamesTmp});
+          this.allTagTypeList.set(paratag.paratagType.name, { after : [], before : data1, afterNames : afterNamesTmp, beforeNames : beforeNamesTmp});
           if (paratag.id === this.page.paratagList[this.page.paratagList.length - 1].id) {
           }
-        });
-      }
-
-      this.pageService.getAllSimplifiedDto().subscribe(value => {
-        this.pagesMap = new Map();
-        for (const page of value) {
-          if (page !== null) { //car pas edit
-            this.pagesMap.set(page.id , page);
-          }
-        }
-
-        for (const parapage of this.page.parapageList) {
-          const beforeNIdTmp2 = [];
-          const afterIdTmp2 = [];
-          for (const page of value) {
-            if (page !== null) { //car pas edit
-              beforeNIdTmp2.push(page.id);
-              for (const page2 of parapage.innerParapageList[parapage.innerParapageList.length - 1].pageList) {
-                if (page2.id === page.id) {
-                  beforeNIdTmp2.pop();
-                  afterIdTmp2.push(page.id);
-                }
+          this.pageService.getAllSimplifiedDto().subscribe(value => {
+            this.pagesMap = new Map();
+            for (const page of value) {
+              if (page !== null) { //car pas edit
+                this.pagesMap.set(page.id , page);
               }
             }
-          }
-          this.allParaTypeList.set(parapage.parapageType.name, { afterId : afterIdTmp2, beforeId : beforeNIdTmp2});
-        }
-        this.pages = value;
-      });
+
+            for (const parapage of this.page.parapageList) {
+              const beforeNIdTmp2 = [];
+              const afterIdTmp2 = [];
+              for (const page of value) {
+                if (page !== null) { //car pas edit
+                  beforeNIdTmp2.push(page.id);
+                  for (const page2 of parapage.innerParapageList[parapage.innerParapageList.length - 1].pageList) {
+                    if (page2.id === page.id) {
+                      beforeNIdTmp2.pop();
+                      afterIdTmp2.push(page.id);
+                    }
+                  }
+                }
+              }
+              this.allParaTypeList.set(parapage.parapageType.name, { afterId : afterIdTmp2, beforeId : beforeNIdTmp2});
+            }
+            this.pages = value;
+          });
+        });
+      }
 
       this.imageService.getAllImageDto().subscribe(value => {
         this.imageList = value;
