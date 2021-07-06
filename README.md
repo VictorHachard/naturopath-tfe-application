@@ -1,3 +1,6 @@
+[![BCH compliance](https://bettercodehub.com/edge/badge/VictorHachard/naturopath-tfe-application?branch=master)](https://bettercodehub.com/)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/955dcdb2e6d54a0dac4a6d817f6b24e9)](https://www.codacy.com/gh/VictorHachard/naturopath-tfe-application/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=VictorHachard/naturopath-tfe-application&amp;utm_campaign=Badge_Grade)
+
 # Naturopath TFE Application
 
 If you want more information there is a report: "naturopath.pdf".
@@ -18,12 +21,12 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 ## What I Learned
 
-- Angular
-- TypeScript
+-   Angular
+-   TypeScript
 
 ## Authors & Contributors
 
-* **Hachard Victor** - *Initial work* - [VictorHachard](https://github.com/VictorHachard)
+-   **Hachard Victor** - *Initial work* - [VictorHachard](https://github.com/VictorHachard)
 
 ## License
 
