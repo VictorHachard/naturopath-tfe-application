@@ -55,7 +55,7 @@
       </div>
 
       <div *ngIf="url; else elseBlockNoId">
-        <div class="page-image page-border-radius" [style]="apiRessourceUrl + url + ');'">
+        <div class="page-image page-border-radius" [style]="'background-image:url(' + apiRessourceUrl + url + ');'">
           <div class="page-border-radius" style="background-color: rgba(30, 32, 34, 0.6);">
             <div class="jumbotron p-5 mb-4 text-white page-border-radius" style="background-color: rgba(0, 0, 0, 0)!important;">
               <p class="display-3">{{ name }}</p>

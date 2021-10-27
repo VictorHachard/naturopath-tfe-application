@@ -7,7 +7,7 @@
     <p class="mb-1"></p>
   </div>
 
-  <div *ngIf="page" class="jumbotron-image page-border-radius" [style]="'background-image:url(http://localhost:8080/api/v1/resource/' +  page?.image.url + ');'">
+  <div *ngIf="page" class="jumbotron-image page-border-radius" [style]="'background-image:url(' + apiRessourceUrl +  page?.image.url + ');'">
     <div class="page-border-radius" style="background-color: rgba(30, 32, 34, 0.6);">
       <div class="jumbotron mb-3 text-white page-border-radius" style="background-color: rgba(0, 0, 0, 0)!important;">
         <p class="display-3">{{ page?.title }}</p>
@@ -55,7 +55,7 @@
             <p class="ml-4 text-justify">{{ parapage.content }}</p>
             <div class="ml-2 row">
               <div *ngFor="let page of parapage.pageList" class="col col-md-6 mb-3">
-                <div class="jumbotron-image zoom" [routerLink]="['/page', page.id]" [style]="'background-image:url(http://localhost:8080/api/v1/resource/' + page.image.url + ');border-radius: 0.25rem;'">
+                <div class="jumbotron-image zoom" [routerLink]="['/page', page.id]" [style]="'background-image:url(' + apiRessourceUrl + page.image.url + ');border-radius: 0.25rem;'">
                   <div style="background-color: rgba(30, 32, 34, 0.6);border-radius: 0.25rem;">
                     <div class="jumbotron mb-0 p-4 text-white" style="background-color: rgba(0, 0, 0, 0)!important;'">
                       <p class="display-6">{{ page.title }}</p>
@@ -72,7 +72,7 @@
       <p class="display-5 mb-3">Recommended pages</p>
       <div class="row">
         <div *ngFor="let search of recommendedPage" class="col col-md-6 mb-3">
-          <div class="jumbotron-image zoom" [routerLink]="['/page', search.pageSimplifiedRecommendedViewDtoList[0].id]" [style]="'background-image:url(http://localhost:8080/api/v1/resource/' + search.pageSimplifiedRecommendedViewDtoList[0].image.url + ');border-radius: 0.25rem;'">
+          <div class="jumbotron-image zoom" [routerLink]="['/page', search.pageSimplifiedRecommendedViewDtoList[0].id]" [style]="'background-image:url(' + apiRessourceUrl + search.pageSimplifiedRecommendedViewDtoList[0].image.url + ');border-radius: 0.25rem;'">
             <div style="background-color: rgba(30, 32, 34, 0.6);border-radius: 0.25rem;">
               <div class="jumbotron mb-0 p-4 text-white" style="background-color: rgba(0, 0, 0, 0)!important;'">
                 <p class="display-6">{{ search.categoryViewDto.name }} - {{ search.pageSimplifiedRecommendedViewDtoList[0].title }}</p>
