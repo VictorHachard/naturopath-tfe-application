@@ -4,11 +4,11 @@ import {UserSecurityService} from '../../service/security/UserSecurity.service';
 import {CookieService} from 'ngx-cookie-service';
 import {HttpClient} from '@angular/common/http';
 import {Injector} from '@angular/core';
-import {environment} from "../../../environments/environment";
+import {environment} from '../../../environments/environment';
 
 export class AbstractComponents {
 
-  apiRessourceUrl = environment.apiRessourceUrl;
+  apiResourceUrl = environment.apiResourceUrl;
 
   constructor() { }
 
