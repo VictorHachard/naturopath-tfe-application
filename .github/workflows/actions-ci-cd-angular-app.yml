@@ -16,14 +16,14 @@ jobs:
         node-version: [ 16.x ]
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
       - name: Cache node modules # this allows for re-using node_modules caching, making builds a bit faster.
         id: cache-nodemodules
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         env:
           cache-name: cache-node-modules
         with:
@@ -51,11 +51,11 @@ jobs:
     #runs-on: ubuntu-latest
     #steps:
       #- name: Checkout
-      #  uses: actions/checkout@v2
+      #  uses: actions/checkout@v3
       #- name: Create folder
       #  run: mkdir ~/deploy_dist
       #- name: Download Artifact
-      #  uses: actions/download-artifact@v2
+      #  uses: actions/download-artifact@v3
       #  with:
       #    name: deploy_dist
       #    path: deploy_dist
