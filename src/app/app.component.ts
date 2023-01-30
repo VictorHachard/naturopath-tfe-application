@@ -7,7 +7,7 @@ import {UserSecurityService} from './service/security/UserSecurity.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnDestroy {
-  title = 'tfe-application';
+  title = 'naturopath';
 
   constructor(private renderer: Renderer2, private userSecurityService: UserSecurityService) {
     this.userSecurityService.isLoggedIn().subscribe(value => {
