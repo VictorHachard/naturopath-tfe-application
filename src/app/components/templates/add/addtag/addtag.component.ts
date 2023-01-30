@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
 import {TagService} from '../../../../service/Tag.service';
 import {TagTypeService} from '../../../../service/TagType.service';
 import {AbstractComponents} from '../../../commons/AbstractComponents';
@@ -14,7 +14,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class AddtagComponent extends AbstractComponents implements OnInit {
 
-  addTagForm: FormGroup;
+  addTagForm: UntypedFormGroup;
   tagTypeList: any;
 
   constructor(private userSecurityService: UserSecurityService,
@@ -34,11 +34,11 @@ export class AddtagComponent extends AbstractComponents implements OnInit {
   }
 
   init(): void {
-    this.addTagForm = new FormGroup({
-      tagType: new FormControl(this.tagTypeList[0].name, Validators.required),
-      name: new FormControl('Lorem ipsum dolor sit amet',
+    this.addTagForm = new UntypedFormGroup({
+      tagType: new UntypedFormControl(this.tagTypeList[0].name, Validators.required),
+      name: new UntypedFormControl('Lorem ipsum dolor sit amet',
         [Validators.required, Validators.minLength(2), Validators.maxLength(32)]),
-      content: new FormControl('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+      content: new UntypedFormControl('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
         [Validators.required, Validators.minLength(32), Validators.maxLength(1024)]),
     });
   }

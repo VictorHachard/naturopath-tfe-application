@@ -1,19 +1,19 @@
 import {AbstractComponents} from './AbstractComponents';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
 import {UserSecurityService} from '../../service/security/UserSecurity.service';
 import {CookieService} from 'ngx-cookie-service';
 import {ActivatedRoute, Router} from '@angular/router';
 
 export class AbstractEdit extends AbstractComponents {
-  messageInnerForm: FormGroup;
+  messageInnerForm: UntypedFormGroup;
 
   constructor() {
     super();
   }
 
   init(): void {
-    this.messageInnerForm = new FormGroup({
-      content: new FormControl('',
+    this.messageInnerForm = new UntypedFormGroup({
+      content: new UntypedFormControl('',
         [Validators.required, Validators.minLength(8), Validators.maxLength(2048)])
     });
   }

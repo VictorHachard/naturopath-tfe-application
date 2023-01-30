@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
 import {AbstractComponents} from '../../../commons/AbstractComponents';
 import {UserSecurityService} from '../../../../service/security/UserSecurity.service';
 import {CookieService} from 'ngx-cookie-service';
@@ -13,7 +13,7 @@ import {AlertManager} from '../../../../model/my/AlertManager';
 })
 export class ForgetComponent extends AbstractComponents implements OnInit {
   alertManagerManager: AlertManager;
-  setResetForm: FormGroup;
+  setResetForm: UntypedFormGroup;
 
   constructor(private userSecurityService: UserSecurityService,
               private cookieService: CookieService,
@@ -28,9 +28,9 @@ export class ForgetComponent extends AbstractComponents implements OnInit {
   }
 
   init(): void {
-    this.setResetForm = new FormGroup({
-      emailOrUsername: new FormControl('', Validators.required),
-      forgetPassword: new FormControl('', Validators.required)
+    this.setResetForm = new UntypedFormGroup({
+      emailOrUsername: new UntypedFormControl('', Validators.required),
+      forgetPassword: new UntypedFormControl('', Validators.required)
     });
   }
 

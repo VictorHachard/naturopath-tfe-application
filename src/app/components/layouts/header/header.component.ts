@@ -4,7 +4,7 @@ import {AbstractComponents} from '../../commons/AbstractComponents';
 import {UserSecurityService} from '../../../service/security/UserSecurity.service';
 import {CookieService} from 'ngx-cookie-service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
 import {PageService} from '../../../service/Page.service';
 
 @Component({
@@ -17,7 +17,7 @@ export class HeaderComponent implements OnInit {
   user: User;
   page;
   proposal;
-  searchFormHeader: FormGroup;
+  searchFormHeader: UntypedFormGroup;
 
   constructor(private userSecurityService: UserSecurityService,
               private pageService: PageService,
@@ -35,8 +35,8 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.pageService.getAllSimplifiedDto().subscribe(value => {
       this.page = value;
-      this.searchFormHeader = new FormGroup({
-        input: new FormControl('', [Validators.required, Validators.minLength(3)])
+      this.searchFormHeader = new UntypedFormGroup({
+        input: new UntypedFormControl('', [Validators.required, Validators.minLength(3)])
       });
     });
   }

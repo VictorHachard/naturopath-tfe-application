@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
 import {ParatagTypeService} from '../../../../service/ParatagType.service';
 import {TagTypeService} from '../../../../service/TagType.service';
 import {AbstractComponents} from '../../../commons/AbstractComponents';
@@ -13,7 +13,7 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./editparatagtype.component.css']
 })
 export class EditparatagtypeComponent extends AbstractComponents implements OnInit {
-  editParatagTypeForm: FormGroup;
+  editParatagTypeForm: UntypedFormGroup;
   private id: string;
   paratagType: any;
   tagTypes: any[];
@@ -39,13 +39,13 @@ export class EditparatagtypeComponent extends AbstractComponents implements OnIn
   }
 
   init(): void {
-    this.editParatagTypeForm = new FormGroup({
-      size: new FormControl(this.paratagType.size, Validators.required),
-      tagType: new FormControl(this.paratagType.tagType.name, Validators.required),
-      name: new FormControl(this.paratagType.name,
+    this.editParatagTypeForm = new UntypedFormGroup({
+      size: new UntypedFormControl(this.paratagType.size, Validators.required),
+      tagType: new UntypedFormControl(this.paratagType.tagType.name, Validators.required),
+      name: new UntypedFormControl(this.paratagType.name,
         [Validators.required, Validators.minLength(6), Validators.maxLength(32)]),
-      alert: new FormControl(this.paratagType.alert),
-      description: new FormControl(this.paratagType.description,
+      alert: new UntypedFormControl(this.paratagType.alert),
+      description: new UntypedFormControl(this.paratagType.description,
         [Validators.required, Validators.minLength(16), Validators.maxLength(1024)]),
     });
   }

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
 import {ParagraphTypeService} from '../../../../service/ParagraphType.service';
 import {AbstractComponents} from '../../../commons/AbstractComponents';
 import {UserSecurityService} from '../../../../service/security/UserSecurity.service';
@@ -12,7 +12,7 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./editparagraphtype.component.css']
 })
 export class EditparagraphtypeComponent extends AbstractComponents implements OnInit {
-  editParagraphTypeForm: FormGroup;
+  editParagraphTypeForm: UntypedFormGroup;
   private id: string;
   paragraphType: any;
 
@@ -33,12 +33,12 @@ export class EditparagraphtypeComponent extends AbstractComponents implements On
   }
 
   init(): void {
-    this.editParagraphTypeForm = new FormGroup({
-      name: new FormControl(this.paragraphType.name,
+    this.editParagraphTypeForm = new UntypedFormGroup({
+      name: new UntypedFormControl(this.paragraphType.name,
         [Validators.required, Validators.minLength(6), Validators.maxLength(32)]),
-      description: new FormControl(this.paragraphType.description,
+      description: new UntypedFormControl(this.paragraphType.description,
         [Validators.required, Validators.minLength(16), Validators.maxLength(1024)]),
-      alert: new FormControl(this.paragraphType.alert)
+      alert: new UntypedFormControl(this.paragraphType.alert)
     });
   }
 

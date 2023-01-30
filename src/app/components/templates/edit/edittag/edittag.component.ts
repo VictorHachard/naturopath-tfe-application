@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {VoteService} from '../../../../service/Vote.service';
 import {TagService} from '../../../../service/Tag.service';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
 import {InnerTagService} from '../../../../service/InnerTag.service';
 import {AbstractEdit} from '../../../commons/AbstractEdit';
 import {UserSecurityService} from '../../../../service/security/UserSecurity.service';
@@ -15,7 +15,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class EdittagComponent extends AbstractEdit implements OnInit {
 
-  editInnerTagForm: FormGroup;
+  editInnerTagForm: UntypedFormGroup;
   private id: string;
   tag: any;
 
@@ -39,10 +39,10 @@ export class EdittagComponent extends AbstractEdit implements OnInit {
 
   init(): void {
     super.init();
-    this.editInnerTagForm = new FormGroup({
-      name: new FormControl(this.tag.innerTagList[0].name,
+    this.editInnerTagForm = new UntypedFormGroup({
+      name: new UntypedFormControl(this.tag.innerTagList[0].name,
         [Validators.required, Validators.minLength(2), Validators.maxLength(32)]),
-      content: new FormControl(this.tag.innerTagList[0].content,
+      content: new UntypedFormControl(this.tag.innerTagList[0].content,
         [Validators.required, Validators.minLength(32), Validators.maxLength(1024)]),
     });
   }

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {PageService} from '../../../../service/Page.service';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
 import {VoteService} from '../../../../service/Vote.service';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import {InnerParagraphService} from '../../../../service/InnerParagraph.service';
@@ -27,13 +27,13 @@ export class EditpageComponent extends AbstractEdit implements OnInit {
   allTagTypeList = new Map(); // {before : any[], after : any[]}
   allParaTypeList = new Map(); // {before : any[], after : any[]}
 
-  editInnerPageForm: FormGroup;
-  editInnerParagraphForm: FormGroup[];
-  messageInnerFormParatag: FormGroup[];
-  messageInnerFormParagraph: FormGroup[];
-  messageInnerFormParapage: FormGroup[];
-  editInnerParatagForm: FormGroup[];
-  editInnerParapageForm: FormGroup[];
+  editInnerPageForm: UntypedFormGroup;
+  editInnerParagraphForm: UntypedFormGroup[];
+  messageInnerFormParatag: UntypedFormGroup[];
+  messageInnerFormParagraph: UntypedFormGroup[];
+  messageInnerFormParapage: UntypedFormGroup[];
+  editInnerParatagForm: UntypedFormGroup[];
+  editInnerParapageForm: UntypedFormGroup[];
   imageList = [];
 
   page: any;
@@ -127,52 +127,52 @@ export class EditpageComponent extends AbstractEdit implements OnInit {
     this.editInnerParatagForm = [];
     this.editInnerParapageForm = [];
     this.page.paratagList.forEach(p => {
-      this.messageInnerFormParatag.push(new FormGroup({
-        content: new FormControl('',
+      this.messageInnerFormParatag.push(new UntypedFormGroup({
+        content: new UntypedFormControl('',
           [Validators.required, Validators.minLength(8), Validators.maxLength(2048)])
       }));
     });
     this.page.paragraphList.forEach(p => {
-      this.messageInnerFormParagraph.push(new FormGroup({
-        content: new FormControl('',
+      this.messageInnerFormParagraph.push(new UntypedFormGroup({
+        content: new UntypedFormControl('',
           [Validators.required, Validators.minLength(8), Validators.maxLength(2048)])
       }));
     });
     this.page.parapageList.forEach(p => {
-      this.messageInnerFormParapage.push(new FormGroup({
-        content: new FormControl('',
+      this.messageInnerFormParapage.push(new UntypedFormGroup({
+        content: new UntypedFormControl('',
           [Validators.required, Validators.minLength(8), Validators.maxLength(2048)])
       }));
     });
-    this.editInnerPageForm = new FormGroup({
-      titlePage: new FormControl(this.page.innerPageList[0].title,
+    this.editInnerPageForm = new UntypedFormGroup({
+      titlePage: new UntypedFormControl(this.page.innerPageList[0].title,
         [Validators.required, Validators.minLength(8), Validators.maxLength(128)]),
-      descriptionPage: new FormControl(this.page.innerPageList[0].description,
+      descriptionPage: new UntypedFormControl(this.page.innerPageList[0].description,
         [Validators.required, Validators.minLength(64), Validators.maxLength(1024)]),
-      imagePage: new FormControl(this.page.innerPageList[0].image == null ? '' : this.page.innerPageList[0].image.parentId,
+      imagePage: new UntypedFormControl(this.page.innerPageList[0].image == null ? '' : this.page.innerPageList[0].image.parentId,
         [Validators.required]),
     });
     this.page.paragraphList.forEach(p => {
-      this.editInnerParagraphForm.push(new FormGroup({
-        titleParagraph : new FormControl(p.innerParagraphList[0].title,
+      this.editInnerParagraphForm.push(new UntypedFormGroup({
+        titleParagraph : new UntypedFormControl(p.innerParagraphList[0].title,
           [Validators.required, Validators.minLength(8), Validators.maxLength(128)]),
-        contentParagraph : new FormControl(p.innerParagraphList[0].content,
+        contentParagraph : new UntypedFormControl(p.innerParagraphList[0].content,
           [Validators.required, Validators.minLength(128), Validators.maxLength(8182)]),
       }));
     });
     this.page.paratagList.forEach(p => {
-      this.editInnerParatagForm.push(new FormGroup({
-        titleParatag: new FormControl(p.innerParatagList[0].title,
+      this.editInnerParatagForm.push(new UntypedFormGroup({
+        titleParatag: new UntypedFormControl(p.innerParatagList[0].title,
           [Validators.required, Validators.minLength(8), Validators.maxLength(128)]),
-        contentParatag: new FormControl(p.innerParatagList[0].content,
+        contentParatag: new UntypedFormControl(p.innerParatagList[0].content,
           [Validators.required, Validators.minLength(64), Validators.maxLength(8182)]),
       }));
     });
     this.page.parapageList.forEach(p => {
-      this.editInnerParapageForm.push(new FormGroup({
-        titleParapage: new FormControl(p.innerParapageList[0].title,
+      this.editInnerParapageForm.push(new UntypedFormGroup({
+        titleParapage: new UntypedFormControl(p.innerParapageList[0].title,
           [Validators.required, Validators.minLength(8), Validators.maxLength(128)]),
-        contentParapage: new FormControl(p.innerParapageList[0].content,
+        contentParapage: new UntypedFormControl(p.innerParapageList[0].content,
           [Validators.required, Validators.minLength(64), Validators.maxLength(8182)]),
       }));
     });

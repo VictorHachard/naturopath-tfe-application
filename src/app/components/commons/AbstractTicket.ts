@@ -1,11 +1,11 @@
 import {AbstractComponents} from './AbstractComponents';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
 
 export class AbstractTicket extends AbstractComponents {
     username = JSON.parse(localStorage.getItem('currentUser')).username;
-  ticketMessageForm: FormGroup;
-  ticketCloseForm: FormGroup;
+  ticketMessageForm: UntypedFormGroup;
+  ticketCloseForm: UntypedFormGroup;
   ticketList: any;
 
   constructor() {
@@ -13,12 +13,12 @@ export class AbstractTicket extends AbstractComponents {
   }
 
   init(): void {
-    this.ticketMessageForm = new FormGroup({
-      content: new FormControl('',
+    this.ticketMessageForm = new UntypedFormGroup({
+      content: new UntypedFormControl('',
         [Validators.required, Validators.minLength(32), Validators.maxLength(1024)])
     });
-    this.ticketCloseForm = new FormGroup({
-      check: new FormControl(false, [Validators.required])
+    this.ticketCloseForm = new UntypedFormGroup({
+      check: new UntypedFormControl(false, [Validators.required])
     });
   }
 

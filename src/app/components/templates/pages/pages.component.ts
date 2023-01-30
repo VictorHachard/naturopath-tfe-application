@@ -9,7 +9,7 @@ import {PageEvent} from '@angular/material/paginator';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {MatChipInputEvent} from '@angular/material/chips';
 import {MatAutocomplete, MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
@@ -26,7 +26,7 @@ import {isNumeric} from 'rxjs/internal-compatibility';
 export class PagesComponent extends AbstractComponents implements OnInit {
 
   id: string;
-  searchForm: FormGroup;
+  searchForm: UntypedFormGroup;
   searchTagMap;
 
   categories: any[] = [];
@@ -50,7 +50,7 @@ export class PagesComponent extends AbstractComponents implements OnInit {
   // chip
   selectable = true;
   removable = true;
-  fruitCtrl = new FormControl();
+  fruitCtrl = new UntypedFormControl();
   filteredFruits: Observable<string[]>;
   tagSearch: string[];
   allTagsSearch: string[];
@@ -149,8 +149,8 @@ export class PagesComponent extends AbstractComponents implements OnInit {
   ngOnInit(): void { }
 
   private init(): void {
-    this.searchForm = new FormGroup({
-      input: new FormControl('', [Validators.required, Validators.minLength(3)])
+    this.searchForm = new UntypedFormGroup({
+      input: new UntypedFormControl('', [Validators.required, Validators.minLength(3)])
     });
   }
 

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AbstractComponents} from '../../../commons/AbstractComponents';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
 import {UserSecurityService} from '../../../../service/security/UserSecurity.service';
 import {CookieService} from 'ngx-cookie-service';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -12,7 +12,7 @@ import {ParapageTypeService} from '../../../../service/parapage-type.service';
   styleUrls: ['./editparapagetype.component.css']
 })
 export class EditparapagetypeComponent extends AbstractComponents implements OnInit {
-  editParapageForm: FormGroup;
+  editParapageForm: UntypedFormGroup;
   parapage;
   private id: string;
 
@@ -33,11 +33,11 @@ export class EditparapagetypeComponent extends AbstractComponents implements OnI
   }
 
   init(): void {
-    this.editParapageForm = new FormGroup({
-      name: new FormControl(this.parapage.name,
+    this.editParapageForm = new UntypedFormGroup({
+      name: new UntypedFormControl(this.parapage.name,
         [Validators.required, Validators.minLength(6), Validators.maxLength(32)]),
-      alert: new FormControl(this.parapage.alert),
-      description: new FormControl(this.parapage.description,
+      alert: new UntypedFormControl(this.parapage.alert),
+      description: new UntypedFormControl(this.parapage.description,
         [Validators.required, Validators.minLength(16), Validators.maxLength(1024)]),
     });
   }

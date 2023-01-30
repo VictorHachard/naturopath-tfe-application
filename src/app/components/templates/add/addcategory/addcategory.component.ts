@@ -1,5 +1,5 @@
 import {Component, Injector, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
 import {CategoryService} from '../../../../service/Category.service';
 import {Category} from '../../../../model/view/Category';
 import {AbstractComponents} from '../../../commons/AbstractComponents';
@@ -13,7 +13,7 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./addcategory.component.css']
 })
 export class AddcategoryComponent extends AbstractComponents implements OnInit {
-  addCategoryForm: FormGroup;
+  addCategoryForm: UntypedFormGroup;
   categories: Category[];
 
   constructor(private userSecurityService: UserSecurityService,
@@ -32,11 +32,11 @@ export class AddcategoryComponent extends AbstractComponents implements OnInit {
   }
 
   init(): void {
-    this.addCategoryForm = new FormGroup({
-      isParent: new FormControl(false),
-      category: new FormControl('No category', Validators.required),
-      name: new FormControl('Lorem ipsum dolor.', [Validators.required, Validators.minLength(6), Validators.maxLength(32)]),
-      description: new FormControl('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', [Validators.required, Validators.minLength(16), Validators.maxLength(1024)]),
+    this.addCategoryForm = new UntypedFormGroup({
+      isParent: new UntypedFormControl(false),
+      category: new UntypedFormControl('No category', Validators.required),
+      name: new UntypedFormControl('Lorem ipsum dolor.', [Validators.required, Validators.minLength(6), Validators.maxLength(32)]),
+      description: new UntypedFormControl('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', [Validators.required, Validators.minLength(16), Validators.maxLength(1024)]),
     });
   }
 

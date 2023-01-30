@@ -6,7 +6,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
 import {AlertManager} from '../../../../model/my/AlertManager';
 
 @Component({
@@ -17,7 +17,7 @@ import {AlertManager} from '../../../../model/my/AlertManager';
 export class AdmindashboardComponent extends AbstractComponents implements OnInit, AfterViewInit {
 
   userList;
-  updateUserForm: FormGroup;
+  updateUserForm: UntypedFormGroup;
   editUser;
   alertManagerManager: AlertManager;
 
@@ -49,19 +49,19 @@ export class AdmindashboardComponent extends AbstractComponents implements OnIni
   }
 
   initForm(): void {
-    this.updateUserForm = new FormGroup({
-      email: new FormControl('', [Validators.required, Validators.email])
+    this.updateUserForm = new UntypedFormGroup({
+      email: new UntypedFormControl('', [Validators.required, Validators.email])
     });
   }
 
   initUpdateUser(user: any): void {
     this.editUser = user;
-    this.updateUserForm = new FormGroup({
-      email: new FormControl(user.email, [Validators.required, Validators.email]),
-      ROLE_OWNER: new FormControl(user.roleList.includes('ROLE_OWNER'), [Validators.required]),
-      ROLE_ADMINISTRATOR: new FormControl(user.roleList.includes('ROLE_ADMINISTRATOR'), [Validators.required]),
-      ROLE_MODERATOR: new FormControl(user.roleList.includes('ROLE_MODERATOR'), [Validators.required]),
-      ROLE_USER: new FormControl(user.roleList.includes('ROLE_USER'), [Validators.required]),
+    this.updateUserForm = new UntypedFormGroup({
+      email: new UntypedFormControl(user.email, [Validators.required, Validators.email]),
+      ROLE_OWNER: new UntypedFormControl(user.roleList.includes('ROLE_OWNER'), [Validators.required]),
+      ROLE_ADMINISTRATOR: new UntypedFormControl(user.roleList.includes('ROLE_ADMINISTRATOR'), [Validators.required]),
+      ROLE_MODERATOR: new UntypedFormControl(user.roleList.includes('ROLE_MODERATOR'), [Validators.required]),
+      ROLE_USER: new UntypedFormControl(user.roleList.includes('ROLE_USER'), [Validators.required]),
     });
   }
 

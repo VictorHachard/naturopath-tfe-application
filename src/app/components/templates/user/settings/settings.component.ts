@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
 import {AlertManager} from '../../../../model/my/AlertManager';
 import {User} from '../../../../model/view/User';
 import {AbstractComponents} from '../../../commons/AbstractComponents';
@@ -19,13 +19,13 @@ export class SettingsComponent extends AbstractComponents implements OnInit {
   notUser: boolean;
   alertManagerManager: AlertManager;
 
-  updateUsernameEmailForm: FormGroup;
-  updateNameForm: FormGroup;
-  updatePrivacyForm: FormGroup;
-  updateAppearanceForm: FormGroup;
-  deleteForm: FormGroup;
-  confirmForm: FormGroup;
-  emailAuthForm: FormGroup;
+  updateUsernameEmailForm: UntypedFormGroup;
+  updateNameForm: UntypedFormGroup;
+  updatePrivacyForm: UntypedFormGroup;
+  updateAppearanceForm: UntypedFormGroup;
+  deleteForm: UntypedFormGroup;
+  confirmForm: UntypedFormGroup;
+  emailAuthForm: UntypedFormGroup;
 
   constructor(private userSecurityService: UserSecurityService,
               private cookieService: CookieService,
@@ -56,28 +56,28 @@ export class SettingsComponent extends AbstractComponents implements OnInit {
   }
 
   init(): void {
-    this.updateUsernameEmailForm = new FormGroup({
-      username: new FormControl(this.user.username, Validators.required),
-      email: new FormControl(this.user.email, [Validators.required, Validators.email]),
-      password: new FormControl('',  Validators.required)
+    this.updateUsernameEmailForm = new UntypedFormGroup({
+      username: new UntypedFormControl(this.user.username, Validators.required),
+      email: new UntypedFormControl(this.user.email, [Validators.required, Validators.email]),
+      password: new UntypedFormControl('',  Validators.required)
     });
-    this.updateNameForm = new FormGroup({
-      firstName: new FormControl(this.user.firstName !== null ? this.user.firstName : ''),
-      lastName: new FormControl(this.user.lastName !== null ? this.user.lastName : '')
+    this.updateNameForm = new UntypedFormGroup({
+      firstName: new UntypedFormControl(this.user.firstName !== null ? this.user.firstName : ''),
+      lastName: new UntypedFormControl(this.user.lastName !== null ? this.user.lastName : '')
     });
-    this.deleteForm = new FormGroup({
-      password: new FormControl('',  Validators.required)
+    this.deleteForm = new UntypedFormGroup({
+      password: new UntypedFormControl('',  Validators.required)
     });
-    this.updatePrivacyForm = new FormGroup({
-      isPrivate: new FormControl(this.user.isPrivate)
+    this.updatePrivacyForm = new UntypedFormGroup({
+      isPrivate: new UntypedFormControl(this.user.isPrivate)
     });
-    this.emailAuthForm = new FormGroup({
-      emailAuth: new FormControl(this.user.emailAuth)
+    this.emailAuthForm = new UntypedFormGroup({
+      emailAuth: new UntypedFormControl(this.user.emailAuth)
     });
-    this.updateAppearanceForm = new FormGroup({
-      dark: new FormControl(this.user.dark)
+    this.updateAppearanceForm = new UntypedFormGroup({
+      dark: new UntypedFormControl(this.user.dark)
     });
-    this.confirmForm = new FormGroup({});
+    this.confirmForm = new UntypedFormGroup({});
   }
 
   updateUsernameEmail(): void {

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {TagTypeService} from '../../../../service/TagType.service';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
 import {ParatagTypeService} from '../../../../service/ParatagType.service';
 import {AbstractComponents} from '../../../commons/AbstractComponents';
 import {UserSecurityService} from '../../../../service/security/UserSecurity.service';
@@ -13,7 +13,7 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./addparatagtype.component.css']
 })
 export class AddparatagtypeComponent extends AbstractComponents implements OnInit {
-  addTagTypeForm: FormGroup;
+  addTagTypeForm: UntypedFormGroup;
   tagTypes: any[];
 
   constructor(private userSecurityService: UserSecurityService,
@@ -33,12 +33,12 @@ export class AddparatagtypeComponent extends AbstractComponents implements OnIni
   }
 
   init(): void {
-    this.addTagTypeForm = new FormGroup({
-      size: new FormControl('SMALL', Validators.required),
-      tagType: new FormControl(this.tagTypes[0].name, Validators.required),
-      name: new FormControl('Lorem ipsum dolor.', [Validators.required, Validators.minLength(6), Validators.maxLength(32)]),
-      description: new FormControl('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', [Validators.required, Validators.minLength(16), Validators.maxLength(1024)]),
-      alert: new FormControl(false)
+    this.addTagTypeForm = new UntypedFormGroup({
+      size: new UntypedFormControl('SMALL', Validators.required),
+      tagType: new UntypedFormControl(this.tagTypes[0].name, Validators.required),
+      name: new UntypedFormControl('Lorem ipsum dolor.', [Validators.required, Validators.minLength(6), Validators.maxLength(32)]),
+      description: new UntypedFormControl('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', [Validators.required, Validators.minLength(16), Validators.maxLength(1024)]),
+      alert: new UntypedFormControl(false)
     });
   }
 

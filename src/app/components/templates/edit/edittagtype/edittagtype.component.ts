@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
 import {TagTypeService} from '../../../../service/TagType.service';
 import {AbstractComponents} from '../../../commons/AbstractComponents';
 import {UserSecurityService} from '../../../../service/security/UserSecurity.service';
@@ -12,7 +12,7 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./edittagtype.component.css']
 })
 export class EdittagtypeComponent extends AbstractComponents implements OnInit {
-  editTagTypeForm: FormGroup;
+  editTagTypeForm: UntypedFormGroup;
   private id: string;
   tagType: any;
 
@@ -33,10 +33,10 @@ export class EdittagtypeComponent extends AbstractComponents implements OnInit {
   }
 
   init(): void {
-    this.editTagTypeForm = new FormGroup({
-      name: new FormControl(this.tagType.name,
+    this.editTagTypeForm = new UntypedFormGroup({
+      name: new UntypedFormControl(this.tagType.name,
         [Validators.required, Validators.minLength(6), Validators.maxLength(32)]),
-      description: new FormControl(this.tagType.description,
+      description: new UntypedFormControl(this.tagType.description,
         [Validators.required, Validators.minLength(16), Validators.maxLength(1024)]),
     });
   }

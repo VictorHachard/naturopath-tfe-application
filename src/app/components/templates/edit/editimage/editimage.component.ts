@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AbstractEdit} from '../../../commons/AbstractEdit';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
 import {VoteService} from '../../../../service/Vote.service';
 import {ImageService} from '../../../../service/Image.service';
 import {InnerImageService} from '../../../../service/InnerImage.service';
@@ -19,7 +19,7 @@ import {HttpHeaders} from '@angular/common/http';
   styleUrls: ['./editimage.component.css']
 })
 export class EditimageComponent extends AbstractEdit implements OnInit {
-  editInnerImageForm: FormGroup;
+  editInnerImageForm: UntypedFormGroup;
   private id: string;
   image: any;
   imgURL: any;
@@ -46,13 +46,13 @@ export class EditimageComponent extends AbstractEdit implements OnInit {
 
   init(): void {
     super.init();
-    this.editInnerImageForm = new FormGroup({
-      title: new FormControl(this.image.innerImageList[0].title,
+    this.editInnerImageForm = new UntypedFormGroup({
+      title: new UntypedFormControl(this.image.innerImageList[0].title,
         [Validators.required, Validators.minLength(2), Validators.maxLength(32)]),
-      description: new FormControl(this.image.innerImageList[0].description,
+      description: new UntypedFormControl(this.image.innerImageList[0].description,
         [Validators.required, Validators.minLength(32), Validators.maxLength(1024)]),
-      image: new FormControl(null, ),
-      fileSource: new FormControl('', )
+      image: new UntypedFormControl(null, ),
+      fileSource: new UntypedFormControl('', )
     });
   }
 

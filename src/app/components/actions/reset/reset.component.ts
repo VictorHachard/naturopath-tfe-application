@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, ValidatorFn, Validators} from '@angular/forms';
+import {UntypedFormControl, UntypedFormGroup, ValidatorFn, Validators} from '@angular/forms';
 import {AbstractComponents} from '../../commons/AbstractComponents';
 import {AlertManager} from '../../../model/my/AlertManager';
 import {UserSecurityService} from '../../../service/security/UserSecurity.service';
@@ -13,7 +13,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class ResetComponent implements OnInit {
   alertManagerManager: AlertManager;
-  resetForm: FormGroup;
+  resetForm: UntypedFormGroup;
 
   constructor(private userSecurityService: UserSecurityService,
               private cookieService: CookieService,
@@ -34,9 +34,9 @@ export class ResetComponent implements OnInit {
   }
 
   init(): void {
-    this.resetForm = new FormGroup({
-      password: new FormControl('', [Validators.required, Validators.pattern('(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=*])(?=\\S+$).{6,}')]),
-      password_confirm: new FormControl('', [Validators.required, Validators.pattern('(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=*])(?=\\S+$).{6,}')])},
+    this.resetForm = new UntypedFormGroup({
+      password: new UntypedFormControl('', [Validators.required, Validators.pattern('(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=*])(?=\\S+$).{6,}')]),
+      password_confirm: new UntypedFormControl('', [Validators.required, Validators.pattern('(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=*])(?=\\S+$).{6,}')])},
       { validators: this.matchPassword('password', 'password_confirm') });
   }
 
@@ -56,7 +56,7 @@ export class ResetComponent implements OnInit {
   }
 
   matchPassword(firstControl, secondControl): ValidatorFn {
-    return (control: FormGroup): { [key: string]: boolean } | null => {
+    return (control: UntypedFormGroup): { [key: string]: boolean } | null => {
 
       if (control.get(firstControl).value !== control.get(secondControl).value) {
         const err = {noMatch: true};

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
 import {AlertManager} from '../../../../model/my/AlertManager';
 import {User} from '../../../../model/view/User';
 import {AbstractComponents} from '../../../commons/AbstractComponents';
@@ -16,7 +16,7 @@ declare let $: any;
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent extends AbstractComponents implements OnInit {
-  loginForm: FormGroup;
+  loginForm: UntypedFormGroup;
   alertManagerManager: AlertManager;
   count = 1;
   doubleAuth;
@@ -39,10 +39,10 @@ export class LoginComponent extends AbstractComponents implements OnInit {
   }
 
   init(): void {
-    this.loginForm = new FormGroup({
-      emailOrUsername: new FormControl('Paulin', Validators.required),
-      password: new FormControl('Test123*',  Validators.required),
-      rememberMe: new FormControl(false)
+    this.loginForm = new UntypedFormGroup({
+      emailOrUsername: new UntypedFormControl('Paulin', Validators.required),
+      password: new UntypedFormControl('Test123*',  Validators.required),
+      rememberMe: new UntypedFormControl(false)
     });
   }
 

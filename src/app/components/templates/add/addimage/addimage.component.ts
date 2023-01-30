@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AbstractComponents} from '../../../commons/AbstractComponents';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
 import {ImageService} from '../../../../service/Image.service';
 import {UserSecurityService} from '../../../../service/security/UserSecurity.service';
 import {CookieService} from 'ngx-cookie-service';
@@ -12,7 +12,7 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./addimage.component.css']
 })
 export class AddimageComponent extends AbstractComponents implements OnInit {
-  addImageForm: FormGroup;
+  addImageForm: UntypedFormGroup;
   imgURL: any;
 
   constructor(private userSecurityService: UserSecurityService,
@@ -28,13 +28,13 @@ export class AddimageComponent extends AbstractComponents implements OnInit {
   }
 
   init(): void {
-    this.addImageForm = new FormGroup({
-      title: new FormControl('Lorem ipsum dolor sit amet',
+    this.addImageForm = new UntypedFormGroup({
+      title: new UntypedFormControl('Lorem ipsum dolor sit amet',
         [Validators.required, Validators.minLength(2), Validators.maxLength(32)]),
-      description: new FormControl('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+      description: new UntypedFormControl('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
         [Validators.required, Validators.minLength(32), Validators.maxLength(1024)]),
-      image: new FormControl(null, [Validators.required]),
-      fileSource: new FormControl('', [Validators.required])
+      image: new UntypedFormControl(null, [Validators.required]),
+      fileSource: new UntypedFormControl('', [Validators.required])
     });
   }
 

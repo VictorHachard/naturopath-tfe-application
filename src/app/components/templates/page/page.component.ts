@@ -5,7 +5,7 @@ import {UserSecurityService} from '../../../service/security/UserSecurity.servic
 import {CookieService} from 'ngx-cookie-service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {LikeService} from '../../../service/Like.service';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
 import {PageEvent} from '@angular/material/paginator';
 
 @Component({
@@ -16,7 +16,7 @@ import {PageEvent} from '@angular/material/paginator';
 export class PageComponent extends AbstractComponents implements OnInit {
 
   private id: string;
-  messageForm: FormGroup;
+  messageForm: UntypedFormGroup;
   messageAdded;
 
   page: any;
@@ -59,8 +59,8 @@ export class PageComponent extends AbstractComponents implements OnInit {
   ngOnInitDebug(): void {
     this.id = this.route.snapshot.paramMap.get('id');
     this.user = JSON.parse(localStorage.getItem('currentUser'));
-    this.messageForm = new FormGroup({
-      content: new FormControl('',
+    this.messageForm = new UntypedFormGroup({
+      content: new UntypedFormControl('',
         [Validators.required, Validators.minLength(8), Validators.maxLength(2048)])
     });
     this.pageService.getPage(this.id).subscribe(data => {

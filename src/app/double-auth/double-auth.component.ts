@@ -2,7 +2,7 @@ import {Component, Injector, Input, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserSecurityService} from '../service/security/UserSecurity.service';
 import {AbstractComponents} from '../components/commons/AbstractComponents';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
 import {AlertManager} from '../model/my/AlertManager';
 import {User} from '../model/view/User';
 import {CookieService} from 'ngx-cookie-service';
@@ -16,7 +16,7 @@ declare let $: any;
   styleUrls: ['./double-auth.component.css']
 })
 export class DoubleAuthComponent extends AbstractComponents implements OnInit {
-  doubleForm: FormGroup;
+  doubleForm: UntypedFormGroup;
 
   alertManagerManager: AlertManager;
   count = 1;
@@ -37,8 +37,8 @@ export class DoubleAuthComponent extends AbstractComponents implements OnInit {
   }
 
   init(): void {
-    this.doubleForm = new FormGroup({
-      code: new FormControl('', [Validators.required, Validators.pattern('^[0-9]+$')])
+    this.doubleForm = new UntypedFormGroup({
+      code: new UntypedFormControl('', [Validators.required, Validators.pattern('^[0-9]+$')])
     });
   }
 
