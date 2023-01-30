@@ -41,7 +41,7 @@ jobs:
         run: |
           npm run build -- --output-hashing none
       - name: Archive build
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v3
         with:
           name: deploy_dist
           path: dist
