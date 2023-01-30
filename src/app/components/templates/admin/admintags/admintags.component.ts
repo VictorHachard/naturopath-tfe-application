@@ -5,9 +5,9 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {PageService} from '../../../../service/Page.service';
 import {AbstractComponents} from '../../../commons/AbstractComponents';
 import {TagService} from '../../../../service/Tag.service';
-import {MatPaginator} from '@angular/material/paginator';
+import {MatLegacyPaginator as MatPaginator} from '@angular/material/legacy-paginator';
 import {MatSort} from '@angular/material/sort';
-import {MatTableDataSource} from '@angular/material/table';
+import {MatLegacyTableDataSource as MatTableDataSource} from '@angular/material/legacy-table';
 
 @Component({
   selector: 'app-admintags',

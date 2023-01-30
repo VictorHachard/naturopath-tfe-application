@@ -9,7 +9,6 @@ import {CookieService} from 'ngx-cookie-service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {DomSanitizer} from '@angular/platform-browser';
 import {element} from 'protractor';
-import {getSortHeaderNotContainedWithinSortError} from '@angular/material/sort/sort-errors';
 import {Observable} from 'rxjs';
 import {HttpHeaders} from '@angular/common/http';
 

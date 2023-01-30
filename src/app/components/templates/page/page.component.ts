@@ -6,7 +6,7 @@ import {CookieService} from 'ngx-cookie-service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {LikeService} from '../../../service/Like.service';
 import {UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
-import {PageEvent} from '@angular/material/paginator';
+import {LegacyPageEvent as PageEvent} from '@angular/material/legacy-paginator';
 
 @Component({
   selector: 'app-page',

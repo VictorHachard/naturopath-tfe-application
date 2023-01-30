@@ -55,16 +55,16 @@ import {ConnectFromCookieComponent} from './components/templates/user/connect-fr
 import { AdminpagesComponent } from './components/templates/admin/adminpages/adminpages.component';
 import { AdmintagsComponent } from './components/templates/admin/admintags/admintags.component';
 import { AdminimagesComponent } from './components/templates/admin/adminimages/adminimages.component';
-import {MatPaginatorModule} from '@angular/material/paginator';
-import {MatTableModule} from '@angular/material/table';
+import {MatLegacyPaginatorModule as MatPaginatorModule} from '@angular/material/legacy-paginator';
+import {MatLegacyTableModule as MatTableModule} from '@angular/material/legacy-table';
 import {MatSortModule} from '@angular/material/sort';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatChipsModule} from '@angular/material/chips';
-import {MatOptionModule} from '@angular/material/core';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatLegacyFormFieldModule as MatFormFieldModule} from '@angular/material/legacy-form-field';
+import {MatLegacyChipsModule as MatChipsModule} from '@angular/material/legacy-chips';
+import {MatLegacyOptionModule as MatOptionModule} from '@angular/material/legacy-core';
+import {MatLegacyAutocompleteModule as MatAutocompleteModule} from '@angular/material/legacy-autocomplete';
 import {MatIconModule} from '@angular/material/icon';
-import {MatSelectModule} from '@angular/material/select';
-import {MatInputModule} from '@angular/material/input';
+import {MatLegacySelectModule as MatSelectModule} from '@angular/material/legacy-select';
+import {MatLegacyInputModule as MatInputModule} from '@angular/material/legacy-input';
 import { SearchComponent } from './components/templates/search/search.component';
 import { FavoriteComponent } from './components/templates/favorite/favorite.component';
 
