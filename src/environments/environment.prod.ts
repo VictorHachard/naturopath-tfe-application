@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://localhost:8080/api/v1/',
-  apiResourceUrl: 'http://localhost:8080/api/v1/resource/',
+  apiUrl: 'https://api-naturopath.victorhachard.fr/api/v1/',
+  apiResourceUrl: 'https://api-naturopath.victorhachard.fr/api/v1/resource/',
 };
