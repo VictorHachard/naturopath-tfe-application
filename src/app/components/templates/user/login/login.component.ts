@@ -6,6 +6,7 @@ import {AbstractComponents} from '../../../commons/AbstractComponents';
 import {UserSecurityService} from '../../../../service/security/UserSecurity.service';
 import {CookieService} from 'ngx-cookie-service';
 import {ActivatedRoute, Router} from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 // jQuery Sign $
 declare let $: any;
@@ -16,6 +17,12 @@ declare let $: any;
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent extends AbstractComponents implements OnInit {
+
+  private default = {
+    username: 'Paulin',
+    password: 'Test123*',
+  };
+
   loginForm: UntypedFormGroup;
   alertManagerManager: AlertManager;
   count = 1;
@@ -40,13 +47,11 @@ export class LoginComponent extends AbstractComponents implements OnInit {
 
   init(): void {
     this.loginForm = new UntypedFormGroup({
-      emailOrUsername: new UntypedFormControl('Paulin', Validators.required),
-      password: new UntypedFormControl('Test123*',  Validators.required),
+      emailOrUsername: new UntypedFormControl(!environment.production ? this.default.username : '', Validators.required),
+      password: new UntypedFormControl(!environment.production ? this.default.password : '',  Validators.required),
       rememberMe: new UntypedFormControl(false)
     });
   }
-
-
 
   login(): void {
     const loginValue = this.loginForm.value;

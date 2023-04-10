@@ -6,6 +6,7 @@ import {AbstractComponents} from '../../../commons/AbstractComponents';
 import {UserSecurityService} from '../../../../service/security/UserSecurity.service';
 import {CookieService} from 'ngx-cookie-service';
 import {ActivatedRoute, Router} from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-register',
@@ -13,16 +14,16 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent extends AbstractComponents implements OnInit {
-  registerForm: UntypedFormGroup;
-  alertManagerManager: AlertManager;
-  count = 1;
-
-  private debug = true;
+  
   private default = {
     username: 'Paulin',
     email: 'test@test.test',
     password: 'Test123*',
   };
+
+  registerForm: UntypedFormGroup;
+  alertManagerManager: AlertManager;
+  count = 1;
 
   constructor(private userSecurityService: UserSecurityService,
               private cookieService: CookieService,
@@ -38,10 +39,10 @@ export class RegisterComponent extends AbstractComponents implements OnInit {
 
   init(): void {
     this.registerForm = new UntypedFormGroup({
-      username: new UntypedFormControl(this.debug ? this.default.username : '', Validators.required),
-      email: new UntypedFormControl(this.debug ? this.default.email : '', [Validators.required, Validators.email]),
-      password: new UntypedFormControl(this.debug ? this.default.password : '', [Validators.required, Validators.pattern('(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=*])(?=\\S+$).{6,}')]),
-      password_confirm: new UntypedFormControl(this.debug ? this.default.password : '', [Validators.required, Validators.pattern('(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=*])(?=\\S+$).{6,}')])},
+      username: new UntypedFormControl(!environment.production ? this.default.username : '', Validators.required),
+      email: new UntypedFormControl(!environment.production ? this.default.email : '', [Validators.required, Validators.email]),
+      password: new UntypedFormControl(!environment.production ? this.default.password : '', [Validators.required, Validators.pattern('(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=*])(?=\\S+$).{6,}')]),
+      password_confirm: new UntypedFormControl(!environment.production ? this.default.password : '', [Validators.required, Validators.pattern('(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=*])(?=\\S+$).{6,}')])},
       { validators: this.matchPassword('password', 'password_confirm')});
   }
 
