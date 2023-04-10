@@ -16,7 +16,7 @@ export class AbstractComponents {
     if (this.hasToPrintError(formControl)) {
       let errors = '';
       if (formControl.errors.required) {
-        errors += 'Please type a something.';
+        errors += 'Please type something.';
       }
       if (formControl.errors.minlength) {
         errors += 'Please insert a minimum of ' + formControl.errors.minlength.requiredLength + ' characters.';
