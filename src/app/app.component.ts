@@ -1,5 +1,6 @@
 import {Component, OnDestroy, Renderer2} from '@angular/core';
 import {UserSecurityService} from './service/security/UserSecurity.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +9,8 @@ import {UserSecurityService} from './service/security/UserSecurity.service';
 })
 export class AppComponent implements OnDestroy {
   title = 'naturopath';
+
+  log_url = environment.logUrl;
 
   constructor(private renderer: Renderer2, private userSecurityService: UserSecurityService) {
     this.userSecurityService.isLoggedIn().subscribe(value => {
