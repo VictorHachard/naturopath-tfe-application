@@ -3,39 +3,41 @@
   <div class="row">
     <div class="col-md-auto" >
       <div class="jumbotron jumbotron-fluid p-4 page-border-radius">
-        <small *ngIf="categories && searchForm" class="text-danger">{{ printError(searchForm.get('input')) }}</small>
-        <form *ngIf="categories && searchForm" [formGroup]="searchForm" (ngSubmit)="search()" class="mb-2">
-          <mat-form-field class="example-full-width">
-            <mat-label>Search</mat-label>
-            <input matInput type="text" formControlName="input"/>
-          </mat-form-field>
-          <mat-form-field class="example-chip-list mt-0">
-            <mat-chip-list #chipList aria-label="Tag selection">
-              <mat-chip
-                *ngFor="let fruit of tagSearch"
-                [selectable]="selectable"
-                [removable]="removable"
-                (removed)="remove(fruit)">
-                {{ tagsMap.get(fruit).name }}
-                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-              </mat-chip>
-              <input
-                placeholder="Add tags"
-                #fruitInput
-                [formControl]="fruitCtrl"
-                [matAutocomplete]="auto"
-                [matChipInputFor]="chipList">
-            </mat-chip-list>
-            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-              <mat-option *ngFor="let fruit of filteredFruits | async" [value]="fruit">
-                {{ tagsMap.get(fruit).name }}
-              </mat-option>
-            </mat-autocomplete>
-          </mat-form-field>
-          <button class="btn btn-sm btn-outline-primary btn-block" type="submit">Search</button>
-        </form>
-        <button class="btn btn-sm btn-outline-primary btn-block" (click)="clear()">Clear</button>
-        <hr class="style1 mt-4">
+        <div *ngIf="false">
+          <small *ngIf="categories && searchForm" class="text-danger">{{ printError(searchForm.get('input')) }}</small>
+          <form *ngIf="categories && searchForm" [formGroup]="searchForm" (ngSubmit)="search()" class="mb-2">
+            <mat-form-field class="example-full-width">
+              <mat-label>Search</mat-label>
+              <input matInput type="text" formControlName="input"/>
+            </mat-form-field>
+            <mat-form-field class="example-chip-list mt-0">
+              <mat-chip-list #chipList aria-label="Tag selection">
+                <mat-chip
+                  *ngFor="let fruit of tagSearch"
+                  [selectable]="selectable"
+                  [removable]="removable"
+                  (removed)="remove(fruit)">
+                  {{ tagsMap.get(fruit).name }}
+                  <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                </mat-chip>
+                <input
+                  placeholder="Add tags"
+                  #fruitInput
+                  [formControl]="fruitCtrl"
+                  [matAutocomplete]="auto"
+                  [matChipInputFor]="chipList">
+              </mat-chip-list>
+              <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                <mat-option *ngFor="let fruit of filteredFruits | async" [value]="fruit">
+                  {{ tagsMap.get(fruit).name }}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+            <button class="btn btn-sm btn-outline-primary btn-block" type="submit">Search</button>
+          </form>
+          <button class="btn btn-sm btn-outline-primary btn-block" (click)="clear()">Clear</button>
+          <hr class="style1 mt-4">
+        </div>
         <nav class="nav flex-column">
           <div *ngFor="let category of categoryList2">
             <li *ngIf="!category.ca.parent; else notEmpty" class="nav-item">
